@@ -1,0 +1,17 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
+use_frameworks!
+platform :ios, '11.0'
+
+target 'TestProj' do
+  pod 'AlamofireImage', '3.5.2'
+  pod 'SkyFloatingLabelTextField', '3.7.0'
+
+  # MultiPlatformLibrary
+  # для корректной установки фреймворка нужно сначала скомпилировать котлин библиотеку - compile-kotlin-framework.sh (в корневой директории репозитория)
+  pod 'MultiPlatformLibrary', :path => '../mpp-library'
+  pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.1.0'
+end

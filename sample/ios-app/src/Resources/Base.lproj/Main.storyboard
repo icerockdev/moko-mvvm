@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zIh-nI-gcX">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="snE-Ct-w85">
+            <objects>
+                <navigationController id="zIh-nI-gcX" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aGe-Yj-KQZ">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="TTy-86-aNs" kind="relationship" relationship="rootViewController" id="y6u-Ao-rTD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dpF-aw-Lyj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5158" y="-1482"/>
+        </scene>
+        <!--Test-->
+        <scene sceneID="B5V-K5-FDE">
+            <objects>
+                <viewController id="TTy-86-aNs" customClass="TestViewController" customModule="mokoSampleMvvm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gcA-zH-akF"/>
+                        <viewControllerLayoutGuide type="bottom" id="gTY-6T-yQv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KxK-oh-5KO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zhe-Bh-RIO">
+                                <rect key="frame" x="16" y="72" width="51" height="31"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUe-UX-Bf6">
+                                <rect key="frame" x="255" y="72" width="51" height="31"/>
+                            </switch>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F3z-el-u0i">
+                                <rect key="frame" x="16" y="111" width="288" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS7-ux-llm">
+                                <rect key="frame" x="16" y="149" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LD-BQ-heL">
+                                <rect key="frame" x="16" y="178" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E1r-27-0bB">
+                                <rect key="frame" x="16" y="207" width="288" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="PwM-qU-bjW"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHC-mW-q36">
+                                <rect key="frame" x="16" y="315" width="42" height="30"/>
+                                <state key="normal" title="Count"/>
+                                <connections>
+                                    <action selector="onCounterButtonPressed" destination="TTy-86-aNs" eventType="touchUpInside" id="8Q7-in-UYU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PqP-m9-Wpk">
+                                <rect key="frame" x="270" y="315" width="34" height="30"/>
+                                <state key="normal" title="Error"/>
+                                <connections>
+                                    <action selector="onErrorButtonPressed" destination="TTy-86-aNs" eventType="touchUpInside" id="MZX-wS-FSS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="E1r-27-0bB" secondAttribute="trailing" id="1EU-9l-Tdf"/>
+                            <constraint firstItem="F3z-el-u0i" firstAttribute="leading" secondItem="KxK-oh-5KO" secondAttribute="leadingMargin" id="2Yj-i0-hIP"/>
+                            <constraint firstItem="E1r-27-0bB" firstAttribute="leading" secondItem="KxK-oh-5KO" secondAttribute="leadingMargin" id="4A4-kT-F0S"/>
+                            <constraint firstItem="zhe-Bh-RIO" firstAttribute="leading" secondItem="KxK-oh-5KO" secondAttribute="leadingMargin" id="54K-5h-IG5"/>
+                            <constraint firstItem="F3z-el-u0i" firstAttribute="top" secondItem="zhe-Bh-RIO" secondAttribute="bottom" constant="8" id="7X8-E1-BqW"/>
+                            <constraint firstItem="gS7-ux-llm" firstAttribute="leading" secondItem="KxK-oh-5KO" secondAttribute="leadingMargin" id="8WT-PC-F0D"/>
+                            <constraint firstItem="F3z-el-u0i" firstAttribute="trailing" secondItem="KxK-oh-5KO" secondAttribute="trailingMargin" id="aI6-L0-fxA"/>
+                            <constraint firstItem="9LD-BQ-heL" firstAttribute="leading" secondItem="KxK-oh-5KO" secondAttribute="leadingMargin" id="aiG-i2-UbM"/>
+                            <constraint firstItem="zhe-Bh-RIO" firstAttribute="top" secondItem="gcA-zH-akF" secondAttribute="bottom" constant="8" id="i0c-gJ-CB2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gS7-ux-llm" secondAttribute="trailing" id="l75-ZZ-ZFQ"/>
+                            <constraint firstItem="JHC-mW-q36" firstAttribute="top" secondItem="E1r-27-0bB" secondAttribute="bottom" constant="8" id="lPG-wy-hgn"/>
+                            <constraint firstItem="gS7-ux-llm" firstAttribute="top" secondItem="F3z-el-u0i" secondAttribute="bottom" constant="8" id="ov6-3W-7tB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PqP-m9-Wpk" secondAttribute="trailing" id="r1S-jj-xfL"/>
+                            <constraint firstItem="E1r-27-0bB" firstAttribute="top" secondItem="9LD-BQ-heL" secondAttribute="bottom" constant="8" id="ree-nc-Sai"/>
+                            <constraint firstItem="JHC-mW-q36" firstAttribute="leading" secondItem="KxK-oh-5KO" secondAttribute="leadingMargin" id="sHw-Re-uhn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bUe-UX-Bf6" secondAttribute="trailing" id="syq-SW-Cio"/>
+                            <constraint firstItem="PqP-m9-Wpk" firstAttribute="top" secondItem="E1r-27-0bB" secondAttribute="bottom" constant="8" id="unp-IT-bLU"/>
+                            <constraint firstItem="bUe-UX-Bf6" firstAttribute="top" secondItem="gcA-zH-akF" secondAttribute="bottom" constant="8" id="xXw-PG-45R"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9LD-BQ-heL" secondAttribute="trailing" id="yBe-Tx-K70"/>
+                            <constraint firstItem="9LD-BQ-heL" firstAttribute="top" secondItem="gS7-ux-llm" secondAttribute="bottom" constant="8" id="yGh-Xo-Qk0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Test" id="0jM-60-fjM"/>
+                    <connections>
+                        <outlet property="inputSwitch" destination="zhe-Bh-RIO" id="FF4-T3-yP5"/>
+                        <outlet property="inputTextField" destination="F3z-el-u0i" id="QmI-Pf-q5K"/>
+                        <outlet property="labelString" destination="gS7-ux-llm" id="Gmy-FJ-xAH"/>
+                        <outlet property="labelStringDesc" destination="9LD-BQ-heL" id="CnD-nw-28y"/>
+                        <outlet property="outputSwitch" destination="bUe-UX-Bf6" id="jWL-XH-b2D"/>
+                        <outlet property="outputTextView" destination="E1r-27-0bB" id="7IF-su-6d2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jxh-nl-GiI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4297.5" y="-1482.0422535211267"/>
+        </scene>
+    </scenes>
+</document>
