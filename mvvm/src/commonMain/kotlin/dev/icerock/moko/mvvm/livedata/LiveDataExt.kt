@@ -16,10 +16,10 @@ fun <T, OT> LiveData<T>.flatMap(function: (T) -> LiveData<OT>): LiveData<OT> {
 
     val shadowObserver: (OT) -> Unit = { mutableLiveData.value = it }
 
-    addObserver {
+    addObserver { newValue ->
         shadowLiveData.removeObserver(shadowObserver)
 
-        shadowLiveData = function(value)
+        shadowLiveData = function(newValue)
 
         mutableLiveData.value = shadowLiveData.value
 
@@ -40,17 +40,17 @@ fun <OT, I1T, I2T> LiveData<I1T>.mergeWith(
 }
 
 fun <IT, OT> LiveData<IT?>.mapOrNull(function: (IT) -> OT): LiveData<OT?> {
-    return map {
-        when (it) {
+    return map { newValue ->
+        when (newValue) {
             null -> null
-            else -> function(it)
+            else -> function(newValue)
         }
     }
 }
 
 fun <OT> LiveData<Boolean?>.mapTrueOrNull(function: () -> OT): LiveData<OT?> {
-    return map {
-        when (it) {
+    return map { newValue ->
+        when (newValue) {
             true -> function()
             else -> null
         }
@@ -61,36 +61,36 @@ fun LiveData<Boolean>.not() = map { !it }
 
 fun <T, OT> LiveData<T>.mapBuffered(function: (current: T, new: T) -> OT): LiveData<OT> {
     var current = value
-    return map {
-        val result = function(current, it)
-        current = it
+    return map { newValue ->
+        val result = function(current, newValue)
+        current = newValue
         result
     }
 }
 
 fun <T, OT> LiveData<T>.flatMapBuffered(function: (current: T, new: T) -> LiveData<OT>): LiveData<OT> {
     var current = value
-    return flatMap {
-        val result = function(current, it)
-        current = it
+    return flatMap { newValue ->
+        val result = function(current, newValue)
+        current = newValue
         result
     }
 }
 
 fun <T> LiveData<T?>.required(initialValue: T): LiveData<T> = MediatorLiveData(initialValue).apply {
-    addSource(this@required) {
-        if (it == null) return@addSource
+    addSource(this@required) { newValue ->
+        if (newValue == null) return@addSource
 
-        value = it
+        value = newValue
     }
 }
 
 fun <T> LiveData<T>.distinct(): LiveData<T> {
     val source = this
     return MediatorLiveData(value).apply {
-        addSource(source) {
-            if(it == value) return@addSource
-            value = it
+        addSource(source) { newValue ->
+            if(newValue == value) return@addSource
+            value = newValue
         }
     }
 }

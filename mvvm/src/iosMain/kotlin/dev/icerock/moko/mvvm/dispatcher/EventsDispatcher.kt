@@ -12,11 +12,10 @@ actual class EventsDispatcher<ListenerType : Any>(listener: ListenerType) {
     private val weakListener: WeakReference<ListenerType> = WeakReference(listener)
 
     actual fun dispatchEvent(block: ListenerType.() -> Unit) {
-        weakListener.get()?.let {
-            val mainQueue = dispatch_get_main_queue()
-            dispatch_async(mainQueue) {
-                block(it)
-            }
+        val listener = weakListener.get() ?: return
+        val mainQueue = dispatch_get_main_queue()
+        dispatch_async(mainQueue) {
+            block(listener)
         }
     }
 }

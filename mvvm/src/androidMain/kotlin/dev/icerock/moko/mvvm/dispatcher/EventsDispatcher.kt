@@ -10,7 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import java.util.concurrent.Executor
 
-actual class EventsDispatcher<ListenerType: Any>(private val executor: Executor) {
+actual class EventsDispatcher<ListenerType : Any>(private val executor: Executor) {
     private var eventsListener: ListenerType? = null
 
     internal val blocks = mutableListOf<ListenerType.() -> Unit>()
@@ -22,9 +22,7 @@ actual class EventsDispatcher<ListenerType: Any>(private val executor: Executor)
             fun connectListener() {
                 eventsListener = listener
                 executor.execute {
-                    blocks.forEach {
-                        it(listener)
-                    }
+                    blocks.forEach { it(listener) }
                     blocks.clear()
                 }
             }

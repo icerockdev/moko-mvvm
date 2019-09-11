@@ -17,9 +17,9 @@ class DebounceLiveData<T>(private val liveData: LiveData<T?>, timer: Long) {
     private val _output = MutableLiveData<T?>(null)
     val output = _output.readOnly()
 
-    private val observer: (T?) -> Unit = {
-        if (lastValue == null && it != null) {
-            _output.value = it
+    private val observer: (T?) -> Unit = { newValue ->
+        if (lastValue == null && newValue != null) {
+            _output.value = newValue
         } else {
             this.timer.apply {
                 stop()
@@ -27,7 +27,7 @@ class DebounceLiveData<T>(private val liveData: LiveData<T?>, timer: Long) {
             }
         }
 
-        lastValue = it
+        lastValue = newValue
     }
 
     init {
