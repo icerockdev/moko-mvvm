@@ -1,89 +1,88 @@
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
-[ ![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion)
 
-# Мультиплатформенные компоненты под MVVM архитектуру
-Model-View-ViewModel Основанный на Android Architecture Components https://developer.android.com/topic/libraries/architecture/viewmodel
+# Mobile Kotlin model-view-viewmodel architecture components
+This is a Kotlin MultiPlatform library that provide access to resources on iOS & Android with localization support based on system.
 
-`ViewModel` на android является вьюмоделью из AAC. На айос - своя реализация.  
-`ViewModel` является `CoroutineScope` и при `onCleared` отменяет запущенные корутины.  
- 
-В связке с `ViewModel` используется `EventsDispatcher` - для типизированного вызова событий на `view`,
- типа: `routeToProfile()`, `showError(stringDesc)`. Все события (то что не должно быть сохранено на
-  постоянку в состояние вьюмодели) вызываются через него.
+## Table of Contents
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Samples](#samples)
+- [Set Up Locally](#setup-locally)
+- [Contributing](#contributing)
+- [License](#license)
 
-Так же в связке с `ViewModel` используется `LiveData` - реактивное хранилище данных, с возможностью
- привязки к UI на обеих целевых платформах. К `LiveData` сделано множество методов расширений,
- позволяющих упростить код трансформации данных.
+## Features
+- **111** 222;
 
-## Пример EventsDispatcher
-common:
-```kotlin
-class RootViewModel(val eventsDispatcher: EventsDispatcher<EventsListener>) : ViewModel() {
-    
-    fun logout() {
-        eventsDispatcher.dispatchEvent { routeToAuth() }
-    }
+## Requirements
+- Gradle version 5.4.1+
+- Android API 21+
+- iOS version 9.0+
 
-    fun loadUser() {
-        launch {
-            try {
-                // ...
-            } catch (error: Throwable) {
-                eventsDispatcher.dispatchEvent { showError(error.userFriendlyDescription()) }
-            }
-        }
-    }
-
-    interface EventsListener {
-        fun showError(message: StringDesc)
-        fun routeToAuth()
+## Installation
+root build.gradle  
+```groovy
+allprojects {
+    repositories {
+        maven { url = "https://dl.bintray.com/icerockdev/moko" }
     }
 }
 ```
-android:
-```kotlin
-class RootActivity : AppCompatActivity(), RootViewModel.EventsListener {
-    lateinit var mViewModel: RootViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        mViewModel = getViewModel { RootViewModel(EventsDispatcherExecutor.dispatcher()) }
-
-        mViewModel.eventsDispatcher.bind(this, this)
-    }
-
-    override fun showError(message: StringDesc) {
-        toast(message.toString(this))
-    }
-
-    override fun routeToAuth() {
-        intentClearStack<AuthPhoneActivity>().start(this)
-    }
+project build.gradle
+```groovy
+dependencies {
+    commonMainApi("dev.icerock.moko:mvvm:0.2.0")
 }
 ```
-iOS:
-```swift
-class SideMenuHeaderController: UIViewController, RootViewModelEventsListener {
-  private (set) var viewModel: RootViewModel!
 
-  func routeToAuth() {
-    parent?.navigationController?.dismiss(animated: true, completion: nil)
-    SideMenuManager.default.menuLeftNavigationController?.dismiss(animated: false, completion: nil)
-    SideMenuManager.default.menuLeftNavigationController = nil
-    AppDelegate.goToLogin()
-    PushService.shared.unregisterFromFCM()
-  }
-  
-  func showError(message: StringDesc) {
-    //TODO: Localize me
-    super.showAlert(title: "Ошибка", message: message.localized(), actions: [])
-  }
-    
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    viewModel = RootViewModel(eventsDispatcher: EventsDispatcher(mListener: self))
-  }
-}
+settings.gradle  
+```groovy
+enableFeaturePreview("GRADLE_METADATA")
 ```
+
+On iOS in addition to Kotlin library exist Pod - add in Podfile
+```ruby
+pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.2.0'
+```
+**MultiPlatformLibraryMvvm cocoapod requires that the framework compiled from kotlin be named 
+MultiPlatformLibrary and be connected as cocoapod named MultiPlatformLibrary. 
+Example [here](sample/ios-app/Podfile).
+To simplify configuration with MultiPlatformFramework you can use [mobile-multiplatform-plugin](https://github.com/icerockdev/mobile-multiplatform-gradle-plugin)**
+`MultiPlatformLibraryMvvm` cocoapod contains extension to `UIView`s for bind to `LiveData`.
+
+## Usage
+
+
+## Samples
+More examples can be found in the [sample directory](sample).
+
+## Set Up Locally 
+- In [mvvm directory](mvvm) contains `mvvm` library;
+- In [sample directory](sample) contains samples on android, ios & mpp-library connected to apps;
+- For test changes locally use `:mvvm:publishToMavenLocal` gradle task, after it samples will use locally published version.
+
+## Contributing
+All development (both new features and bug fixes) is performed in `develop` branch. This way `master` sources always contain sources of the most recently released version. Please send PRs with bug fixes to `develop` branch. Fixes to documentation in markdown files are an exception to this rule. They are updated directly in `master`.
+
+The `develop` branch is pushed to `master` during release.
+
+More detailed guide for contributers see in [contributing guide](CONTRIBUTING.md).
+
+## License
+        
+    Copyright 2019 IceRock MAG Inc
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+       http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
