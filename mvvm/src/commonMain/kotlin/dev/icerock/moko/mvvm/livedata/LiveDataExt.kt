@@ -89,7 +89,7 @@ fun <T> LiveData<T>.distinct(): LiveData<T> {
     val source = this
     return MediatorLiveData(value).apply {
         addSource(source) { newValue ->
-            if(newValue == value) return@addSource
+            if (newValue == value) return@addSource
             value = newValue
         }
     }

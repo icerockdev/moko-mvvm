@@ -12,8 +12,8 @@ import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
 /**
  * Created by Aleksey Mikhailov <Aleksey.Mikhailov@icerockdev.com> on 27.03.2018.
  */
-abstract class MvvmEventsFragment<DB : ViewDataBinding, VM, Listener: Any> :
-        MvvmFragment<DB, VM>() where VM : ViewModel, VM : EventsDispatcherOwner<Listener> {
+abstract class MvvmEventsFragment<DB : ViewDataBinding, VM, Listener : Any> :
+    MvvmFragment<DB, VM>() where VM : ViewModel, VM : EventsDispatcherOwner<Listener> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
