@@ -4,8 +4,6 @@
 
 package com.icerockdev.library
 
-import dev.icerock.moko.mvvm.desc.StringDesc
-import dev.icerock.moko.mvvm.desc.desc
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
 import dev.icerock.moko.mvvm.livedata.LiveData
@@ -13,6 +11,8 @@ import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
 
 class TestViewModel(
     override val eventsDispatcher: EventsDispatcher<EventsListener>
