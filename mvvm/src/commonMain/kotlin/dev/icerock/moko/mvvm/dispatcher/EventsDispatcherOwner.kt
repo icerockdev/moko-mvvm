@@ -4,6 +4,6 @@
 
 package dev.icerock.moko.mvvm.dispatcher
 
-interface EventsDispatcherOwner<T: Any> {
+interface EventsDispatcherOwner<T : Any> {
     val eventsDispatcher: EventsDispatcher<T>
 }

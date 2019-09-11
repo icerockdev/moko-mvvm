@@ -6,8 +6,8 @@ import com.icerockdev.databinding.ActivityTestBinding
 import com.icerockdev.library.TestViewModel
 import dev.icerock.moko.mvvm.MvvmEventsActivity
 import dev.icerock.moko.mvvm.createViewModelFactory
-import dev.icerock.moko.mvvm.desc.StringDesc
 import dev.icerock.moko.mvvm.dispatcher.eventsDispatcherOnMain
+import dev.icerock.moko.resources.desc.StringDesc
 
 class TestActivity :
     MvvmEventsActivity<ActivityTestBinding, TestViewModel, TestViewModel.EventsListener>(),

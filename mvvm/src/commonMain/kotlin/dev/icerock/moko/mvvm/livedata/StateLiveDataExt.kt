@@ -23,38 +23,38 @@ fun <T, E> LiveData<State<T, E>>.error(): LiveData<E?> = map { it.errorValue() }
 fun <T, E> LiveData<State<T, E>>.errorValue(): E? = value.errorValue()
 
 fun <T, E, ST : State<T, E>, LD : LiveData<out ST>> List<LD>.isSuccessState(): LiveData<Boolean> =
-        MediatorLiveData(false)
-                .composition(this) { list ->
-                    list.firstOrNull { it !is State.Data<*, *> } == null
-                }
+    MediatorLiveData(false)
+        .composition(this) { list ->
+            list.firstOrNull { it !is State.Data<*, *> } == null
+        }
 
 fun <T, E, ST : State<T, E>, LD : LiveData<out ST>> List<LD>.isLoadingState(): LiveData<Boolean> =
-        MediatorLiveData(false)
-                .composition(this) { list ->
-                    list.firstOrNull { it is State.Loading<*, *> } != null
-                }
+    MediatorLiveData(false)
+        .composition(this) { list ->
+            list.firstOrNull { it is State.Loading<*, *> } != null
+        }
 
 fun <T, E, ST : State<T, E>, LD : LiveData<out ST>> List<LD>.isErrorState(): LiveData<Boolean> =
-        MediatorLiveData(false)
-                .composition(this) { list ->
-                    list.firstOrNull { it is State.Error<*, *> } != null
-                }
+    MediatorLiveData(false)
+        .composition(this) { list ->
+            list.firstOrNull { it is State.Error<*, *> } != null
+        }
 
 fun <T, E, ST : State<T, E>, LD : LiveData<out ST>> List<LD>.isEmptyState(): LiveData<Boolean> =
-        MediatorLiveData(false)
-                .composition(this) { list ->
-                    list.firstOrNull { it is State.Empty<*, *> } != null
-                }
+    MediatorLiveData(false)
+        .composition(this) { list ->
+            list.firstOrNull { it is State.Empty<*, *> } != null
+        }
 
 fun <T, E, ST : State<T, E>, LD : LiveData<out ST>> List<LD>.error(): LiveData<E?> =
-        MediatorLiveData<E?>(null)
-                .composition(this) { list ->
-                    @Suppress("UNCHECKED_CAST")
-                    val errorItem = list.firstOrNull {
-                        (it is State.Error<*, *>)
-                    } as? State.Error<T, E>
-                    errorItem?.error
-                }
+    MediatorLiveData<E?>(null)
+        .composition(this) { list ->
+            @Suppress("UNCHECKED_CAST")
+            val errorItem = list.firstOrNull {
+                (it is State.Error<*, *>)
+            } as? State.Error<T, E>
+            errorItem?.error
+        }
 
 fun <IT, E, OT> LiveData<State<IT, E>>.dataTransform(transform: LiveData<IT>.() -> LiveData<OT>):
         LiveData<State<OT, E>> = flatMap { state ->
@@ -92,20 +92,28 @@ fun <T, E> LiveData<State<T, E>>.emptyAsData(dataBuilder: () -> T):
     }
 }
 
-fun <T1, E, T2, OT> LiveData<State<T1, E>>.concatData(liveData: LiveData<State<T2, E>>, function: (T1, T2) -> OT):
+fun <T1, E, T2, OT> LiveData<State<T1, E>>.concatData(
+    liveData: LiveData<State<T2, E>>,
+    function: (T1, T2) -> OT
+):
         LiveData<State<OT, E>> =
-        mergeWith(liveData) { firstState, secondState ->
-            val state: State<OT, E> = when {
-                (firstState is State.Loading || secondState is State.Loading) -> State.Loading()
-                (firstState is State.Error) -> State.Error(firstState.error)
-                (secondState is State.Error) -> State.Error(secondState.error)
-                (firstState is State.Empty || secondState is State.Empty) -> State.Empty()
-                (firstState is State.Data && secondState is State.Data) -> State.Data(function(firstState.data, secondState.data))
-                else -> State.Empty()
-            }
-
-            state
+    mergeWith(liveData) { firstState, secondState ->
+        val state: State<OT, E> = when {
+            (firstState is State.Loading || secondState is State.Loading) -> State.Loading()
+            (firstState is State.Error) -> State.Error(firstState.error)
+            (secondState is State.Error) -> State.Error(secondState.error)
+            (firstState is State.Empty || secondState is State.Empty) -> State.Empty()
+            (firstState is State.Data && secondState is State.Data) -> State.Data(
+                function(
+                    firstState.data,
+                    secondState.data
+                )
+            )
+            else -> State.Empty()
         }
+
+        state
+    }
 
 fun <T, E> LiveData<State<T, E>>.emptyIf(emptyPredicate: (T) -> Boolean):
         LiveData<State<T, E>> = map {

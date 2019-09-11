@@ -11,7 +11,6 @@ actual open class MediatorLiveData<T> actual constructor(initialValue: T) :
         liveData: LiveData<IT>,
         onChange: (newValue: IT) -> Unit
     ) {
-        // тут есть опасения что могут быть утечки памяти...стоит подетальнее исследовать это потом
         liveData.addObserver { onChange(it) }
     }
 }

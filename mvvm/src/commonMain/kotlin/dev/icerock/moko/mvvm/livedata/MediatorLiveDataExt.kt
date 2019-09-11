@@ -4,9 +4,11 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-fun <OT, I1T, I2T> MediatorLiveData<OT>.compose(firstInput: LiveData<I1T>,
-                                                secondInput: LiveData<I2T>,
-                                                function: (I1T, I2T) -> OT): MediatorLiveData<OT> {
+fun <OT, I1T, I2T> MediatorLiveData<OT>.compose(
+    firstInput: LiveData<I1T>,
+    secondInput: LiveData<I2T>,
+    function: (I1T, I2T) -> OT
+): MediatorLiveData<OT> {
     listOf(firstInput, secondInput).forEach {
         addSource(it) {
             value = function(firstInput.value, secondInput.value)
@@ -16,13 +18,13 @@ fun <OT, I1T, I2T> MediatorLiveData<OT>.compose(firstInput: LiveData<I1T>,
     return this
 }
 
-fun <OT, IT, LD : LiveData<out IT>> MediatorLiveData<OT>.composition(liveDataList: List<LD>,
-                                                                     function: (List<IT>) -> OT): MediatorLiveData<OT> {
-    liveDataList.forEach {
-        addSource(it) {
-            val values = liveDataList.map {
-                it.value
-            }
+fun <OT, IT, LD : LiveData<out IT>> MediatorLiveData<OT>.composition(
+    liveDataList: List<LD>,
+    function: (List<IT>) -> OT
+): MediatorLiveData<OT> {
+    liveDataList.forEach { liveData ->
+        addSource(liveData) { _ ->
+            val values = liveDataList.map { it.value }
             value = function(values)
         }
     }
@@ -33,15 +35,15 @@ fun <OT, IT, LD : LiveData<out IT>> MediatorLiveData<OT>.composition(liveDataLis
 fun <OT, IT, LD : LiveData<out IT>> List<LD>.mediator(function: (List<IT>) -> OT): LiveData<OT> {
     val initialValue = function(map { it.value })
     return MediatorLiveData(initialValue)
-            .composition(this, function)
+        .composition(this, function)
 }
 
 fun <LD : LiveData<Boolean>> List<LD>.any(value: Boolean): LiveData<Boolean> =
-        mediator {
-            it.firstOrNull { it == value } != null
-        }
+    mediator { values ->
+        values.firstOrNull { it == value } != null
+    }
 
 fun <LD : LiveData<Boolean>> List<LD>.all(value: Boolean): LiveData<Boolean> =
-        mediator {
-            it.all { it == value }
-        }
+    mediator { values ->
+        values.all { it == value }
+    }

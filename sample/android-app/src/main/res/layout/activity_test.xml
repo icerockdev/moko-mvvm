@@ -16,44 +16,44 @@
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="@={viewModel.mutableSwitch.ld}"/>
+            android:checked="@={viewModel.mutableSwitch.ld}" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:checked="@{viewModel.readOnlySwitch.ld}"/>
+            android:checked="@{viewModel.readOnlySwitch.ld}"
+            android:enabled="false" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@={viewModel.mutableString.ld}"/>
+            android:text="@={viewModel.mutableString.ld}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.mutableString.ld}"/>
+            android:text="@{viewModel.mutableString.ld}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.string.ld}"/>
+            android:text="@{viewModel.string.ld}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.stringDesc.ld}"/>
+            android:text="@{viewModel.stringDesc.ld}" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Press me to count"
-            android:onClick="@{() -> viewModel.onCounterButtonPressed()}"/>
+            android:onClick="@{() -> viewModel.onCounterButtonPressed()}"
+            android:text="Press me to count" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Press me to error"
-            android:onClick="@{() -> viewModel.onErrorButtonPressed()}"/>
+            android:onClick="@{() -> viewModel.onErrorButtonPressed()}"
+            android:text="Press me to error" />
     </LinearLayout>
 </layout>

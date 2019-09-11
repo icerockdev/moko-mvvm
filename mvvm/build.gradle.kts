@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "dev.icerock.moko"
-version = "0.1.0"
+version = Versions.Libs.MultiPlatform.mokoMvvm
 
 android {
     compileSdkVersion(Versions.Android.compileSdk)
