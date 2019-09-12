@@ -5,12 +5,11 @@
 package dev.icerock.moko.mvvm.viewmodel
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 
 actual open class ViewModel actual constructor() {
     // for now dispatcher fixed on Main. after implementing multithread coroutines on native - we can change it
-    protected actual val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
+    protected actual val coroutineScope: CoroutineScope = CoroutineScope(UIDispatcher())
 
     protected actual open fun onCleared() {
         coroutineScope.cancel()
