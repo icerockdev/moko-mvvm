@@ -54,6 +54,7 @@ pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm
 MultiPlatformLibrary and be connected as cocoapod named MultiPlatformLibrary. 
 Example [here](sample/ios-app/Podfile).
 To simplify configuration with MultiPlatformFramework you can use [mobile-multiplatform-plugin](https://github.com/icerockdev/mobile-multiplatform-gradle-plugin)**
+
 `MultiPlatformLibraryMvvm` cocoapod contains extension to `UIView`s for bind to `LiveData`.
 
 ## Usage
