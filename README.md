@@ -1,7 +1,8 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion)
 
 # Mobile Kotlin model-view-viewmodel architecture components
-This is a Kotlin MultiPlatform library that provide access to resources on iOS & Android with localization support based on system.
+This is a Kotlin MultiPlatform library that provides architecture components of Model-View-ViewModel
+ for UI applications. Components is lifecycle aware on both mobile platforms.  
 
 ## Table of Contents
 - [Features](#features)
@@ -14,7 +15,9 @@ This is a Kotlin MultiPlatform library that provide access to resources on iOS &
 - [License](#license)
 
 ## Features
-- **111** 222;
+- **ViewModel** - store and manage UI-related data. Interop with `Android Architecture Components` - on android it exactly `androidx.lifecycle.ViewModel`;
+- **LiveData, MutableLiveData, MediatorLiveData** - lifecycle aware reactive data holders with set of operators to transform, merge etc;
+- **EventsDispatcher** - dispatch events from `ViewModel` to `View` with automatic lifecycle control and explicit interface of required events.
 
 ## Requirements
 - Gradle version 5.4.1+
@@ -54,7 +57,414 @@ To simplify configuration with MultiPlatformFramework you can use [mobile-multip
 `MultiPlatformLibraryMvvm` cocoapod contains extension to `UIView`s for bind to `LiveData`.
 
 ## Usage
+### Simple view model
+Suppose we need a screen with a button click counter. To implement it we should:
+#### common
+In `commonMain` we can create ViewModel like:
+```kotlin
+class SimpleViewModel() : ViewModel() {
+    private val _counter: MutableLiveData<Int> = MutableLiveData(0)
+    val counter: LiveData<String> = _counter.map { it.toString() }
 
+    fun onCounterButtonPressed() {
+        val current = _counter.value
+        _counter.value = current + 1
+    }
+}
+``` 
+And after it integrate ViewModel on platform sides.
+#### android  
+`SimpleActivity.kt`:
+```kotlin
+class SimpleActivity : MvvmActivity<ActivitySimpleBinding, SimpleViewModel>() {
+    override val layoutId: Int = R.layout.activity_simple
+    override val viewModelVariableId: Int = BR.viewModel
+    override val viewModelClass: Class<SimpleViewModel> = SimpleViewModel::class.java
+
+    override fun viewModelFactory(): ViewModelProvider.Factory {
+        return createViewModelFactory { SimpleViewModel() }
+    }
+}
+```
+`MvvmActivity` automatically load databinding layout, resolve ViewModel object and set in databinding variable.  
+`activity_simple.xml`:
+```xml
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.icerockdev.library.sample1.SimpleViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.counter.ld}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="@{() -> viewModel.onCounterButtonPressed()}"
+            android:text="Press me to count" />
+    </LinearLayout>
+</layout>
+```
+#### ios
+`SimpleViewController.swift`:
+```swift
+import MultiPlatformLibrary
+import MultiPlatformLibraryMvvm
+
+class SimpleViewController: UIViewController {
+    @IBOutlet private var counterLabel: UILabel!
+    
+    private var viewModel: SimpleViewModel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        viewModel = SimpleViewModel()
+        
+        counterLabel.bindText(liveData: viewModel.counter)
+    }
+    
+    @IBAction func onCounterButtonPressed() {
+        viewModel.onCounterButtonPressed()
+    }
+    
+    deinit {
+        viewModel.onCleared()
+    }
+}
+```
+`bindText` is extension from `MultiPlatformLibraryMvvm` cocoapod.
+
+### ViewModel with send events to View
+Suppose we need a screen where we should go on other screen after press of button. To implement it we should:
+#### common
+```kotlin
+class EventsViewModel(
+    val eventsDispatcher: EventsDispatcher<EventsListener>
+) : ViewModel() {
+
+    fun onButtonPressed() {
+        eventsDispatcher.dispatchEvent { routeToMainPage() }
+    }
+
+    interface EventsListener {
+        fun routeToMainPage()
+    }
+}
+```
+`EventsDispatcher` is special class that automatically remove observers by lifecycle and buffer called
+ events while listener not attached (on android side).
+#### android
+`EventsActivity.kt`:
+```kotlin
+class EventsActivity : MvvmActivity<ActivityEventsBinding, EventsViewModel>(),
+    EventsViewModel.EventsListener {
+    override val layoutId: Int = R.layout.activity_events
+    override val viewModelVariableId: Int = BR.viewModel
+    override val viewModelClass: Class<EventsViewModel> = EventsViewModel::class.java
+
+    override fun viewModelFactory(): ViewModelProvider.Factory {
+        return createViewModelFactory { EventsViewModel(eventsDispatcherOnMain()) }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.eventsDispatcher.bind(
+            lifecycleOwner = this,
+            listener = this
+        )
+    }
+
+    override fun routeToMainPage() {
+        Toast.makeText(this, "here must be routing to main page", Toast.LENGTH_SHORT).show()
+    }
+}
+```
+`eventsDispatcher.bind` attach `EventsDispatcher` to lifecycle (in this case - activity) to correct
+ subscribe and unsubscribe, without memory leaks.
+
+Also we can simplify bind of `EventsDispatcher` with `MvvmEventsActivity` and `EventsDispatcherOwnder`.
+`EventsOwnerViewModel.kt`:
+```kotlin
+class EventsOwnerViewModel(
+    override val eventsDispatcher: EventsDispatcher<EventsListener>
+) : ViewModel(), EventsDispatcherOwner<EventsOwnerViewModel.EventsListener> {
+
+    fun onButtonPressed() {
+        eventsDispatcher.dispatchEvent { routeToMainPage() }
+    }
+
+    interface EventsListener {
+        fun routeToMainPage()
+    }
+}
+```
+`EventsOwnderActivity.kt`:
+```kotlin
+class EventsOwnerActivity :
+    MvvmEventsActivity<ActivityEventsOwnerBinding, EventsOwnerViewModel, EventsOwnerViewModel.EventsListener>(),
+    EventsOwnerViewModel.EventsListener {
+
+    override val layoutId: Int = R.layout.activity_events_owner
+    override val viewModelVariableId: Int = BR.viewModel
+    override val viewModelClass: Class<EventsOwnerViewModel> = EventsOwnerViewModel::class.java
+
+    override fun viewModelFactory(): ViewModelProvider.Factory {
+        return createViewModelFactory { EventsOwnerViewModel(eventsDispatcherOnMain()) }
+    }
+
+    override fun routeToMainPage() {
+        Toast.makeText(this, "here must be routing to main page", Toast.LENGTH_SHORT).show()
+    }
+}
+```
+
+#### ios
+`EventsViewController.swift`:
+```swift
+import MultiPlatformLibrary
+import MultiPlatformLibraryMvvm
+
+class EventsViewController: UIViewController {
+    private var viewModel: EventsViewModel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let eventsDispatcher = EventsDispatcher<EventsViewModelEventsListener>(listener: self)
+        viewModel = EventsViewModel(eventsDispatcher: eventsDispatcher)
+    }
+    
+    @IBAction func onButtonPressed() {
+        viewModel.onButtonPressed()
+    }
+    
+    deinit {
+        viewModel.onCleared()
+    }
+}
+
+extension EventsViewController: EventsViewModelEventsListener {
+    func routeToMainPage() {
+        showAlert(text: "go to main page")
+    }
+}
+```
+On iOS we create instance of `EventsDispatcher` with link to listener. We shouldn't call `bind` like
+ on android (in iOS this method not exist).
+
+### ViewModel with validation of user input
+```kotlin
+class ValidationMergeViewModel() : ViewModel() {
+    val email: MutableLiveData<String> = MutableLiveData("")
+    val password: MutableLiveData<String> = MutableLiveData("")
+
+    val isLoginButtonEnabled: LiveData<Boolean> = email.mergeWith(password) { email, password ->
+        email.isNotEmpty() && password.isNotEmpty()
+    }
+}
+```
+`isLoginButtonEnabled` is observe `email` & `password` liveData and after any changes call lambda
+ with calculation of new value.
+
+Also we can use another variant of combinations:
+```kotlin
+class ValidationAllViewModel() : ViewModel() {
+    val email: MutableLiveData<String> = MutableLiveData("")
+    val password: MutableLiveData<String> = MutableLiveData("")
+
+    private val isEmailValid: LiveData<Boolean> = email.map { it.isNotEmpty() }
+    private val isPasswordValid: LiveData<Boolean> = password.map { it.isNotEmpty() }
+    val isLoginButtonEnabled: LiveData<Boolean> = listOf(isEmailValid, isPasswordValid).all(true)
+}
+```
+Here we have separated LiveData with valid flags - `isEmailValid`, `isPasswordValid` and combine both
+ to `isLoginButtonEnabled` by merge all boolean LiveData in list with condition "all values must be true".
+
+### ViewModel for login feature
+#### common
+```kotlin
+class LoginViewModel(
+    override val eventsDispatcher: EventsDispatcher<EventsListener>,
+    private val userRepository: UserRepository
+) : ViewModel(), EventsDispatcherOwner<LoginViewModel.EventsListener> {
+    val email: MutableLiveData<String> = MutableLiveData("")
+    val password: MutableLiveData<String> = MutableLiveData("")
+
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isLoading: LiveData<Boolean> = _isLoading.readOnly()
+
+    val isLoginButtonVisible: LiveData<Boolean> = isLoading.not()
+
+    fun onLoginButtonPressed() {
+        val emailValue = email.value
+        val passwordValue = password.value
+
+        coroutineScope.launch {
+            _isLoading.value = true
+
+            try {
+                userRepository.login(email = emailValue, password = passwordValue)
+
+                eventsDispatcher.dispatchEvent { routeToMainScreen() }
+            } catch (error: Throwable) {
+                val message = error.message ?: error.toString()
+                val errorDesc = message.desc()
+
+                eventsDispatcher.dispatchEvent { showError(errorDesc) }
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    interface EventsListener {
+        fun routeToMainScreen()
+        fun showError(error: StringDesc)
+    }
+}
+```
+`coroutineScope` is field of `ViewModel` class with default Dispatcher - `UI` on both platforms. 
+ All coroutines will be canceled in `onCleared` automatically.
+#### android
+`LoginActivity.kt`:
+```kotlin
+class LoginActivity :
+    MvvmEventsActivity<ActivityLoginBinding, LoginViewModel, LoginViewModel.EventsListener>(),
+    LoginViewModel.EventsListener {
+
+    override val layoutId: Int = R.layout.activity_login
+    override val viewModelVariableId: Int = BR.viewModel
+    override val viewModelClass: Class<LoginViewModel> =
+        LoginViewModel::class.java
+
+    override fun viewModelFactory(): ViewModelProvider.Factory {
+        return createViewModelFactory {
+            LoginViewModel(
+                userRepository = MockUserRepository(),
+                eventsDispatcher = eventsDispatcherOnMain()
+            )
+        }
+    }
+
+    override fun routeToMainScreen() {
+        Toast.makeText(this, "route to main page here", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showError(error: StringDesc) {
+        Toast.makeText(this, error.toString(context = this), Toast.LENGTH_SHORT).show()
+    }
+}
+```
+`activity_login.xml`:
+```xml
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.icerockdev.library.sample6.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            android:text="@={viewModel.email.ld}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="password"
+            android:text="@={viewModel.password.ld}" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:onClick="@{() -> viewModel.onLoginButtonPressed()}"
+                android:text="Login"
+                app:visibleOrGone="@{viewModel.isLoginButtonVisible.ld}" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:visibleOrGone="@{viewModel.isLoading.ld}" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>
+```
+#### ios
+`LoginViewController.swift`:
+```swift
+class LoginViewController: UIViewController {
+    @IBOutlet private var emailField: UITextField!
+    @IBOutlet private var passwordField: UITextField!
+    @IBOutlet private var loginButton: UIButton!
+    @IBOutlet private var progressBar: UIActivityIndicatorView!
+    
+    private var viewModel: LoginViewModel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let eventsDispatcher = EventsDispatcher<LoginViewModelEventsListener>(listener: self)
+        viewModel = LoginViewModel(eventsDispatcher: eventsDispatcher,
+                                   userRepository: MockUserRepository())
+        
+        emailField.bindTextTwoWay(liveData: viewModel.email)
+        passwordField.bindTextTwoWay(liveData: viewModel.password)
+        loginButton.bindVisibility(liveData: viewModel.isLoginButtonVisible)
+        progressBar.bindVisibility(liveData: viewModel.isLoading)
+    }
+    
+    @IBAction func onLoginButtonPressed() {
+        viewModel.onLoginButtonPressed()
+    }
+    
+    deinit {
+        viewModel.onCleared()
+    }
+}
+
+extension LoginViewController: LoginViewModelEventsListener {
+    func routeToMainScreen() {
+        showAlert(text: "route to main screen")
+    }
+    
+    func showError(error: StringDesc) {
+        showAlert(text: error.localized())
+    }
+}
+```
 
 ## Samples
 More examples can be found in the [sample directory](sample).
