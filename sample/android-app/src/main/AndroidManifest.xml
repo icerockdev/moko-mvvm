@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.icerockdev">
+    package="com.icerockdev.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,11 +10,18 @@
         android:theme="@style/Theme.AppCompat.DayNight"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".TestActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".sample1.SimpleActivity" />
+        <activity android:name=".sample2.EventsActivity" />
+        <activity android:name=".sample3.EventsOwnerActivity" />
+        <activity android:name=".sample4.ValidationMergeActivity" />
+        <activity android:name=".sample5.ValidationAllActivity" />
+        <activity android:name=".sample6.LoginActivity" />
     </application>
 </manifest>
