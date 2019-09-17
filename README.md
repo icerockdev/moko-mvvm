@@ -1,4 +1,4 @@
-![moko-mvvm](img/logo.png)
+![moko-mvvm](img/logo.png)  
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion)
 
 # Mobile Kotlin model-view-viewmodel architecture components
