@@ -22,7 +22,7 @@ actual open class LiveData<T> {
 
     actual fun addObserver(observer: (T) -> Unit) {
         val archObserver = Observer<T> { value ->
-            if(value is T) observer(value)
+            if (value is T) observer(value)
         }
         observers[observer] = archObserver
 

@@ -25,6 +25,8 @@ setupFramework(
 
 dependencies {
     mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
+    mppLibrary(Deps.Libs.MultiPlatform.coroutines)
+
     androidLibrary(Deps.Libs.Android.lifecycle)
 
     libs.forEach { mppLibrary(it) }

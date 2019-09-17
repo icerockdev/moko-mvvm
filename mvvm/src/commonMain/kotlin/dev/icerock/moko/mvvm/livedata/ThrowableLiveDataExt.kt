@@ -5,6 +5,4 @@
 package dev.icerock.moko.mvvm.livedata
 
 fun <T : Throwable> LiveData<T>.throwableMessage(mapper: (Throwable) -> String = { it.message.orEmpty() }):
-        LiveData<String> = map {
-    mapper(it)
-}
+        LiveData<String> = map(mapper)

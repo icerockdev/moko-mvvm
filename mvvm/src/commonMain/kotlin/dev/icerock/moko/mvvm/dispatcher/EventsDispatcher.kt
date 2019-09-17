@@ -4,6 +4,6 @@
 
 package dev.icerock.moko.mvvm.dispatcher
 
-expect class EventsDispatcher<ListenerType: Any> {
+expect class EventsDispatcher<ListenerType : Any> {
     fun dispatchEvent(block: ListenerType.() -> Unit)
 }

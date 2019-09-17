@@ -8,9 +8,6 @@ object Versions {
     const val kotlin = "1.3.50"
 
     object Plugins {
-        const val android = "3.4.1"
-
-        const val kotlin = Versions.kotlin
         const val androidExtensions = Versions.kotlin
     }
 
@@ -24,8 +21,8 @@ object Versions {
         object MultiPlatform {
             const val coroutines = "1.3.0"
             const val mokoCore: String = "0.1.0"
-            const val mokoResources: String = "0.1.0"
-            const val mokoMvvm: String = "0.1.0"
+            const val mokoResources: String = "0.3.0"
+            const val mokoMvvm: String = "0.2.0"
         }
     }
 }

@@ -2,13 +2,13 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package dev.icerock.moko.mvvm.desc.databinding
+package dev.icerock.moko.mvvm.databinding
 
 import android.widget.Button
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
-import dev.icerock.moko.mvvm.desc.StringDesc
+import dev.icerock.moko.resources.desc.StringDesc
 
 object StringDescAdapters {
     @JvmStatic
