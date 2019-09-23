@@ -4,6 +4,7 @@
 
 import UIKit
 import MultiPlatformLibrary
+import MultiPlatformLibraryResources
 import SkyFloatingLabelTextField
 
 public extension SkyFloatingLabelTextField {

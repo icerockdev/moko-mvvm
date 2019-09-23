@@ -4,6 +4,7 @@
 
 import UIKit
 import MultiPlatformLibrary
+import MultiPlatformLibraryResources
 
 public extension UIButton {
   func bindEnabled(liveData: LiveData<KotlinBoolean>,
