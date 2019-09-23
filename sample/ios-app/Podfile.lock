@@ -8,13 +8,17 @@ PODS:
     - MultiPlatformLibraryMvvm/AlamofireImage (= 0.1.0)
     - MultiPlatformLibraryMvvm/Core (= 0.1.0)
     - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (= 0.1.0)
+    - MultiPlatformLibraryResources
   - MultiPlatformLibraryMvvm/AlamofireImage (0.1.0):
     - AlamofireImage
     - MultiPlatformLibrary
+    - MultiPlatformLibraryResources
   - MultiPlatformLibraryMvvm/Core (0.1.0):
     - MultiPlatformLibrary
+    - MultiPlatformLibraryResources
   - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (0.1.0):
     - MultiPlatformLibrary
+    - MultiPlatformLibraryResources
     - SkyFloatingLabelTextField
   - MultiPlatformLibraryResources (0.2.0):
     - MultiPlatformLibrary
@@ -55,7 +59,7 @@ SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   MultiPlatformLibrary: cd722dcacda18e0f3b888e477d2bf1743af85ee1
-  MultiPlatformLibraryMvvm: d15f42fcd3cc4c6cfbf35214f872ef8576ed73d8
+  MultiPlatformLibraryMvvm: b37e42e96f97f22c13693d085e537ace75e9e19e
   MultiPlatformLibraryResources: 5cc246020c1b505ff909b4a0851c216847bb92eb
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
 
