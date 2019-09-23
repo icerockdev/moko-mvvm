@@ -9,6 +9,7 @@ Pod::Spec.new do |spec|
     spec.module_name              = "#{spec.name}"
     
     spec.dependency 'MultiPlatformLibrary'
+    spec.dependency 'MultiPlatformLibraryResources'
 
     spec.ios.deployment_target  = '9.0'
     spec.swift_version = '4.2'

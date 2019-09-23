@@ -4,6 +4,7 @@
 
 import UIKit
 import MultiPlatformLibrary
+import MultiPlatformLibraryResources
 
 public extension UITextView {
   func bindText(liveData: LiveData<StringDesc>) {
