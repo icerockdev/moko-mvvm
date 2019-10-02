@@ -2,8 +2,8 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion)
 
 # Mobile Kotlin Model-View-ViewModel architecture components
-This is a Kotlin MultiPlatform library that provides architecture components of Model-View-ViewModel
- for UI applications. Components is lifecycle aware on both mobile platforms.  
+This is a Kotlin Multiplatform library that provides architecture components of Model-View-ViewModel
+ for UI applications. Components are lifecycle-aware on Android.  
 
 ## Table of Contents
 - [Features](#features)
@@ -16,8 +16,8 @@ This is a Kotlin MultiPlatform library that provides architecture components of 
 - [License](#license)
 
 ## Features
-- **ViewModel** - store and manage UI-related data. Interop with `Android Architecture Components` - on android it exactly `androidx.lifecycle.ViewModel`;
-- **LiveData, MutableLiveData, MediatorLiveData** - lifecycle aware reactive data holders with set of operators to transform, merge etc;
+- **ViewModel** - store and manage UI-related data. Interop with `Android Architecture Components` - on Android it's precisely `androidx.lifecycle.ViewModel`;
+- **LiveData, MutableLiveData, MediatorLiveData** - lifecycle-aware reactive data holders with set of operators to transform, merge, etc.;
 - **EventsDispatcher** - dispatch events from `ViewModel` to `View` with automatic lifecycle control and explicit interface of required events.
 
 ## Requirements
@@ -47,22 +47,22 @@ settings.gradle
 enableFeaturePreview("GRADLE_METADATA")
 ```
 
-On iOS in addition to Kotlin library exist Pod - add in Podfile
+On iOS, in addition to the Kotlin library add in Podfile
 ```ruby
 pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.2.0'
 ```
-**MultiPlatformLibraryMvvm cocoapod requires that the framework compiled from kotlin be named 
-MultiPlatformLibrary and be connected as cocoapod named MultiPlatformLibrary. 
-Example [here](sample/ios-app/Podfile).
-To simplify configuration with MultiPlatformFramework you can use [mobile-multiplatform-plugin](https://github.com/icerockdev/mobile-multiplatform-gradle-plugin)**
+**`MultiPlatformLibraryMvvm` CocoaPod requires that the framework compiled from Kotlin be named 
+`MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
+[Here](sample/ios-app/Podfile)'s an example.
+To simplify integration with MultiPlatformFramework you can use [mobile-multiplatform-plugin](https://github.com/icerockdev/mobile-multiplatform-gradle-plugin)**
 
-`MultiPlatformLibraryMvvm` cocoapod contains extension to `UIView`s for bind to `LiveData`.
+`MultiPlatformLibraryMvvm` CocoaPod contains the extension to `UIView`s for binding with `LiveData`.
 
 ## Usage
 ### Simple view model
-Suppose we need a screen with a button click counter. To implement it we should:
+Let’s say we need a screen with a button click counter. To implement it we should:
 #### common
-In `commonMain` we can create ViewModel like:
+In `commonMain` we can create a `ViewModel` like:
 ```kotlin
 class SimpleViewModel() : ViewModel() {
     private val _counter: MutableLiveData<Int> = MutableLiveData(0)
@@ -74,8 +74,8 @@ class SimpleViewModel() : ViewModel() {
     }
 }
 ``` 
-And after it integrate ViewModel on platform sides.
-#### android  
+And after that integrate the `ViewModel` on platform the sides.
+#### Android  
 `SimpleActivity.kt`:
 ```kotlin
 class SimpleActivity : MvvmActivity<ActivitySimpleBinding, SimpleViewModel>() {
@@ -88,7 +88,7 @@ class SimpleActivity : MvvmActivity<ActivitySimpleBinding, SimpleViewModel>() {
     }
 }
 ```
-`MvvmActivity` automatically load databinding layout, resolve ViewModel object and set in databinding variable.  
+`MvvmActivity` automatically loads a databinding layout, resolves `ViewModel` object and sets a databinding variable.  
 `activity_simple.xml`:
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
@@ -120,7 +120,7 @@ class SimpleActivity : MvvmActivity<ActivitySimpleBinding, SimpleViewModel>() {
     </LinearLayout>
 </layout>
 ```
-#### ios
+#### iOS
 `SimpleViewController.swift`:
 ```swift
 import MultiPlatformLibrary
@@ -148,10 +148,10 @@ class SimpleViewController: UIViewController {
     }
 }
 ```
-`bindText` is extension from `MultiPlatformLibraryMvvm` cocoapod.
+`bindText` is an extension from the `MultiPlatformLibraryMvvm` CocoaPod.
 
 ### ViewModel with send events to View
-Suppose we need a screen where we should go on other screen after press of button. To implement it we should:
+Let’s say we need a screen from which we should go to another screen by pressing a button. To implement it we should:
 #### common
 ```kotlin
 class EventsViewModel(
@@ -167,9 +167,9 @@ class EventsViewModel(
     }
 }
 ```
-`EventsDispatcher` is special class that automatically remove observers by lifecycle and buffer called
- events while listener not attached (on android side).
-#### android
+`EventsDispatcher` is a special class that automatically removes observers from lifecycle and buffers input
+ events while listener is not attached (on the Android side).
+#### Android
 `EventsActivity.kt`:
 ```kotlin
 class EventsActivity : MvvmActivity<ActivityEventsBinding, EventsViewModel>(),
@@ -196,10 +196,10 @@ class EventsActivity : MvvmActivity<ActivityEventsBinding, EventsViewModel>(),
     }
 }
 ```
-`eventsDispatcher.bind` attach `EventsDispatcher` to lifecycle (in this case - activity) to correct
+`eventsDispatcher.bind` attaches `EventsDispatcher` to the lifecycle (in this case - to an activity) to correctly
  subscribe and unsubscribe, without memory leaks.
 
-Also we can simplify bind of `EventsDispatcher` with `MvvmEventsActivity` and `EventsDispatcherOwnder`.
+We can also simplify the binding of `EventsDispatcher` with `MvvmEventsActivity` and `EventsDispatcherOwnder`.
 `EventsOwnerViewModel.kt`:
 ```kotlin
 class EventsOwnerViewModel(
@@ -235,7 +235,7 @@ class EventsOwnerActivity :
 }
 ```
 
-#### ios
+#### iOS
 `EventsViewController.swift`:
 ```swift
 import MultiPlatformLibrary
@@ -266,8 +266,8 @@ extension EventsViewController: EventsViewModelEventsListener {
     }
 }
 ```
-On iOS we create instance of `EventsDispatcher` with link to listener. We shouldn't call `bind` like
- on android (in iOS this method not exist).
+On iOS we create an instance of `EventsDispatcher` with the link to the listener. We shouldn't call `bind` like
+ on Android (in iOS this method doesn't exist).
 
 ### ViewModel with validation of user input
 ```kotlin
@@ -280,10 +280,10 @@ class ValidationMergeViewModel() : ViewModel() {
     }
 }
 ```
-`isLoginButtonEnabled` is observe `email` & `password` liveData and after any changes call lambda
- with calculation of new value.
+`isLoginButtonEnabled` is observable `email` & `password` `LiveData`, and in case there are any changes it calls lambda
+ with the newly calculated value.
 
-Also we can use another variant of combinations:
+We can also use one of these combinations:
 ```kotlin
 class ValidationAllViewModel() : ViewModel() {
     val email: MutableLiveData<String> = MutableLiveData("")
@@ -294,8 +294,8 @@ class ValidationAllViewModel() : ViewModel() {
     val isLoginButtonEnabled: LiveData<Boolean> = listOf(isEmailValid, isPasswordValid).all(true)
 }
 ```
-Here we have separated LiveData with valid flags - `isEmailValid`, `isPasswordValid` and combine both
- to `isLoginButtonEnabled` by merge all boolean LiveData in list with condition "all values must be true".
+Here we have separated LiveData with the validation flags - `isEmailValid`, `isPasswordValid` and combine both
+ to `isLoginButtonEnabled` by merging all boolean LiveData in the list with on the condition that "all values must be true".
 
 ### ViewModel for login feature
 #### common
@@ -340,9 +340,9 @@ class LoginViewModel(
     }
 }
 ```
-`coroutineScope` is field of `ViewModel` class with default Dispatcher - `UI` on both platforms. 
+`coroutineScope` is a field of the `ViewModel` class with a default Dispatcher - `UI` on both platforms. 
  All coroutines will be canceled in `onCleared` automatically.
-#### android
+#### Android
 `LoginActivity.kt`:
 ```kotlin
 class LoginActivity :
@@ -424,7 +424,7 @@ class LoginActivity :
     </LinearLayout>
 </layout>
 ```
-#### ios
+#### iOS
 `LoginViewController.swift`:
 ```swift
 class LoginViewController: UIViewController {
@@ -469,23 +469,23 @@ extension LoginViewController: LoginViewModelEventsListener {
 ```
 
 ## Samples
-More examples can be found in the [sample directory](sample).
+Please see more examples in the [sample directory](sample).
 
 ## Set Up Locally 
-- In [mvvm directory](mvvm) contains `mvvm` library;
-- In [sample directory](sample) contains samples on android, ios & mpp-library connected to apps;
-- For test changes locally use `:mvvm:publishToMavenLocal` gradle task, after it samples will use locally published version.
+- The [mvvm directory](mvvm) contains the `mvvm` library;
+- In [sample directory](sample) contains sample apps for Android and iOS; plus the mpp-library connected to the apps;
+- For local testing use the `:mvvm:publishToMavenLocal` gradle task - so that sample apps use the locally published version.
 
 ## Contributing
-All development (both new features and bug fixes) is performed in `develop` branch. This way `master` sources always contain sources of the most recently released version. Please send PRs with bug fixes to `develop` branch. Fixes to documentation in markdown files are an exception to this rule. They are updated directly in `master`.
+All development (both new features and bug fixes) is performed in the `develop` branch. This way `master` always contains the sources of the most recently released version. Please send PRs with bug fixes to the `develop` branch. Documentation fixes in the markdown files are an exception to this rule. They are updated directly in `master`.
 
-The `develop` branch is pushed to `master` during release.
+The `develop` branch is pushed to `master` on release.
 
-More detailed guide for contributers see in [contributing guide](CONTRIBUTING.md).
+For more details on contributing please see the [contributing guide](CONTRIBUTING.md).
 
 ## License
         
-    Copyright 2019 IceRock MAG Inc
+    Copyright 2019 IceRock MAG Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
