@@ -322,7 +322,7 @@ class LoginViewModel(
         val emailValue = email.value
         val passwordValue = password.value
 
-        coroutineScope.launch {
+        viewModelScope.launch {
             _isLoading.value = true
 
             try {
@@ -346,7 +346,7 @@ class LoginViewModel(
     }
 }
 ```
-`coroutineScope` is a field of the `ViewModel` class with a default Dispatcher - `UI` on both platforms. 
+`viewModelScope` is a `CoroutineScope` field of the `ViewModel` class with a default Dispatcher - `UI` on both platforms. 
  All coroutines will be canceled in `onCleared` automatically.
 #### Android
 `LoginActivity.kt`:
