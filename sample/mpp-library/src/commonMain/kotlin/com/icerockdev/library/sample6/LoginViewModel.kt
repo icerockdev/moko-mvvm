@@ -31,7 +31,7 @@ class LoginViewModel(
         val emailValue = email.value
         val passwordValue = password.value
 
-        coroutineScope.launch {
+        viewModelScope.launch {
             _isLoading.value = true
 
             try {

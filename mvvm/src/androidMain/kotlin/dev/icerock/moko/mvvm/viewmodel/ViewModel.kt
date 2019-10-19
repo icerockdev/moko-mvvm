@@ -11,11 +11,11 @@ import kotlinx.coroutines.cancel
 
 actual open class ViewModel actual constructor() : ViewModel() {
     // for now dispatcher fixed on Main. after implementing multithread coroutines on native - we can change it
-    protected actual val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
+    protected actual val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
 
     actual override fun onCleared() {
         super.onCleared()
 
-        coroutineScope.cancel()
+        viewModelScope.cancel()
     }
 }

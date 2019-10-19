@@ -7,7 +7,7 @@ package dev.icerock.moko.mvvm.viewmodel
 import kotlinx.coroutines.CoroutineScope
 
 expect open class ViewModel() {
-    protected val coroutineScope: CoroutineScope
+    protected val viewModelScope: CoroutineScope
 
     protected open fun onCleared()
 }

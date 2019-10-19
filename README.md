@@ -30,6 +30,7 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 - kotlin 1.3.50
   - 0.1.0
   - 0.2.0
+  - 0.3.0
 
 ## Installation
 root build.gradle  
@@ -44,7 +45,7 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm:0.2.0")
+    commonMainApi("dev.icerock.moko:mvvm:0.3.0")
 }
 ```
 
@@ -55,7 +56,7 @@ enableFeaturePreview("GRADLE_METADATA")
 
 On iOS, in addition to the Kotlin library add in Podfile
 ```ruby
-pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.2.0'
+pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.3.0'
 ```
 **`MultiPlatformLibraryMvvm` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
@@ -322,7 +323,7 @@ class LoginViewModel(
         val emailValue = email.value
         val passwordValue = password.value
 
-        coroutineScope.launch {
+        viewModelScope.launch {
             _isLoading.value = true
 
             try {
@@ -346,7 +347,7 @@ class LoginViewModel(
     }
 }
 ```
-`coroutineScope` is a field of the `ViewModel` class with a default Dispatcher - `UI` on both platforms. 
+`viewModelScope` is a `CoroutineScope` field of the `ViewModel` class with a default Dispatcher - `UI` on both platforms. 
  All coroutines will be canceled in `onCleared` automatically.
 #### Android
 `LoginActivity.kt`:
