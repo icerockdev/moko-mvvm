@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'MultiPlatformLibraryMvvm'
-    spec.version                  = '0.1.0'
+    spec.version                  = '0.3.0'
     spec.homepage                 = 'https://github.com/icerockdev/moko-mvvm'
     spec.source                   = { :git => "https://github.com/icerockdev/moko-mvvm.git", :tag => "release/#{spec.version}" }
     spec.authors                  = 'IceRock Development'
