@@ -31,6 +31,7 @@ This is a Kotlin Multiplatform library that provides architecture components of 
   - 0.1.0
   - 0.2.0
   - 0.3.0
+  - 0.3.1
 
 ## Installation
 root build.gradle  
@@ -45,7 +46,7 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm:0.3.0")
+    commonMainApi("dev.icerock.moko:mvvm:0.3.1")
 }
 ```
 
@@ -56,7 +57,7 @@ enableFeaturePreview("GRADLE_METADATA")
 
 On iOS, in addition to the Kotlin library add in Podfile
 ```ruby
-pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.3.0'
+pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.3.1'
 ```
 **`MultiPlatformLibraryMvvm` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 

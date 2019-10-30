@@ -22,7 +22,7 @@ object Versions {
             const val coroutines = "1.3.0"
             const val mokoCore: String = "0.1.0"
             const val mokoResources: String = "0.3.0"
-            const val mokoMvvm: String = "0.3.0"
+            const val mokoMvvm: String = "0.3.1"
         }
     }
 }
