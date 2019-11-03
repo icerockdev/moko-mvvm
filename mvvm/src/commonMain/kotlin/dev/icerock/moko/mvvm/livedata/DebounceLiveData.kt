@@ -4,40 +4,40 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-import dev.icerock.moko.core.Timer
+// import dev.icerock.moko.core.Timer
 
-class DebounceLiveData<T>(private val liveData: LiveData<T?>, timer: Long) {
-    private var lastValue: T? = null
+// class DebounceLiveData<T>(private val liveData: LiveData<T?>, timer: Long) {
+//     private var lastValue: T? = null
 
-    private val timer = Timer(timer) {
-        _output.value = lastValue
-        false
-    }
+//     private val timer = Timer(timer) {
+//         _output.value = lastValue
+//         false
+//     }
 
-    private val _output = MutableLiveData<T?>(null)
-    val output = _output.readOnly()
+//     private val _output = MutableLiveData<T?>(null)
+//     val output = _output.readOnly()
 
-    private val observer: (T?) -> Unit = { newValue ->
-        if (lastValue == null && newValue != null) {
-            _output.value = newValue
-        } else {
-            this.timer.apply {
-                stop()
-                start()
-            }
-        }
+//     private val observer: (T?) -> Unit = { newValue ->
+//         if (lastValue == null && newValue != null) {
+//             _output.value = newValue
+//         } else {
+//             this.timer.apply {
+//                 stop()
+//                 start()
+//             }
+//         }
 
-        lastValue = newValue
-    }
+//         lastValue = newValue
+//     }
 
-    init {
-        liveData.addObserver(observer)
-    }
+//     init {
+//         liveData.addObserver(observer)
+//     }
 
-    fun stopTimer() {
-        timer.stop()
-        liveData.removeObserver(observer)
-    }
-}
+//     fun stopTimer() {
+//         timer.stop()
+//         liveData.removeObserver(observer)
+//     }
+// }
 
-fun <T> LiveData<T?>.debounce(timeInMillis: Long) = DebounceLiveData(this, timeInMillis)
+// fun <T> LiveData<T?>.debounce(timeInMillis: Long) = DebounceLiveData(this, timeInMillis)
