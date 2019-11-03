@@ -7,10 +7,6 @@ object Versions {
 
     const val kotlin = "1.3.50"
 
-    object Plugins {
-        const val androidExtensions = Versions.kotlin
-    }
-
     object Libs {
         object Android {
             const val appCompat = "1.0.2"

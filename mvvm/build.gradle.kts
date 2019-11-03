@@ -5,7 +5,6 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.multiplatform")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("dev.icerock.mobile.multiplatform")
     id("maven-publish")
@@ -25,10 +24,6 @@ android {
     dataBinding {
         isEnabled = true
     }
-}
-
-androidExtensions {
-    isExperimental = true
 }
 
 dependencies {

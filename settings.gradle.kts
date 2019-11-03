@@ -12,12 +12,6 @@ pluginManagement {
         maven { url = uri("https://jetbrains.bintray.com/kotlin-native-dependencies") }
         maven { url = uri("https://maven.fabric.io/public") }
     }
-    resolutionStrategy.eachPlugin {
-        // part of plugins defined in Deps.Plugins, part in buildSrc/build.gradle.kts
-        val module = Deps.plugins[requested.id.id] ?: return@eachPlugin
-
-        useModule(module)
-    }
 }
 
 enableFeaturePreview("GRADLE_METADATA")

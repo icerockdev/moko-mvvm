@@ -1,9 +1,4 @@
 object Deps {
-    object Plugins {
-        const val androidExtensions =
-            "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.Plugins.androidExtensions}"
-    }
-
     object Libs {
         object Android {
             val kotlinStdLib = AndroidLibrary(
@@ -42,8 +37,4 @@ object Deps {
             )
         }
     }
-
-    val plugins: Map<String, String> = mapOf(
-        "kotlin-android-extensions" to Plugins.androidExtensions
-    )
 }
