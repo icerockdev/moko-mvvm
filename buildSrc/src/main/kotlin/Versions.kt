@@ -17,7 +17,7 @@ object Versions {
         object MultiPlatform {
             const val coroutines = "1.3.0"
             const val mokoResources: String = "0.3.0"
-            const val mokoMvvm: String = "0.3.1"
+            const val mokoMvvm: String = "0.4.0-dev-1"
         }
     }
 }
