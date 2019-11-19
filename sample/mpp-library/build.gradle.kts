@@ -14,7 +14,6 @@ android {
 }
 
 val libs = listOf(
-    Deps.Libs.MultiPlatform.mokoCore,
     Deps.Libs.MultiPlatform.mokoResources,
     Deps.Libs.MultiPlatform.mokoMvvm
 )

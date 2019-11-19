@@ -8,11 +8,25 @@ import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import kotlin.native.ref.WeakReference
 
-actual class EventsDispatcher<ListenerType : Any>(listener: ListenerType) {
-    private val weakListener: WeakReference<ListenerType> = WeakReference(listener)
+actual class EventsDispatcher<ListenerType : Any>() {
+    private var weakListener: WeakReference<ListenerType>? = null
+
+    var listener: ListenerType?
+        get() = weakListener?.get()
+        set(value) {
+            weakListener = if (value == null) {
+                null
+            } else {
+                WeakReference(value)
+            }
+        }
+
+    constructor(listener: ListenerType) : this() {
+        this.listener = listener
+    }
 
     actual fun dispatchEvent(block: ListenerType.() -> Unit) {
-        val listener = weakListener.get() ?: return
+        val listener = weakListener?.get() ?: return
         val mainQueue = dispatch_get_main_queue()
         dispatch_async(mainQueue) {
             block(listener)
