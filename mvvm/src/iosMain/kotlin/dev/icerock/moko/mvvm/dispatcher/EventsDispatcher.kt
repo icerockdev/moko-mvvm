@@ -21,6 +21,10 @@ actual class EventsDispatcher<ListenerType : Any>() {
             }
         }
 
+    constructor(listener: ListenerType) : this() {
+        this.listener = listener
+    }
+
     actual fun dispatchEvent(block: ListenerType.() -> Unit) {
         val listener = weakListener?.get() ?: return
         val mainQueue = dispatch_get_main_queue()
