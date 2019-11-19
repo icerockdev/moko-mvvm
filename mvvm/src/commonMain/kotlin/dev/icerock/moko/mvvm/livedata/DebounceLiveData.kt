@@ -4,40 +4,24 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-// import dev.icerock.moko.core.Timer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.launch
 
-// class DebounceLiveData<T>(private val liveData: LiveData<T?>, timer: Long) {
-//     private var lastValue: T? = null
+fun <T> LiveData<T>.debounce(
+    coroutineScope: CoroutineScope,
+    timeInMillis: Long
+): LiveData<T> {
+    val resultLiveData = MutableLiveData(this.value)
 
-//     private val timer = Timer(timer) {
-//         _output.value = lastValue
-//         false
-//     }
+    coroutineScope.launch {
+        this@debounce.asFlow()
+            .debounce(timeInMillis)
+            .collect {
+                resultLiveData.value = it
+            }
+    }
 
-//     private val _output = MutableLiveData<T?>(null)
-//     val output = _output.readOnly()
-
-//     private val observer: (T?) -> Unit = { newValue ->
-//         if (lastValue == null && newValue != null) {
-//             _output.value = newValue
-//         } else {
-//             this.timer.apply {
-//                 stop()
-//                 start()
-//             }
-//         }
-
-//         lastValue = newValue
-//     }
-
-//     init {
-//         liveData.addObserver(observer)
-//     }
-
-//     fun stopTimer() {
-//         timer.stop()
-//         liveData.removeObserver(observer)
-//     }
-// }
-
-// fun <T> LiveData<T?>.debounce(timeInMillis: Long) = DebounceLiveData(this, timeInMillis)
+    return resultLiveData
+}
