@@ -20,7 +20,6 @@ val properties = startParameter.projectProperties
 // ./gradlew -PlibraryPublish publishToMavenLocal
 val libraryPublish: Boolean = properties.containsKey("libraryPublish")
 
-
 include(":mvvm")
 if (!libraryPublish) {
     include(":sample:android-app")

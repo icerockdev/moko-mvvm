@@ -4,7 +4,6 @@
 
 import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryResources
 
 public extension UITextField {
   func bindText(liveData: LiveData<NSString>, formatter: ((String) -> String)? = nil) {
