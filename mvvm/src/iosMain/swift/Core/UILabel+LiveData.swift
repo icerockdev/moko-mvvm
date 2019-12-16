@@ -4,7 +4,6 @@
 
 import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryResources
 
 public extension UILabel {
   func bindText(liveData: LiveData<NSString>, formatter: @escaping ((String?) -> String?) = { text in return text }) {

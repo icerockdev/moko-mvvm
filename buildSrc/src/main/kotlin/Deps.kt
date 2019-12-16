@@ -1,9 +1,4 @@
 object Deps {
-    object Plugins {
-        const val androidExtensions =
-            "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.Plugins.androidExtensions}"
-    }
-
     object Libs {
         object Android {
             val kotlinStdLib = AndroidLibrary(
@@ -30,11 +25,6 @@ object Deps {
                 common = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${Versions.Libs.MultiPlatform.coroutines}",
                 ios = "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:${Versions.Libs.MultiPlatform.coroutines}"
             )
-            val mokoCore = MultiPlatformLibrary(
-                common = "dev.icerock.moko:core:${Versions.Libs.MultiPlatform.mokoCore}",
-                iosX64 = "dev.icerock.moko:core-iosx64:${Versions.Libs.MultiPlatform.mokoCore}",
-                iosArm64 = "dev.icerock.moko:core-iosarm64:${Versions.Libs.MultiPlatform.mokoCore}"
-            )
             val mokoResources = MultiPlatformLibrary(
                 common = "dev.icerock.moko:resources:${Versions.Libs.MultiPlatform.mokoResources}",
                 iosX64 = "dev.icerock.moko:resources-iosx64:${Versions.Libs.MultiPlatform.mokoResources}",
@@ -47,8 +37,4 @@ object Deps {
             )
         }
     }
-
-    val plugins: Map<String, String> = mapOf(
-        "kotlin-android-extensions" to Plugins.androidExtensions
-    )
 }
