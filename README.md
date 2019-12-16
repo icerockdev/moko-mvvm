@@ -1,5 +1,5 @@
 ![moko-mvvm](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.60-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.61-orange)
 
 # Mobile Kotlin Model-View-ViewModel architecture components
 This is a Kotlin Multiplatform library that provides architecture components of Model-View-ViewModel
@@ -32,7 +32,7 @@ This is a Kotlin Multiplatform library that provides architecture components of 
   - 0.2.0
   - 0.3.0
   - 0.3.1
-- kotlin 1.3.60
+- kotlin 1.3.61
   - 0.4.0
 
 ## Installation

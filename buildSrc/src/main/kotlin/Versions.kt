@@ -5,7 +5,7 @@ object Versions {
         const val minSdk = 16
     }
 
-    const val kotlin = "1.3.60"
+    const val kotlin = "1.3.61"
 
     object Libs {
         object Android {
@@ -15,9 +15,9 @@ object Versions {
         }
 
         object MultiPlatform {
-            const val coroutines = "1.3.2-1.3.60-eap-76"
-            const val mokoResources: String = "0.5.0"
-            const val mokoMvvm: String = "0.4.0-dev-2"
+            const val coroutines = "1.3.3"
+            const val mokoResources: String = "0.6.0"
+            const val mokoMvvm: String = "0.4.0"
         }
     }
 }
