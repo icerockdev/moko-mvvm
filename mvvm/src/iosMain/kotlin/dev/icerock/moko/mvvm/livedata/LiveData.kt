@@ -12,11 +12,15 @@ actual open class LiveData<T>(initialValue: T) {
         get() = storedValue
 
     actual fun addObserver(observer: (T) -> Unit) {
+        println("livedata $this addObserver $observer")
+
         observer(value)
         observers.add(observer)
     }
 
     actual fun removeObserver(observer: (T) -> Unit) {
+        println("livedata $this removeObserver $observer")
+
         observers.remove(observer)
     }
 
