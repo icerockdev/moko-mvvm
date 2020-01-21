@@ -21,6 +21,8 @@ actual open class LiveData<T> {
         get() = archLiveData.value as T
 
     actual fun addObserver(observer: (T) -> Unit) {
+        println("livedata $this addObserver $observer")
+
         val archObserver = Observer<T> { value ->
             if (value is T) observer(value)
         }
@@ -30,6 +32,8 @@ actual open class LiveData<T> {
     }
 
     actual fun removeObserver(observer: (T) -> Unit) {
+        println("livedata $this removeObserver $observer")
+
         val archObserver = observers.remove(observer) ?: return
         archLiveData.removeObserver(archObserver)
     }
