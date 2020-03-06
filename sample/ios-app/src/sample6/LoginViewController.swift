@@ -17,9 +17,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let eventsDispatcher = EventsDispatcher<LoginViewModelEventsListener>(listener: self)
-        viewModel = LoginViewModel(eventsDispatcher: eventsDispatcher,
+        viewModel = LoginViewModel(eventsDispatcher: EventsDispatcher(),
                                    userRepository: MockUserRepository())
+        
+        viewModel.eventsDispatcher.listener = self
         
         emailField.bindTextTwoWay(liveData: viewModel.email)
         passwordField.bindTextTwoWay(liveData: viewModel.password)
