@@ -6,10 +6,12 @@ package dev.icerock.moko.mvvm.dispatcher
 
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
+import platform.darwin.dispatch_queue_t
 import kotlin.native.ref.WeakReference
 
-actual class EventsDispatcher<ListenerType : Any>() {
+actual class EventsDispatcher<ListenerType : Any> {
     private var weakListener: WeakReference<ListenerType>? = null
+    private val queue: dispatch_queue_t
 
     var listener: ListenerType?
         get() = weakListener?.get()
@@ -21,14 +23,22 @@ actual class EventsDispatcher<ListenerType : Any>() {
             }
         }
 
-    constructor(listener: ListenerType) : this() {
+    actual constructor() {
+        this.queue = dispatch_get_main_queue()
+    }
+
+    constructor(queue: dispatch_queue_t) {
+        this.queue = queue
+    }
+
+    constructor(listener: ListenerType) {
+        this.queue = dispatch_get_main_queue()
         this.listener = listener
     }
 
     actual fun dispatchEvent(block: ListenerType.() -> Unit) {
         val listener = weakListener?.get() ?: return
-        val mainQueue = dispatch_get_main_queue()
-        dispatch_async(mainQueue) {
+        dispatch_async(queue) {
             block(listener)
         }
     }
