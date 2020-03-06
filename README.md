@@ -34,6 +34,7 @@ This is a Kotlin Multiplatform library that provides architecture components of 
   - 0.3.1
 - kotlin 1.3.61
   - 0.4.0
+  - 0.5.0
 
 ## Installation
 root build.gradle  
@@ -48,7 +49,8 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm:0.4.0")
+    commonMainApi("dev.icerock.moko:mvvm:0.5.0")
+    androidMainImplementation("androidx.lifecycle:lifecycle-extensions:2.0.0")
 }
 ```
 
@@ -59,7 +61,7 @@ enableFeaturePreview("GRADLE_METADATA")
 
 On iOS, in addition to the Kotlin library add in Podfile
 ```ruby
-pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.4.0'
+pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.5.0'
 ```
 **`MultiPlatformLibraryMvvm` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
@@ -153,8 +155,8 @@ class SimpleViewController: UIViewController {
         viewModel.onCounterButtonPressed()
     }
     
-    deinit {
-        viewModel.onCleared()
+    override func didMove(toParentViewController parent: UIViewController?) {
+        if(parent == nil) { viewModel.onCleared() }
     }
 }
 ```
@@ -265,8 +267,8 @@ class EventsViewController: UIViewController {
         viewModel.onButtonPressed()
     }
     
-    deinit {
-        viewModel.onCleared()
+    override func didMove(toParentViewController parent: UIViewController?) {
+        if(parent == nil) { viewModel.onCleared() }
     }
 }
 
@@ -462,8 +464,8 @@ class LoginViewController: UIViewController {
         viewModel.onLoginButtonPressed()
     }
     
-    deinit {
-        viewModel.onCleared()
+    override func didMove(toParentViewController parent: UIViewController?) {
+        if(parent == nil) { viewModel.onCleared() }
     }
 }
 
@@ -484,7 +486,7 @@ Please see more examples in the [sample directory](sample).
 ## Set Up Locally 
 - The [mvvm directory](mvvm) contains the `mvvm` library;
 - In [sample directory](sample) contains sample apps for Android and iOS; plus the mpp-library connected to the apps;
-- For local testing use the `:mvvm:publishToMavenLocal` gradle task - so that sample apps use the locally published version.
+- For local testing use the `./publishToMavenLocal.sh` script - so that sample apps use the locally published version.
 
 ## Contributing
 All development (both new features and bug fixes) is performed in the `develop` branch. This way `master` always contains the sources of the most recently released version. Please send PRs with bug fixes to the `develop` branch. Documentation fixes in the markdown files are an exception to this rule. They are updated directly in `master`.

@@ -6,15 +6,14 @@ import UIKit
 import MultiPlatformLibrary
 
 public extension UIView {
-  func bindVisibility(liveData: LiveData<KotlinBoolean>, inverted: Bool = false) {
-    setVisibility(visible: liveData.value, inverted: inverted)
-    liveData.addObserver { [weak self] visible in
-      self?.setVisibility(visible: visible, inverted: inverted)
-    }
-  }
-  
-  private func setVisibility(visible: KotlinBoolean?, inverted: Bool) {
-    let isVisible = visible?.boolValue ?? false
-    isHidden = inverted ? isVisible : !isVisible
+  func bindVisibility(
+    liveData: LiveData<KotlinBoolean>,
+    inverted: Bool = false
+  ) {
+    UIViewBindingKt.bindVisibility(
+      self,
+      liveData: liveData,
+      inverted: inverted
+    )
   }
 }
