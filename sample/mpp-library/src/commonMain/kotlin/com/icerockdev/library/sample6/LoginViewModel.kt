@@ -27,6 +27,10 @@ class LoginViewModel(
 
     val isLoginButtonVisible: LiveData<Boolean> = isLoading.not()
 
+    init {
+        eventsDispatcher.dispatchEvent { showError("inited".desc()) }
+    }
+
     fun onLoginButtonPressed() {
         val emailValue = email.value
         val passwordValue = password.value

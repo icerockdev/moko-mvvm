@@ -10,10 +10,18 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import java.util.concurrent.Executor
 
-actual class EventsDispatcher<ListenerType : Any>(private val executor: Executor) {
+actual class EventsDispatcher<ListenerType : Any> {
     private var eventsListener: ListenerType? = null
+    private val blocks = mutableListOf<ListenerType.() -> Unit>()
+    private val executor: Executor
 
-    internal val blocks = mutableListOf<ListenerType.() -> Unit>()
+    actual constructor() {
+        this.executor = createExecutorOnMainLooper()
+    }
+
+    constructor(executor: Executor) {
+        this.executor = executor
+    }
 
     fun bind(lifecycleOwner: LifecycleOwner, listener: ListenerType) {
         val observer = object : LifecycleObserver {
