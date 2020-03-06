@@ -6,6 +6,10 @@ inhibit_all_warnings!
 use_frameworks!
 platform :ios, '11.0'
 
+# workaround for https://github.com/CocoaPods/CocoaPods/issues/8073
+# need for correct invalidate of cache MultiPlatformLibrary.framework
+install! 'cocoapods', :disable_input_output_paths => true
+
 target 'TestProj' do
   pod 'AlamofireImage', '3.5.2'
   pod 'SkyFloatingLabelTextField', '3.7.0'
