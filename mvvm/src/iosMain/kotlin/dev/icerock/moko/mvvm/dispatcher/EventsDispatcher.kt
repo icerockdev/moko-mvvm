@@ -32,8 +32,7 @@ actual class EventsDispatcher<ListenerType : Any> {
         this.queue = queue
     }
 
-    constructor(listener: ListenerType) {
-        this.queue = dispatch_get_main_queue()
+    constructor(listener: ListenerType): this() {
         this.listener = listener
     }
 
