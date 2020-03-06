@@ -8,9 +8,12 @@ import android.os.Handler
 import android.os.Looper
 import java.util.concurrent.Executor
 
-inline fun <reified T : Any> eventsDispatcherOnMain(): EventsDispatcher<T> {
+fun createExecutorOnMainLooper(): Executor {
     val mainLooper = Looper.getMainLooper()
     val mainHandler = Handler(mainLooper)
-    val mainExecutor = Executor { mainHandler.post(it) }
-    return EventsDispatcher(mainExecutor)
+    return Executor { mainHandler.post(it) }
+}
+
+inline fun <reified T : Any> eventsDispatcherOnMain(): EventsDispatcher<T> {
+    return EventsDispatcher(createExecutorOnMainLooper())
 }

@@ -4,8 +4,6 @@
 
 package dev.icerock.moko.mvvm.dispatcher
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -57,11 +55,5 @@ actual class EventsDispatcher<ListenerType : Any> {
         } else {
             executor.execute { blocks.add(block) }
         }
-    }
-
-    private fun createExecutorOnMainLooper(): Executor {
-        val mainLooper = Looper.getMainLooper()
-        val mainHandler = Handler(mainLooper)
-        return Executor { mainHandler.post(it) }
     }
 }
