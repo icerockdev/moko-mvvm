@@ -49,6 +49,7 @@ project build.gradle
 ```groovy
 dependencies {
     commonMainApi("dev.icerock.moko:mvvm:0.4.0")
+    androidMainImplementation("androidx.lifecycle:lifecycle-extensions:2.0.0")
 }
 ```
 
