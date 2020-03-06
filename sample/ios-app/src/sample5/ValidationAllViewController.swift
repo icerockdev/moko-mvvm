@@ -23,7 +23,7 @@ class ValidationAllViewController: UIViewController {
         button.bindEnabled(liveData: viewModel.isLoginButtonEnabled)
     }
     
-    deinit {
-        viewModel.onCleared()
+    override func didMove(toParentViewController parent: UIViewController?) {
+        if(parent == nil) { viewModel.onCleared() }
     }
 }
