@@ -35,6 +35,9 @@ dependencies {
     androidLibrary(Deps.Libs.Android.appCompat)
     androidLibrary(Deps.Libs.Android.lifecycle)
     androidLibrary(Deps.Libs.Android.material)
+
+    // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
+    compileOnly("javax.annotation:jsr250-api:1.0")
 }
 
 publishing {
