@@ -4,6 +4,7 @@
 
 package com.icerockdev.library.sample6
 
+import dev.icerock.moko.mvvm.State
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
 import dev.icerock.moko.mvvm.livedata.LiveData
@@ -22,6 +23,8 @@ class LoginViewModel(
     val email: MutableLiveData<String> = MutableLiveData("")
     val password: MutableLiveData<String> = MutableLiveData("")
 
+    val state: LiveData<State<String, StringDesc>> = MutableLiveData(State.Empty())
+
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading.readOnly()
 
@@ -37,7 +40,6 @@ class LoginViewModel(
 
         viewModelScope.launch {
             _isLoading.value = true
-
             try {
                 userRepository.login(email = emailValue, password = passwordValue)
 
@@ -45,7 +47,6 @@ class LoginViewModel(
             } catch (error: Throwable) {
                 val message = error.message ?: error.toString()
                 val errorDesc = message.desc()
-
                 eventsDispatcher.dispatchEvent { showError(errorDesc) }
             } finally {
                 _isLoading.value = false

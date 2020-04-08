@@ -21,7 +21,6 @@ class LoginViewController: UIViewController {
                                    userRepository: MockUserRepository())
         
         viewModel.eventsDispatcher.listener = self
-        
         emailField.bindTextTwoWay(liveData: viewModel.email)
         passwordField.bindTextTwoWay(liveData: viewModel.password)
         loginButton.bindVisibility(liveData: viewModel.isLoginButtonVisible)

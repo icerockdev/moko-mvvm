@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E09D32E243D9FA20042BE49 /* StateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09D32D243D9FA20042BE49 /* StateViewController.swift */; };
 		2B70A10DE02726CA8E6981EB /* Pods_TestProj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D683A7C91DCD56058C7435 /* Pods_TestProj.framework */; };
 		4504F734232A32440008A68E /* SimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504F733232A32440008A68E /* SimpleViewController.swift */; };
 		4504F736232A39C60008A68E /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504F735232A39C60008A68E /* EventsViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E09D32D243D9FA20042BE49 /* StateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateViewController.swift; sourceTree = "<group>"; };
 		287627FF1F319065007FA12B /* mokoSampleMvvm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mokoSampleMvvm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4504F733232A32440008A68E /* SimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViewController.swift; sourceTree = "<group>"; };
 		4504F735232A39C60008A68E /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,14 @@
 				A644D2F1C5377C40A53FCD6A /* Pods-TestProj.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		0E09D32C243D9F8D0042BE49 /* sample7 */ = {
+			isa = PBXGroup;
+			children = (
+				0E09D32D243D9FA20042BE49 /* StateViewController.swift */,
+			);
+			path = sample7;
 			sourceTree = "<group>";
 		};
 		287627F61F319065007FA12B = {
@@ -135,6 +145,7 @@
 		45F47910219463C7003D25FA /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0E09D32C243D9F8D0042BE49 /* sample7 */,
 				4504F745232A3A340008A68E /* sample6 */,
 				4504F744232A3A260008A68E /* sample5 */,
 				4504F743232A3A1E0008A68E /* sample4 */,
@@ -284,6 +295,7 @@
 				4504F73A232A39E50008A68E /* ValidationMergeViewController.swift in Sources */,
 				4504F747232A3B5E0008A68E /* AlertViewControllerExt.swift in Sources */,
 				4504F738232A39D00008A68E /* EventsOwnerViewController.swift in Sources */,
+				0E09D32E243D9FA20042BE49 /* StateViewController.swift in Sources */,
 				4504F736232A39C60008A68E /* EventsViewController.swift in Sources */,
 				4504F73E232A3A020008A68E /* LoginViewController.swift in Sources */,
 				45F47922219463C7003D25FA /* AppDelegate.swift in Sources */,
