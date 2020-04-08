@@ -31,18 +31,12 @@ fun UIButton.bindEnabled(
     }
 }
 
-fun UIButton.bindTitle(
-    liveData: LiveData<String>
+fun <T> UIButton.bindTitle(
+    liveData: LiveData<T>
 ) {
-    liveData.bind(this) { value ->
-        setTitle(value, forState = UIControlStateNormal)
+    liveData.descOrEmpty().bind(this) { value ->
+        setTitle(value.localized(), forState = UIControlStateNormal)
     }
-}
-
-fun UIButton.bindTitle(
-    liveData: LiveData<StringDesc>
-) {
-    bindTitle(liveData.map { it.localized() })
 }
 
 fun UIButton.bindImages(

@@ -98,14 +98,3 @@ fun <T> LiveData<T>.distinct(): LiveData<T> {
         }
     }
 }
-
-fun <T> LiveData<T?>.descOrEmpty(): LiveData<StringDesc> {
-    return this.map {
-        when (it) {
-            is StringDesc -> it
-            is StringResource -> it.desc()
-            is String -> it.desc()
-            else -> "".desc()
-        }
-    }
-}
