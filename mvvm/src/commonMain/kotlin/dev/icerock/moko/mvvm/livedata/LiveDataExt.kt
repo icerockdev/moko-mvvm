@@ -4,6 +4,10 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+import dev.icerock.moko.resources.StringResource
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
+
 fun <T, OT> LiveData<T>.map(function: (T) -> OT): LiveData<OT> {
     val mutableLiveData = MutableLiveData(function(value))
     addObserver { mutableLiveData.value = function(it) }
@@ -91,6 +95,17 @@ fun <T> LiveData<T>.distinct(): LiveData<T> {
         addSource(source) { newValue ->
             if (newValue == value) return@addSource
             value = newValue
+        }
+    }
+}
+
+fun <T> LiveData<T?>.descOrEmpty(): LiveData<StringDesc> {
+    return this.map {
+        when (it) {
+            is StringDesc -> it
+            is StringResource -> it.desc()
+            is String -> it.desc()
+            else -> "".desc()
         }
     }
 }
