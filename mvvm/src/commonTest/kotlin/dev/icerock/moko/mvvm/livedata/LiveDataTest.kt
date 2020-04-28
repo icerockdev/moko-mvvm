@@ -36,7 +36,7 @@ class LiveDataTest : BaseTestsClass() {
         }
 
         ld.value = 1
-        "value set but not changed, but we should got notify".let { msg ->
+        "value set but not changed, we should got notification".let { msg ->
             assertEquals(expected = 1, actual = ld.value, message = msg)
             assertEquals(expected = 1, actual = lastValue, message = msg)
             assertEquals(expected = 3, actual = observedCounter, message = msg)
@@ -87,7 +87,7 @@ class LiveDataTest : BaseTestsClass() {
         }
 
         ld.value = 2
-        "value set but not changed, but we should got changes".let { msg ->
+        "value set but not changed, we should got notification".let { msg ->
             assertEquals(expected = 2, actual = ld.value, message = msg)
             assertEquals(expected = -2, actual = mapLd.value, message = msg)
             assertEquals(expected = -2, actual = lastValue, message = msg)
@@ -137,7 +137,7 @@ class LiveDataTest : BaseTestsClass() {
         }
 
         firstLd.value = 1
-        "result of merge not changed, we should not got changes".let { msg ->
+        "result of merge not changed, but we should got notification".let { msg ->
             assertEquals(expected = 1, actual = firstLd.value, message = msg)
             assertEquals(expected = 0, actual = secondLd.value, message = msg)
             assertEquals(expected = 0, actual = mergedLd.value, message = msg)
