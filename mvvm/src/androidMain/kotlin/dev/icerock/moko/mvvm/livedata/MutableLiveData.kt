@@ -16,12 +16,10 @@ actual open class MutableLiveData<T> : LiveData<T> {
     actual override var value: T
         get() = archLiveData.value as T
         set(newValue) {
-            if(newValue == archLiveData.value) return
             (archLiveData as MutableLiveData<T>).value = newValue
         }
 
     actual fun postValue(value: T) {
-        if(value == archLiveData.value) return
         (archLiveData as MutableLiveData<T>).postValue(value)
     }
 

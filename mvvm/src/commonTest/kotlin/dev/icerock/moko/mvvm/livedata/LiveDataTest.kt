@@ -36,17 +36,17 @@ class LiveDataTest : BaseTestsClass() {
         }
 
         ld.value = 1
-        "value set but not changed, we should not got changes".let { msg ->
+        "value set but not changed, but we should got notify".let { msg ->
             assertEquals(expected = 1, actual = ld.value, message = msg)
             assertEquals(expected = 1, actual = lastValue, message = msg)
-            assertEquals(expected = 2, actual = observedCounter, message = msg)
+            assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
 
         ld.postValue(2)
         "postValue should set value on mainThread, so change should be applied".let { msg ->
             assertEquals(expected = 2, actual = ld.value, message = msg)
             assertEquals(expected = 2, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
+            assertEquals(expected = 4, actual = observedCounter, message = msg)
         }
 
         ld.removeObserver(observer)
@@ -54,7 +54,7 @@ class LiveDataTest : BaseTestsClass() {
         "observer was removed - we should not got any changes".let { msg ->
             assertEquals(expected = 3, actual = ld.value, message = msg)
             assertEquals(expected = 2, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
+            assertEquals(expected = 4, actual = observedCounter, message = msg)
         }
     }
 
@@ -87,11 +87,11 @@ class LiveDataTest : BaseTestsClass() {
         }
 
         ld.value = 2
-        "value set but not changed, we should not got changes".let { msg ->
+        "value set but not changed, but we should got changes".let { msg ->
             assertEquals(expected = 2, actual = ld.value, message = msg)
             assertEquals(expected = -2, actual = mapLd.value, message = msg)
             assertEquals(expected = -2, actual = lastValue, message = msg)
-            assertEquals(expected = 2, actual = observedCounter, message = msg)
+            assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
 
         ld.postValue(3)
@@ -99,7 +99,7 @@ class LiveDataTest : BaseTestsClass() {
             assertEquals(expected = 3, actual = ld.value, message = msg)
             assertEquals(expected = -3, actual = mapLd.value, message = msg)
             assertEquals(expected = -3, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
+            assertEquals(expected = 4, actual = observedCounter, message = msg)
         }
 
         mapLd.removeObserver(observer)
@@ -108,7 +108,7 @@ class LiveDataTest : BaseTestsClass() {
             assertEquals(expected = 4, actual = ld.value, message = msg)
             assertEquals(expected = -4, actual = mapLd.value, message = msg)
             assertEquals(expected = -3, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
+            assertEquals(expected = 4, actual = observedCounter, message = msg)
         }
     }
 
@@ -142,7 +142,7 @@ class LiveDataTest : BaseTestsClass() {
             assertEquals(expected = 0, actual = secondLd.value, message = msg)
             assertEquals(expected = 0, actual = mergedLd.value, message = msg)
             assertEquals(expected = 0, actual = lastValue, message = msg)
-            assertEquals(expected = 1, actual = observedCounter, message = msg)
+            assertEquals(expected = 2, actual = observedCounter, message = msg)
         }
 
         secondLd.value = 2
@@ -151,7 +151,7 @@ class LiveDataTest : BaseTestsClass() {
             assertEquals(expected = 2, actual = secondLd.value, message = msg)
             assertEquals(expected = 2, actual = mergedLd.value, message = msg)
             assertEquals(expected = 2, actual = lastValue, message = msg)
-            assertEquals(expected = 2, actual = observedCounter, message = msg)
+            assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
 
         mergedLd.removeObserver(observer)
@@ -161,7 +161,7 @@ class LiveDataTest : BaseTestsClass() {
             assertEquals(expected = 2, actual = secondLd.value, message = msg)
             assertEquals(expected = 8, actual = mergedLd.value, message = msg)
             assertEquals(expected = 2, actual = lastValue, message = msg)
-            assertEquals(expected = 2, actual = observedCounter, message = msg)
+            assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
     }
 }
