@@ -111,4 +111,57 @@ class LiveDataTest : BaseTestsClass() {
             assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
     }
+
+    @Test
+    fun `live data merge testing`() {
+        val firstLd: MutableLiveData<Int> = MutableLiveData(initialValue = 0)
+        val secondLd: MutableLiveData<Int> = MutableLiveData(initialValue = 0)
+        val mergedLd: LiveData<Int> = firstLd.mergeWith(secondLd) { first, second ->
+            first * second
+        }
+
+        var observedCounter = 0
+        var lastValue: Int? = null
+        val observer: (Int) -> Unit = {
+            observedCounter++
+            lastValue = it
+        }
+        mergedLd.addObserver(observer)
+
+        "we should got initial value".let { msg ->
+            assertEquals(expected = 0, actual = firstLd.value, message = msg)
+            assertEquals(expected = 0, actual = secondLd.value, message = msg)
+            assertEquals(expected = 0, actual = mergedLd.value, message = msg)
+            assertEquals(expected = 0, actual = lastValue, message = msg)
+            assertEquals(expected = 1, actual = observedCounter, message = msg)
+        }
+
+        firstLd.value = 1
+        "result of merge not changed, we should not got changes".let { msg ->
+            assertEquals(expected = 1, actual = firstLd.value, message = msg)
+            assertEquals(expected = 0, actual = secondLd.value, message = msg)
+            assertEquals(expected = 0, actual = mergedLd.value, message = msg)
+            assertEquals(expected = 0, actual = lastValue, message = msg)
+            assertEquals(expected = 1, actual = observedCounter, message = msg)
+        }
+
+        secondLd.value = 2
+        "merged value changed, we should got changes".let { msg ->
+            assertEquals(expected = 1, actual = firstLd.value, message = msg)
+            assertEquals(expected = 2, actual = secondLd.value, message = msg)
+            assertEquals(expected = 2, actual = mergedLd.value, message = msg)
+            assertEquals(expected = 2, actual = lastValue, message = msg)
+            assertEquals(expected = 2, actual = observedCounter, message = msg)
+        }
+
+        mergedLd.removeObserver(observer)
+        firstLd.value = 4
+        "observer was removed - we should not got any changes".let { msg ->
+            assertEquals(expected = 4, actual = firstLd.value, message = msg)
+            assertEquals(expected = 2, actual = secondLd.value, message = msg)
+            assertEquals(expected = 8, actual = mergedLd.value, message = msg)
+            assertEquals(expected = 2, actual = lastValue, message = msg)
+            assertEquals(expected = 2, actual = observedCounter, message = msg)
+        }
+    }
 }
