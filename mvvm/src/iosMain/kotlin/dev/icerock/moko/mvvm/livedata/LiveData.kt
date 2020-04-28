@@ -21,6 +21,8 @@ actual open class LiveData<T>(initialValue: T) {
     }
 
     protected fun changeValue(value: T) {
+        if(storedValue == value) return
+
         storedValue = value
 
         observers.forEach { it(value) }
