@@ -20,4 +20,8 @@ object Versions {
             const val mokoMvvm: String = "0.6.0"
         }
     }
+
+    object Tests {
+        const val androidCoreTesting = "2.1.0"
+    }
 }
