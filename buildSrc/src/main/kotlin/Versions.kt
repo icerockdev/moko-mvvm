@@ -6,12 +6,13 @@ object Versions {
     }
 
     const val kotlin = "1.3.70"
+    private const val androidArch = "2.1.0"
 
     object Libs {
         object Android {
             const val appCompat = "1.1.0"
             const val material = "1.0.0"
-            const val lifecycle = "2.0.0"
+            const val lifecycle = androidArch
         }
 
         object MultiPlatform {
@@ -19,5 +20,9 @@ object Versions {
             const val mokoResources: String = "0.11.0"
             const val mokoMvvm: String = "0.6.0"
         }
+    }
+
+    object Tests {
+        const val androidCoreTesting = androidArch
     }
 }

@@ -5,6 +5,7 @@
 package dev.icerock.moko.mvvm.livedata
 
 import platform.darwin.dispatch_async
+import platform.darwin.dispatch_get_current_queue
 import platform.darwin.dispatch_get_main_queue
 
 actual open class MutableLiveData<T> actual constructor(initialValue: T) :
@@ -17,8 +18,11 @@ actual open class MutableLiveData<T> actual constructor(initialValue: T) :
         }
 
     actual fun postValue(value: T) {
-        dispatch_async(dispatch_get_main_queue()) {
+        val mainQueue = dispatch_get_main_queue()
+        if (dispatch_get_current_queue() == mainQueue) {
             changeValue(value)
+        } else {
+            dispatch_async(mainQueue) { changeValue(value) }
         }
     }
 }
