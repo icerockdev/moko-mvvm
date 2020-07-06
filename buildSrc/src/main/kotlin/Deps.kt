@@ -37,4 +37,18 @@ object Deps {
             )
         }
     }
+
+    object Tests {
+        val kotlinTestCommon = MultiPlatformLibrary(
+            android = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}",
+            common = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
+        )
+        val kotlinTestCommonAnnotations = MultiPlatformLibrary(
+            android = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}",
+            common = "org.jetbrains.kotlin:kotlin-test-annotations-common:${Versions.kotlin}"
+        )
+        val androidCoreTesting = MultiPlatformLibrary(
+            android = "androidx.arch.core:core-testing:${Versions.Tests.androidCoreTesting}"
+        )
+    }
 }

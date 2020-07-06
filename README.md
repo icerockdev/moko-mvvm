@@ -1,5 +1,5 @@
 ![moko-mvvm](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.70-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.72-orange)
 
 # Mobile Kotlin Model-View-ViewModel architecture components
 This is a Kotlin Multiplatform library that provides architecture components of Model-View-ViewModel
@@ -37,6 +37,8 @@ This is a Kotlin Multiplatform library that provides architecture components of 
   - 0.5.0
 - kotlin 1.3.70
   - 0.6.0
+- kotlin 1.3.72
+  - 0.7.0
 
 ## Installation
 root build.gradle  
@@ -51,8 +53,8 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm:0.6.0")
-    androidMainImplementation("androidx.lifecycle:lifecycle-extensions:2.0.0")
+    commonMainApi("dev.icerock.moko:mvvm:0.7.0")
+    androidMainImplementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 }
 ```
 
