@@ -11,24 +11,27 @@ fun <T, OT> LiveData<T>.map(function: (T) -> OT): LiveData<OT> {
 }
 
 fun <T, OT> LiveData<T>.flatMap(function: (T) -> LiveData<OT>): LiveData<OT> {
-    var shadowLiveData = function(value)
-    val mutableLiveData = MutableLiveData<OT>(shadowLiveData.value)
+    var shadowLiveData: LiveData<OT>? = null
+    var mutableLiveData: MutableLiveData<OT>? = null
 
-    val shadowObserver: (OT) -> Unit = { mutableLiveData.value = it }
-
-    addObserver { newValue ->
-        shadowLiveData.removeObserver(shadowObserver)
-
-        shadowLiveData = function(newValue)
-
-        mutableLiveData.value = shadowLiveData.value
-
-        shadowLiveData.addObserver(shadowObserver)
+    val shadowObserver: (OT) -> Unit = {
+        mutableLiveData!!.value = it
     }
 
-    shadowLiveData.addObserver(shadowObserver)
+    addObserver { newValue ->
+        shadowLiveData?.removeObserver(shadowObserver)
 
-    return mutableLiveData
+        val _shadowLiveData = function(newValue)
+        shadowLiveData = _shadowLiveData
+
+        if (mutableLiveData == null) {
+            mutableLiveData = MutableLiveData(_shadowLiveData.value)
+        }
+
+        _shadowLiveData.addObserver(shadowObserver)
+    }
+
+    return mutableLiveData!!
 }
 
 fun <OT, I1T, I2T> LiveData<I1T>.mergeWith(
