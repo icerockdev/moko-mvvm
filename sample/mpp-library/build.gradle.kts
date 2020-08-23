@@ -4,29 +4,11 @@ plugins {
     id("dev.icerock.mobile.multiplatform")
 }
 
-android {
-    compileSdkVersion(Versions.Android.compileSdk)
-
-    defaultConfig {
-        minSdkVersion(Versions.Android.minSdk)
-        targetSdkVersion(Versions.Android.targetSdk)
-    }
-}
-
-val libs = listOf(
-    Deps.Libs.MultiPlatform.mokoResources,
-    Deps.Libs.MultiPlatform.mokoMvvm
-)
-
-setupFramework(
-    exports = libs
-)
-
 dependencies {
-    mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
-    mppLibrary(Deps.Libs.MultiPlatform.coroutines)
+    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
-    androidLibrary(Deps.Libs.Android.lifecycle)
+    androidMainImplementation(Deps.Libs.Android.lifecycle)
 
-    libs.forEach { mppLibrary(it) }
+    commonMainApi(Deps.Libs.MultiPlatform.mokoResources)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoMvvm)
 }
