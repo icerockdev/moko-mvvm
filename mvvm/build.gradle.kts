@@ -20,11 +20,12 @@ android {
 dependencies {
     commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
-    commonMainImplementation(Deps.Libs.MultiPlatform.mokoResources)
+    commonMainImplementation(Deps.Libs.MultiPlatform.mokoResources.common)
 
     androidMainImplementation(Deps.Libs.Android.appCompat)
     androidMainImplementation(Deps.Libs.Android.lifecycle)
     androidMainImplementation(Deps.Libs.Android.material)
+    androidMainImplementation(Deps.Libs.Android.coroutines)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     androidMainCompileOnly("javax.annotation:jsr250-api:1.0")

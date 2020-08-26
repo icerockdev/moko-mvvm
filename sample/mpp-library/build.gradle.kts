@@ -10,6 +10,11 @@ dependencies {
 
     androidMainImplementation(Deps.Libs.Android.lifecycle)
 
-    commonMainApi(Deps.Libs.MultiPlatform.mokoResources)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
     commonMainApi(Deps.Libs.MultiPlatform.mokoMvvm)
+}
+
+framework {
+    export(project(":mvvm"))
+    export(Deps.Libs.MultiPlatform.mokoResources)
 }

@@ -48,12 +48,18 @@ object Deps {
             const val appCompat = "androidx.appcompat:appcompat:$androidAppCompatVersion"
             const val material = "com.google.android.material:material:$materialDesignVersion"
             const val lifecycle = "androidx.lifecycle:lifecycle-extensions:$androidLifecycleVersion"
+            const val coroutines =
+                "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
         }
 
         object MultiPlatform {
             const val coroutines =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-            const val mokoResources = "dev.icerock.moko:resources:$mokoResourcesVersion"
+            val mokoResources = MultiPlatformLibrary(
+                common = "dev.icerock.moko:resources:$mokoResourcesVersion",
+                iosArm64 = "dev.icerock.moko:resources-iosarm64:$mokoResourcesVersion",
+                iosX64 = "dev.icerock.moko:resources-iosx64:$mokoResourcesVersion"
+            )
             const val mokoMvvm = "dev.icerock.moko:mvvm:$mokoMvvmVersion"
         }
 
