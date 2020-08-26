@@ -3,11 +3,11 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("kotlin-kapt")
-    id("dev.icerock.mobile.multiplatform")
-    id("maven-publish")
+    plugin(Deps.Plugins.androidLibrary)
+    plugin(Deps.Plugins.kotlinMultiplatform)
+    plugin(Deps.Plugins.kotlinKapt)
+    plugin(Deps.Plugins.mobileMultiplatform)
+    plugin(Deps.Plugins.mavenPublish)
 }
 
 group = "dev.icerock.moko"

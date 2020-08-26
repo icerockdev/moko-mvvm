@@ -58,9 +58,9 @@ object Deps {
         }
 
         object Tests {
-            val kotlinTestJUnit =
+            const val kotlinTestJUnit =
                 "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
-            val androidCoreTesting =
+            const val androidCoreTesting =
                 "androidx.arch.core:core-testing:$androidCoreTestingVersion"
         }
     }

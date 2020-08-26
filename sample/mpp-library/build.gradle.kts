@@ -1,7 +1,8 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("dev.icerock.mobile.multiplatform")
+    plugin(Deps.Plugins.androidLibrary)
+    plugin(Deps.Plugins.kotlinMultiplatform)
+    plugin(Deps.Plugins.mobileMultiplatform)
+    plugin(Deps.Plugins.iosFramework)
 }
 
 dependencies {
