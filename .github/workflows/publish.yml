@@ -15,4 +15,4 @@ jobs:
         with:
           java-version: 1.8
       - name: Build and publish to Bintray
-        run: ./gradlew -PlibraryPublish :mvvm:publishAllPublicationsToBintrayRepository -DBINTRAY_USER=${{ secrets.BINTRAY_USER }} -DBINTRAY_KEY=${{ secrets.BINTRAY_KEY }}
+        run: ./gradlew publishAllPublicationsToBintrayRepository -DBINTRAY_USER=${{ secrets.BINTRAY_USER }} -DBINTRAY_KEY=${{ secrets.BINTRAY_KEY }}
