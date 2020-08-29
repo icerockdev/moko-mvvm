@@ -27,11 +27,15 @@ dependencies {
     androidMainImplementation(Deps.Libs.Android.material)
     androidMainImplementation(Deps.Libs.Android.coroutines)
 
+    commonTestImplementation(Deps.Libs.Tests.kotlinTestJUnit)
+    androidTestImplementation(Deps.Libs.Tests.androidCoreTesting)
+
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
 
-    commonTestImplementation(Deps.Libs.Tests.kotlinTestJUnit)
-    androidTestImplementation(Deps.Libs.Tests.androidCoreTesting)
+    // temporary fix of https://youtrack.jetbrains.com/issue/KT-41083
+    commonMainImplementation("dev.icerock.moko:parcelize:0.4.0")
+    commonMainImplementation("dev.icerock.moko:graphics:0.4.0")
 }
 
 publishing {
