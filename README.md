@@ -1,5 +1,5 @@
 ![moko-mvvm](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.72-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-mvvm/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-mvvm/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.4.0-orange)
 
 # Mobile Kotlin Model-View-ViewModel architecture components
 This is a Kotlin Multiplatform library that provides architecture components of Model-View-ViewModel
@@ -12,7 +12,7 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Samples](#samples)
-- [Set Up Locally](#setup-locally)
+- [Set Up Locally](#set-up-locally)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -22,7 +22,7 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 - **EventsDispatcher** - dispatch events from `ViewModel` to `View` with automatic lifecycle control and explicit interface of required events.
 
 ## Requirements
-- Gradle version 5.4.1+
+- Gradle version 6.0+
 - Android API 16+
 - iOS version 9.0+
 
@@ -40,6 +40,8 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 - kotlin 1.3.72
   - 0.7.0
   - 0.7.1
+- kotlin 1.4.0
+  - 0.8.0
 
 ## Installation
 root build.gradle  
@@ -54,19 +56,14 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm:0.7.1")
+    commonMainApi("dev.icerock.moko:mvvm:0.8.0")
     androidMainImplementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 }
 ```
 
-settings.gradle  
-```groovy
-enableFeaturePreview("GRADLE_METADATA")
-```
-
 On iOS, in addition to the Kotlin library add in Podfile
 ```ruby
-pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.7.1'
+pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.8.0'
 ```
 **`MultiPlatformLibraryMvvm` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
@@ -490,8 +487,7 @@ Please see more examples in the [sample directory](sample).
 
 ## Set Up Locally 
 - The [mvvm directory](mvvm) contains the `mvvm` library;
-- In [sample directory](sample) contains sample apps for Android and iOS; plus the mpp-library connected to the apps;
-- For local testing use the `./publishToMavenLocal.sh` script - so that sample apps use the locally published version.
+- In [sample directory](sample) contains sample apps for Android and iOS; plus the mpp-library connected to the apps.
 
 ## Contributing
 All development (both new features and bug fixes) is performed in the `develop` branch. This way `master` always contains the sources of the most recently released version. Please send PRs with bug fixes to the `develop` branch. Documentation fixes in the markdown files are an exception to this rule. They are updated directly in `master`.

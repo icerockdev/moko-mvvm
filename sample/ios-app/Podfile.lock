@@ -39,10 +39,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
-  MultiPlatformLibrary: cd722dcacda18e0f3b888e477d2bf1743af85ee1
+  MultiPlatformLibrary: 176fb8ade516666cd47e93de1b71ba0441a541bb
   MultiPlatformLibraryMvvm: 999ac3896d8214fd65e0e0a376a2e553bf4515b3
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
 
 PODFILE CHECKSUM: bcb3dbb84251cb098ef01da03025fb9e92e73129
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.9.3

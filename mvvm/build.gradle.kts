@@ -3,45 +3,39 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("kotlin-kapt")
-    id("dev.icerock.mobile.multiplatform")
-    id("maven-publish")
+    plugin(Deps.Plugins.androidLibrary)
+    plugin(Deps.Plugins.kotlinMultiplatform)
+    plugin(Deps.Plugins.kotlinKapt)
+    plugin(Deps.Plugins.mobileMultiplatform)
+    plugin(Deps.Plugins.mavenPublish)
 }
 
 group = "dev.icerock.moko"
-version = Versions.Libs.MultiPlatform.mokoMvvm
+version = Deps.mokoMvvmVersion
 
 android {
-    compileSdkVersion(Versions.Android.compileSdk)
-
-    defaultConfig {
-        minSdkVersion(Versions.Android.minSdk)
-        targetSdkVersion(Versions.Android.targetSdk)
-    }
-
-    dataBinding {
-        isEnabled = true
-    }
+    buildFeatures.dataBinding = true
 }
 
 dependencies {
-    mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
-    mppLibrary(Deps.Libs.MultiPlatform.coroutines)
+    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
-    mppLibrary(Deps.Libs.MultiPlatform.mokoResources)
+    commonMainImplementation(Deps.Libs.MultiPlatform.mokoResources.common)
 
-    androidLibrary(Deps.Libs.Android.appCompat)
-    androidLibrary(Deps.Libs.Android.lifecycle)
-    androidLibrary(Deps.Libs.Android.material)
+    androidMainImplementation(Deps.Libs.Android.appCompat)
+    androidMainImplementation(Deps.Libs.Android.lifecycle)
+    androidMainImplementation(Deps.Libs.Android.material)
+    androidMainImplementation(Deps.Libs.Android.coroutines)
+
+    commonTestImplementation(Deps.Libs.Tests.kotlinTestJUnit)
+    androidTestImplementation(Deps.Libs.Tests.androidCoreTesting)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
-    compileOnly("javax.annotation:jsr250-api:1.0")
+    androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
 
-    mppTestLibrary(Deps.Tests.kotlinTestCommon)
-    mppTestLibrary(Deps.Tests.kotlinTestCommonAnnotations)
-    mppTestLibrary(Deps.Tests.androidCoreTesting)
+    // temporary fix of https://youtrack.jetbrains.com/issue/KT-41083
+    commonMainImplementation("dev.icerock.moko:parcelize:0.4.0")
+    commonMainImplementation("dev.icerock.moko:graphics:0.4.0")
 }
 
 publishing {
