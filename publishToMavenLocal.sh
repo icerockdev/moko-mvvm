@@ -1,1 +1,0 @@
-./gradlew -PlibraryPublish :mvvm:publishToMavenLocal
