@@ -39,6 +39,10 @@ android {
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
     }
+
+    lintOptions {
+        disable("Instantiatable") // bug Error: SimpleActivity must extend android.app.Activity [Instantiatable]
+    }
 }
 
 dependencies {

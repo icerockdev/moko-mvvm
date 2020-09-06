@@ -1,9 +1,9 @@
 object Deps {
     private const val kotlinVersion = "1.4.0"
 
-    private const val androidAppCompatVersion = "1.1.0"
-    private const val materialDesignVersion = "1.0.0"
-    private const val androidLifecycleVersion = "2.1.0"
+    private const val androidAppCompatVersion = "1.2.0"
+    private const val materialDesignVersion = "1.2.1"
+    private const val androidLifecycleVersion = "2.2.0"
     private const val androidCoreTestingVersion = "2.1.0"
 
     private const val detektVersion = "1.7.4"
@@ -13,8 +13,8 @@ object Deps {
     const val mokoMvvmVersion = "0.8.0"
 
     object Android {
-        const val compileSdk = 28
-        const val targetSdk = 28
+        const val compileSdk = 29
+        const val targetSdk = 29
         const val minSdk = 16
     }
 
