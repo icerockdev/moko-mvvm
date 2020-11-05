@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
         viewModel.onLoginButtonPressed()
     }
     
-    override func didMove(toParentViewController parent: UIViewController?) {
+    override func didMove(toParent parent: UIViewController?) {
         if(parent == nil) { viewModel.onCleared() }
     }
 }

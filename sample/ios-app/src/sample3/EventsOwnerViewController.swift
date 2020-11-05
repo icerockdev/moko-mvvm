@@ -20,7 +20,7 @@ class EventsOwnerViewController: UIViewController {
         viewModel.onButtonPressed()
     }
     
-    override func didMove(toParentViewController parent: UIViewController?) {
+    override func didMove(toParent parent: UIViewController?) {
         if(parent == nil) { viewModel.onCleared() }
     }
 }
