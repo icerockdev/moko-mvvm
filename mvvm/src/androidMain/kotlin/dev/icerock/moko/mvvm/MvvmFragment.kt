@@ -16,7 +16,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 
 abstract class MvvmFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
-    protected lateinit var binding: DB
+    private var _binding: DB? = null
+    protected val binding: DB
+        get() = _binding!!
+
     protected lateinit var viewModel: VM
 
     protected abstract val layoutId: Int
@@ -39,7 +42,7 @@ abstract class MvvmFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -48,5 +51,10 @@ abstract class MvvmFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.setVariable(viewModelVariableId, viewModel)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

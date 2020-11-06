@@ -23,5 +23,6 @@
         <activity android:name=".sample4.ValidationMergeActivity" />
         <activity android:name=".sample5.ValidationAllActivity" />
         <activity android:name=".sample6.LoginActivity" />
+        <activity android:name=".sample7.ContainerActivity" />
     </application>
 </manifest>

@@ -15,6 +15,7 @@ import com.icerockdev.app.sample3.EventsOwnerActivity
 import com.icerockdev.app.sample4.ValidationMergeActivity
 import com.icerockdev.app.sample5.ValidationAllActivity
 import com.icerockdev.app.sample6.LoginActivity
+import com.icerockdev.app.sample7.ContainerActivity
 import kotlin.reflect.KClass
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
     fun onSample6ButtonPressed(view: View) {
         openScreen(LoginActivity::class)
+    }
+
+    fun onSample7ButtonPressed(view: View) {
+        openScreen(ContainerActivity::class)
     }
 
     private fun openScreen(clazz: KClass<out Activity>) {
