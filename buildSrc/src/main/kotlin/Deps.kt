@@ -1,5 +1,5 @@
 object Deps {
-    private const val kotlinVersion = "1.4.0"
+    private const val kotlinVersion = "1.4.21"
 
     private const val androidAppCompatVersion = "1.2.0"
     private const val materialDesignVersion = "1.2.1"
@@ -8,9 +8,9 @@ object Deps {
 
     private const val detektVersion = "1.7.4"
 
-    private const val coroutinesVersion = "1.3.9"
-    private const val mokoResourcesVersion = "0.13.0"
-    const val mokoMvvmVersion = "0.8.0"
+    private const val coroutinesVersion = "1.4.2"
+    private const val mokoResourcesVersion = "0.13.2"
+    const val mokoMvvmVersion = "0.8.1"
 
     object Android {
         const val compileSdk = 29
@@ -55,11 +55,8 @@ object Deps {
         object MultiPlatform {
             const val coroutines =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-            val mokoResources = MultiPlatformLibrary(
-                common = "dev.icerock.moko:resources:$mokoResourcesVersion",
-                iosArm64 = "dev.icerock.moko:resources-iosarm64:$mokoResourcesVersion",
-                iosX64 = "dev.icerock.moko:resources-iosx64:$mokoResourcesVersion"
-            )
+            val mokoResources = "dev.icerock.moko:resources:$mokoResourcesVersion"
+                .defaultMPL(ios = true)
             const val mokoMvvm = "dev.icerock.moko:mvvm:$mokoMvvmVersion"
         }
 

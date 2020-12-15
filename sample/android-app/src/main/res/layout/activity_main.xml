@@ -47,4 +47,11 @@
         android:layout_marginTop="8dp"
         android:onClick="onSample6ButtonPressed"
         android:text="Sample 6" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="onSample7ButtonPressed"
+        android:text="Sample 7" />
 </LinearLayout>
