@@ -36,7 +36,11 @@ internal class UIDispatcher : CoroutineDispatcher(), Delay {
         }
     }
 
-    override fun invokeOnTimeout(timeMillis: Long, block: Runnable): DisposableHandle {
+    override fun invokeOnTimeout(
+        timeMillis: Long,
+        block: Runnable,
+        context: CoroutineContext
+    ): DisposableHandle {
         var disposed = false
         dispatch_after(
             `when` = dispatch_time(

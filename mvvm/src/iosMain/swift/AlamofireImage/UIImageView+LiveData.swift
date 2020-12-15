@@ -7,17 +7,19 @@ import MultiPlatformLibrary
 import AlamofireImage
 
 public extension UIImageView {
-  public func bindImageUrl(liveData: LiveData<NSString>) {
-    setUrl(url: liveData.value)
+  public func bindImageUrl(liveData: LiveData<NSString>,
+                           defaultImage: UIImage? = nil) {
+    setUrl(url: liveData.value, defaultImage: defaultImage)
     liveData.addObserver { [weak self] url in
-      self?.setUrl(url: url)
+      self?.setUrl(url: url, defaultImage: defaultImage)
     }
   }
 
-  private func setUrl(url: NSString?) {
+  private func setUrl(url: NSString?,
+                      defaultImage: UIImage? = nil) {
     setImageFromUrlString(
       urlString: url as? String,
-      defaultImage: #imageLiteral(resourceName: "no_photo_con"),
+      defaultImage: defaultImage,
       completion: nil
     )
   }
