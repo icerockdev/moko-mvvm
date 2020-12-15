@@ -20,10 +20,10 @@ android {
 dependencies {
     commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
-    commonMainImplementation(Deps.Libs.MultiPlatform.mokoResources.common)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
 
-    androidMainImplementation(Deps.Libs.Android.appCompat)
-    androidMainImplementation(Deps.Libs.Android.lifecycle)
+    androidMainApi(Deps.Libs.Android.appCompat)
+    androidMainApi(Deps.Libs.Android.lifecycle)
     androidMainImplementation(Deps.Libs.Android.material)
     androidMainImplementation(Deps.Libs.Android.coroutines)
 
@@ -32,10 +32,6 @@ dependencies {
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
-
-    // temporary fix of https://youtrack.jetbrains.com/issue/KT-41083
-    commonMainImplementation("dev.icerock.moko:parcelize:0.4.0")
-    commonMainImplementation("dev.icerock.moko:graphics:0.4.0")
 }
 
 publishing {
