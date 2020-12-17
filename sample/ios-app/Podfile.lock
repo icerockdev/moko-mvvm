@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (4.8.2)
-  - AlamofireImage (3.5.2):
-    - Alamofire (~> 4.8)
+  - Alamofire (5.4.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
   - MultiPlatformLibrary (0.1.0)
   - MultiPlatformLibraryMvvm (0.8.1):
     - MultiPlatformLibrary
@@ -9,20 +9,18 @@ PODS:
     - MultiPlatformLibraryMvvm/Core (= 0.8.1)
     - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (= 0.8.1)
   - MultiPlatformLibraryMvvm/AlamofireImage (0.8.1):
-    - AlamofireImage (~> 3.5.2)
+    - AlamofireImage (~> 4.1.0)
     - MultiPlatformLibrary
   - MultiPlatformLibraryMvvm/Core (0.8.1):
     - MultiPlatformLibrary
   - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (0.8.1):
     - MultiPlatformLibrary
-    - SkyFloatingLabelTextField (~> 3.7.0)
-  - SkyFloatingLabelTextField (3.7.0)
+    - SkyFloatingLabelTextField (~> 3.8.0)
+  - SkyFloatingLabelTextField (3.8.0)
 
 DEPENDENCIES:
-  - AlamofireImage (= 3.5.2)
   - MultiPlatformLibrary (from `../mpp-library`)
   - MultiPlatformLibraryMvvm (from `../../`)
-  - SkyFloatingLabelTextField (= 3.7.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -37,12 +35,12 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   MultiPlatformLibrary: 176fb8ade516666cd47e93de1b71ba0441a541bb
-  MultiPlatformLibraryMvvm: a2042a0cff031631e66a035fdc783e86423ccf29
-  SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
+  MultiPlatformLibraryMvvm: 75aa7149b3849f05dfbfa605e3694f5412134ef5
+  SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
 
-PODFILE CHECKSUM: bcb3dbb84251cb098ef01da03025fb9e92e73129
+PODFILE CHECKSUM: 249fc91bfc85b50c6c9d781dddf500306f58dc24
 
 COCOAPODS: 1.10.0
