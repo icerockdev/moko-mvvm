@@ -19,12 +19,12 @@ Pod::Spec.new do |spec|
 
     spec.subspec 'AlamofireImage' do |sp|
       sp.source_files = "mvvm/src/iosMain/swift/AlamofireImage/**/*.{h,m,swift}"
-      sp.dependency 'AlamofireImage', '~> 3.5.2'
+      sp.dependency 'AlamofireImage', '~> 4.1.0'
     end
 
     spec.subspec 'SkyFloatingLabelTextField' do |sp|
       sp.source_files = "mvvm/src/iosMain/swift/SkyFloatingLabelTextField/**/*.{h,m,swift}"
-      sp.dependency 'SkyFloatingLabelTextField', '~> 3.7.0'
+      sp.dependency 'SkyFloatingLabelTextField', '~> 3.8.0'
     end
 
     spec.pod_target_xcconfig = {
