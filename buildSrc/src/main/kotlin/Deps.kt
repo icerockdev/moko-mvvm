@@ -1,16 +1,16 @@
 object Deps {
-    private const val kotlinVersion = "1.4.21"
+    private const val kotlinVersion = "1.4.30-M1"
 
     private const val androidAppCompatVersion = "1.2.0"
     private const val materialDesignVersion = "1.2.1"
     private const val androidLifecycleVersion = "2.2.0"
     private const val androidCoreTestingVersion = "2.1.0"
 
-    private const val detektVersion = "1.7.4"
+    private const val detektVersion = "1.14.0"
 
     private const val coroutinesVersion = "1.4.2"
-    private const val mokoResourcesVersion = "0.13.2"
-    const val mokoMvvmVersion = "0.8.1"
+    private const val mokoResourcesVersion = "0.13.3"
+    const val mokoMvvmVersion = "0.8.2"
 
     object Android {
         const val compileSdk = 29
@@ -25,7 +25,7 @@ object Deps {
         val kotlinMultiplatform = GradlePlugin(id = "org.jetbrains.kotlin.multiplatform")
         val kotlinKapt = GradlePlugin(id = "kotlin-kapt")
         val kotlinAndroid = GradlePlugin(id = "kotlin-android")
-        val kotlinAndroidExtensions = GradlePlugin(id = "kotlin-android-extensions")
+        val kotlinParcelize = GradlePlugin(id = "kotlin-parcelize")
         val kotlinSerialization = GradlePlugin(id = "kotlin-serialization")
         val mavenPublish = GradlePlugin(id = "org.gradle.maven-publish")
 
