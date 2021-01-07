@@ -5,12 +5,16 @@
 package dev.icerock.moko.mvvm.livedata
 
 import dev.icerock.moko.mvvm.State
-import dev.icerock.moko.mvvm.test.BaseTestsClass
+import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
+import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class LiveDataTest : BaseTestsClass() {
+class LiveDataTest {
+
+    @get:TestRule
+    val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
     fun `live data observer testing`() {

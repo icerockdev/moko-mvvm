@@ -10,6 +10,7 @@ object Deps {
 
     private const val coroutinesVersion = "1.4.2"
     private const val mokoResourcesVersion = "0.13.2"
+    private const val mokoTestVersion = "0.1.0"
     const val mokoMvvmVersion = "0.8.1"
 
     object Android {
@@ -57,6 +58,7 @@ object Deps {
                 "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
             val mokoResources = "dev.icerock.moko:resources:$mokoResourcesVersion"
                 .defaultMPL(ios = true)
+            const val mokoTest = "dev.icerock.moko:test:$mokoTestVersion"
             const val mokoMvvm = "dev.icerock.moko:mvvm:$mokoMvvmVersion"
             const val mokoMvvmCore = "dev.icerock.moko:mvvm-core:$mokoMvvmVersion"
             const val mokoMvvmLiveData = "dev.icerock.moko:mvvm-livedataa:$mokoMvvmVersion"

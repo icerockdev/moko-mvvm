@@ -22,6 +22,7 @@ dependencies {
     androidMainApi(Deps.Libs.Android.lifecycle)
     androidMainImplementation(Deps.Libs.Android.coroutines)
 
+    commonTestApi(Deps.Libs.MultiPlatform.mokoTest)
     commonTestApi(project(":mvvm-test"))
 }
 
