@@ -13,6 +13,11 @@ pluginManagement {
     }
 }
 
+include(":mvvm-core")
+include(":mvvm-livedata")
+include(":mvvm-databinding")
+include(":mvvm-viewbinding")
+include(":mvvm-test")
 include(":mvvm")
 include(":sample:android-app")
 include(":sample:mpp-library")

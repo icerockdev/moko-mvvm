@@ -58,6 +58,11 @@ object Deps {
             val mokoResources = "dev.icerock.moko:resources:$mokoResourcesVersion"
                 .defaultMPL(ios = true)
             const val mokoMvvm = "dev.icerock.moko:mvvm:$mokoMvvmVersion"
+            const val mokoMvvmCore = "dev.icerock.moko:mvvm-core:$mokoMvvmVersion"
+            const val mokoMvvmLiveData = "dev.icerock.moko:mvvm-livedataa:$mokoMvvmVersion"
+            const val mokoMvvmDataBinding = "dev.icerock.moko:mvvm-databinding:$mokoMvvmVersion"
+            const val mokoMvvmViewBinding = "dev.icerock.moko:mvvm-viewbinding:$mokoMvvmVersion"
+            const val mokoMvvmTest = "dev.icerock.moko:mvvm-test:$mokoMvvmVersion"
         }
 
         object Tests {
@@ -65,6 +70,8 @@ object Deps {
                 "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
             const val androidCoreTesting =
                 "androidx.arch.core:core-testing:$androidCoreTestingVersion"
+            const val coroutinesTest =
+                "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
         }
     }
 }

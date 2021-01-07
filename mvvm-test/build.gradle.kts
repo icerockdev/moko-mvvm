@@ -13,9 +13,13 @@ group = "dev.icerock.moko"
 version = Deps.mokoMvvmVersion
 
 dependencies {
+    commonMainApi(Deps.Libs.MultiPlatform.coroutines)
+
     commonMainApi(project(":mvvm-core"))
-    commonMainApi(project(":mvvm-livedata"))
-    androidMainApi(project(":mvvm-databinding"))
+
+    commonMainApi(Deps.Libs.Tests.kotlinTestJUnit)
+    androidMainApi(Deps.Libs.Tests.coroutinesTest)
+    androidMainApi(Deps.Libs.Tests.androidCoreTesting)
 }
 
 publishing {
