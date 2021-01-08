@@ -13,6 +13,7 @@ dependencies {
 }
 
 framework {
-    export(project(":mvvm"))
+    export(project(":mvvm-core"))
+    export(project(":mvvm-livedata"))
     export(Deps.Libs.MultiPlatform.mokoResources)
 }
