@@ -57,9 +57,6 @@ afterEvaluate {
             create("release", MavenPublication::class.java) {
                 from(components.getByName("release"))
             }
-            create("debug", MavenPublication::class.java) {
-                from(components.getByName("debug"))
-            }
         }
     }
 }

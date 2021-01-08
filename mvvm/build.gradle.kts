@@ -13,7 +13,6 @@ group = "dev.icerock.moko"
 version = Deps.mokoMvvmVersion
 
 dependencies {
-    commonMainApi(project(":mvvm-core"))
     commonMainApi(project(":mvvm-livedata"))
     androidMainApi(project(":mvvm-databinding"))
 }

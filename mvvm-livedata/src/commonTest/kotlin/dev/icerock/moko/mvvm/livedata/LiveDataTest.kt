@@ -125,7 +125,10 @@ class LiveDataTest {
         ldBool.value = false
 
         assertEquals(actual = dataTransformCounter, expected = 2)
-        assertEquals(actual = mergeWithCounter, expected = 9) // FIXME: there's an extra mergeWith lambda call
+        assertEquals(
+            actual = mergeWithCounter,
+            expected = 9
+        ) // FIXME: there's an extra mergeWith lambda call
         assertEquals(expected = -11, actual = mapLd.value.dataValue())
     }
 
