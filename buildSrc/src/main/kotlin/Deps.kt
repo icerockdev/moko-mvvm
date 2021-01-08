@@ -6,7 +6,7 @@ object Deps {
     private const val androidLifecycleVersion = "2.2.0"
     private const val androidCoreTestingVersion = "2.1.0"
 
-    private const val detektVersion = "1.7.4"
+    private const val detektVersion = "1.15.0"
 
     private const val coroutinesVersion = "1.4.2"
     private const val mokoResourcesVersion = "0.13.2"
@@ -22,12 +22,9 @@ object Deps {
     object Plugins {
         val androidApplication = GradlePlugin(id = "com.android.application")
         val androidLibrary = GradlePlugin(id = "com.android.library")
-        val kotlinJvm = GradlePlugin(id = "org.jetbrains.kotlin.jvm")
         val kotlinMultiplatform = GradlePlugin(id = "org.jetbrains.kotlin.multiplatform")
         val kotlinKapt = GradlePlugin(id = "kotlin-kapt")
         val kotlinAndroid = GradlePlugin(id = "kotlin-android")
-        val kotlinAndroidExtensions = GradlePlugin(id = "kotlin-android-extensions")
-        val kotlinSerialization = GradlePlugin(id = "kotlin-serialization")
         val mavenPublish = GradlePlugin(id = "org.gradle.maven-publish")
 
         val mobileMultiplatform = GradlePlugin(id = "dev.icerock.mobile.multiplatform")
@@ -74,6 +71,11 @@ object Deps {
                 "androidx.arch.core:core-testing:$androidCoreTestingVersion"
             const val coroutinesTest =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+        }
+
+        object Jvm {
+            const val detektFormatting =
+                "io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion"
         }
     }
 }

@@ -21,14 +21,14 @@ fun <T, OT> LiveData<T>.flatMap(function: (T) -> LiveData<OT>): LiveData<OT> {
     addObserver { newValue ->
         shadowLiveData?.removeObserver(shadowObserver)
 
-        val _shadowLiveData = function(newValue)
-        shadowLiveData = _shadowLiveData
+        val newShadowLiveData = function(newValue)
+        shadowLiveData = newShadowLiveData
 
         if (mutableLiveData == null) {
-            mutableLiveData = MutableLiveData(_shadowLiveData.value)
+            mutableLiveData = MutableLiveData(newShadowLiveData.value)
         }
 
-        _shadowLiveData.addObserver(shadowObserver)
+        newShadowLiveData.addObserver(shadowObserver)
     }
 
     return mutableLiveData!!

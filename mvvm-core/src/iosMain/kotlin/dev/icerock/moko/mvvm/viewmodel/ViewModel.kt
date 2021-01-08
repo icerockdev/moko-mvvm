@@ -13,6 +13,7 @@ import kotlin.native.internal.GC
 @ThreadLocal
 private var isGCWorking = false
 
+@Suppress("EmptyDefaultConstructor")
 actual open class ViewModel actual constructor() {
     // for now dispatcher fixed on Main. after implementing multithread coroutines on native - we can change it
     protected actual val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.UI)

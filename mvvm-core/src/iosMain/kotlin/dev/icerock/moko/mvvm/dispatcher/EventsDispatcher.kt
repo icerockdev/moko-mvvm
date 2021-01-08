@@ -32,7 +32,7 @@ actual class EventsDispatcher<ListenerType : Any> {
         this.queue = queue
     }
 
-    constructor(listener: ListenerType): this() {
+    constructor(listener: ListenerType) : this() {
         this.listener = listener
     }
 
@@ -43,7 +43,7 @@ actual class EventsDispatcher<ListenerType : Any> {
             blocks.add(block)
             return
         }
-        
+
         dispatch_async(queue) {
             block(listener)
         }

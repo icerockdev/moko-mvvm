@@ -38,6 +38,7 @@ class LoginViewModel(
         viewModelScope.launch {
             _isLoading.value = true
 
+            @Suppress("TooGenericExceptionCaught")
             try {
                 userRepository.login(email = emailValue, password = passwordValue)
 

@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.dispatcher
 
+@Suppress("EmptyDefaultConstructor")
 expect class EventsDispatcher<ListenerType : Any>() {
     fun dispatchEvent(block: ListenerType.() -> Unit)
 }
