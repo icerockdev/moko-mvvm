@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
 abstract class MvvmFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
     private var _binding: DB? = null

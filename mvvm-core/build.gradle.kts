@@ -16,7 +16,7 @@ dependencies {
     commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
     androidMainApi(Deps.Libs.Android.appCompat)
-    androidMainApi(Deps.Libs.Android.lifecycle)
+    androidMainApi(Deps.Libs.Android.androidViewModel)
 
     androidMainImplementation(Deps.Libs.Android.coroutines)
 }

@@ -8,9 +8,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
 abstract class MvvmActivity<DB : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
     protected lateinit var binding: DB
@@ -25,7 +24,9 @@ abstract class MvvmActivity<DB : ViewDataBinding, VM : ViewModel> : AppCompatAct
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory())[viewModelClass]
+        val provider = ViewModelProvider(this, viewModelFactory())
+        viewModel = provider.get(viewModelClass)
+
         binding = DataBindingUtil.setContentView(this, layoutId)
 
         binding.lifecycleOwner = this

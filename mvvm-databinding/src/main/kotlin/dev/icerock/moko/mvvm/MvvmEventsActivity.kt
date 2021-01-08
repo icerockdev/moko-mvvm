@@ -6,8 +6,8 @@ package dev.icerock.moko.mvvm
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
+import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
 abstract class MvvmEventsActivity<DB : ViewDataBinding, VM, Listener : Any> :
     MvvmActivity<DB, VM>() where VM : ViewModel, VM : EventsDispatcherOwner<Listener> {

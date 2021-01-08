@@ -46,6 +46,8 @@ object Deps {
             const val appCompat = "androidx.appcompat:appcompat:$androidAppCompatVersion"
             const val material = "com.google.android.material:material:$materialDesignVersion"
             const val lifecycle = "androidx.lifecycle:lifecycle-extensions:$androidLifecycleVersion"
+            const val androidViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifecycleVersion"
+            const val androidLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$androidLifecycleVersion"
             const val coroutines =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
         }

@@ -19,7 +19,7 @@ dependencies {
     commonMainApi(project(":mvvm-core"))
 
     androidMainApi(Deps.Libs.Android.appCompat)
-    androidMainApi(Deps.Libs.Android.lifecycle)
+    androidMainApi(Deps.Libs.Android.androidLiveData)
     androidMainImplementation(Deps.Libs.Android.coroutines)
 
     commonTestApi(Deps.Libs.MultiPlatform.mokoTest)
