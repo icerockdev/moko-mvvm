@@ -8,8 +8,6 @@ plugins {
 dependencies {
     commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
-    androidMainImplementation(Deps.Libs.Android.lifecycle)
-
     commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
     commonMainApi(Deps.Libs.MultiPlatform.mokoMvvm)
 }
