@@ -31,20 +31,21 @@ dependencies {
     api(Deps.Libs.Android.coroutines)
 }
 
-afterEvaluate {
-    publishing {
-        repositories.maven("https://api.bintray.com/maven/icerockdev/moko/moko-mvvm/;publish=1") {
-            name = "bintray"
+publishing {
+    repositories.maven("https://api.bintray.com/maven/icerockdev/moko/moko-mvvm/;publish=1") {
+        name = "bintray"
 
-            credentials {
-                username = System.getProperty("BINTRAY_USER")
-                password = System.getProperty("BINTRAY_KEY")
-            }
+        credentials {
+            username = System.getProperty("BINTRAY_USER")
+            password = System.getProperty("BINTRAY_KEY")
         }
-        publications {
-            create("release", MavenPublication::class.java) {
-                from(components.getByName("release"))
-            }
+    }
+}
+
+afterEvaluate {
+    publishing.publications {
+        create("release", MavenPublication::class.java) {
+            from(components.getByName("release"))
         }
     }
 }
