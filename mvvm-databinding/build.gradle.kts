@@ -14,6 +14,8 @@ version = Deps.mokoMvvmVersion
 
 android {
     buildFeatures.dataBinding = true
+
+    sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
 
 dependencies {
