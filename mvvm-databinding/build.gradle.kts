@@ -34,17 +34,6 @@ dependencies {
     compileOnly("javax.annotation:jsr250-api:1.0")
 }
 
-publishing {
-    repositories.maven("https://api.bintray.com/maven/icerockdev/moko/moko-mvvm/;publish=1") {
-        name = "bintray"
-
-        credentials {
-            username = System.getProperty("BINTRAY_USER")
-            password = System.getProperty("BINTRAY_KEY")
-        }
-    }
-}
-
 afterEvaluate {
     publishing.publications {
         create("release", MavenPublication::class.java) {

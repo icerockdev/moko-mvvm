@@ -18,14 +18,3 @@ dependencies {
     commonMainApi(project(":mvvm-state-deprecated"))
     androidMainApi(project(":mvvm-databinding"))
 }
-
-publishing {
-    repositories.maven("https://api.bintray.com/maven/icerockdev/moko/moko-mvvm/;publish=1") {
-        name = "bintray"
-
-        credentials {
-            username = System.getProperty("BINTRAY_USER")
-            password = System.getProperty("BINTRAY_KEY")
-        }
-    }
-}
