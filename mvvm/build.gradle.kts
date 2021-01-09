@@ -5,7 +5,6 @@
 plugins {
     plugin(Deps.Plugins.androidLibrary)
     plugin(Deps.Plugins.kotlinMultiplatform)
-    plugin(Deps.Plugins.kotlinKapt)
     plugin(Deps.Plugins.mobileMultiplatform)
     plugin(Deps.Plugins.mavenPublish)
 }
@@ -13,25 +12,9 @@ plugins {
 group = "dev.icerock.moko"
 version = Deps.mokoMvvmVersion
 
-android {
-    buildFeatures.dataBinding = true
-}
-
 dependencies {
-    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
-
-    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
-
-    androidMainApi(Deps.Libs.Android.appCompat)
-    androidMainApi(Deps.Libs.Android.lifecycle)
-    androidMainImplementation(Deps.Libs.Android.material)
-    androidMainImplementation(Deps.Libs.Android.coroutines)
-
-    commonTestImplementation(Deps.Libs.Tests.kotlinTestJUnit)
-    androidTestImplementation(Deps.Libs.Tests.androidCoreTesting)
-
-    // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
-    androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
+    commonMainApi(project(":mvvm-livedata"))
+    androidMainApi(project(":mvvm-databinding"))
 }
 
 publishing {

@@ -5,8 +5,16 @@
 subprojects {
     configurations.all {
         resolutionStrategy.dependencySubstitution {
-            substitute(module(Deps.Libs.MultiPlatform.mokoMvvm))
-                .with(project(":mvvm"))
+            listOf(
+                Deps.Libs.MultiPlatform.mokoMvvm to ":mvvm",
+                Deps.Libs.MultiPlatform.mokoMvvmCore to ":mvvm-core",
+                Deps.Libs.MultiPlatform.mokoMvvmLiveData to ":mvvm-livedata",
+                Deps.Libs.MultiPlatform.mokoMvvmDataBinding to ":mvvm-databinding",
+                Deps.Libs.MultiPlatform.mokoMvvmViewBinding to ":mvvm-viewbinding",
+                Deps.Libs.MultiPlatform.mokoMvvmTest to ":mvvm-test"
+            ).forEach { (module, path) ->
+                substitute(module(module)).with(project(path))
+            }
         }
     }
 }

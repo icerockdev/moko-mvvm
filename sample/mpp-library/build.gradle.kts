@@ -8,13 +8,12 @@ plugins {
 dependencies {
     commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
-    androidMainImplementation(Deps.Libs.Android.lifecycle)
-
     commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
     commonMainApi(Deps.Libs.MultiPlatform.mokoMvvm)
 }
 
 framework {
-    export(project(":mvvm"))
+    export(project(":mvvm-core"))
+    export(project(":mvvm-livedata"))
     export(Deps.Libs.MultiPlatform.mokoResources)
 }

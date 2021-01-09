@@ -9,7 +9,7 @@ import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
-class SimpleViewModel() : ViewModel() {
+class SimpleViewModel : ViewModel() {
     private val _counter: MutableLiveData<Int> = MutableLiveData(0)
     val counter: LiveData<String> = _counter.map { it.toString() }
 

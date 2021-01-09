@@ -6,11 +6,12 @@ object Deps {
     private const val androidLifecycleVersion = "2.2.0"
     private const val androidCoreTestingVersion = "2.1.0"
 
-    private const val detektVersion = "1.7.4"
+    private const val detektVersion = "1.15.0"
 
     private const val coroutinesVersion = "1.4.2"
     private const val mokoResourcesVersion = "0.13.2"
-    const val mokoMvvmVersion = "0.8.1"
+    private const val mokoTestVersion = "0.1.0"
+    const val mokoMvvmVersion = "0.9.0"
 
     object Android {
         const val compileSdk = 29
@@ -21,12 +22,9 @@ object Deps {
     object Plugins {
         val androidApplication = GradlePlugin(id = "com.android.application")
         val androidLibrary = GradlePlugin(id = "com.android.library")
-        val kotlinJvm = GradlePlugin(id = "org.jetbrains.kotlin.jvm")
         val kotlinMultiplatform = GradlePlugin(id = "org.jetbrains.kotlin.multiplatform")
         val kotlinKapt = GradlePlugin(id = "kotlin-kapt")
         val kotlinAndroid = GradlePlugin(id = "kotlin-android")
-        val kotlinAndroidExtensions = GradlePlugin(id = "kotlin-android-extensions")
-        val kotlinSerialization = GradlePlugin(id = "kotlin-serialization")
         val mavenPublish = GradlePlugin(id = "org.gradle.maven-publish")
 
         val mobileMultiplatform = GradlePlugin(id = "dev.icerock.mobile.multiplatform")
@@ -48,6 +46,8 @@ object Deps {
             const val appCompat = "androidx.appcompat:appcompat:$androidAppCompatVersion"
             const val material = "com.google.android.material:material:$materialDesignVersion"
             const val lifecycle = "androidx.lifecycle:lifecycle-extensions:$androidLifecycleVersion"
+            const val androidViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifecycleVersion"
+            const val androidLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$androidLifecycleVersion"
             const val coroutines =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
         }
@@ -57,7 +57,13 @@ object Deps {
                 "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
             val mokoResources = "dev.icerock.moko:resources:$mokoResourcesVersion"
                 .defaultMPL(ios = true)
+            const val mokoTest = "dev.icerock.moko:test:$mokoTestVersion"
             const val mokoMvvm = "dev.icerock.moko:mvvm:$mokoMvvmVersion"
+            const val mokoMvvmCore = "dev.icerock.moko:mvvm-core:$mokoMvvmVersion"
+            const val mokoMvvmLiveData = "dev.icerock.moko:mvvm-livedataa:$mokoMvvmVersion"
+            const val mokoMvvmDataBinding = "dev.icerock.moko:mvvm-databinding:$mokoMvvmVersion"
+            const val mokoMvvmViewBinding = "dev.icerock.moko:mvvm-viewbinding:$mokoMvvmVersion"
+            const val mokoMvvmTest = "dev.icerock.moko:mvvm-test:$mokoMvvmVersion"
         }
 
         object Tests {
@@ -65,6 +71,13 @@ object Deps {
                 "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
             const val androidCoreTesting =
                 "androidx.arch.core:core-testing:$androidCoreTestingVersion"
+            const val coroutinesTest =
+                "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+        }
+
+        object Jvm {
+            const val detektFormatting =
+                "io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion"
         }
     }
 }

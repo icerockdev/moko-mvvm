@@ -23,7 +23,7 @@ DEPENDENCIES:
   - MultiPlatformLibraryMvvm (from `../../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
     - SkyFloatingLabelTextField
@@ -41,6 +41,6 @@ SPEC CHECKSUMS:
   MultiPlatformLibraryMvvm: 75aa7149b3849f05dfbfa605e3694f5412134ef5
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
 
-PODFILE CHECKSUM: 249fc91bfc85b50c6c9d781dddf500306f58dc24
+PODFILE CHECKSUM: 8f0d11a22b8a433f8c575123e905e01cd4b049b8
 
 COCOAPODS: 1.10.0
