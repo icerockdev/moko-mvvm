@@ -14,16 +14,16 @@ Pod::Spec.new do |spec|
     spec.swift_version = '5'
 
     spec.subspec 'Core' do |sp|
-      sp.source_files = "mvvm/src/iosMain/swift/Core/**/*.{h,m,swift}"
+      sp.source_files = "mvvm-livedata/src/iosMain/swift/Core/**/*.{h,m,swift}"
     end
 
     spec.subspec 'AlamofireImage' do |sp|
-      sp.source_files = "mvvm/src/iosMain/swift/AlamofireImage/**/*.{h,m,swift}"
+      sp.source_files = "mvvm-livedata/src/iosMain/swift/AlamofireImage/**/*.{h,m,swift}"
       sp.dependency 'AlamofireImage', '~> 4.1.0'
     end
 
     spec.subspec 'SkyFloatingLabelTextField' do |sp|
-      sp.source_files = "mvvm/src/iosMain/swift/SkyFloatingLabelTextField/**/*.{h,m,swift}"
+      sp.source_files = "mvvm-livedata/src/iosMain/swift/SkyFloatingLabelTextField/**/*.{h,m,swift}"
       sp.dependency 'SkyFloatingLabelTextField', '~> 3.8.0'
     end
 
