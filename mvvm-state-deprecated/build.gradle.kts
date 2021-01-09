@@ -13,10 +13,17 @@ group = "dev.icerock.moko"
 version = Deps.mokoMvvmVersion
 
 dependencies {
-    // by default use old named state
-    // core and livedata loaded transitive from it. not add directly - mergeDex will fail on android
-    commonMainApi(project(":mvvm-state-deprecated"))
-    androidMainApi(project(":mvvm-databinding"))
+    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
+
+    commonMainApi(project(":mvvm-livedata"))
+
+    androidMainApi(Deps.Libs.Android.appCompat)
+    androidMainApi(Deps.Libs.Android.androidViewModel)
+
+    androidMainImplementation(Deps.Libs.Android.coroutines)
+
+    commonTestApi(Deps.Libs.MultiPlatform.mokoTest)
+    commonTestApi(project(":mvvm-test"))
 }
 
 publishing {

@@ -4,7 +4,6 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-import dev.icerock.moko.mvvm.State
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
@@ -88,113 +87,6 @@ class LiveDataTest {
 
         assertEquals(actual = mergeWithCounter, expected = 5)
         assertEquals(expected = 11, actual = mapLd.value)
-    }
-
-    @Test
-    fun `dataTransform test`() {
-        val ld: MutableLiveData<State<Int, Throwable>> = MutableLiveData(State.Data(10))
-        val ldBool: MutableLiveData<Boolean> = MutableLiveData(false)
-
-        var dataTransformCounter = 0
-        var mergeWithCounter = 0
-
-        val mapLd: LiveData<State<Long, Throwable>> = ld.dataTransform {
-            dataTransformCounter++
-            mergeWith(ldBool) { a1, a2 ->
-                mergeWithCounter++
-                if (a2) a1.toLong() else -a1.toLong()
-            }
-        }
-
-        assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithCounter, expected = 3)
-        assertEquals(expected = -10, actual = mapLd.value.dataValue())
-
-        ldBool.value = true
-
-        assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithCounter, expected = 4)
-        assertEquals(expected = 10, actual = mapLd.value.dataValue())
-
-        ld.value = State.Data(11)
-
-        assertEquals(actual = dataTransformCounter, expected = 2)
-        assertEquals(actual = mergeWithCounter, expected = 7)
-        assertEquals(expected = 11, actual = mapLd.value.dataValue())
-
-        ldBool.value = false
-
-        assertEquals(actual = dataTransformCounter, expected = 2)
-        assertEquals(
-            actual = mergeWithCounter,
-            expected = 9
-        ) // FIXME: there's an extra mergeWith lambda call
-        assertEquals(expected = -11, actual = mapLd.value.dataValue())
-    }
-
-    @Test
-    fun `dataTransform + mergeWith test`() {
-        val vmIsAuthorized = MutableLiveData(true)
-        val state: MutableLiveData<State<Int, Throwable>> = MutableLiveData(State.Empty())
-        val isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
-
-        var dataTransformCounter = 0
-        var mergeWithDataTransformCounter = 0
-        var mergeWithIsAuthorizedCounter = 0
-
-        val dataTransform: LiveData<State<Long, Throwable>> = state.dataTransform {
-            dataTransformCounter++
-            mergeWith(isLoading) { a1, a2 ->
-                mergeWithDataTransformCounter++
-                if (a2) a1.toLong() else -a1.toLong()
-            }
-        }
-
-        val result: LiveData<State<Long, Throwable>> = vmIsAuthorized
-            .mergeWith(dataTransform) { isAuthorized, dataState ->
-                mergeWithIsAuthorizedCounter++
-                if (isAuthorized) {
-                    dataState
-                } else {
-                    State.Error(Exception())
-                }
-            }
-
-        assertEquals(actual = dataTransformCounter, expected = 0)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 0)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 3)
-        assertTrue { result.value.isEmpty() }
-
-        state.value = State.Loading()
-
-        assertEquals(actual = dataTransformCounter, expected = 0)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 0)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 4)
-        assertTrue { result.value.isLoading() }
-
-        state.value = State.Data(10)
-
-        assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 3)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 5)
-        assertTrue { result.value.isSuccess() }
-        assertEquals(actual = result.value.dataValue(), expected = -10)
-
-        isLoading.value = true
-
-        assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 4)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 6)
-        assertTrue { result.value.isSuccess() }
-        assertEquals(actual = result.value.dataValue(), expected = 10)
-
-        isLoading.value = false
-
-        assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 5)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 7)
-        assertTrue { result.value.isSuccess() }
-        assertEquals(actual = result.value.dataValue(), expected = -10)
     }
 
     @Test
