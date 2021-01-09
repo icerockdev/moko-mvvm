@@ -41,6 +41,19 @@ allprojects {
             }
         }
     }
+
+    plugins.withId(Deps.Plugins.mavenPublish.id) {
+        configure<PublishingExtension> {
+            repositories.maven("https://api.bintray.com/maven/icerockdev/moko/moko-mvvm/;publish=1") {
+                name = "bintray"
+
+                credentials {
+                    username = System.getProperty("BINTRAY_USER")
+                    password = System.getProperty("BINTRAY_KEY")
+                }
+            }
+        }
+    }
 }
 
 tasks.register("clean", Delete::class).configure {

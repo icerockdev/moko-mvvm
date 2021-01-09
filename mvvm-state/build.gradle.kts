@@ -15,11 +15,11 @@ version = Deps.mokoMvvmVersion
 dependencies {
     commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
-    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
-    commonMainApi(project(":mvvm-core"))
+    commonMainApi(project(":mvvm-livedata"))
 
     androidMainApi(Deps.Libs.Android.appCompat)
-    androidMainApi(Deps.Libs.Android.androidLiveData)
+    androidMainApi(Deps.Libs.Android.androidViewModel)
+
     androidMainImplementation(Deps.Libs.Android.coroutines)
 
     commonTestApi(Deps.Libs.MultiPlatform.mokoTest)

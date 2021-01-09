@@ -59,8 +59,9 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm-core:0.9.0") // only ViewModel, EventsDispatcher, State, Dispatchers.UI
+    commonMainApi("dev.icerock.moko:mvvm-core:0.9.0") // only ViewModel, EventsDispatcher, Dispatchers.UI
     commonMainApi("dev.icerock.moko:mvvm-livedata:0.9.0") // api mvvm-core, LiveData and extensions
+    commonMainApi("dev.icerock.moko:mvvm-state:0.9.0") // api mvvm-livedata, ResourceState class and extensions
     androidMainApi("dev.icerock.moko:mvvm-databinding:0.9.0") // api mvvm-livedata, DataBinding support for Android
     androidMainApi("dev.icerock.moko:mvvm-viewbinding:0.9.0") // api mvvm-livedata, ViewBinding support for Android
     commonTestImplementation("dev.icerock.moko:mvvm-test:0.9.0") // test utilities
