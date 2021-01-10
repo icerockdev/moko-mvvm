@@ -4,6 +4,7 @@
 
 plugins {
     plugin(Deps.Plugins.detekt) apply false
+    plugin(Deps.Plugins.dokka) apply false
 }
 
 allprojects {
@@ -17,6 +18,7 @@ allprojects {
     }
 
     apply(plugin = Deps.Plugins.detekt.id)
+    apply(plugin = Deps.Plugins.dokka.id)
 
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         input.setFrom(
@@ -59,4 +61,23 @@ allprojects {
 tasks.register("clean", Delete::class).configure {
     group = "build"
     delete(rootProject.buildDir)
+}
+
+tasks.withType<org.jetbrains.dokka.gradle.DokkaMultiModuleTask>().all {
+    removeChildTasks(listOf(
+        ":mvvm",
+        ":sample",
+        ":sample:android-app",
+        ":sample:mpp-library"
+    ).map { project(it) })
+
+    doLast {
+        val dir = outputDirectory.get()
+        val from = File(dir,"-modules.html")
+        val to = File(dir,"index.html")
+
+        from.renameTo(to)
+
+        dir.renameTo(file("docs"))
+    }
 }

@@ -9,6 +9,7 @@ object Deps {
     private const val swipeRefreshVersion = "1.1.0"
 
     private const val detektVersion = "1.15.0"
+    private const val dokkaVersion = "1.4.20"
 
     private const val coroutinesVersion = "1.4.2"
     private const val mokoResourcesVersion = "0.13.2"
@@ -40,6 +41,11 @@ object Deps {
         val detekt = GradlePlugin(
             id = "io.gitlab.arturbosch.detekt",
             version = detektVersion
+        )
+
+        val dokka = GradlePlugin(
+            id = "org.jetbrains.dokka",
+            version = dokkaVersion
         )
     }
 

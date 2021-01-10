@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+dev.icerock.moko.mvvm
+dev.icerock.moko.mvvm.dispatcher
+dev.icerock.moko.mvvm.viewmodel
+
