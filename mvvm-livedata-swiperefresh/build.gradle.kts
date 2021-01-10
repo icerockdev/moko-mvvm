@@ -5,7 +5,6 @@
 plugins {
     plugin(Deps.Plugins.androidLibrary)
     plugin(Deps.Plugins.kotlinAndroid)
-    plugin(Deps.Plugins.kotlinKapt)
     plugin(Deps.Plugins.mavenPublish)
 }
 
@@ -13,20 +12,19 @@ group = "dev.icerock.moko"
 version = Deps.mokoMvvmVersion
 
 android {
-    buildFeatures.viewBinding = true
-
     sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
 
 dependencies {
     implementation(Deps.Libs.MultiPlatform.coroutines)
 
-    api(project(":mvvm-core"))
+    api(project(":mvvm-livedata"))
 
     api(Deps.Libs.MultiPlatform.mokoResources.common)
 
     api(Deps.Libs.Android.appCompat)
     api(Deps.Libs.Android.lifecycle)
+    api(Deps.Libs.Android.swipeRefresh)
     api(Deps.Libs.Android.coroutines)
 }
 

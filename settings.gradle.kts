@@ -16,6 +16,9 @@ pluginManagement {
 
 include(":mvvm-core")
 include(":mvvm-livedata")
+include(":mvvm-livedata-material")
+include(":mvvm-livedata-glide")
+include(":mvvm-livedata-swiperefresh")
 include(":mvvm-databinding")
 include(":mvvm-viewbinding")
 include(":mvvm-state")

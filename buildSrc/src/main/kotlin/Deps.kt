@@ -5,6 +5,8 @@ object Deps {
     private const val materialDesignVersion = "1.2.1"
     private const val androidLifecycleVersion = "2.2.0"
     private const val androidCoreTestingVersion = "2.1.0"
+    private const val glideVersion = "4.11.0"
+    private const val swipeRefreshVersion = "1.1.0"
 
     private const val detektVersion = "1.15.0"
 
@@ -46,10 +48,16 @@ object Deps {
             const val appCompat = "androidx.appcompat:appcompat:$androidAppCompatVersion"
             const val material = "com.google.android.material:material:$materialDesignVersion"
             const val lifecycle = "androidx.lifecycle:lifecycle-extensions:$androidLifecycleVersion"
-            const val androidViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifecycleVersion"
-            const val androidLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$androidLifecycleVersion"
+            const val androidViewModel =
+                "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifecycleVersion"
+            const val androidLiveData =
+                "androidx.lifecycle:lifecycle-livedata-ktx:$androidLifecycleVersion"
             const val coroutines =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+            const val glide =
+                "com.github.bumptech.glide:glide:$glideVersion"
+            const val swipeRefresh =
+                "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
         }
 
         object MultiPlatform {
@@ -60,9 +68,18 @@ object Deps {
             const val mokoTest = "dev.icerock.moko:test:$mokoTestVersion"
             const val mokoMvvm = "dev.icerock.moko:mvvm:$mokoMvvmVersion"
             const val mokoMvvmCore = "dev.icerock.moko:mvvm-core:$mokoMvvmVersion"
-            const val mokoMvvmLiveData = "dev.icerock.moko:mvvm-livedataa:$mokoMvvmVersion"
+            const val mokoMvvmLiveData = "dev.icerock.moko:mvvm-livedata:$mokoMvvmVersion"
+            const val mokoMvvmLiveDataMaterial =
+                "dev.icerock.moko:mvvm-livedata-material:$mokoMvvmVersion"
+            const val mokoMvvmLiveDataGlide =
+                "dev.icerock.moko:mvvm-livedata-glide:$mokoMvvmVersion"
+            const val mokoMvvmLiveDataSwipeRefresh =
+                "dev.icerock.moko:mvvm-livedata-swiperefresh:$mokoMvvmVersion"
             const val mokoMvvmDataBinding = "dev.icerock.moko:mvvm-databinding:$mokoMvvmVersion"
             const val mokoMvvmViewBinding = "dev.icerock.moko:mvvm-viewbinding:$mokoMvvmVersion"
+            const val mokoMvvmState = "dev.icerock.moko:mvvm-state:$mokoMvvmVersion"
+            const val mokoMvvmStateDeprecated =
+                "dev.icerock.moko:mvvm-state-deprecated:$mokoMvvmVersion"
             const val mokoMvvmTest = "dev.icerock.moko:mvvm-test:$mokoMvvmVersion"
         }
 

@@ -10,6 +10,10 @@ dependencies {
 
     commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
     commonMainApi(Deps.Libs.MultiPlatform.mokoMvvm)
+
+    androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataGlide)
+    androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataMaterial)
+    androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataSwipeRefresh)
 }
 
 framework {

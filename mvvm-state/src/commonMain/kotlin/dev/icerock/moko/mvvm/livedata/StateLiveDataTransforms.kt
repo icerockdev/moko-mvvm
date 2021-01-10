@@ -10,7 +10,7 @@ fun <IT, E, OT> LiveData<ResourceState<IT, E>>.dataTransform(transform: LiveData
         LiveData<ResourceState<OT, E>> = flatMap { state ->
     when (state) {
         is ResourceState.Success -> transform.invoke(MutableLiveData(state.data))
-            .map { ResourceState.Success<OT, E>(it) as ResourceState<OT, E> }
+            .map { ResourceState.Success(it) }
         is ResourceState.Loading -> MutableLiveData(ResourceState.Loading())
         is ResourceState.Empty -> MutableLiveData(ResourceState.Empty())
         is ResourceState.Failed -> MutableLiveData(ResourceState.Failed(state.error))
@@ -24,7 +24,7 @@ fun <T, IE, OE> LiveData<ResourceState<T, IE>>.errorTransform(transform: LiveDat
         is ResourceState.Loading -> MutableLiveData(ResourceState.Loading())
         is ResourceState.Empty -> MutableLiveData(ResourceState.Empty())
         is ResourceState.Failed -> transform.invoke(MutableLiveData(state.error))
-            .map { ResourceState.Failed<T, OE>(it) as ResourceState<T, OE> }
+            .map { ResourceState.Failed<T, OE>(it) }
     }
 }
 

@@ -19,7 +19,8 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 ## Features
 - **ViewModel** - store and manage UI-related data. Interop with `Android Architecture Components` - on Android it's precisely `androidx.lifecycle.ViewModel`;
 - **LiveData, MutableLiveData, MediatorLiveData** - lifecycle-aware reactive data holders with set of operators to transform, merge, etc.;
-- **EventsDispatcher** - dispatch events from `ViewModel` to `View` with automatic lifecycle control and explicit interface of required events.
+- **EventsDispatcher** - dispatch events from `ViewModel` to `View` with automatic lifecycle control and explicit interface of required events;
+- **DataBinding, ViewBinding support** - integrate to android app with 
 
 ## Requirements
 - Gradle version 6.0+
