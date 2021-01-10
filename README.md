@@ -20,7 +20,7 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 - **ViewModel** - store and manage UI-related data. Interop with `Android Architecture Components` - on Android it's precisely `androidx.lifecycle.ViewModel`;
 - **LiveData, MutableLiveData, MediatorLiveData** - lifecycle-aware reactive data holders with set of operators to transform, merge, etc.;
 - **EventsDispatcher** - dispatch events from `ViewModel` to `View` with automatic lifecycle control and explicit interface of required events;
-- **DataBinding, ViewBinding support** - integrate to android app with 
+- **DataBinding, ViewBinding support** - integrate to android app with commonly used tools.
 
 ## Requirements
 - Gradle version 6.0+
@@ -62,6 +62,9 @@ project build.gradle
 dependencies {
     commonMainApi("dev.icerock.moko:mvvm-core:0.9.0") // only ViewModel, EventsDispatcher, Dispatchers.UI
     commonMainApi("dev.icerock.moko:mvvm-livedata:0.9.0") // api mvvm-core, LiveData and extensions
+    androidMainApi("dev.icerock.moko:mvvm-livedata-material:0.9.0") // api mvvm-livedata, Material library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-livedata-glide:0.9.0") // api mvvm-livedata, Glide library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-livedata-swiperefresh:0.9.0") // api mvvm-livedata, SwipeRefreshLayout library android extensions
     commonMainApi("dev.icerock.moko:mvvm-state:0.9.0") // api mvvm-livedata, ResourceState class and extensions
     androidMainApi("dev.icerock.moko:mvvm-databinding:0.9.0") // api mvvm-livedata, DataBinding support for Android
     androidMainApi("dev.icerock.moko:mvvm-viewbinding:0.9.0") // api mvvm-livedata, ViewBinding support for Android
