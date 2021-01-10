@@ -5,56 +5,55 @@
 package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.map
+import dev.icerock.moko.mvvm.livedata.bindToButtonImage
+import dev.icerock.moko.mvvm.livedata.bindToButtonTitle
+import dev.icerock.moko.mvvm.livedata.bindToControlEnabled
+import dev.icerock.moko.mvvm.livedata.bindToViewBackgroundColor
 import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UIButton
 import platform.UIKit.UIColor
-import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UIImage
-import platform.UIKit.backgroundColor
-import dev.icerock.moko.mvvm.utils.bind
 
+@Deprecated("use LiveData.bindToControlEnabled & LiveData.bindToViewBackgroundColor extension")
 fun UIButton.bindEnabled(
     liveData: LiveData<Boolean>,
     enabledColor: UIColor? = null,
     disabledColor: UIColor? = null
 ) {
-    liveData.bind(this) { value ->
-        this.enabled = value
+    liveData.bindToControlEnabled(control = this)
 
-        val color = when (value) {
-            true -> enabledColor
-            false -> disabledColor
-        }
-
-        color?.also { backgroundColor = it }
+    if (enabledColor != null && disabledColor != null) {
+        liveData.bindToViewBackgroundColor(
+            view = this,
+            trueColor = enabledColor,
+            falseColor = disabledColor
+        )
     }
 }
 
+@Deprecated("use LiveData.bindToButtonTitle extension")
 fun UIButton.bindTitle(
     liveData: LiveData<String>
 ) {
-    liveData.bind(this) { value ->
-        setTitle(value, forState = UIControlStateNormal)
-    }
+    liveData.bindToButtonTitle(button = this)
 }
 
+@Deprecated("use LiveData.bindToButtonTitle extension")
 fun UIButton.bindTitle(
     liveData: LiveData<StringDesc>
 ) {
-    bindTitle(liveData.map { it.localized() })
+    liveData.bindToButtonTitle(button = this)
 }
 
+@Deprecated("use LiveData.bindToButtonImage extension")
 fun UIButton.bindImages(
     liveData: LiveData<Boolean>,
     trueImage: UIImage,
     falseImage: UIImage
 ) {
-    liveData.bind(this) { value ->
-        val image = when (value) {
-            true -> trueImage
-            false -> falseImage
-        }
-        setImage(image, forState = UIControlStateNormal)
-    }
+    liveData.bindToButtonImage(
+        button = this,
+        trueImage = trueImage,
+        falseImage = falseImage
+    )
 }

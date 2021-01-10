@@ -6,37 +6,35 @@ package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
+import dev.icerock.moko.mvvm.livedata.bindToResponderFocus
+import dev.icerock.moko.mvvm.livedata.bindToTextFieldText
+import dev.icerock.moko.mvvm.livedata.bindTwoWayToControlFocus
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UIControlEventEditingChanged
-import platform.UIKit.UIControlEventEditingDidBegin
-import platform.UIKit.UIControlEventEditingDidEnd
-import platform.UIKit.UIControlEventEditingDidEndOnExit
 import platform.UIKit.UITextField
-import dev.icerock.moko.mvvm.utils.bind
 import dev.icerock.moko.mvvm.utils.setEventHandler
 
+@Deprecated("use LiveData.bindToTextFieldText extension")
 fun UITextField.bindText(
     liveData: LiveData<String>,
     formatter: ((String) -> String)? = null
 ) {
-    liveData.bind(this) { value ->
-        val newText = formatter?.invoke(value) ?: value
-        if (text == newText) return@bind
-        text = newText
-    }
+    liveData.map { formatter?.invoke(it) ?: it }.bindToTextFieldText(textField = this)
 }
 
+@Deprecated("use LiveData.bindToTextFieldText extension")
 fun UITextField.bindText(
     liveData: LiveData<StringDesc>,
     formatter: ((String) -> String)? = null
 ) {
-    bindText(
-        liveData = liveData.map { it.localized() },
-        formatter = formatter
-    )
+    liveData
+        .map { it.localized() }
+        .map { formatter?.invoke(it) ?: it }
+        .bindToTextFieldText(textField = this)
 }
 
+@Deprecated("use LiveData.bindTwoWayToTextFieldText extension")
 fun UITextField.bindTextTwoWay(
     liveData: MutableLiveData<String>,
     formatter: ((String) -> String)? = null,
@@ -54,28 +52,12 @@ fun UITextField.bindTextTwoWay(
     }
 }
 
+@Deprecated("use LiveData.bindToControlFocus extension")
 fun UITextField.bindFocus(liveData: LiveData<Boolean>) {
-    liveData.bind(this) { value ->
-        if (value) {
-            becomeFirstResponder()
-        } else {
-            if (nextResponder?.canBecomeFirstResponder == true) {
-                nextResponder?.becomeFirstResponder()
-            } else {
-                resignFirstResponder()
-            }
-        }
-    }
+    liveData.bindToResponderFocus(responder = this)
 }
 
+@Deprecated("use LiveData.    liveData.bindTwoWayToControlFocus(control = this)\n extension")
 fun UITextField.bindFocusTwoWay(liveData: MutableLiveData<Boolean>) {
-    bindFocus(liveData)
-    val handler: UITextField.() -> Unit = {
-        val focused = isFocused()
-        if (liveData.value != focused) liveData.value = focused
-    }
-
-    setEventHandler(UIControlEventEditingDidBegin, handler)
-    setEventHandler(UIControlEventEditingDidEnd, handler)
-    setEventHandler(UIControlEventEditingDidEndOnExit, handler)
+    liveData.bindTwoWayToControlFocus(control = this)
 }

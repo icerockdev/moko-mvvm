@@ -21,13 +21,12 @@ android {
 dependencies {
     implementation(Deps.Libs.MultiPlatform.coroutines)
 
-    api(project(":mvvm-livedata"))
+    api(project(":mvvm-core"))
 
     api(Deps.Libs.MultiPlatform.mokoResources.common)
 
     api(Deps.Libs.Android.appCompat)
     api(Deps.Libs.Android.lifecycle)
-    api(Deps.Libs.Android.material)
     api(Deps.Libs.Android.coroutines)
 }
 
