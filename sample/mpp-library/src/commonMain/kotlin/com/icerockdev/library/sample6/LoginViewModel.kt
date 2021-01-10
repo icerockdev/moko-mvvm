@@ -10,6 +10,7 @@ import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.not
 import dev.icerock.moko.mvvm.livedata.readOnly
+import dev.icerock.moko.mvvm.livedata.revert
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -25,7 +26,7 @@ class LoginViewModel(
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading.readOnly()
 
-    val isLoginButtonVisible: LiveData<Boolean> = isLoading.not()
+    val isLoginButtonVisible: LiveData<Boolean> = isLoading.revert()
 
     init {
         eventsDispatcher.dispatchEvent { showError("inited".desc()) }
@@ -38,6 +39,7 @@ class LoginViewModel(
         viewModelScope.launch {
             _isLoading.value = true
 
+            @Suppress("TooGenericExceptionCaught")
             try {
                 userRepository.login(email = emailValue, password = passwordValue)
 

@@ -9,7 +9,7 @@ import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.mergeWith
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
-class ValidationMergeViewModel() : ViewModel() {
+class ValidationMergeViewModel : ViewModel() {
     val email: MutableLiveData<String> = MutableLiveData("")
     val password: MutableLiveData<String> = MutableLiveData("")
 

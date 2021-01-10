@@ -18,9 +18,12 @@ class ValidationMergeViewController: UIViewController {
         
         viewModel = ValidationMergeViewModel()
         
-        emailField.bindTextTwoWay(liveData: viewModel.email)
-        passwordField.bindTextTwoWay(liveData: viewModel.password)
-        button.bindEnabled(liveData: viewModel.isLoginButtonEnabled)
+//        emailField.bindTextTwoWay(liveData: viewModel.email)
+//        passwordField.bindTextTwoWay(liveData: viewModel.password)
+//        button.bindEnabled(liveData: viewModel.isLoginButtonEnabled)
+        viewModel.email.bindTwoWayToTextFieldText(textField: emailField)
+        viewModel.password.bindTwoWayToTextFieldText(textField: passwordField)
+        viewModel.isLoginButtonEnabled.bindToControlEnabled(control: button)
     }
     
     override func didMove(toParent parent: UIViewController?) {

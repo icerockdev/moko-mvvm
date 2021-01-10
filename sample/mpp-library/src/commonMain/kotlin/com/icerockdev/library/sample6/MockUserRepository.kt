@@ -6,8 +6,12 @@ package com.icerockdev.library.sample6
 
 import kotlinx.coroutines.delay
 
-class MockUserRepository: UserRepository {
+class MockUserRepository : UserRepository {
     override suspend fun login(email: String, password: String) {
-        delay(2000)
+        delay(WAIT_TIME_MS)
+    }
+
+    private companion object {
+        const val WAIT_TIME_MS = 2000L
     }
 }

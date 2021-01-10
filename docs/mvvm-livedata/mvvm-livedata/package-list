@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+dev.icerock.moko.mvvm.binding
+dev.icerock.moko.mvvm.livedata
+dev.icerock.moko.mvvm.utils
+

@@ -10,7 +10,7 @@ import dev.icerock.moko.mvvm.livedata.all
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
-class ValidationAllViewModel() : ViewModel() {
+class ValidationAllViewModel : ViewModel() {
     val email: MutableLiveData<String> = MutableLiveData("")
     val password: MutableLiveData<String> = MutableLiveData("")
 
