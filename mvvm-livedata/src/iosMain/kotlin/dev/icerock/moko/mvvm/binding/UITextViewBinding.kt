@@ -6,37 +6,36 @@ package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
+import dev.icerock.moko.mvvm.livedata.bindToResponderFocus
+import dev.icerock.moko.mvvm.livedata.bindToTextViewText
+import dev.icerock.moko.mvvm.livedata.bindTwoWayToTextViewFocus
 import dev.icerock.moko.mvvm.livedata.map
-import dev.icerock.moko.mvvm.utils.bind
 import dev.icerock.moko.mvvm.utils.setEventHandler
 import dev.icerock.moko.resources.desc.StringDesc
 import platform.Foundation.NSNotificationCenter
 import platform.UIKit.UITextView
-import platform.UIKit.UITextViewTextDidBeginEditingNotification
 import platform.UIKit.UITextViewTextDidChangeNotification
-import platform.UIKit.UITextViewTextDidEndEditingNotification
 
+@Deprecated("use LiveData.bindToTextViewText extension")
 fun UITextView.bindText(
     liveData: LiveData<String>,
     formatter: ((String) -> String)? = null
 ) {
-    liveData.bind(this) { value ->
-        val newText = formatter?.invoke(value) ?: value
-        if (text == newText) return@bind
-        text = newText
-    }
+    liveData.map { formatter?.invoke(it) ?: it }.bindToTextViewText(textView = this)
 }
 
+@Deprecated("use LiveData.bindToTextViewText extension")
 fun UITextView.bindText(
     liveData: LiveData<StringDesc>,
     formatter: ((String) -> String)? = null
 ) {
-    bindText(
-        liveData = liveData.map { it.localized() },
-        formatter = formatter
-    )
+    liveData
+        .map { it.localized() }
+        .map { formatter?.invoke(it) ?: it }
+        .bindToTextViewText(textView = this)
 }
 
+@Deprecated("use LiveData.bindToTextViewText extension")
 fun UITextView.bindTextTwoWay(
     liveData: MutableLiveData<String>,
     formatter: ((String) -> String)? = null,
@@ -57,35 +56,12 @@ fun UITextView.bindTextTwoWay(
     }
 }
 
+@Deprecated("use LiveData.bindToResponderFocus extension")
 fun UITextView.bindFocus(liveData: LiveData<Boolean>) {
-    liveData.bind(this) { value ->
-        if (value) {
-            becomeFirstResponder()
-        } else {
-            if (nextResponder?.canBecomeFirstResponder == true) {
-                nextResponder?.becomeFirstResponder()
-            } else {
-                resignFirstResponder()
-            }
-        }
-    }
+    liveData.bindToResponderFocus(responder = this)
 }
 
+@Deprecated("use LiveData.bindTwoWayToTextViewFocus extension")
 fun UITextView.bindFocusTwoWay(liveData: MutableLiveData<Boolean>) {
-    bindFocus(liveData)
-    val handler: UITextView.() -> Unit = {
-        val focused = isFocused()
-        if (liveData.value != focused) liveData.value = focused
-    }
-
-    NSNotificationCenter.defaultCenter.setEventHandler(
-        notification = UITextViewTextDidBeginEditingNotification,
-        ref = this,
-        lambda = handler
-    )
-    NSNotificationCenter.defaultCenter.setEventHandler(
-        notification = UITextViewTextDidEndEditingNotification,
-        ref = this,
-        lambda = handler
-    )
+    liveData.bindTwoWayToTextViewFocus(textView = this)
 }

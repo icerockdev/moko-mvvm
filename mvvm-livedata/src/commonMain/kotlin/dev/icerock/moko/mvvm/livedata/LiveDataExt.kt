@@ -24,7 +24,11 @@ fun <OT> LiveData<Boolean?>.mapTrueOrNull(function: () -> OT): LiveData<OT?> {
     }
 }
 
-fun LiveData<Boolean>.not() = map { !it }
+@Deprecated(
+    replaceWith = ReplaceWith(expression = "revert"),
+    message = "use revert extension"
+)
+fun LiveData<Boolean>.not() = revert()
 
 fun <T> LiveData<T?>.required(initialValue: T): LiveData<T> = MediatorLiveData(initialValue).apply {
     addSource(this@required) { newValue ->
