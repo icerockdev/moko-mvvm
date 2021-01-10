@@ -7,6 +7,15 @@ plugins {
     plugin(Deps.Plugins.dokka) apply false
 }
 
+buildscript {
+    repositories {
+        maven { url = uri("https://dl.bintray.com/icerockdev/plugins") }
+    }
+    dependencies {
+        plugin(Deps.Plugins.bintrayPublish)
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -55,6 +64,8 @@ allprojects {
                 }
             }
         }
+
+        apply(plugin = Deps.Plugins.bintrayPublish.id)
     }
 }
 
