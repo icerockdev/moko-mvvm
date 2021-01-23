@@ -5,10 +5,11 @@
 package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.bindToButtonImage
-import dev.icerock.moko.mvvm.livedata.bindToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindToControlEnabled
-import dev.icerock.moko.mvvm.livedata.bindToViewBackgroundColor
+import dev.icerock.moko.mvvm.livedata.bindBoolToButtonImage
+import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
+import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
+import dev.icerock.moko.mvvm.livedata.bindBoolToControlEnabled
+import dev.icerock.moko.mvvm.livedata.bindBoolToViewBackgroundColor
 import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UIButton
 import platform.UIKit.UIColor
@@ -20,10 +21,10 @@ fun UIButton.bindEnabled(
     enabledColor: UIColor? = null,
     disabledColor: UIColor? = null
 ) {
-    liveData.bindToControlEnabled(control = this)
+    liveData.bindBoolToControlEnabled(control = this)
 
     if (enabledColor != null && disabledColor != null) {
-        liveData.bindToViewBackgroundColor(
+        liveData.bindBoolToViewBackgroundColor(
             view = this,
             trueColor = enabledColor,
             falseColor = disabledColor
@@ -35,14 +36,14 @@ fun UIButton.bindEnabled(
 fun UIButton.bindTitle(
     liveData: LiveData<String>
 ) {
-    liveData.bindToButtonTitle(button = this)
+    liveData.bindStringToButtonTitle(button = this)
 }
 
 @Deprecated("use LiveData.bindToButtonTitle extension")
 fun UIButton.bindTitle(
     liveData: LiveData<StringDesc>
 ) {
-    liveData.bindToButtonTitle(button = this)
+    liveData.bindStringDescToButtonTitle(button = this)
 }
 
 @Deprecated("use LiveData.bindToButtonImage extension")
@@ -51,7 +52,7 @@ fun UIButton.bindImages(
     trueImage: UIImage,
     falseImage: UIImage
 ) {
-    liveData.bindToButtonImage(
+    liveData.bindBoolToButtonImage(
         button = this,
         trueImage = trueImage,
         falseImage = falseImage

@@ -8,14 +8,14 @@ import dev.icerock.moko.mvvm.utils.bind
 import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UILabel
 
-fun LiveData<String>.bindToLabelText(
+fun <T : String?> LiveData<T>.bindStringToLabelText(
     label: UILabel
 ) {
     bind(label) { this.text = it }
 }
 
-fun LiveData<StringDesc>.bindToLabelText(
+fun <T : StringDesc?> LiveData<T>.bindStringDescToLabelText(
     label: UILabel
 ) {
-    map { it.localized() }.bindToLabelText(label)
+    map { it?.localized() }.bindStringToLabelText(label)
 }

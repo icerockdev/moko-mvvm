@@ -6,16 +6,16 @@ package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindToSwitchOn
-import dev.icerock.moko.mvvm.livedata.bindTwoWayToSwitchOn
+import dev.icerock.moko.mvvm.livedata.bindBoolToSwitchOn
+import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToSwitchOn
 import platform.UIKit.UISwitch
 
 @Deprecated("use LiveData.bindToSwitchOn extension")
 fun UISwitch.bindValue(liveData: LiveData<Boolean>) {
-    liveData.bindToSwitchOn(switch = this)
+    liveData.bindBoolToSwitchOn(switch = this)
 }
 
 @Deprecated("use LiveData.bindTwoWayToSwitchOn extension")
 fun UISwitch.bindValueTwoWay(liveData: MutableLiveData<Boolean>) {
-    liveData.bindTwoWayToSwitchOn(switch = this)
+    liveData.bindBoolTwoWayToSwitchOn(switch = this)
 }

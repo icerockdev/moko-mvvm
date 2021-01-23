@@ -13,26 +13,26 @@ import platform.UIKit.UITextViewTextDidBeginEditingNotification
 import platform.UIKit.UITextViewTextDidChangeNotification
 import platform.UIKit.UITextViewTextDidEndEditingNotification
 
-fun LiveData<String>.bindToTextViewText(
+fun <T : String?> LiveData<T>.bindStringToTextViewText(
     textView: UITextView
 ) {
     bind(textView) { value ->
         if (this.text == value) return@bind
 
-        this.text = value
+        this.text = value.orEmpty()
     }
 }
 
-fun LiveData<StringDesc>.bindToTextViewText(
+fun <T : StringDesc?> LiveData<T>.bindStringDescToTextViewText(
     textView: UITextView
 ) {
-    map { it.localized() }.bindToTextViewText(textView)
+    map { it?.localized() }.bindStringToTextViewText(textView)
 }
 
-fun MutableLiveData<String>.bindTwoWayToTextViewText(
+fun MutableLiveData<String>.bindStringTwoWayToTextViewText(
     textView: UITextView
 ) {
-    bindToTextViewText(textView)
+    bindStringToTextViewText(textView)
 
     NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidChangeNotification,
@@ -46,8 +46,8 @@ fun MutableLiveData<String>.bindTwoWayToTextViewText(
     }
 }
 
-fun MutableLiveData<Boolean>.bindTwoWayToTextViewFocus(textView: UITextView) {
-    bindToResponderFocus(textView)
+fun MutableLiveData<Boolean>.bindBoolTwoWayToTextViewFocus(textView: UITextView) {
+    bindBoolToResponderFocus(textView)
 
     val handler: UITextView.() -> Unit = {
         val focused = isFocused()

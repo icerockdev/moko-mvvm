@@ -11,14 +11,14 @@ import platform.UIKit.UIControlEventEditingDidBegin
 import platform.UIKit.UIControlEventEditingDidEnd
 import platform.UIKit.UIControlEventEditingDidEndOnExit
 
-fun LiveData<Boolean>.bindToControlEnabled(
+fun LiveData<Boolean>.bindBoolToControlEnabled(
     control: UIControl
 ) {
     bind(control) { this.enabled = it }
 }
 
-fun MutableLiveData<Boolean>.bindTwoWayToControlFocus(control: UIControl) {
-    bindToResponderFocus(control)
+fun MutableLiveData<Boolean>.bindBoolTwoWayToControlFocus(control: UIControl) {
+    bindBoolToResponderFocus(control)
 
     val handler: UIControl.() -> Unit = {
         val focused = isFocused()

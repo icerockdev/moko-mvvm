@@ -21,6 +21,8 @@ class LoginViewModel(
     private val userRepository: UserRepository
 ) : ViewModel(), EventsDispatcherOwner<LoginViewModel.EventsListener> {
     val email: MutableLiveData<String> = MutableLiveData("")
+    private val _emailValidation = MutableLiveData<String?>(null)
+    val emailValidation: LiveData<String?> get() = _emailValidation
     val password: MutableLiveData<String> = MutableLiveData("")
 
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -35,6 +37,11 @@ class LoginViewModel(
     fun onLoginButtonPressed() {
         val emailValue = email.value
         val passwordValue = password.value
+
+        if (emailValue.isBlank()) {
+            _emailValidation.value = "email can't be blank"
+            return
+        }
 
         viewModelScope.launch {
             _isLoading.value = true
