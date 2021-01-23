@@ -5,7 +5,7 @@
 package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.bindToViewHidden
+import dev.icerock.moko.mvvm.livedata.bindBoolToViewHidden
 import dev.icerock.moko.mvvm.livedata.revert
 import platform.UIKit.UIView
 
@@ -17,5 +17,5 @@ fun UIView.bindVisibility(
     val source = if (inverted) liveData
     else liveData.revert()
 
-    source.bindToViewHidden(view = this)
+    source.bindBoolToViewHidden(view = this)
 }

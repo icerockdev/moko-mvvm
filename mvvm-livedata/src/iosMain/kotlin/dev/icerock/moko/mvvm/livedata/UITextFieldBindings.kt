@@ -10,7 +10,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UIControlEventEditingChanged
 import platform.UIKit.UITextField
 
-fun LiveData<String>.bindToTextFieldText(
+fun <T : String?> LiveData<T>.bindStringToTextFieldText(
     textField: UITextField
 ) {
     bind(textField) { value ->
@@ -20,16 +20,16 @@ fun LiveData<String>.bindToTextFieldText(
     }
 }
 
-fun LiveData<StringDesc>.bindToTextFieldText(
+fun <T : StringDesc?> LiveData<T>.bindStringDescToTextFieldText(
     textField: UITextField
 ) {
-    map { it.localized() }.bindToTextFieldText(textField)
+    map { it?.localized() }.bindStringToTextFieldText(textField)
 }
 
-fun MutableLiveData<String>.bindTwoWayToTextFieldText(
+fun MutableLiveData<String>.bindStringTwoWayToTextFieldText(
     textField: UITextField
 ) {
-    bindToTextFieldText(textField)
+    bindStringToTextFieldText(textField)
 
     textField.setEventHandler(UIControlEventEditingChanged) {
         val newText = this.text.orEmpty()

@@ -6,9 +6,9 @@ package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindToResponderFocus
-import dev.icerock.moko.mvvm.livedata.bindToTextViewText
-import dev.icerock.moko.mvvm.livedata.bindTwoWayToTextViewFocus
+import dev.icerock.moko.mvvm.livedata.bindBoolToResponderFocus
+import dev.icerock.moko.mvvm.livedata.bindStringToTextViewText
+import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToTextViewFocus
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.mvvm.utils.setEventHandler
 import dev.icerock.moko.resources.desc.StringDesc
@@ -21,7 +21,7 @@ fun UITextView.bindText(
     liveData: LiveData<String>,
     formatter: ((String) -> String)? = null
 ) {
-    liveData.map { formatter?.invoke(it) ?: it }.bindToTextViewText(textView = this)
+    liveData.map { formatter?.invoke(it) ?: it }.bindStringToTextViewText(textView = this)
 }
 
 @Deprecated("use LiveData.bindToTextViewText extension")
@@ -32,7 +32,7 @@ fun UITextView.bindText(
     liveData
         .map { it.localized() }
         .map { formatter?.invoke(it) ?: it }
-        .bindToTextViewText(textView = this)
+        .bindStringToTextViewText(textView = this)
 }
 
 @Deprecated("use LiveData.bindToTextViewText extension")
@@ -58,10 +58,10 @@ fun UITextView.bindTextTwoWay(
 
 @Deprecated("use LiveData.bindToResponderFocus extension")
 fun UITextView.bindFocus(liveData: LiveData<Boolean>) {
-    liveData.bindToResponderFocus(responder = this)
+    liveData.bindBoolToResponderFocus(responder = this)
 }
 
 @Deprecated("use LiveData.bindTwoWayToTextViewFocus extension")
 fun UITextView.bindFocusTwoWay(liveData: MutableLiveData<Boolean>) {
-    liveData.bindTwoWayToTextViewFocus(textView = this)
+    liveData.bindBoolTwoWayToTextViewFocus(textView = this)
 }

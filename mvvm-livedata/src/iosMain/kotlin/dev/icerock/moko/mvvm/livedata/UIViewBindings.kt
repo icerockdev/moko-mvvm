@@ -10,7 +10,7 @@ import platform.UIKit.UIView
 import platform.UIKit.backgroundColor
 import platform.UIKit.hidden
 
-fun LiveData<Boolean>.bindToViewBackgroundColor(
+fun LiveData<Boolean>.bindBoolToViewBackgroundColor(
     view: UIView,
     trueColor: UIColor,
     falseColor: UIColor
@@ -25,7 +25,7 @@ fun LiveData<Boolean>.bindToViewBackgroundColor(
     }
 }
 
-fun LiveData<Boolean>.bindToViewHidden(
+fun LiveData<Boolean>.bindBoolToViewHidden(
     view: UIView
 ) {
     bind(view) { value ->

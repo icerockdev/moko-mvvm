@@ -9,16 +9,16 @@ import dev.icerock.moko.mvvm.utils.setEventHandler
 import platform.UIKit.UIControlEventValueChanged
 import platform.UIKit.UISwitch
 
-fun LiveData<Boolean>.bindToSwitchOn(
+fun LiveData<Boolean>.bindBoolToSwitchOn(
     switch: UISwitch
 ) {
     bind(switch) { this.on = it }
 }
 
-fun MutableLiveData<Boolean>.bindTwoWayToSwitchOn(
+fun MutableLiveData<Boolean>.bindBoolTwoWayToSwitchOn(
     switch: UISwitch
 ) {
-    bindToSwitchOn(switch)
+    bindBoolToSwitchOn(switch)
 
     switch.setEventHandler(UIControlEventValueChanged) {
         if (value == on) return@setEventHandler
