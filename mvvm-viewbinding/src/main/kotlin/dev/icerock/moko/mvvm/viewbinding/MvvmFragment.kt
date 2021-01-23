@@ -21,9 +21,6 @@ abstract class MvvmFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
     protected lateinit var viewModel: VM
 
-    protected abstract val layoutId: Int
-    protected abstract val viewModelVariableId: Int
-
     protected abstract val viewModelClass: Class<VM>
 
     protected abstract fun viewModelFactory(): ViewModelProvider.Factory
