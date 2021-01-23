@@ -74,6 +74,23 @@ dependencies {
 }
 ```
 
+Also required export of dependency to iOS framework. For example:
+```
+kotlin {
+    // export correct artifact to use all classes of moko-resources directly from Swift
+    targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
+        val arch = when (this.konanTarget) {	
+            org.jetbrains.kotlin.konan.target.KonanTarget.IOS_ARM64 -> "iosarm64"	
+            org.jetbrains.kotlin.konan.target.KonanTarget.IOS_X64 -> "iosx64"	
+            else -> throw IllegalArgumentException()	
+        }
+        binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
+            export("dev.icerock.moko:mvvm-$arch:0.8.1")
+        }
+    }
+}
+```
+
 On iOS, in addition to the Kotlin library add in Podfile
 ```ruby
 pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.9.1'
