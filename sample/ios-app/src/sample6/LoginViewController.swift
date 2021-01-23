@@ -8,6 +8,7 @@ import MultiPlatformLibraryMvvm
 
 class LoginViewController: UIViewController {
     @IBOutlet private var emailField: UITextField!
+    @IBOutlet private var emailValidationLabel: UILabel!
     @IBOutlet private var passwordField: UITextField!
     @IBOutlet private var loginButton: UIButton!
     @IBOutlet private var progressBar: UIActivityIndicatorView!
@@ -21,11 +22,12 @@ class LoginViewController: UIViewController {
                                    userRepository: MockUserRepository())
         
         viewModel.eventsDispatcher.listener = self
-        
-        emailField.bindTextTwoWay(liveData: viewModel.email)
-        passwordField.bindTextTwoWay(liveData: viewModel.password)
-        loginButton.bindVisibility(liveData: viewModel.isLoginButtonVisible)
-        progressBar.bindVisibility(liveData: viewModel.isLoading)
+
+        viewModel.email.bindStringTwoWayToTextFieldText(textField: emailField)
+        viewModel.emailValidation.bindStringToLabelText(label: emailValidationLabel)
+        viewModel.password.bindStringTwoWayToTextFieldText(textField: passwordField)
+        viewModel.isLoginButtonVisible.revert().bindBoolToViewHidden(view: loginButton)
+        viewModel.isLoading.revert().bindBoolToViewHidden(view: progressBar)
     }
     
     @IBAction func onLoginButtonPressed() {

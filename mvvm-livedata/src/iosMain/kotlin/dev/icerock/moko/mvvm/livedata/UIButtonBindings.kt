@@ -10,17 +10,17 @@ import platform.UIKit.UIButton
 import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UIImage
 
-fun LiveData<String>.bindToButtonTitle(button: UIButton) {
+fun <T : String?> LiveData<T>.bindStringToButtonTitle(button: UIButton) {
     bind(button) { value ->
         setTitle(value, forState = UIControlStateNormal)
     }
 }
 
-fun LiveData<StringDesc>.bindToButtonTitle(button: UIButton) {
-    map { it.localized() }.bindToButtonTitle(button)
+fun <T : StringDesc?> LiveData<T>.bindStringDescToButtonTitle(button: UIButton) {
+    map { it?.localized() }.bindStringToButtonTitle(button)
 }
 
-fun LiveData<Boolean>.bindToButtonImage(
+fun LiveData<Boolean>.bindBoolToButtonImage(
     button: UIButton,
     trueImage: UIImage,
     falseImage: UIImage

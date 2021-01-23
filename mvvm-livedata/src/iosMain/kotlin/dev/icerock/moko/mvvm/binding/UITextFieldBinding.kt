@@ -6,9 +6,9 @@ package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindToResponderFocus
-import dev.icerock.moko.mvvm.livedata.bindToTextFieldText
-import dev.icerock.moko.mvvm.livedata.bindTwoWayToControlFocus
+import dev.icerock.moko.mvvm.livedata.bindBoolToResponderFocus
+import dev.icerock.moko.mvvm.livedata.bindStringToTextFieldText
+import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToControlFocus
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UIControlEventEditingChanged
@@ -20,7 +20,7 @@ fun UITextField.bindText(
     liveData: LiveData<String>,
     formatter: ((String) -> String)? = null
 ) {
-    liveData.map { formatter?.invoke(it) ?: it }.bindToTextFieldText(textField = this)
+    liveData.map { formatter?.invoke(it) ?: it }.bindStringToTextFieldText(textField = this)
 }
 
 @Deprecated("use LiveData.bindToTextFieldText extension")
@@ -31,7 +31,7 @@ fun UITextField.bindText(
     liveData
         .map { it.localized() }
         .map { formatter?.invoke(it) ?: it }
-        .bindToTextFieldText(textField = this)
+        .bindStringToTextFieldText(textField = this)
 }
 
 @Deprecated("use LiveData.bindTwoWayToTextFieldText extension")
@@ -54,10 +54,10 @@ fun UITextField.bindTextTwoWay(
 
 @Deprecated("use LiveData.bindToControlFocus extension")
 fun UITextField.bindFocus(liveData: LiveData<Boolean>) {
-    liveData.bindToResponderFocus(responder = this)
+    liveData.bindBoolToResponderFocus(responder = this)
 }
 
 @Deprecated("use LiveData.    liveData.bindTwoWayToControlFocus(control = this)\n extension")
 fun UITextField.bindFocusTwoWay(liveData: MutableLiveData<Boolean>) {
-    liveData.bindTwoWayToControlFocus(control = this)
+    liveData.bindBoolTwoWayToControlFocus(control = this)
 }

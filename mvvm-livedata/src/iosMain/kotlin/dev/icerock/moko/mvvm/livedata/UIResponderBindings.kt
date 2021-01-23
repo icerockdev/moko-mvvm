@@ -7,7 +7,7 @@ package dev.icerock.moko.mvvm.livedata
 import dev.icerock.moko.mvvm.utils.bind
 import platform.UIKit.UIResponder
 
-fun LiveData<Boolean>.bindToResponderFocus(responder: UIResponder) {
+fun LiveData<Boolean>.bindBoolToResponderFocus(responder: UIResponder) {
     bind(responder) { value ->
         if (value) {
             becomeFirstResponder()
