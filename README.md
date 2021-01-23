@@ -77,7 +77,7 @@ dependencies {
 Also required export of dependency to iOS framework. For example:
 ```
 kotlin {
-    // export correct artifact to use all classes of moko-resources directly from Swift
+    // export correct artifact to use all classes of library directly from Swift
     targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
         val arch = when (this.konanTarget) {	
             org.jetbrains.kotlin.konan.target.KonanTarget.IOS_ARM64 -> "iosarm64"	
