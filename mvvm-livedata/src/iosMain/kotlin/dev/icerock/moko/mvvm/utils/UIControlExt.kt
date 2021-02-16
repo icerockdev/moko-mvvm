@@ -13,14 +13,13 @@ import platform.UIKit.UIControlEvents
 import platform.darwin.NSObject
 import platform.objc.OBJC_ASSOCIATION_RETAIN
 import platform.objc.objc_setAssociatedObject
-import kotlin.native.ref.WeakReference
 
 fun <T : UIControl> T.setEventHandler(event: UIControlEvents, lambda: T.() -> Unit) {
-    val lambdaTarget = ControlLambdaTarget(this, lambda)
+    val lambdaTarget = ControlLambdaTarget(lambda)
 
     addTarget(
         target = lambdaTarget,
-        action = NSSelectorFromString("action"),
+        action = NSSelectorFromString("action:"),
         forControlEvents = event
     )
 
@@ -33,15 +32,13 @@ fun <T : UIControl> T.setEventHandler(event: UIControlEvents, lambda: T.() -> Un
 }
 
 @ExportObjCClass
-private class ControlLambdaTarget<T : Any>(
-    ref: T,
-    val lambda: T.() -> Unit
+private class ControlLambdaTarget<T : UIControl>(
+    private val lambda: T.() -> Unit
 ) : NSObject() {
-    private val weakRef = WeakReference(ref)
 
     @ObjCAction
-    fun action() {
-        val ref = weakRef.get() ?: return
-        lambda(ref)
+    fun action(sender: UIControl) {
+        @Suppress("UNCHECKED_CAST")
+        lambda(sender as T)
     }
 }
