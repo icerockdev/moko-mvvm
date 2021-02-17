@@ -44,6 +44,7 @@ private class NotificationLambdaTarget<T>(
 
     @ObjCAction
     fun action(notification: NSNotification) {
+        @Suppress("UNCHECKED_CAST")
         val ref = notification.`object` as T
         lambda(ref)
     }
