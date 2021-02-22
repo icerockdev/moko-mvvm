@@ -14,7 +14,7 @@ class MapTest {
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
-    fun `live data map testing`() {
+    fun `map validate`() {
         val input: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
         val output: LiveData<Long> = input.map { it * -1L }
         val observer = AssertObserver<Long>()
