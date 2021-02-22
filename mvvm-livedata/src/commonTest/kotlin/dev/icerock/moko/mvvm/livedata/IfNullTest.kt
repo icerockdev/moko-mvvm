@@ -83,7 +83,7 @@ class IfNullTest {
     }
 
     @Test
-    fun `String? orEmpty validate`() {
+    fun `String orEmpty validate`() {
         val input: MutableLiveData<String?> = MutableLiveData(initialValue = null)
         val output: LiveData<String> = input.orEmpty()
         val observer = AssertObserver<String>()
@@ -151,7 +151,7 @@ class IfNullTest {
     }
 
     @Test
-    fun `List? orEmpty validate`() {
+    fun `List orEmpty validate`() {
         val input: MutableLiveData<List<Int>?> = MutableLiveData(initialValue = null)
         val output: LiveData<List<Int>> = input.orEmpty()
         val observer = AssertObserver<List<Int>>()
