@@ -40,7 +40,7 @@ class MapTest {
             expectOutput = -2L,
             expectLastObservedValue = -2L,
             expectObserveCount = 2,
-            messagePrefix = "first change of intput"
+            messagePrefix = "first change of input"
         )
 
         input.value = 2
