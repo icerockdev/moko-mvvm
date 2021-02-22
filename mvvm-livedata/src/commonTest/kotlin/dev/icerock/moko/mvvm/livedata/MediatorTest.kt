@@ -199,4 +199,122 @@ class MediatorTest {
             messagePrefix = "observer removed"
         )
     }
+
+    @Test
+    fun `mediator extension validate`() {
+        val input1: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
+        val input2: MutableLiveData<Int> = MutableLiveData(initialValue = 2)
+        val output: LiveData<Int> = listOf(input1, input2).mediator { inputs ->
+            inputs.sum()
+        }
+        val observer = AssertObserver<Int>()
+        output.addObserver(observer)
+
+        assert(
+            input = input1,
+            output = output,
+            outputObserver = observer,
+            expectInput = 1,
+            expectOutput = 3,
+            expectLastObservedValue = 3,
+            expectObserveCount = 1,
+            messagePrefix = "initialization step"
+        )
+
+        input1.value = 2
+        assert(
+            input = input1,
+            output = output,
+            outputObserver = observer,
+            expectInput = 2,
+            expectOutput = 4,
+            expectLastObservedValue = 4,
+            expectObserveCount = 2,
+            messagePrefix = "first input changed"
+        )
+
+        input2.value = 3
+        assert(
+            input = input2,
+            output = output,
+            outputObserver = observer,
+            expectInput = 3,
+            expectOutput = 5,
+            expectLastObservedValue = 5,
+            expectObserveCount = 3,
+            messagePrefix = "second input changed"
+        )
+
+        output.removeObserver(observer)
+        input1.value = 5
+        input2.value = 7
+        assert(
+            input = input2,
+            output = output,
+            outputObserver = observer,
+            expectInput = 7,
+            expectOutput = 12,
+            expectLastObservedValue = 5,
+            expectObserveCount = 3,
+            messagePrefix = "observer removed"
+        )
+    }
+
+    @Test
+    fun `list any validate`() {
+        val input1: MutableLiveData<Boolean> = MutableLiveData(initialValue = true)
+        val input2: MutableLiveData<Boolean> = MutableLiveData(initialValue = false)
+        val output: LiveData<Boolean> = listOf(input1, input2).any(value = true)
+        val observer = AssertObserver<Boolean>()
+        output.addObserver(observer)
+
+        assert(
+            input = input1,
+            output = output,
+            outputObserver = observer,
+            expectInput = true,
+            expectOutput = true,
+            expectLastObservedValue = true,
+            expectObserveCount = 1,
+            messagePrefix = "initialization step"
+        )
+
+        input1.value = false
+        assert(
+            input = input1,
+            output = output,
+            outputObserver = observer,
+            expectInput = false,
+            expectOutput = false,
+            expectLastObservedValue = false,
+            expectObserveCount = 2,
+            messagePrefix = "first input changed"
+        )
+
+        input2.value = true
+        assert(
+            input = input2,
+            output = output,
+            outputObserver = observer,
+            expectInput = true,
+            expectOutput = true,
+            expectLastObservedValue = true,
+            expectObserveCount = 3,
+            messagePrefix = "second input changed"
+        )
+
+        output.removeObserver(observer)
+        input1.value = true
+        input2.value = true
+        assert(
+            input = input2,
+            output = output,
+            outputObserver = observer,
+            expectInput = true,
+            expectOutput = true,
+            expectLastObservedValue = true,
+            expectObserveCount = 3,
+            messagePrefix = "observer removed"
+        )
+    }
 }
