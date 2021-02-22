@@ -29,34 +29,16 @@ class LiveDataFlatMapTest {
         var observerCounter: Int = 0
         output.addObserver { observerCounter++ }
 
-        assertEquals(
-            expected = 0,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 1,
-            actual = observerCounter
-        )
+        assertEquals(expected = 0, actual = output.value)
+        assertEquals(expected = 1, actual = observerCounter)
 
         input.value = 1
-        assertEquals(
-            expected = 2,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 2,
-            actual = observerCounter
-        )
+        assertEquals(expected = 2, actual = output.value)
+        assertEquals(expected = 2, actual = observerCounter)
 
         input.value = 2
-        assertEquals(
-            expected = 4,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 3,
-            actual = observerCounter
-        )
+        assertEquals(expected = 4, actual = output.value)
+        assertEquals(expected = 3, actual = observerCounter)
     }
 
     @Test
@@ -67,54 +49,24 @@ class LiveDataFlatMapTest {
         var observerCounter: Int = 0
         output.addObserver { observerCounter++ }
 
-        assertEquals(
-            expected = 1,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 1,
-            actual = observerCounter
-        )
+        assertEquals(expected = 1, actual = output.value)
+        assertEquals(expected = 1, actual = observerCounter)
 
         input.value = 1
-        assertEquals(
-            expected = 1,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 2,
-            actual = observerCounter
-        )
+        assertEquals(expected = 1, actual = output.value)
+        assertEquals(expected = 2, actual = observerCounter)
 
         input.value = 2
-        assertEquals(
-            expected = 1,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 3,
-            actual = observerCounter
-        )
+        assertEquals(expected = 1, actual = output.value)
+        assertEquals(expected = 3, actual = observerCounter)
 
         input.value = 3
-        assertEquals(
-            expected = 1,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 4,
-            actual = observerCounter
-        )
+        assertEquals(expected = 1, actual = output.value)
+        assertEquals(expected = 4, actual = observerCounter)
 
         internalLiveData.value = 2
-        assertEquals(
-            expected = 2,
-            actual = output.value
-        )
-        assertEquals(
-            expected = 5,
-            actual = observerCounter
-        )
+        assertEquals(expected = 2, actual = output.value)
+        assertEquals(expected = 5, actual = observerCounter)
     }
 
     @Test
