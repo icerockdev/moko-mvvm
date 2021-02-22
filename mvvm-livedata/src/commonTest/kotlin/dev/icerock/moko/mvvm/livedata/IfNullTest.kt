@@ -82,7 +82,7 @@ class IfNullTest {
     }
 
     @Test
-    fun `orEmpty validate`() {
+    fun `String? orEmpty validate`() {
         val input: MutableLiveData<String?> = MutableLiveData(initialValue = null)
         val output: LiveData<String> = input.orEmpty()
         val observer = AssertObserver<String>()
@@ -145,6 +145,62 @@ class IfNullTest {
             expectOutput = "end",
             expectLastObservedValue = "",
             expectObserveCount = 4,
+            messagePrefix = "input changed after removing observer"
+        )
+    }
+
+    @Test
+    fun `List? orEmpty validate`() {
+        val input: MutableLiveData<List<Int>?> = MutableLiveData(initialValue = null)
+        val output: LiveData<List<Int>> = input.orEmpty()
+        val observer = AssertObserver<List<Int>>()
+        output.addObserver(observer)
+
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = null,
+            expectOutput = emptyList(),
+            expectLastObservedValue = emptyList(),
+            expectObserveCount = 1,
+            messagePrefix = "initialization ends"
+        )
+
+        input.value = listOf(1,2)
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = listOf(1,2),
+            expectOutput = listOf(1,2),
+            expectLastObservedValue = listOf(1,2),
+            expectObserveCount = 2,
+            messagePrefix = "input value not null"
+        )
+
+        input.value = null
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = null,
+            expectOutput = emptyList(),
+            expectLastObservedValue = emptyList(),
+            expectObserveCount = 3,
+            messagePrefix = "input value cleared to null"
+        )
+
+        output.removeObserver(observer)
+        input.value = listOf(1)
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = listOf(1),
+            expectOutput = listOf(1),
+            expectLastObservedValue = emptyList(),
+            expectObserveCount = 3,
             messagePrefix = "input changed after removing observer"
         )
     }
