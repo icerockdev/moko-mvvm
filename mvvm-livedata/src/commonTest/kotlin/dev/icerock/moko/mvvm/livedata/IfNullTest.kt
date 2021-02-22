@@ -80,4 +80,72 @@ class IfNullTest {
             messagePrefix = "input changed after removing observer"
         )
     }
+
+    @Test
+    fun `orEmpty validate`() {
+        val input: MutableLiveData<String?> = MutableLiveData(initialValue = null)
+        val output: LiveData<String> = input.orEmpty()
+        val observer = AssertObserver<String>()
+        output.addObserver(observer)
+
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = null,
+            expectOutput = "",
+            expectLastObservedValue = "",
+            expectObserveCount = 1,
+            messagePrefix = "initialization ends"
+        )
+
+        input.value = "test"
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = "test",
+            expectOutput = "test",
+            expectLastObservedValue = "test",
+            expectObserveCount = 2,
+            messagePrefix = "input value not null"
+        )
+
+        input.value = null
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = null,
+            expectOutput = "",
+            expectLastObservedValue = "",
+            expectObserveCount = 3,
+            messagePrefix = "input value cleared to null"
+        )
+
+        input.value = ""
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = "",
+            expectOutput = "",
+            expectLastObservedValue = "",
+            expectObserveCount = 4,
+            messagePrefix = "input value again not null"
+        )
+
+        output.removeObserver(observer)
+        input.value = "end"
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = "end",
+            expectOutput = "end",
+            expectLastObservedValue = "",
+            expectObserveCount = 4,
+            messagePrefix = "input changed after removing observer"
+        )
+    }
 }
