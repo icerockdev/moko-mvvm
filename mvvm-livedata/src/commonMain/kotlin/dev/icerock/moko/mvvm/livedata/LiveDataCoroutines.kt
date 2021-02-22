@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@UseExperimental(ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 fun <T> LiveData<T>.asFlow(): Flow<T> = channelFlow {
     val observer: (T) -> Unit = { offer(it) }
 

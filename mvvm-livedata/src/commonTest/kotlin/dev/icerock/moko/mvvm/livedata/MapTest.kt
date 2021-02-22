@@ -7,7 +7,6 @@ package dev.icerock.moko.mvvm.livedata
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class MapTest {
 
@@ -16,55 +15,125 @@ class MapTest {
 
     @Test
     fun `live data map testing`() {
-        val ld: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
-        val mapLd: LiveData<Int> = ld.map { it * -1 }
+        val input: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
+        val output: LiveData<Long> = input.map { it * -1L }
+        val observer = AssertObserver<Long>()
+        output.addObserver(observer)
 
-        var observedCounter = 0
-        var lastValue: Int? = null
-        val observer: (Int) -> Unit = {
-            observedCounter++
-            lastValue = it
-        }
-        mapLd.addObserver(observer)
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 1,
+            expectOutput = -1L,
+            expectLastObservedValue = -1L,
+            expectObserveCount = 1,
+            messagePrefix = "initialization ends"
+        )
 
-        "we should got initial value".let { msg ->
-            assertEquals(expected = 1, actual = ld.value, message = msg)
-            assertEquals(expected = -1, actual = mapLd.value, message = msg)
-            assertEquals(expected = -1, actual = lastValue, message = msg)
-            assertEquals(expected = 1, actual = observedCounter, message = msg)
-        }
+        input.value = 2
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 2,
+            expectOutput = -2L,
+            expectLastObservedValue = -2L,
+            expectObserveCount = 2,
+            messagePrefix = "first change of intput"
+        )
 
-        ld.value = 2
-        "we should got changes".let { msg ->
-            assertEquals(expected = 2, actual = ld.value, message = msg)
-            assertEquals(expected = -2, actual = mapLd.value, message = msg)
-            assertEquals(expected = -2, actual = lastValue, message = msg)
-            assertEquals(expected = 2, actual = observedCounter, message = msg)
-        }
+        input.value = 2
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 2,
+            expectOutput = -2L,
+            expectLastObservedValue = -2L,
+            expectObserveCount = 3,
+            messagePrefix = "input value reset to same value"
+        )
 
-        ld.value = 2
-        "value set but not changed, we should got notification".let { msg ->
-            assertEquals(expected = 2, actual = ld.value, message = msg)
-            assertEquals(expected = -2, actual = mapLd.value, message = msg)
-            assertEquals(expected = -2, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
-        }
+        input.postValue(3)
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 3,
+            expectOutput = -3L,
+            expectLastObservedValue = -3L,
+            expectObserveCount = 4,
+            messagePrefix = "input changed by postValue"
+        )
 
-        ld.postValue(3)
-        "postValue should set value on mainThread, so change should be applied".let { msg ->
-            assertEquals(expected = 3, actual = ld.value, message = msg)
-            assertEquals(expected = -3, actual = mapLd.value, message = msg)
-            assertEquals(expected = -3, actual = lastValue, message = msg)
-            assertEquals(expected = 4, actual = observedCounter, message = msg)
-        }
+        output.removeObserver(observer)
+        input.value = 4
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 4,
+            expectOutput = -4L,
+            expectLastObservedValue = -3L,
+            expectObserveCount = 4,
+            messagePrefix = "input changed after removing observer"
+        )
+    }
 
-        mapLd.removeObserver(observer)
-        ld.value = 4
-        "observer was removed - we should not got any changes".let { msg ->
-            assertEquals(expected = 4, actual = ld.value, message = msg)
-            assertEquals(expected = -4, actual = mapLd.value, message = msg)
-            assertEquals(expected = -3, actual = lastValue, message = msg)
-            assertEquals(expected = 4, actual = observedCounter, message = msg)
-        }
+    @Test
+    fun `mapOrNull validate`() {
+        val input: MutableLiveData<Int?> = MutableLiveData(initialValue = 1)
+        val output: LiveData<Long?> = input.mapOrNull { it * -1L }
+        val observer = AssertObserver<Long?>()
+        output.addObserver(observer)
+
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 1,
+            expectOutput = -1L,
+            expectLastObservedValue = -1L,
+            expectObserveCount = 1,
+            messagePrefix = "initialization ends"
+        )
+
+        input.value = 2
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 2,
+            expectOutput = -2L,
+            expectLastObservedValue = -2L,
+            expectObserveCount = 2,
+            messagePrefix = "first change input"
+        )
+
+        input.value = null
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = null,
+            expectOutput = null,
+            expectLastObservedValue = null,
+            expectObserveCount = 3,
+            messagePrefix = "null input"
+        )
+
+        output.removeObserver(observer)
+        input.value = 3
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 3,
+            expectOutput = -3L,
+            expectLastObservedValue = null,
+            expectObserveCount = 3,
+            messagePrefix = "change input after removing observer"
+        )
     }
 }
