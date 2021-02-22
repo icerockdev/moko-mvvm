@@ -6,19 +6,7 @@ package dev.icerock.moko.mvvm.livedata
 
 import kotlin.test.assertEquals
 
-class AssertObserver<T> : (T) -> Unit {
-    private var _invokeCount: Int = 0
-    val invokeCount: Int get() = _invokeCount
-
-    private var _lastObservedValue: T? = null
-    val lastObservedValue: T? get() = _lastObservedValue
-
-    override fun invoke(p1: T) {
-        _lastObservedValue = p1
-        _invokeCount++
-    }
-}
-
+@Suppress("LongParameterList")
 fun <IT, OT> assert(
     input: LiveData<IT>,
     output: LiveData<OT>,

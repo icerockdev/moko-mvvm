@@ -8,6 +8,7 @@ import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
 
+@Suppress("LongMethod")
 class MapTest {
 
     @get:TestRule
@@ -192,7 +193,6 @@ class MapTest {
             messagePrefix = "change input after removing observer"
         )
     }
-
 
     @Test
     fun `mapBuffered validate`() {

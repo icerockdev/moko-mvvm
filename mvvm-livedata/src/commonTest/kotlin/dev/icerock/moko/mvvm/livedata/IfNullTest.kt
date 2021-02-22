@@ -8,6 +8,7 @@ import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
 
+@Suppress("LongMethod")
 class IfNullTest {
 
     @get:TestRule
@@ -167,14 +168,14 @@ class IfNullTest {
             messagePrefix = "initialization ends"
         )
 
-        input.value = listOf(1,2)
+        input.value = listOf(1, 2)
         assert(
             input = input,
             output = output,
             outputObserver = observer,
-            expectInput = listOf(1,2),
-            expectOutput = listOf(1,2),
-            expectLastObservedValue = listOf(1,2),
+            expectInput = listOf(1, 2),
+            expectOutput = listOf(1, 2),
+            expectLastObservedValue = listOf(1, 2),
             expectObserveCount = 2,
             messagePrefix = "input value not null"
         )
