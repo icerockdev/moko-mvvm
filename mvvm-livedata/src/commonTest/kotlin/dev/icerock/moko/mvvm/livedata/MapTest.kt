@@ -192,4 +192,62 @@ class MapTest {
             messagePrefix = "change input after removing observer"
         )
     }
+
+
+    @Test
+    fun `mapBuffered validate`() {
+        val input: MutableLiveData<Int> = MutableLiveData(initialValue = 2)
+        val output: LiveData<Int> = input.mapBuffered { current, new -> current * new }
+        val observer = AssertObserver<Int>()
+        output.addObserver(observer)
+
+        // TODO maybe we should change logic of mapBuffered at initialization step?
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 2,
+            expectOutput = 4,
+            expectLastObservedValue = 4,
+            expectObserveCount = 1,
+            messagePrefix = "initialization with null"
+        )
+
+        input.value = 3
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 3,
+            expectOutput = 6,
+            expectLastObservedValue = 6,
+            expectObserveCount = 2,
+            messagePrefix = "new value"
+        )
+
+        input.value = 4
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 4,
+            expectOutput = 12,
+            expectLastObservedValue = 12,
+            expectObserveCount = 3,
+            messagePrefix = "new value"
+        )
+
+        output.removeObserver(observer)
+        input.value = 5
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = 5,
+            expectOutput = 20,
+            expectLastObservedValue = 12,
+            expectObserveCount = 3,
+            messagePrefix = "change input after removing observer"
+        )
+    }
 }
