@@ -136,4 +136,60 @@ class MapTest {
             messagePrefix = "change input after removing observer"
         )
     }
+
+    @Test
+    fun `mapTrueOrNull validate`() {
+        val input: MutableLiveData<Boolean?> = MutableLiveData(initialValue = null)
+        val output: LiveData<Int?> = input.mapTrueOrNull { 1 }
+        val observer = AssertObserver<Int?>()
+        output.addObserver(observer)
+
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = null,
+            expectOutput = null,
+            expectLastObservedValue = null,
+            expectObserveCount = 1,
+            messagePrefix = "initialization with null"
+        )
+
+        input.value = false
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = false,
+            expectOutput = null,
+            expectLastObservedValue = null,
+            expectObserveCount = 2,
+            messagePrefix = "false value"
+        )
+
+        input.value = true
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = true,
+            expectOutput = 1,
+            expectLastObservedValue = 1,
+            expectObserveCount = 3,
+            messagePrefix = "true value"
+        )
+
+        output.removeObserver(observer)
+        input.value = null
+        assert(
+            input = input,
+            output = output,
+            outputObserver = observer,
+            expectInput = null,
+            expectOutput = null,
+            expectLastObservedValue = 1,
+            expectObserveCount = 3,
+            messagePrefix = "change input after removing observer"
+        )
+    }
 }
