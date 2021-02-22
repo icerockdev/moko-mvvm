@@ -7,7 +7,6 @@ package dev.icerock.moko.mvvm.livedata
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class MediatorTest {
 
@@ -15,61 +14,67 @@ class MediatorTest {
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
-    fun `live data mediator testing`() {
-        val firstLd: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
-        val secondLd: MutableLiveData<Int> = MutableLiveData(initialValue = 2)
-        val mediatorLd: LiveData<Int> = MediatorLiveData(initialValue = 3).apply {
-            addSource(firstLd) {
+    fun `Mediator validate`() {
+        val input1: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
+        val input2: MutableLiveData<Int> = MutableLiveData(initialValue = 2)
+        val output: LiveData<Int> = MediatorLiveData(initialValue = 3).apply {
+            addSource(input1) {
                 this.value = it * 2
             }
-            addSource(secondLd) {
+            addSource(input2) {
                 this.value = it * 3
             }
         }
+        val observer = AssertObserver<Int>()
+        output.addObserver(observer)
 
-        var observedCounter = 0
-        var lastValue: Int? = null
-        val observer: (Int) -> Unit = {
-            observedCounter++
-            lastValue = it
-        }
-        mediatorLd.addObserver(observer)
+        assert(
+            input = input1,
+            output = output,
+            outputObserver = observer,
+            expectInput = 1,
+            expectOutput = 6,
+            expectLastObservedValue = 6,
+            expectObserveCount = 1,
+            messagePrefix = "initialization step"
+        )
 
-        "we should got initial value".let { msg ->
-            assertEquals(expected = 1, actual = firstLd.value, message = msg)
-            assertEquals(expected = 2, actual = secondLd.value, message = msg)
-            assertEquals(expected = 6, actual = mediatorLd.value, message = msg)
-            assertEquals(expected = 6, actual = lastValue, message = msg)
-            assertEquals(expected = 1, actual = observedCounter, message = msg)
-        }
+        input1.value = 2
+        assert(
+            input = input1,
+            output = output,
+            outputObserver = observer,
+            expectInput = 2,
+            expectOutput = 4,
+            expectLastObservedValue = 4,
+            expectObserveCount = 2,
+            messagePrefix = "first input changed"
+        )
 
-        firstLd.value = 2
-        "we should got changes from first source".let { msg ->
-            assertEquals(expected = 2, actual = firstLd.value, message = msg)
-            assertEquals(expected = 2, actual = secondLd.value, message = msg)
-            assertEquals(expected = 4, actual = mediatorLd.value, message = msg)
-            assertEquals(expected = 4, actual = lastValue, message = msg)
-            assertEquals(expected = 2, actual = observedCounter, message = msg)
-        }
+        input2.value = 3
+        assert(
+            input = input2,
+            output = output,
+            outputObserver = observer,
+            expectInput = 3,
+            expectOutput = 9,
+            expectLastObservedValue = 9,
+            expectObserveCount = 3,
+            messagePrefix = "second input changed"
+        )
 
-        secondLd.value = 3
-        "we should got changes from second source".let { msg ->
-            assertEquals(expected = 2, actual = firstLd.value, message = msg)
-            assertEquals(expected = 3, actual = secondLd.value, message = msg)
-            assertEquals(expected = 9, actual = mediatorLd.value, message = msg)
-            assertEquals(expected = 9, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
-        }
-
-        mediatorLd.removeObserver(observer)
-        firstLd.value = 5
-        secondLd.value = 7
-        "observer was removed - we should not got any changes".let { msg ->
-            assertEquals(expected = 5, actual = firstLd.value, message = msg)
-            assertEquals(expected = 7, actual = secondLd.value, message = msg)
-            assertEquals(expected = 21, actual = mediatorLd.value, message = msg)
-            assertEquals(expected = 9, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
-        }
+        output.removeObserver(observer)
+        input1.value = 5
+        input2.value = 7
+        assert(
+            input = input2,
+            output = output,
+            outputObserver = observer,
+            expectInput = 7,
+            expectOutput = 21,
+            expectLastObservedValue = 9,
+            expectObserveCount = 3,
+            messagePrefix = "observer removed"
+        )
     }
 }

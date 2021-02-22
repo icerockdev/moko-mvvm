@@ -210,7 +210,7 @@ class MapTest {
             expectOutput = 4,
             expectLastObservedValue = 4,
             expectObserveCount = 1,
-            messagePrefix = "initialization with null"
+            messagePrefix = "initialization step"
         )
 
         input.value = 3
