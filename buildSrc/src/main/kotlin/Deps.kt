@@ -1,5 +1,5 @@
 object Deps {
-    private const val kotlinVersion = "1.4.21"
+    private const val kotlinVersion = "1.4.30"
 
     private const val androidAppCompatVersion = "1.2.0"
     private const val materialDesignVersion = "1.2.1"
@@ -13,9 +13,9 @@ object Deps {
     private const val bintrayPublishVersion = "0.1.0"
 
     private const val coroutinesVersion = "1.4.2"
-    private const val mokoResourcesVersion = "0.13.2"
+    private const val mokoResourcesVersion = "0.15.0"
     private const val mokoTestVersion = "0.1.0"
-    const val mokoMvvmVersion = "0.9.1"
+    const val mokoMvvmVersion = "0.9.2"
 
     object Android {
         const val compileSdk = 29

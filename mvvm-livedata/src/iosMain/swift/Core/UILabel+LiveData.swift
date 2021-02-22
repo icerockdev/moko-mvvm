@@ -13,7 +13,7 @@ public extension UILabel {
     UILabelBindingKt.bindText(
       self,
       liveData: liveData,
-      formatter_____: formatter
+      formatter_: formatter
     )
   }
 
@@ -24,7 +24,7 @@ public extension UILabel {
     UILabelBindingKt.bindText(
       self,
       liveData: liveData,
-      formatter____: formatter
+      formatter: formatter
     )
   }
 }
