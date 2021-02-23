@@ -23,6 +23,7 @@ class UIControlBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UITextField(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

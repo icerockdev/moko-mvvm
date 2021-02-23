@@ -3,7 +3,7 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToResponderFocus
+import dev.icerock.moko.mvvm.livedata.bindBoolToViewFocus
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.Foundation.NSDate
@@ -21,13 +21,14 @@ class UIResponderBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UITextField(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     // disabled while not found way to sync becomeFirstResponder logic with current thread
 //    @Test
     fun `bool focused`() {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        source.bindBoolToResponderFocus(destination)
+        source.bindBoolToViewFocus(destination)
         assertEquals(
             expected = false,
             actual = destination.focused

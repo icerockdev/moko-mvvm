@@ -23,6 +23,7 @@ class UISwitchBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UISwitch(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

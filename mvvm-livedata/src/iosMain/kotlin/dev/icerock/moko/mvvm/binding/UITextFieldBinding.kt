@@ -6,7 +6,7 @@ package dev.icerock.moko.mvvm.binding
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToResponderFocus
+import dev.icerock.moko.mvvm.livedata.bindBoolToViewFocus
 import dev.icerock.moko.mvvm.livedata.bindStringToTextFieldText
 import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToControlFocus
 import dev.icerock.moko.mvvm.livedata.map
@@ -54,7 +54,7 @@ fun UITextField.bindTextTwoWay(
 
 @Deprecated("use LiveData.bindToControlFocus extension")
 fun UITextField.bindFocus(liveData: LiveData<Boolean>) {
-    liveData.bindBoolToResponderFocus(responder = this)
+    liveData.bindBoolToViewFocus(view = this)
 }
 
 @Deprecated("use LiveData.    liveData.bindTwoWayToControlFocus(control = this)\n extension")

@@ -32,3 +32,17 @@ fun LiveData<Boolean>.bindBoolToViewHidden(
         hidden = value
     }
 }
+
+fun LiveData<Boolean>.bindBoolToViewFocus(view: UIView) {
+    bind(view) { value ->
+        if (value) {
+            becomeFirstResponder()
+        } else {
+            if (nextResponder?.canBecomeFirstResponder == true) {
+                nextResponder?.becomeFirstResponder()
+            } else {
+                resignFirstResponder()
+            }
+        }
+    }
+}

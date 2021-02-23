@@ -21,6 +21,7 @@ class UILabelBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UILabel(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

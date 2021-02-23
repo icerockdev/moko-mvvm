@@ -23,6 +23,7 @@ class UIButtonBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UIButton(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

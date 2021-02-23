@@ -22,6 +22,7 @@ class UITextViewBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UITextView(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test
