@@ -54,7 +54,9 @@ class LiveDataTest {
         assertEquals(
             actual = mergeWithCounter,
             expected = 9
-        ) // FIXME: there's an extra mergeWith lambda call
+        )
+        @Suppress("ForbiddenComment")
+        // FIXME: there's an extra mergeWith lambda call
         assertEquals(expected = -11, actual = mapLd.value.dataValue())
     }
 
