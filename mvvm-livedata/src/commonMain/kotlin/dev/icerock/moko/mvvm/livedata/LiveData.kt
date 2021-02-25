@@ -25,3 +25,8 @@ expect open class LiveData<T> {
     /** Will be true if any observer already added */
     val isActive: Boolean
 }
+
+fun <T> LiveData<T>.addCloseableObserver(observer: (T) -> Unit): Closeable {
+    addObserver(observer)
+    return Closeable { removeObserver(observer) }
+}
