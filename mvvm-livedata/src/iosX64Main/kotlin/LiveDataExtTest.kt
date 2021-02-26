@@ -24,19 +24,6 @@ actual fun <T, V : UIView> LiveData<T>.bind(view: V, setter: V.(T) -> Unit) {
     view.addLifecycleDelegate(lifecycleDelegate)
 }
 
-//private fun <V : Any, T> weakObserver(
-//    ref: V,
-//    setter: V.(T) -> Unit
-//): (T) -> Unit {
-//    val weakRef: WeakReference<V> = WeakReference(ref)
-//
-//    return lambda@{ value ->
-//        val strongRef = weakRef.value ?: return@lambda
-//
-//        setter(strongRef, value)
-//    }
-//}
-
 class WeakObserver<V : Any, T>(
     ref: V,
     private val setter: V.(T) -> Unit
