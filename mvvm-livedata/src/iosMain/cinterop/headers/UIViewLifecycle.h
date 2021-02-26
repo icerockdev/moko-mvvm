@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (Lifecycle)
 
-- (NSValue *)addLifecycleDelegate:(id <UIViewLifecycleDelegate>)delegate;
+- (NSUInteger)addLifecycleDelegate:(id<UIViewLifecycleDelegate>)delegate;
 
-- (void)removeLifecycleDelegate:(NSValue *)delegate;
+- (void)removeLifecycleDelegate:(NSUInteger)index;
 
 @end
 

@@ -5,7 +5,23 @@
 #import "ViewController.h"
 #import "UIViewLifecycle.h"
 
-@interface ViewController () <UIViewLifecycleDelegate>
+@interface LifecycleDelegate : NSObject<UIViewLifecycleDelegate>
+
+@end
+
+@implementation LifecycleDelegate
+
+- (void)view:(UIView *)view willMoveToWindow:(UIWindow *)window {
+//    NSLog(@"view %@ will move to window %@", view, window);
+}
+
+- (void)viewDidMoveToWindow:(UIView *)view {
+//    NSLog(@"view %@ did move to window", view);
+}
+
+@end
+
+@interface ViewController ()
 
 @property(nonatomic, weak) IBOutlet UILabel *text1;
 @property(nonatomic, weak) IBOutlet UILabel *text2;
@@ -20,23 +36,21 @@
     if(_text1.window != nil) {
         NSLog(@"view %@ already with window %@", _text1, _text1.window);
     }
+    
+    LifecycleDelegate *lifecycleDelegate = [[LifecycleDelegate alloc] init];
 
-    [_text1 addLifecycleDelegate:self];
-    [_text2 addLifecycleDelegate:self];
-}
-
-- (void)view:(UIView *)view willMoveToWindow:(UIWindow *)window {
-    NSLog(@"view %@ will move to window %@", view, window);
-}
-
-- (void)viewDidMoveToWindow:(UIView *)view {
-    NSLog(@"view %@ did move to window", view);
+    [_text1 addLifecycleDelegate:lifecycleDelegate];
+    [_text2 addLifecycleDelegate:lifecycleDelegate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
     [self.navigationController popViewControllerAnimated:true];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
 }
 
 @end

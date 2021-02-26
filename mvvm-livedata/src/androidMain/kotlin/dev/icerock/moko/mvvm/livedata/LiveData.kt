@@ -46,5 +46,6 @@ actual open class LiveData<T> protected constructor(mutableLiveData: androidx.li
     /** Will be true if any observer already added */
     actual val isActive: Boolean get() = observers.isNotEmpty()
 
+    // FIXME when someone observe architecture livedata we should activate our livedata too....
     open fun ld(): androidx.lifecycle.LiveData<T> = archLiveData
 }

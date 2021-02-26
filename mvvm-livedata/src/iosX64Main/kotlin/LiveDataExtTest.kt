@@ -24,23 +24,38 @@ actual fun <T, V : UIView> LiveData<T>.bind(view: V, setter: V.(T) -> Unit) {
     view.addLifecycleDelegate(lifecycleDelegate)
 }
 
-private class WeakObserver<V : Any, T>(
+//private fun <V : Any, T> weakObserver(
+//    ref: V,
+//    setter: V.(T) -> Unit
+//): (T) -> Unit {
+//    val weakRef: WeakReference<V> = WeakReference(ref)
+//
+//    return lambda@{ value ->
+//        val strongRef = weakRef.value ?: return@lambda
+//
+//        setter(strongRef, value)
+//    }
+//}
+
+class WeakObserver<V : Any, T>(
     ref: V,
     private val setter: V.(T) -> Unit
 ) : (T) -> Unit {
     private val weakRef: WeakReference<V> = WeakReference(ref)
 
     override fun invoke(p1: T) {
-        val strongRef = weakRef.get() ?: return
+        val strongRef = weakRef.value ?: return
 
         setter(strongRef, p1)
     }
 }
 
-private class ViewDelegate<T>(
-    private val liveData: LiveData<T>,
+class ViewDelegate<T>(
+    liveData: LiveData<T>,
     private val observer: (T) -> Unit
 ) : NSObject(), UIViewLifecycleDelegateProtocol {
+    private val weakLiveData: WeakReference<LiveData<T>> = WeakReference(liveData)
+
     private var movingToWindow: UIWindow? = null
 
     override fun view(view: UIView, willMoveToWindow: UIWindow?) {
@@ -48,10 +63,14 @@ private class ViewDelegate<T>(
     }
 
     override fun viewDidMoveToWindow(view: UIView) {
+        val liveData = weakLiveData.value ?: return
+
         if (movingToWindow == null) {
             liveData.removeObserver(observer)
         } else {
             liveData.addObserver(observer)
         }
+
+        movingToWindow = null
     }
 }

@@ -6,8 +6,12 @@ import Foundation
 import MultiPlatformLibrary
 import MultiPlatformLibraryMvvm
 
+class MyTextField: UITextField {
+    
+}
+
 class ValidationAllViewController: UIViewController {
-    @IBOutlet private var emailField: UITextField!
+    @IBOutlet private var emailField: MyTextField!
     @IBOutlet private var passwordField: UITextField!
     @IBOutlet private var button: UIButton!
     
@@ -25,5 +29,33 @@ class ValidationAllViewController: UIViewController {
     
     override func didMove(toParent parent: UIViewController?) {
         if(parent == nil) { viewModel.onCleared() }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+    }
+}
+
+class StartViewController: UIViewController {
+    private var counter: Int = 0
+    @IBOutlet var openButton: UIButton!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if counter > 10 {
+            GarbageCollectorKt.collect()
+            GarbageCollectorKt.cycles()
+            return
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.counter += 1
+            self?.openButton.sendActions(for: .touchUpInside)
+        }
     }
 }

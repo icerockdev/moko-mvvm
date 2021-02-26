@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-5946" y="-1482"/>
         </scene>
-        <!--View Controller-->
+        <!--Start View Controller-->
         <scene sceneID="heM-ap-51W">
             <objects>
-                <viewController id="tpQ-LY-4wm" sceneMemberID="viewController">
+                <viewController id="tpQ-LY-4wm" customClass="StartViewController" customModule="mokoSampleMvvm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MKQ-Qk-EWk"/>
                         <viewControllerLayoutGuide type="bottom" id="Ba9-2V-dd9"/>
@@ -92,6 +92,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ftM-lC-K7M"/>
+                    <connections>
+                        <outlet property="openButton" destination="Uhz-AG-IYm" id="n0L-t3-2C4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQs-JZ-rVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -263,7 +266,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Je-Uo-pXn">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Je-Uo-pXn" customClass="MyTextField" customModule="mokoSampleMvvm" customModuleProvider="target">
                                 <rect key="frame" x="16" y="44" width="288" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>

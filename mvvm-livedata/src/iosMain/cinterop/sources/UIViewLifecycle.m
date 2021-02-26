@@ -7,6 +7,30 @@
 
 static void *lifecycleDelegatesArrayKey;
 
+@interface LifecycleHolder : NSObject
+
+@property(nonatomic) NSMutableArray* array;
+
+@end
+
+@implementation LifecycleHolder
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSLog(@"LH init");
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    NSLog(@"LH dealloc");
+}
+
+@end
+
 @implementation UIView (Lifecycle)
 
 + (void)load {
@@ -42,42 +66,61 @@ static void *lifecycleDelegatesArrayKey;
 
 #pragma mark - delegates control
 
-- (NSMutableArray *)lifecycleDelegates {
-    NSMutableArray *result = objc_getAssociatedObject(self, &lifecycleDelegatesArrayKey);
+- (NSArray *)lifecycleDelegates {
+    LifecycleHolder *result = objc_getAssociatedObject(self, &lifecycleDelegatesArrayKey);
+    return result.array;
+}
+
+- (NSMutableArray *)lifecycleDelegatesMutable {
+    LifecycleHolder *result = objc_getAssociatedObject(self, &lifecycleDelegatesArrayKey);
     if (result == nil) {
-        result = [NSMutableArray new];
-        objc_setAssociatedObject(self, &lifecycleDelegatesArrayKey, result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        result = [[LifecycleHolder alloc] init];
+        result.array = [NSMutableArray new];
+        objc_setAssociatedObject(self, &lifecycleDelegatesArrayKey, result, OBJC_ASSOCIATION_RETAIN);
     }
-    return result;
+    return result.array;
 }
 
-- (NSValue *)addLifecycleDelegate:(id)delegate {
-    NSValue *item = [NSValue valueWithNonretainedObject:delegate];
-    [self.lifecycleDelegates addObject:item];
-    return item;
+- (NSUInteger)addLifecycleDelegate:(id<UIViewLifecycleDelegate>)delegate {
+    NSMutableArray* array = self.lifecycleDelegatesMutable;
+    NSUInteger index = array.count;
+    [array addObject:delegate];
+    return index;
 }
 
-- (void)removeLifecycleDelegate:(NSValue *)item {
-    [self.lifecycleDelegates removeObject:item];
+- (void)removeLifecycleDelegate:(NSUInteger)index {
+    [self.lifecycleDelegatesMutable removeObjectAtIndex:index];
 }
 
 #pragma mark - Method Swizzling
 
 - (void)lifecycle_willMoveToWindow:(UIWindow *)window {
     [self lifecycle_willMoveToWindow:window];
-
-    for (NSValue *value in self.lifecycleDelegates) {
-        id <UIViewLifecycleDelegate> delegate = value.nonretainedObjectValue;
-        [delegate view:self willMoveToWindow:window];
+    
+    NSArray* delegates = self.lifecycleDelegates;
+    if (delegates == nil) return;
+    
+//    NSLog(@"UWL lifecycle_willMoveToWindow: %@", window);
+//    NSLog(@"UWL delegates count %lu", delegates.count);
+    for (id<UIViewLifecycleDelegate> delegate in delegates) {
+//        NSLog(@"UWL delegate %@", delegate);
+        if(delegate != nil) [delegate view:self willMoveToWindow:window];
+        else NSLog(@"UWL null delegate");
     }
 }
 
 - (void)lifecycle_didMoveToWindow {
     [self lifecycle_didMoveToWindow];
-
-    for (NSValue *value in self.lifecycleDelegates) {
-        id <UIViewLifecycleDelegate> delegate = value.nonretainedObjectValue;
-        [delegate viewDidMoveToWindow:self];
+    
+    NSArray* delegates = self.lifecycleDelegates;
+    if (delegates == nil) return;
+    
+//    NSLog(@"UWL lifecycle_didMoveToWindow");
+//    NSLog(@"UWL delegates count %lu", delegates.count);
+    for (id<UIViewLifecycleDelegate> delegate in delegates) {
+//        NSLog(@"UWL delegate %@", delegate);
+        if(delegate != nil) [delegate viewDidMoveToWindow:self];
+        else NSLog(@"UWL null delegate");
     }
 }
 
