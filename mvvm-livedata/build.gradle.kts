@@ -38,6 +38,7 @@ kotlin.targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarge
             defFile("$cinteropDir/lifecycle.def")
             extraOpts("-Xsource-compiler-option", "-I$cinteropDir/headers")
             extraOpts("-Xcompile-source", "$cinteropDir/sources/UIViewLifecycle.m")
+            extraOpts("-Xsource-compiler-option", "-fobjc-arc")
         }
     }
 }
