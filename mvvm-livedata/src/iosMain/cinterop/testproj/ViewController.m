@@ -5,7 +5,7 @@
 #import "ViewController.h"
 #import "UIViewLifecycle.h"
 
-@interface LifecycleDelegate : NSObject<UIViewLifecycleDelegate>
+@interface LifecycleDelegate : NSObject <UIViewLifecycleDelegate>
 
 @end
 
@@ -33,10 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if(_text1.window != nil) {
+    if (_text1.window != nil) {
         NSLog(@"view %@ already with window %@", _text1, _text1.window);
     }
-    
+
     LifecycleDelegate *lifecycleDelegate = [[LifecycleDelegate alloc] init];
 
     [_text1 addLifecycleDelegate:lifecycleDelegate];
@@ -55,7 +55,7 @@
 
 @end
 
-@interface StartViewController: UIViewController
+@interface StartViewController : UIViewController
 
 @property(nonatomic, weak) IBOutlet UIButton *button;
 
