@@ -26,6 +26,9 @@ class MergeTest {
             if (a2) a1.toLong() else -a1.toLong()
         }
 
+        // observer required with cold livedata
+        mapLd.addObserver { }
+
         assertEquals(actual = mergeWithCounter, expected = 3)
         assertEquals(expected = -10, actual = mapLd.value)
 
@@ -87,7 +90,7 @@ class MergeTest {
         "observer was removed - we should not got any changes".let { msg ->
             assertEquals(expected = 4, actual = firstLd.value, message = msg)
             assertEquals(expected = 2, actual = secondLd.value, message = msg)
-            assertEquals(expected = 8, actual = mergedLd.value, message = msg)
+            assertEquals(expected = 2, actual = mergedLd.value, message = msg)
             assertEquals(expected = 2, actual = lastValue, message = msg)
             assertEquals(expected = 3, actual = observedCounter, message = msg)
         }

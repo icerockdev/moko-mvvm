@@ -16,17 +16,16 @@ class FlatMapTest {
 
     @Test
     fun `flat map valid`() {
-        var counter = 0
         val input = MutableLiveData(initialValue = 0)
         val output = input.flatMap { inputValue ->
             val newOutput = MutableLiveData(initialValue = inputValue)
-            newOutput.value += counter++
+            newOutput.value++
             newOutput
         }
         var observerCounter = 0
         output.addObserver { observerCounter++ }
 
-        assertEquals(expected = 0, actual = output.value)
+        assertEquals(expected = 1, actual = output.value)
         assertEquals(expected = 1, actual = observerCounter)
 
         input.value = 1
@@ -34,7 +33,7 @@ class FlatMapTest {
         assertEquals(expected = 2, actual = observerCounter)
 
         input.value = 2
-        assertEquals(expected = 4, actual = output.value)
+        assertEquals(expected = 3, actual = output.value)
         assertEquals(expected = 3, actual = observerCounter)
     }
 
@@ -134,7 +133,7 @@ class FlatMapTest {
             output = output,
             outputObserver = observer,
             expectInput = 4,
-            expectOutput = "3:4:3",
+            expectOutput = "2:3:2",
             expectLastObservedValue = "2:3:2",
             expectObserveCount = 3,
             messagePrefix = "change input after removing observer"

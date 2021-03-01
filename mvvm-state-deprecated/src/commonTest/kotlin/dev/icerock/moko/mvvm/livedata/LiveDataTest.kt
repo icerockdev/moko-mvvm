@@ -32,25 +32,29 @@ class LiveDataTest {
             }
         }
 
-        assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithCounter, expected = 3)
+        // observer required for cold stream
+        mapLd.addObserver { }
+
+        // TODO why expected 2?
+        assertEquals(actual = dataTransformCounter, expected = 2)
+        assertEquals(actual = mergeWithCounter, expected = 4)
         assertEquals(expected = -10, actual = mapLd.value.dataValue())
 
         ldBool.value = true
 
-        assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithCounter, expected = 4)
+        assertEquals(actual = dataTransformCounter, expected = 2)
+        assertEquals(actual = mergeWithCounter, expected = 5)
         assertEquals(expected = 10, actual = mapLd.value.dataValue())
 
         ld.value = State.Data(11)
 
-        assertEquals(actual = dataTransformCounter, expected = 2)
-        assertEquals(actual = mergeWithCounter, expected = 7)
+        assertEquals(actual = dataTransformCounter, expected = 3)
+        assertEquals(actual = mergeWithCounter, expected = 8)
         assertEquals(expected = 11, actual = mapLd.value.dataValue())
 
         ldBool.value = false
 
-        assertEquals(actual = dataTransformCounter, expected = 2)
+        assertEquals(actual = dataTransformCounter, expected = 3)
         assertEquals(
             actual = mergeWithCounter,
             expected = 9
@@ -87,6 +91,9 @@ class LiveDataTest {
                     State.Error(Exception())
                 }
             }
+
+        // observer required for cold stream
+        result.addObserver { }
 
         assertEquals(actual = dataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithDataTransformCounter, expected = 0)

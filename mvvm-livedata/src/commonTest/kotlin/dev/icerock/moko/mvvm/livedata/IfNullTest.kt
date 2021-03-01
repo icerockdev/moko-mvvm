@@ -75,7 +75,7 @@ class IfNullTest {
             output = output,
             outputObserver = observer,
             expectInput = 12,
-            expectOutput = 12,
+            expectOutput = 11,
             expectLastObservedValue = 11,
             expectObserveCount = 3,
             messagePrefix = "input changed after removing observer"

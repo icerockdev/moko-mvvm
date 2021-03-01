@@ -70,7 +70,7 @@ class DistinctTest {
         ld.value = 5
         "observer was removed - we should not got any changes".let { msg ->
             assertEquals(expected = 5, actual = ld.value, message = msg)
-            assertEquals(expected = 5, actual = distinctLd.value, message = msg)
+            assertEquals(expected = 4, actual = distinctLd.value, message = msg)
             assertEquals(expected = 4, actual = lastValue, message = msg)
             assertEquals(expected = 3, actual = observedCounter, message = msg)
         }

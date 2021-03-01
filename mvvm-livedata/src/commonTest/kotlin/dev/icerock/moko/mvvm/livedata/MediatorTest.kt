@@ -71,7 +71,7 @@ class MediatorTest {
             output = output,
             outputObserver = observer,
             expectInput = 7,
-            expectOutput = 21,
+            expectOutput = 9,
             expectLastObservedValue = 9,
             expectObserveCount = 3,
             messagePrefix = "observer removed"
@@ -132,7 +132,7 @@ class MediatorTest {
             output = output,
             outputObserver = observer,
             expectInput = 7,
-            expectOutput = 35,
+            expectOutput = 6,
             expectLastObservedValue = 6,
             expectObserveCount = 3,
             messagePrefix = "observer removed"
@@ -193,7 +193,7 @@ class MediatorTest {
             output = output,
             outputObserver = observer,
             expectInput = 7,
-            expectOutput = 12,
+            expectOutput = 5,
             expectLastObservedValue = 5,
             expectObserveCount = 3,
             messagePrefix = "observer removed"
@@ -253,7 +253,7 @@ class MediatorTest {
             output = output,
             outputObserver = observer,
             expectInput = 7,
-            expectOutput = 12,
+            expectOutput = 5,
             expectLastObservedValue = 5,
             expectObserveCount = 3,
             messagePrefix = "observer removed"
@@ -369,7 +369,7 @@ class MediatorTest {
             output = output,
             outputObserver = observer,
             expectInput = true,
-            expectOutput = true,
+            expectOutput = false,
             expectLastObservedValue = false,
             expectObserveCount = 3,
             messagePrefix = "observer removed"
