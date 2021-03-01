@@ -7,10 +7,16 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
     google()
 
     maven { url = uri("https://dl.bintray.com/icerockdev/plugins") }
+
+    jcenter {
+        content {
+            includeGroup("org.jetbrains.trove4j")
+        }
+    }
 }
 
 dependencies {
