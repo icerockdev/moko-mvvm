@@ -47,7 +47,7 @@ fun MutableLiveData<String>.bindStringTwoWayToTextViewText(
 }
 
 fun MutableLiveData<Boolean>.bindBoolTwoWayToTextViewFocus(textView: UITextView) {
-    bindBoolToResponderFocus(textView)
+    bindBoolToViewFocus(view = textView)
 
     val handler: UITextView.() -> Unit = {
         val focused = isFocused()

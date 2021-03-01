@@ -18,7 +18,7 @@ fun LiveData<Boolean>.bindBoolToControlEnabled(
 }
 
 fun MutableLiveData<Boolean>.bindBoolTwoWayToControlFocus(control: UIControl) {
-    bindBoolToResponderFocus(control)
+    bindBoolToViewFocus(view = control)
 
     val handler: UIControl.() -> Unit = {
         val focused = isFocused()
