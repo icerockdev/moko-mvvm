@@ -69,19 +69,27 @@ class AndroidLiveDataTest {
         assertEquals(expected = 0, actual = lastValue)
 
         source1.value = 1
+        source2.value = 2
 
-        assertEquals(expected = 2, actual = observedCounter)
-        assertEquals(expected = 1, actual = lastValue)
+        assertEquals(expected = 3, actual = observedCounter)
+        assertEquals(expected = 4, actual = lastValue)
 
         androidLd.removeObserver(observer)
         source1.value = 2
 
-        assertEquals(expected = 2, actual = observedCounter)
-        assertEquals(expected = 1, actual = lastValue)
+        assertEquals(expected = 3, actual = observedCounter)
+        assertEquals(expected = 4, actual = lastValue)
     }
 
     @Test
     fun mutable_livedata_valid() {
+        val commonMutable: MutableLiveData<Int> = MutableLiveData(initialValue = 0)
+        val androidLd = commonMutable.ld()
 
+        assertEquals(expected = commonMutable.value, actual = androidLd.value)
+
+        androidLd.value = 2
+
+        assertEquals(expected = androidLd.value, actual = commonMutable.value)
     }
 }
