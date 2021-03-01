@@ -15,6 +15,7 @@ private val myLazyRepository: Repo by lazy { RepoImpl() }
 class RepoImpl : Repo {
     override val sourceLiveData: LiveData<String> = MutableLiveData(
         initialValue = buildString {
+            @Suppress("MagicNumber")
             for (i in 0..1000000) {
                 append("XAXA")
             }
@@ -32,6 +33,8 @@ class ValidationAllViewModel : ViewModel() {
 
     private val isEmailValid: LiveData<Boolean> =
         email.flatMap { myLazyRepository.sourceLiveData }.map { it + it }.map { it.isNotEmpty() }
-    private val isPasswordValid: LiveData<Boolean> = MutableLiveData(false)//password.map { it.isNotEmpty() }
-    val isLoginButtonEnabled: LiveData<Boolean> = isEmailValid //MutableLiveData(false)//listOf(isEmailValid, isPasswordValid).all(true)
+    private val isPasswordValid: LiveData<Boolean> =
+        MutableLiveData(false) // password.map { it.isNotEmpty() }
+    val isLoginButtonEnabled: LiveData<Boolean> =
+        isEmailValid // MutableLiveData(false)//listOf(isEmailValid, isPasswordValid).all(true)
 }
