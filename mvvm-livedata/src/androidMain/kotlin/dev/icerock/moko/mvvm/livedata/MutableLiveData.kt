@@ -4,15 +4,12 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-actual open class MutableLiveData<T> actual constructor(initialValue: T) : LiveData<T>() {
+actual open class MutableLiveData<T> actual constructor(
+    initialValue: T
+) : LiveData<T>(initialValue) {
 
-    init {
-        archLiveData.value = initialValue
-    }
-
-    @Suppress("UNCHECKED_CAST")
     actual override var value: T
-        get() = archLiveData.value as T
+        get() = super.value
         set(newValue) {
             changeValue(newValue)
         }
@@ -20,4 +17,6 @@ actual open class MutableLiveData<T> actual constructor(initialValue: T) : LiveD
     actual fun postValue(value: T) {
         archLiveData.postValue(value)
     }
+
+    override fun ld(): androidx.lifecycle.MutableLiveData<T> = archLiveData
 }

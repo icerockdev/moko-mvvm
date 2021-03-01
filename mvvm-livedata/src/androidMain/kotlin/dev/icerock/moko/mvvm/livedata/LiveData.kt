@@ -4,73 +4,74 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-import androidx.lifecycle.Observer
+// TODO commonize logic of Android and iOS without broking of API and ABI.
+//  we can't just extract `ld` to extension function
+actual open class LiveData<T>(initialValue: T) {
+    private var storedValue: T = initialValue
+    private val observers = mutableListOf<(T) -> Unit>()
 
-actual open class LiveData<T> {
-    protected val archLiveData: androidx.lifecycle.MutableLiveData<T> =
+    protected val archLiveData: androidx.lifecycle.MutableLiveData<T> by lazy {
         object : androidx.lifecycle.MutableLiveData<T>() {
+            init {
+                this.setValue(this@LiveData.value)
+            }
+
+            private val commonObserver: (T) -> Unit = {
+                this.setValue(it)
+            }
+
             override fun onActive() {
                 super.onActive()
 
-                _activeCount++
+                this@LiveData.addObserver(commonObserver)
             }
 
             override fun onInactive() {
                 super.onInactive()
 
-                _activeCount--
+                this@LiveData.removeObserver(commonObserver)
+            }
+
+            override fun setValue(value: T) {
+                super.setValue(value)
+
+                if (value == this@LiveData.value) return
+
+                this@LiveData.changeValue(value)
             }
         }
-    private val observers = mutableMapOf<(T) -> Unit, Observer<T>>()
+    }
 
-    private var _activeCount: Int = 0
-        set(value) {
-            val old = field
-            field = value
-
-            if (old == 0) onActive()
-            else if (value == 0) onInactive()
-        }
-
-    @Suppress("UNCHECKED_CAST")
     actual open val value: T
-        get() = archLiveData.value as T
+        get() = storedValue
 
-    /** change value and notify observers about change */
     protected actual fun changeValue(value: T) {
-        archLiveData.value = value
+        storedValue = value
+
+        observers.forEach { it(value) }
     }
 
     actual fun addObserver(observer: (T) -> Unit) {
-        if (observers.isEmpty()) _activeCount++
+        if (observers.isEmpty()) onActive()
 
-        val archObserver = Observer<T> { value ->
-            if (value is T) observer(value)
-        }
-        observers[observer] = archObserver
-
-        archLiveData.observeForever(archObserver)
+        observer(value)
+        observers.add(observer)
     }
 
     actual fun removeObserver(observer: (T) -> Unit) {
-        val archObserver = observers.remove(observer) ?: return
-        archLiveData.removeObserver(archObserver)
+        if (observers.remove(observer).not()) return
 
-        if (observers.isEmpty()) _activeCount--
+        if (observers.isEmpty()) onInactive()
     }
 
     /** Called when observers count changed from 0 to 1 */
-    protected actual open fun onActive() {
-        println("activate $this")
-    }
+    protected actual open fun onActive() {}
 
     /** Called when observers count changed from 1 to 0 */
-    protected actual open fun onInactive() {
-        println("deactivate $this")
-    }
+    protected actual open fun onInactive() {}
 
     /** Will be true if any observer already added */
-    actual val isActive: Boolean get() = _activeCount > 0
+    actual val isActive: Boolean get() = observers.isNotEmpty()
 
     open fun ld(): androidx.lifecycle.LiveData<T> = archLiveData
 }
