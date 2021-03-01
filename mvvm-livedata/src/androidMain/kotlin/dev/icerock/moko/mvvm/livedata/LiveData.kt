@@ -6,9 +6,31 @@ package dev.icerock.moko.mvvm.livedata
 
 import androidx.lifecycle.Observer
 
-actual open class LiveData<T> protected constructor(mutableLiveData: androidx.lifecycle.MutableLiveData<T>) {
-    protected val archLiveData: androidx.lifecycle.MutableLiveData<T> = mutableLiveData
+actual open class LiveData<T> {
+    protected val archLiveData: androidx.lifecycle.MutableLiveData<T> =
+        object : androidx.lifecycle.MutableLiveData<T>() {
+            override fun onActive() {
+                super.onActive()
+
+                _activeCount++
+            }
+
+            override fun onInactive() {
+                super.onInactive()
+
+                _activeCount--
+            }
+        }
     private val observers = mutableMapOf<(T) -> Unit, Observer<T>>()
+
+    private var _activeCount: Int = 0
+        set(value) {
+            val old = field
+            field = value
+
+            if (old == 0) onActive()
+            else if (value == 0) onInactive()
+        }
 
     @Suppress("UNCHECKED_CAST")
     actual open val value: T
@@ -20,7 +42,7 @@ actual open class LiveData<T> protected constructor(mutableLiveData: androidx.li
     }
 
     actual fun addObserver(observer: (T) -> Unit) {
-        if (observers.isEmpty()) onActive()
+        if (observers.isEmpty()) _activeCount++
 
         val archObserver = Observer<T> { value ->
             if (value is T) observer(value)
@@ -34,18 +56,21 @@ actual open class LiveData<T> protected constructor(mutableLiveData: androidx.li
         val archObserver = observers.remove(observer) ?: return
         archLiveData.removeObserver(archObserver)
 
-        if (observers.isEmpty()) onInactive()
+        if (observers.isEmpty()) _activeCount--
     }
 
     /** Called when observers count changed from 0 to 1 */
-    protected actual open fun onActive() {}
+    protected actual open fun onActive() {
+        println("activate $this")
+    }
 
     /** Called when observers count changed from 1 to 0 */
-    protected actual open fun onInactive() {}
+    protected actual open fun onInactive() {
+        println("deactivate $this")
+    }
 
     /** Will be true if any observer already added */
-    actual val isActive: Boolean get() = observers.isNotEmpty()
+    actual val isActive: Boolean get() = _activeCount > 0
 
-    // FIXME when someone observe architecture livedata we should activate our livedata too....
     open fun ld(): androidx.lifecycle.LiveData<T> = archLiveData
 }
