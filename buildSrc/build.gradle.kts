@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version("1.4.30")
+    id("org.jetbrains.kotlin.jvm") version("1.4.31")
 }
 
 repositories {
@@ -21,6 +21,6 @@ repositories {
 
 dependencies {
     implementation("dev.icerock:mobile-multiplatform:0.9.0")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30")
-    implementation("com.android.tools.build:gradle:4.0.1")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31")
+    implementation("com.android.tools.build:gradle:4.1.2")
 }
