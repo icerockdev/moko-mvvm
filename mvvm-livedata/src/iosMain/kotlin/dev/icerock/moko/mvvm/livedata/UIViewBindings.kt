@@ -14,8 +14,8 @@ fun LiveData<Boolean>.bindBoolToViewBackgroundColor(
     view: UIView,
     trueColor: UIColor,
     falseColor: UIColor
-) {
-    bind(view) { value ->
+): Closeable {
+    return bind(view) { value ->
         val color = when (value) {
             true -> trueColor
             false -> falseColor
@@ -27,14 +27,14 @@ fun LiveData<Boolean>.bindBoolToViewBackgroundColor(
 
 fun LiveData<Boolean>.bindBoolToViewHidden(
     view: UIView
-) {
-    bind(view) { value ->
+): Closeable {
+    return bind(view) { value ->
         hidden = value
     }
 }
 
-fun LiveData<Boolean>.bindBoolToViewFocus(view: UIView) {
-    bind(view) { value ->
+fun LiveData<Boolean>.bindBoolToViewFocus(view: UIView): Closeable {
+    return bind(view) { value ->
         if (value) {
             becomeFirstResponder()
         } else {

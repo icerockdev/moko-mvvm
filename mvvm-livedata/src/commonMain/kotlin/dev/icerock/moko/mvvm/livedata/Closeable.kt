@@ -6,4 +6,11 @@ package dev.icerock.moko.mvvm.livedata
 
 fun interface Closeable {
     fun close()
+
+    operator fun plus(other: Closeable): Closeable {
+        return Closeable {
+            this.close()
+            other.close()
+        }
+    }
 }

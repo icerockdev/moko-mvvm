@@ -4,7 +4,8 @@
 
 package dev.icerock.moko.mvvm.utils
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import platform.UIKit.UIView
 
-expect fun <T, V : UIView> LiveData<T>.bind(view: V, setter: V.(T) -> Unit)
+expect fun <T, V : UIView> LiveData<T>.bind(view: V, setter: V.(T) -> Unit): Closeable

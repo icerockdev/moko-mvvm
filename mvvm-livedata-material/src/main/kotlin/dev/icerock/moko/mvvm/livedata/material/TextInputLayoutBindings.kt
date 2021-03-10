@@ -6,6 +6,7 @@ package dev.icerock.moko.mvvm.livedata.material
 
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.textfield.TextInputLayout
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.utils.bindNotNull
 import dev.icerock.moko.resources.desc.StringDesc
@@ -14,15 +15,15 @@ import dev.icerock.moko.resources.desc.StringDesc
 fun LiveData<String>.bindToTextInputLayoutError(
     lifecycleOwner: LifecycleOwner,
     textInputLayout: TextInputLayout
-) {
-    bindNotNull(lifecycleOwner) { textInputLayout.error = it }
+): Closeable {
+    return bindNotNull(lifecycleOwner) { textInputLayout.error = it }
 }
 
 @JvmName("bindToTextInputLayoutErrorStringDesc")
 fun LiveData<StringDesc>.bindToTextInputLayoutError(
     lifecycleOwner: LifecycleOwner,
     textInputLayout: TextInputLayout
-) {
+): Closeable {
     val context = textInputLayout.context
-    bindNotNull(lifecycleOwner) { textInputLayout.error = it.toString(context) }
+    return bindNotNull(lifecycleOwner) { textInputLayout.error = it.toString(context) }
 }

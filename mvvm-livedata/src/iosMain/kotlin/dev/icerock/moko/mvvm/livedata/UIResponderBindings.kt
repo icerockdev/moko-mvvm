@@ -14,4 +14,4 @@ import platform.UIKit.UIView
     ),
     level = DeprecationLevel.WARNING
 )
-fun LiveData<Boolean>.bindBoolToResponderFocus(responder: UIView) = bindBoolToViewFocus(responder)
+fun LiveData<Boolean>.bindBoolToResponderFocus(responder: UIView): Closeable = bindBoolToViewFocus(responder)

@@ -6,34 +6,37 @@ import UIKit
 import MultiPlatformLibrary
 
 public extension UITextField {
-  func bindText(
+  @available(*, deprecated, message: "use LiveData.bindStringToTextFieldText")
+  @discardableResult func bindText(
     liveData: LiveData<NSString>,
     formatter: ((String) -> String)? = nil
-  ) {
-    UITextFieldBindingKt.bindText(
+  ) -> Closeable {
+    return UITextFieldBindingKt.bindText(
       self,
       liveData: liveData,
       formatter_: formatter
     )
   }
 
-  func bindText(
+  @available(*, deprecated, message: "use LiveData.bindStringDescToTextFieldText")
+  @discardableResult func bindText(
     liveData: LiveData<StringDesc>,
     formatter: ((String) -> String)? = nil
-  ) {
-    UITextFieldBindingKt.bindText(
+  ) -> Closeable {
+    return UITextFieldBindingKt.bindText(
       self,
       liveData: liveData,
       formatter: formatter
     )
   }
 
-  func bindTextTwoWay(
+  @available(*, deprecated, message: "use LiveData.bindStringTwoWayToTextFieldText")
+  @discardableResult func bindTextTwoWay(
     liveData: MutableLiveData<NSString>,
     formatter: ((String) -> String)? = nil,
     reverseFormatter:((String) -> String)? = nil
-  ) {
-    UITextFieldBindingKt.bindTextTwoWay(
+  ) -> Closeable {
+    return UITextFieldBindingKt.bindTextTwoWay(
       self,
       liveData: liveData,
       formatter: formatter,
@@ -41,15 +44,17 @@ public extension UITextField {
     )
   }
 
-  func bindFocus(liveData: LiveData<KotlinBoolean>) {
-    UITextFieldBindingKt.bindFocus(
+  @available(*, deprecated, message: "use LiveData.bindBoolToViewFocus")
+  @discardableResult func bindFocus(liveData: LiveData<KotlinBoolean>) -> Closeable {
+    return UITextFieldBindingKt.bindFocus(
       self,
       liveData: liveData
     )
   }
 
-  func bindFocus(liveData: MutableLiveData<KotlinBoolean>) {
-    UITextFieldBindingKt.bindFocusTwoWay(
+  @available(*, deprecated, message: "use MutableLiveData.bindBoolTwoWayToControlFocus")
+  @discardableResult func bindFocus(liveData: MutableLiveData<KotlinBoolean>) -> Closeable {
+    return UITextFieldBindingKt.bindFocusTwoWay(
       self,
       liveData: liveData
     )

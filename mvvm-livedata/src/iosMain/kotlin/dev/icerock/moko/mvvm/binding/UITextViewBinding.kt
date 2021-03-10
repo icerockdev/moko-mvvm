@@ -4,11 +4,12 @@
 
 package dev.icerock.moko.mvvm.binding
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.bindBoolToViewFocus
-import dev.icerock.moko.mvvm.livedata.bindStringToTextViewText
 import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToTextViewFocus
+import dev.icerock.moko.mvvm.livedata.bindStringToTextViewText
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.mvvm.utils.setEventHandler
 import dev.icerock.moko.resources.desc.StringDesc
@@ -20,16 +21,16 @@ import platform.UIKit.UITextViewTextDidChangeNotification
 fun UITextView.bindText(
     liveData: LiveData<String>,
     formatter: ((String) -> String)? = null
-) {
-    liveData.map { formatter?.invoke(it) ?: it }.bindStringToTextViewText(textView = this)
+): Closeable {
+    return liveData.map { formatter?.invoke(it) ?: it }.bindStringToTextViewText(textView = this)
 }
 
 @Deprecated("use LiveData.bindToTextViewText extension")
 fun UITextView.bindText(
     liveData: LiveData<StringDesc>,
     formatter: ((String) -> String)? = null
-) {
-    liveData
+): Closeable {
+    return liveData
         .map { it.localized() }
         .map { formatter?.invoke(it) ?: it }
         .bindStringToTextViewText(textView = this)
@@ -40,10 +41,10 @@ fun UITextView.bindTextTwoWay(
     liveData: MutableLiveData<String>,
     formatter: ((String) -> String)? = null,
     reverseFormatter: ((String) -> String)? = null
-) {
-    bindText(liveData, formatter)
+): Closeable {
+    val readCloseable = bindText(liveData, formatter)
 
-    NSNotificationCenter.defaultCenter.setEventHandler(
+    val writeCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidChangeNotification,
         ref = this
     ) {
@@ -54,14 +55,16 @@ fun UITextView.bindTextTwoWay(
 
         liveData.value = newFormattedText
     }
+
+    return readCloseable + writeCloseable
 }
 
 @Deprecated("use LiveData.bindToResponderFocus extension")
-fun UITextView.bindFocus(liveData: LiveData<Boolean>) {
-    liveData.bindBoolToViewFocus(view = this)
+fun UITextView.bindFocus(liveData: LiveData<Boolean>): Closeable {
+    return liveData.bindBoolToViewFocus(view = this)
 }
 
 @Deprecated("use LiveData.bindTwoWayToTextViewFocus extension")
-fun UITextView.bindFocusTwoWay(liveData: MutableLiveData<Boolean>) {
-    liveData.bindBoolTwoWayToTextViewFocus(textView = this)
+fun UITextView.bindFocusTwoWay(liveData: MutableLiveData<Boolean>): Closeable {
+    return liveData.bindBoolTwoWayToTextViewFocus(textView = this)
 }

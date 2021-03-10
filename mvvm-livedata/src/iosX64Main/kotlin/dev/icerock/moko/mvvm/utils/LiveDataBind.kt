@@ -4,16 +4,18 @@
 
 package dev.icerock.moko.mvvm.utils
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.cinterop.UIViewLifecycleDelegateProtocol
 import dev.icerock.moko.mvvm.livedata.cinterop.addLifecycleDelegate
+import dev.icerock.moko.mvvm.livedata.cinterop.removeLifecycleDelegate
 import platform.UIKit.UIView
 import platform.UIKit.UIWindow
 import platform.UIKit.window
 import platform.darwin.NSObject
 import kotlin.native.ref.WeakReference
 
-actual fun <T, V : UIView> LiveData<T>.bind(view: V, setter: V.(T) -> Unit) {
+actual fun <T, V : UIView> LiveData<T>.bind(view: V, setter: V.(T) -> Unit): Closeable {
     val observer = WeakObserver(view, setter)
     if (view.window != null) addObserver(observer)
 
@@ -21,10 +23,15 @@ actual fun <T, V : UIView> LiveData<T>.bind(view: V, setter: V.(T) -> Unit) {
         liveData = this,
         observer = observer
     )
-    view.addLifecycleDelegate(lifecycleDelegate)
+    val delegateId = view.addLifecycleDelegate(lifecycleDelegate)
+
+    return Closeable {
+        removeObserver(observer)
+        view.removeLifecycleDelegate(delegateId)
+    }
 }
 
-class WeakObserver<V : Any, T>(
+internal class WeakObserver<V : Any, T>(
     ref: V,
     private val setter: V.(T) -> Unit
 ) : (T) -> Unit {
@@ -37,7 +44,7 @@ class WeakObserver<V : Any, T>(
     }
 }
 
-class ViewDelegate<T>(
+internal class ViewDelegate<T>(
     liveData: LiveData<T>,
     private val observer: (T) -> Unit
 ) : NSObject(), UIViewLifecycleDelegateProtocol {

@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.utils.bindNotNull
 
@@ -18,8 +19,8 @@ fun LiveData<String>.bindToImageViewSrc(
     imageView: ImageView,
     requestManager: (RequestManager.() -> Unit)? = null,
     requestBuilder: (RequestBuilder<Drawable>.() -> Unit)? = null
-) {
-    bindNotNull(lifecycleOwner) { url ->
+): Closeable {
+    return bindNotNull(lifecycleOwner) { url ->
         Glide.with(imageView)
             .also { requestManager?.invoke(it) }
             .load(url)
@@ -33,8 +34,8 @@ fun LiveData<String>.bindToImageViewSrc(
     imageView: ImageView,
     loadingPlaceholder: Drawable? = null,
     errorPlaceholder: Drawable? = null
-) {
-    bindToImageViewSrc(
+): Closeable {
+    return bindToImageViewSrc(
         lifecycleOwner = lifecycleOwner,
         imageView = imageView,
         requestBuilder = {
