@@ -6,6 +6,7 @@ package dev.icerock.moko.mvvm.livedata
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,17 +24,38 @@ fun <T> LiveData<T>.asFlow(): Flow<T> = channelFlow {
 }
 
 fun <T> Flow<T>.asLiveData(coroutineScope: CoroutineScope, initialValue: T): LiveData<T> {
-    val resultLiveData = MutableLiveData(initialValue)
-    coroutineScope.launch {
-        runCatching {
-            collect {
-                resultLiveData.value = it
-            }
-        }
-    }
-    return resultLiveData
+    return FlowLiveData(
+        flow = this,
+        coroutineScope = coroutineScope,
+        initialValue = initialValue
+    )
 }
 
 fun <T> StateFlow<T>.asLiveData(coroutineScope: CoroutineScope): LiveData<T> {
     return asLiveData(coroutineScope, value)
+}
+
+private class FlowLiveData<T>(
+    private val flow: Flow<T>,
+    private val coroutineScope: CoroutineScope,
+    initialValue: T
+) : MutableLiveData<T>(initialValue) {
+    private var activeJob: Job? = null
+
+    override fun onActive() {
+        super.onActive()
+
+        activeJob = coroutineScope.launch {
+            runCatching {
+                flow.collect { this@FlowLiveData.value = it }
+            }
+        }
+    }
+
+    override fun onInactive() {
+        super.onInactive()
+
+        activeJob?.cancel()
+        activeJob = null
+    }
 }

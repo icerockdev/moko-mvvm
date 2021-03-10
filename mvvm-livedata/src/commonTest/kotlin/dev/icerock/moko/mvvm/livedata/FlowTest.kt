@@ -20,11 +20,13 @@ class FlowTest {
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
-    fun `flow to live data test`() {
+    fun `flow to live data close scope`() {
         val scope = CoroutineScope(Dispatchers.Unconfined)
 
         val source = MutableStateFlow(0)
         val destination = source.asLiveData(scope)
+
+        destination.addObserver {  }
 
         assertEquals(expected = source.value, actual = destination.value)
 
@@ -32,6 +34,26 @@ class FlowTest {
         assertEquals(expected = source.value, actual = destination.value)
 
         scope.cancel()
+
+        source.value = 2
+        assertEquals(expected = 1, actual = destination.value)
+    }
+
+    @Test
+    fun `flow to live data close observer`() {
+        val scope = CoroutineScope(Dispatchers.Unconfined)
+
+        val source = MutableStateFlow(0)
+        val destination = source.asLiveData(scope)
+
+        val closeable = destination.addCloseableObserver {  }
+
+        assertEquals(expected = source.value, actual = destination.value)
+
+        source.value = 1
+        assertEquals(expected = source.value, actual = destination.value)
+
+        closeable.close()
 
         source.value = 2
         assertEquals(expected = 1, actual = destination.value)
