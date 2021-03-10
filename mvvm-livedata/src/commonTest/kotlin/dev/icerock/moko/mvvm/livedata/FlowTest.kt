@@ -26,7 +26,7 @@ class FlowTest {
         val source = MutableStateFlow(0)
         val destination = source.asLiveData(scope)
 
-        destination.addObserver {  }
+        destination.addObserver { }
 
         assertEquals(expected = source.value, actual = destination.value)
 
@@ -46,7 +46,7 @@ class FlowTest {
         val source = MutableStateFlow(0)
         val destination = source.asLiveData(scope)
 
-        val closeable = destination.addCloseableObserver {  }
+        val closeable = destination.addCloseableObserver { }
 
         assertEquals(expected = source.value, actual = destination.value)
 
