@@ -11,7 +11,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class LiveDataTest {
+class ResourceStateLiveDataTest {
 
     @get:TestRule
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
