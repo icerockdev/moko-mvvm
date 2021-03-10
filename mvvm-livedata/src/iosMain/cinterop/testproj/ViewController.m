@@ -12,11 +12,11 @@
 @implementation LifecycleDelegate
 
 - (void)view:(UIView *)view willMoveToWindow:(UIWindow *)window {
-//    NSLog(@"view %@ will move to window %@", view, window);
+    NSLog(@"view %@ will move to window %@", view, window);
 }
 
 - (void)viewDidMoveToWindow:(UIView *)view {
-//    NSLog(@"view %@ did move to window", view);
+    NSLog(@"view %@ did move to window", view);
 }
 
 @end
