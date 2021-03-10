@@ -3,7 +3,6 @@
  */
 
 #import "AppDelegate.h"
-#import "UIViewLifecycle.h"
 
 @implementation AppDelegate
 
@@ -27,14 +26,6 @@
     // Called when the user discards a scene session.
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-}
-
-- (void)view:(UIView *)view willMoveToWindow:(UIWindow *)window {
-    NSLog(@"view %@ will move to window %@", view, window);
-}
-
-- (void)viewDidMoveToWindow:(UIView *)view {
-    NSLog(@"view %@ did move to window", view);
 }
 
 
