@@ -8,10 +8,9 @@ import dev.icerock.moko.mvvm.UI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
+import platform.darwin.dispatch_async
+import platform.darwin.dispatch_get_main_queue
 import kotlin.native.internal.GC
-
-@ThreadLocal
-private var isGCWorking = false
 
 @Suppress("EmptyDefaultConstructor")
 actual open class ViewModel actual constructor() {
@@ -20,11 +19,7 @@ actual open class ViewModel actual constructor() {
 
     actual open fun onCleared() {
         viewModelScope.cancel()
-        // run Kotlin/Native GC
-        if (!isGCWorking) {
-            isGCWorking = true
-            GC.collect()
-            isGCWorking = false
-        }
+
+        dispatch_async(dispatch_get_main_queue()) { GC.collect() }
     }
 }
