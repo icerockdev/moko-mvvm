@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-5946" y="-1482"/>
         </scene>
-        <!--Start View Controller-->
+        <!--View Controller-->
         <scene sceneID="heM-ap-51W">
             <objects>
-                <viewController id="tpQ-LY-4wm" customClass="StartViewController" customModule="mokoSampleMvvm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tpQ-LY-4wm" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MKQ-Qk-EWk"/>
                         <viewControllerLayoutGuide type="bottom" id="Ba9-2V-dd9"/>
@@ -92,9 +92,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ftM-lC-K7M"/>
-                    <connections>
-                        <outlet property="openButton" destination="Uhz-AG-IYm" id="n0L-t3-2C4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQs-JZ-rVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
