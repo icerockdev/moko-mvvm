@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+// TODO #110 commonize logic of Android and iOS without broking of API and ABI.
 expect open class LiveData<T> {
     open val value: T
 

@@ -4,7 +4,7 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-// TODO commonize logic of Android and iOS without broking of API and ABI.
+// TODO #110 commonize logic of Android and iOS without broking of API and ABI.
 //  we can't just extract `ld` to extension function
 actual open class LiveData<T>(initialValue: T) {
     private var storedValue: T = initialValue
