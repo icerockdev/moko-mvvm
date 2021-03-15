@@ -16,13 +16,11 @@ class SimpleViewController: UIViewController {
         viewModel = SimpleViewModel()
         
         viewModel.counter.bindStringToLabelText(label: counterLabel)
+        
+        viewModel.clearOnDetach(viewController: self)
     }
     
     @IBAction func onCounterButtonPressed() {
         viewModel.onCounterButtonPressed()
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
     }
 }

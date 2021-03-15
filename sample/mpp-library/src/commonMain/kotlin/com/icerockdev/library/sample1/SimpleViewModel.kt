@@ -17,4 +17,10 @@ class SimpleViewModel : ViewModel() {
         val current = _counter.value
         _counter.value = current + 1
     }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        println("cleared vm!")
+    }
 }

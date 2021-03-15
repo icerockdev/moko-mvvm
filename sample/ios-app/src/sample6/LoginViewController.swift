@@ -27,14 +27,12 @@ class LoginViewController: UIViewController {
         viewModel.password.bindStringTwoWayToTextFieldText(textField: passwordField)
         viewModel.isLoginButtonVisible.revert().bindBoolToViewHidden(view: loginButton)
         viewModel.isLoading.revert().bindBoolToViewHidden(view: progressBar)
+        
+        viewModel.clearOnDetach(viewController: self)
     }
     
     @IBAction func onLoginButtonPressed() {
         viewModel.onLoginButtonPressed()
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
     }
 }
 

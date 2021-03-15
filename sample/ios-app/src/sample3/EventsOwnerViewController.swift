@@ -13,14 +13,11 @@ class EventsOwnerViewController: UIViewController {
         
         let eventsDispatcher = EventsDispatcher<EventsOwnerViewModelEventsListener>(listener: self)
         viewModel = EventsOwnerViewModel(eventsDispatcher: eventsDispatcher)
+        viewModel.clearOnDetach(viewController: self)
     }
     
     @IBAction func onButtonPressed() {
         viewModel.onButtonPressed()
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
     }
 }
 

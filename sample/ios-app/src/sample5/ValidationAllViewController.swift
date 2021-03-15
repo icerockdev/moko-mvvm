@@ -20,9 +20,7 @@ class ValidationAllViewController: UIViewController {
         viewModel.email.bindStringTwoWayToTextFieldText(textField: emailField)
         viewModel.password.bindStringTwoWayToTextFieldText(textField: passwordField)
         viewModel.isLoginButtonEnabled.bindBoolToControlEnabled(control: button)
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
+        
+        viewModel.clearOnDetach(viewController: self)
     }
 }
