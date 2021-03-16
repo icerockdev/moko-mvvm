@@ -35,7 +35,7 @@ class ResourceStateLiveDataTest {
         // observer required for cold stream
         mapLd.addObserver { }
 
-        // TODO why expected 2?
+        // FIXME #111 should be expected 1 time
         assertEquals(actual = dataTransformCounter, expected = 2)
         assertEquals(actual = mergeWithCounter, expected = 4)
         assertEquals(expected = -10, actual = mapLd.value.dataValue())
@@ -60,7 +60,7 @@ class ResourceStateLiveDataTest {
             expected = 9
         )
         @Suppress("ForbiddenComment")
-        // FIXME: there's an extra mergeWith lambda call
+        // FIXME #111 there's an extra mergeWith lambda call
         assertEquals(expected = -11, actual = mapLd.value.dataValue())
     }
 
