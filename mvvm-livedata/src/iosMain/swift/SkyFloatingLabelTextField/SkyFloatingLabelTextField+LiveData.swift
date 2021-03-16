@@ -8,28 +8,24 @@ import SkyFloatingLabelTextField
 
 public extension SkyFloatingLabelTextField {
   func bindError(liveData: LiveData<NSString>) {
-    setError(text: liveData.value)
-    liveData.addObserver { [weak self] text in
-      self?.setError(text: text)
+    liveData.bind(view: self) { (field, text) in
+      guard let field = field as? SkyFloatingLabelTextField,
+            let text = text as? String else {
+        return
+      }
+      
+      field.errorMessage = text
     }
   }
   
   func bindError(liveData: LiveData<StringDesc>) {
-    setError(text: liveData.value)
-    liveData.addObserver { [weak self] text in
-      self?.setError(text: text)
+    liveData.bind(view: self) { (field, text) in
+      guard let field = field as? SkyFloatingLabelTextField,
+            let text = text as? StringDesc else {
+        return
+      }
+      
+      field.errorMessage = text.localized()
     }
-  }
-  
-  private func setError(text: StringDesc?) {
-    setError(text: text?.localized() as? NSString)
-  }
-  
-  private func setError(text: NSString?) {
-    let stringValue = text as? String ?? ""
-    
-    if(self.errorMessage?.compare(stringValue) == ComparisonResult.orderedSame) { return }
-    
-    errorMessage = stringValue
   }
 }
