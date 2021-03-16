@@ -89,7 +89,7 @@ class FlatMapTest {
         val observer = AssertObserver<String>()
         output.addObserver(observer)
 
-        // TODO maybe we should change logic of flatMapBuffered at initialization step?
+        // TODO #112 maybe we should change logic of flatMapBuffered at initialization step?
         assert(
             input = input,
             output = output,
