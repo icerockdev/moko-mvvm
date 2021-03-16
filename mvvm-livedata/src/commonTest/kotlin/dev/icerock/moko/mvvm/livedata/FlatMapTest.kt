@@ -8,6 +8,8 @@ import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class FlatMapTest {
 
@@ -68,13 +70,37 @@ class FlatMapTest {
     @Test
     fun `flat map shared source`() {
         val sharedSource = MutableLiveData(initialValue = 0)
+        val input = MutableLiveData(initialValue = 1)
+        val output = input.flatMap { i -> sharedSource.map { it * i } }
 
-        for (i in 0..10) {
-            val tmpLiveData = MutableLiveData(initialValue = i)
-            tmpLiveData.flatMap { sharedSource }.addObserver { println("hello $i $it") }
-        }
+        val observer = AssertObserver<Int>()
+        output.addObserver(observer)
+
+        assertTrue(sharedSource.isActive)
+        assertTrue(input.isActive)
+        assertEquals(expected = 1, actual = observer.invokeCount)
+        assertEquals(expected = 0, actual = observer.lastObservedValue)
 
         sharedSource.value = 1
+        assertEquals(expected = 2, actual = observer.invokeCount)
+        assertEquals(expected = 1, actual = observer.lastObservedValue)
+
+        input.value = 2
+        assertEquals(expected = 3, actual = observer.invokeCount)
+        assertEquals(expected = 2, actual = observer.lastObservedValue)
+
+        output.removeObserver(observer)
+        assertFalse(sharedSource.isActive)
+        assertFalse(input.isActive)
+
+        sharedSource.value = 2
+        assertEquals(expected = 3, actual = observer.invokeCount)
+
+        input.value = 2
+        assertEquals(expected = 3, actual = observer.invokeCount)
+
+        assertFalse(sharedSource.isActive)
+        assertFalse(input.isActive)
     }
 
     @Test
