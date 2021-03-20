@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+import dev.icerock.moko.mvvm.test.TestObserver
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
@@ -25,7 +26,7 @@ class MediatorTest {
                 this.value = it * 3
             }
         }
-        val observer = AssertObserver<Int>()
+        val observer = TestObserver<Int>()
         output.addObserver(observer)
 
         assert(
@@ -86,7 +87,7 @@ class MediatorTest {
             .compose(input1, input2) { value1, value2 ->
                 value1 * value2
             }
-        val observer = AssertObserver<Int>()
+        val observer = TestObserver<Int>()
         output.addObserver(observer)
 
         assert(
@@ -147,7 +148,7 @@ class MediatorTest {
             .composition(listOf(input1, input2)) { inputs ->
                 inputs.sum()
             }
-        val observer = AssertObserver<Int>()
+        val observer = TestObserver<Int>()
         output.addObserver(observer)
 
         assert(
@@ -207,7 +208,7 @@ class MediatorTest {
         val output: LiveData<Int> = listOf(input1, input2).mediator { inputs ->
             inputs.sum()
         }
-        val observer = AssertObserver<Int>()
+        val observer = TestObserver<Int>()
         output.addObserver(observer)
 
         assert(
@@ -265,7 +266,7 @@ class MediatorTest {
         val input1: MutableLiveData<Boolean> = MutableLiveData(initialValue = true)
         val input2: MutableLiveData<Boolean> = MutableLiveData(initialValue = false)
         val output: LiveData<Boolean> = listOf(input1, input2).any(value = true)
-        val observer = AssertObserver<Boolean>()
+        val observer = TestObserver<Boolean>()
         output.addObserver(observer)
 
         assert(
@@ -323,7 +324,7 @@ class MediatorTest {
         val input1: MutableLiveData<Boolean> = MutableLiveData(initialValue = true)
         val input2: MutableLiveData<Boolean> = MutableLiveData(initialValue = false)
         val output: LiveData<Boolean> = listOf(input1, input2).all(value = true)
-        val observer = AssertObserver<Boolean>()
+        val observer = TestObserver<Boolean>()
         output.addObserver(observer)
 
         assert(

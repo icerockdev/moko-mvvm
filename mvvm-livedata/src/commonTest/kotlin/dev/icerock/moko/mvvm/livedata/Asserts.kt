@@ -4,13 +4,14 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+import dev.icerock.moko.mvvm.test.TestObserver
 import kotlin.test.assertEquals
 
 @Suppress("LongParameterList")
 fun <IT, OT> assert(
     input: LiveData<IT>,
     output: LiveData<OT>,
-    outputObserver: AssertObserver<OT>,
+    outputObserver: TestObserver<OT>,
     expectInput: IT,
     expectOutput: OT,
     expectLastObservedValue: OT,

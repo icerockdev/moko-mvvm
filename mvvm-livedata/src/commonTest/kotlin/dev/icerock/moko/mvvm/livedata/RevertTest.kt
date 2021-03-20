@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+import dev.icerock.moko.mvvm.test.TestObserver
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
@@ -17,7 +18,7 @@ class RevertTest {
     fun `revert validate`() {
         val input: MutableLiveData<Boolean> = MutableLiveData(initialValue = false)
         val output: LiveData<Boolean> = input.revert()
-        val observer = AssertObserver<Boolean>()
+        val observer = TestObserver<Boolean>()
         output.addObserver(observer)
 
         assert(

@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+import dev.icerock.moko.mvvm.test.TestObserver
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
@@ -18,7 +19,7 @@ class IfNullTest {
     fun `required validate`() {
         val input: MutableLiveData<Int?> = MutableLiveData(initialValue = null)
         val output: LiveData<Int> = input.required(initialValue = 1)
-        val observer = AssertObserver<Int>()
+        val observer = TestObserver<Int>()
         output.addObserver(observer)
 
         assert(
@@ -86,7 +87,7 @@ class IfNullTest {
     fun `String orEmpty validate`() {
         val input: MutableLiveData<String?> = MutableLiveData(initialValue = null)
         val output: LiveData<String> = input.orEmpty()
-        val observer = AssertObserver<String>()
+        val observer = TestObserver<String>()
         output.addObserver(observer)
 
         assert(
@@ -154,7 +155,7 @@ class IfNullTest {
     fun `List orEmpty validate`() {
         val input: MutableLiveData<List<Int>?> = MutableLiveData(initialValue = null)
         val output: LiveData<List<Int>> = input.orEmpty()
-        val observer = AssertObserver<List<Int>>()
+        val observer = TestObserver<List<Int>>()
         output.addObserver(observer)
 
         assert(

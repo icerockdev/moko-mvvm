@@ -14,6 +14,9 @@ dependencies {
     androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataGlide)
     androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataMaterial)
     androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataSwipeRefresh)
+
+    commonTestImplementation(Deps.Libs.MultiPlatform.mokoTest)
+    commonTestImplementation(Deps.Libs.MultiPlatform.mokoMvvmTest)
 }
 
 framework {

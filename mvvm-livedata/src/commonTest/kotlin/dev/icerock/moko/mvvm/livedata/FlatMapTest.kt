@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+import dev.icerock.moko.mvvm.test.TestObserver
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
@@ -73,7 +74,7 @@ class FlatMapTest {
         val input = MutableLiveData(initialValue = 1)
         val output = input.flatMap { i -> sharedSource.map { it * i } }
 
-        val observer = AssertObserver<Int>()
+        val observer = TestObserver<Int>()
         output.addObserver(observer)
 
         assertTrue(sharedSource.isActive)
@@ -112,7 +113,7 @@ class FlatMapTest {
                 "$str:$int"
             }
         }
-        val observer = AssertObserver<String>()
+        val observer = TestObserver<String>()
         output.addObserver(observer)
 
         // TODO #112 maybe we should change logic of flatMapBuffered at initialization step?

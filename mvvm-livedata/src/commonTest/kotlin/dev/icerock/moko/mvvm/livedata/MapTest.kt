@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+import dev.icerock.moko.mvvm.test.TestObserver
 import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
@@ -18,7 +19,7 @@ class MapTest {
     fun `map validate`() {
         val input: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
         val output: LiveData<Long> = input.map { it * -1L }
-        val observer = AssertObserver<Long>()
+        val observer = TestObserver<Long>()
         output.addObserver(observer)
 
         assert(
@@ -86,7 +87,7 @@ class MapTest {
     fun `mapOrNull validate`() {
         val input: MutableLiveData<Int?> = MutableLiveData(initialValue = 1)
         val output: LiveData<Long?> = input.mapOrNull { it * -1L }
-        val observer = AssertObserver<Long?>()
+        val observer = TestObserver<Long?>()
         output.addObserver(observer)
 
         assert(
@@ -142,7 +143,7 @@ class MapTest {
     fun `mapTrueOrNull validate`() {
         val input: MutableLiveData<Boolean?> = MutableLiveData(initialValue = null)
         val output: LiveData<Int?> = input.mapTrueOrNull { 1 }
-        val observer = AssertObserver<Int?>()
+        val observer = TestObserver<Int?>()
         output.addObserver(observer)
 
         assert(
@@ -198,7 +199,7 @@ class MapTest {
     fun `mapBuffered validate`() {
         val input: MutableLiveData<Int> = MutableLiveData(initialValue = 2)
         val output: LiveData<Int> = input.mapBuffered { current, new -> current * new }
-        val observer = AssertObserver<Int>()
+        val observer = TestObserver<Int>()
         output.addObserver(observer)
 
         // TODO maybe we should change logic of mapBuffered at initialization step?
