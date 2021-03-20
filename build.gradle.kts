@@ -5,6 +5,7 @@
 plugins {
     plugin(Deps.Plugins.detekt) apply false
     plugin(Deps.Plugins.dokka) apply false
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.5.0"
 }
 
 buildscript {
@@ -75,18 +76,21 @@ allprojects {
     }
 }
 
+val sampleProjects: Set<Project> = project(":sample").allprojects
+
+apiValidation {
+    ignoredPackages.add("dev.icerock.moko.mvvm.internal")
+
+    ignoredProjects.addAll(sampleProjects.map { it.name })
+}
+
 tasks.register("clean", Delete::class).configure {
     group = "build"
     delete(rootProject.buildDir)
 }
 
 tasks.withType<org.jetbrains.dokka.gradle.DokkaMultiModuleTask>().all {
-    removeChildTasks(listOf(
-        ":mvvm",
-        ":sample",
-        ":sample:android-app",
-        ":sample:mpp-library"
-    ).map { project(it) })
+    removeChildTasks(sampleProjects.plus(project(":mvvm")))
 
     doLast {
         val dir = outputDirectory.get()
