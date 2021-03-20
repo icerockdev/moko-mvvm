@@ -18,12 +18,18 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
-        jcenter()
 
         maven { url = uri("https://kotlin.bintray.com/kotlin") }
         maven { url = uri("https://kotlin.bintray.com/kotlinx") }
         maven { url = uri("https://dl.bintray.com/icerockdev/moko") }
+
+        jcenter {
+            content {
+                includeGroup("org.jetbrains.trove4j")
+            }
+        }
     }
 
     apply(plugin = Deps.Plugins.detekt.id)
@@ -31,9 +37,9 @@ allprojects {
 
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         input.setFrom(
-            "src/commonMain/kotlin",
-            "src/androidMain/kotlin",
-            "src/iosMain/kotlin",
+            "src/commonMain/kotlin", "src/commonTest/kotlin",
+            "src/androidMain/kotlin", "src/androidTest/kotlin",
+            "src/iosMain/kotlin", "src/iosTest/kotlin",
             "src/main/kotlin"
         )
     }
@@ -84,8 +90,8 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaMultiModuleTask>().all {
 
     doLast {
         val dir = outputDirectory.get()
-        val from = File(dir,"-modules.html")
-        val to = File(dir,"index.html")
+        val from = File(dir, "-modules.html")
+        val to = File(dir, "index.html")
 
         from.renameTo(to)
 

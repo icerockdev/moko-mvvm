@@ -7,26 +7,27 @@ import MultiPlatformLibrary
 import AlamofireImage
 
 public extension UIImageView {
-  public func bindImageUrl(liveData: LiveData<NSString>,
-                           defaultImage: UIImage? = nil) {
-    setUrl(url: liveData.value, defaultImage: defaultImage)
-    liveData.addObserver { [weak self] url in
-      self?.setUrl(url: url, defaultImage: defaultImage)
+  public func bindImageUrl(
+    liveData: LiveData<NSString>,
+    defaultImage: UIImage? = nil
+  ) {
+    liveData.bind(view: self) { (imageView, imageUrl) in
+      guard let imageView = imageView as? UIImageView else {
+        return
+      }
+      imageView.setImageFromUrlString(
+        urlString: imageUrl as? String,
+        defaultImage: defaultImage,
+        completion: nil
+      )
     }
   }
 
-  private func setUrl(url: NSString?,
-                      defaultImage: UIImage? = nil) {
-    setImageFromUrlString(
-      urlString: url as? String,
-      defaultImage: defaultImage,
-      completion: nil
-    )
-  }
-  
-  fileprivate func setImageFromUrlString(urlString: String?,
-                                         defaultImage: UIImage? = nil,
-                                         completion: (() -> Void)? = nil) {
+  fileprivate func setImageFromUrlString(
+    urlString: String?,
+    defaultImage: UIImage? = nil,
+    completion: (() -> Void)? = nil
+  ) {
     guard let urlString = urlString else {
       image = defaultImage
       completion?()
@@ -39,14 +40,16 @@ public extension UIImageView {
       return
     }
     
-    af_setImage(withURL: url,
-                placeholderImage: defaultImage,
-                filter: nil,
-                progress: nil,
-                progressQueue: DispatchQueue.main,
-                imageTransition: .noTransition,
-                runImageTransitionIfCached: false) { _ in
-                  completion?()
+    af_setImage(
+      withURL: url,
+      placeholderImage: defaultImage,
+      filter: nil,
+      progress: nil,
+      progressQueue: DispatchQueue.main,
+      imageTransition: .noTransition,
+      runImageTransitionIfCached: false
+    ) { _ in
+      completion?()
     }
   }
 }

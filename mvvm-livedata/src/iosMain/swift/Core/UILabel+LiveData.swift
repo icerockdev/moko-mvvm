@@ -6,25 +6,27 @@ import UIKit
 import MultiPlatformLibrary
 
 public extension UILabel {
-  func bindText(
+  @available(*, deprecated, message: "use LiveData.bindStringToLabelText")
+  @discardableResult func bindText(
     liveData: LiveData<NSString>,
     formatter: @escaping ((String) -> String) = { text in return text }
-  ) {
-    UILabelBindingKt.bindText(
+  ) -> Closeable {
+    return UILabelBindingKt.bindText(
       self,
       liveData: liveData,
-      formatter_____: formatter
+      formatter_: formatter
     )
   }
 
-  func bindText(
+  @available(*, deprecated, message: "use LiveData.bindStringDescToLabelText")
+  @discardableResult func bindText(
     liveData: LiveData<StringDesc>,
     formatter: @escaping ((String) -> String) = { text in return text }
-  ) {
-    UILabelBindingKt.bindText(
+  ) -> Closeable {
+    return UILabelBindingKt.bindText(
       self,
       liveData: liveData,
-      formatter____: formatter
+      formatter: formatter
     )
   }
 }

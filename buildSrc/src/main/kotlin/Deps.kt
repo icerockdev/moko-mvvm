@@ -1,5 +1,5 @@
 object Deps {
-    private const val kotlinVersion = "1.4.21"
+    private const val kotlinVersion = "1.4.31"
 
     private const val androidAppCompatVersion = "1.2.0"
     private const val materialDesignVersion = "1.2.1"
@@ -7,15 +7,16 @@ object Deps {
     private const val androidCoreTestingVersion = "2.1.0"
     private const val glideVersion = "4.11.0"
     private const val swipeRefreshVersion = "1.1.0"
+    private const val mockitoVersion = "1.10.19"
 
     private const val detektVersion = "1.15.0"
     private const val dokkaVersion = "1.4.20"
     private const val bintrayPublishVersion = "0.1.0"
 
     private const val coroutinesVersion = "1.4.2"
-    private const val mokoResourcesVersion = "0.13.2"
+    private const val mokoResourcesVersion = "0.15.0"
     private const val mokoTestVersion = "0.1.0"
-    const val mokoMvvmVersion = "0.9.1"
+    const val mokoMvvmVersion = "0.10.0"
 
     object Android {
         const val compileSdk = 29
@@ -102,6 +103,8 @@ object Deps {
                 "androidx.arch.core:core-testing:$androidCoreTestingVersion"
             const val coroutinesTest =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+            const val mockito =
+                "org.mockito:mockito-core:$mockitoVersion"
         }
 
         object Jvm {

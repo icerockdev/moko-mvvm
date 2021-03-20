@@ -2,9 +2,8 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import Foundation
+import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryMvvm
 
 class EventsOwnerViewController: UIViewController {
     private var viewModel: EventsOwnerViewModel!
@@ -14,14 +13,11 @@ class EventsOwnerViewController: UIViewController {
         
         let eventsDispatcher = EventsDispatcher<EventsOwnerViewModelEventsListener>(listener: self)
         viewModel = EventsOwnerViewModel(eventsDispatcher: eventsDispatcher)
+        viewModel.clearOnDetach(viewController: self)
     }
     
     @IBAction func onButtonPressed() {
         viewModel.onButtonPressed()
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
     }
 }
 

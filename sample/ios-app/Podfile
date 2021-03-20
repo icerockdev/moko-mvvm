@@ -10,6 +10,12 @@ platform :ios, '11.0'
 # need for correct invalidate of cache MultiPlatformLibrary.framework
 install! 'cocoapods', :disable_input_output_paths => true
 
+pre_install do |installer|
+  puts "prebuild mpp-library..."
+  `cd .. && ./gradlew :sample:mpp-library:syncMultiPlatformLibraryDebugFrameworkIosX64`
+  puts "prebuild completed"
+end
+
 target 'TestProj' do
   # MultiPlatformLibrary
   pod 'MultiPlatformLibrary', :path => '../mpp-library'

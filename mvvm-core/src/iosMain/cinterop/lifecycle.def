@@ -1,0 +1,2 @@
+package = dev.icerock.moko.mvvm.core.cinterop
+language = Objective-C

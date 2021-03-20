@@ -15,8 +15,8 @@ import platform.UIKit.UITextViewTextDidEndEditingNotification
 
 fun <T : String?> LiveData<T>.bindStringToTextViewText(
     textView: UITextView
-) {
-    bind(textView) { value ->
+): Closeable {
+    return bind(textView) { value ->
         if (this.text == value) return@bind
 
         this.text = value.orEmpty()
@@ -25,16 +25,16 @@ fun <T : String?> LiveData<T>.bindStringToTextViewText(
 
 fun <T : StringDesc?> LiveData<T>.bindStringDescToTextViewText(
     textView: UITextView
-) {
-    map { it?.localized() }.bindStringToTextViewText(textView)
+): Closeable {
+    return map { it?.localized() }.bindStringToTextViewText(textView)
 }
 
 fun MutableLiveData<String>.bindStringTwoWayToTextViewText(
     textView: UITextView
-) {
-    bindStringToTextViewText(textView)
+): Closeable {
+    val readCloseable = bindStringToTextViewText(textView)
 
-    NSNotificationCenter.defaultCenter.setEventHandler(
+    val writeCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidChangeNotification,
         ref = textView
     ) {
@@ -44,10 +44,14 @@ fun MutableLiveData<String>.bindStringTwoWayToTextViewText(
 
         value = newText
     }
+
+    return readCloseable + writeCloseable
 }
 
-fun MutableLiveData<Boolean>.bindBoolTwoWayToTextViewFocus(textView: UITextView) {
-    bindBoolToResponderFocus(textView)
+fun MutableLiveData<Boolean>.bindBoolTwoWayToTextViewFocus(
+    textView: UITextView
+): Closeable {
+    val readCloseable = bindBoolToViewFocus(view = textView)
 
     val handler: UITextView.() -> Unit = {
         val focused = isFocused()
@@ -55,14 +59,16 @@ fun MutableLiveData<Boolean>.bindBoolTwoWayToTextViewFocus(textView: UITextView)
         if (value != focused) value = focused
     }
 
-    NSNotificationCenter.defaultCenter.setEventHandler(
+    val beginCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidBeginEditingNotification,
         ref = textView,
         lambda = handler
     )
-    NSNotificationCenter.defaultCenter.setEventHandler(
+    val endCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidEndEditingNotification,
         ref = textView,
         lambda = handler
     )
+
+    return readCloseable + beginCloseable + endCloseable
 }

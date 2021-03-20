@@ -4,7 +4,6 @@
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.bindBoolToButtonImage
-import dev.icerock.moko.mvvm.livedata.bindBoolToViewBackgroundColor
 import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
 import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
 import dev.icerock.moko.resources.desc.StringDesc
@@ -13,7 +12,6 @@ import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UIButton
 import platform.UIKit.UIImage
-import platform.UIKit.backgroundColor
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,6 +23,7 @@ class UIButtonBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UIButton(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

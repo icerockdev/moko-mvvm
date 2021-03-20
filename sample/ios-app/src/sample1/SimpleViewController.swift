@@ -2,9 +2,8 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import Foundation
+import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryMvvm
 
 class SimpleViewController: UIViewController {
     @IBOutlet private var counterLabel: UILabel!
@@ -16,14 +15,12 @@ class SimpleViewController: UIViewController {
         
         viewModel = SimpleViewModel()
         
-        counterLabel.bindText(liveData: viewModel.counter)
+        viewModel.counter.bindStringToLabelText(label: counterLabel)
+        
+        viewModel.clearOnDetach(viewController: self)
     }
     
     @IBAction func onCounterButtonPressed() {
         viewModel.onCounterButtonPressed()
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
     }
 }

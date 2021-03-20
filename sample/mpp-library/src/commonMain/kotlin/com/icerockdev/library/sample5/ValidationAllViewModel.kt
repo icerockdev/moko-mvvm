@@ -16,5 +16,6 @@ class ValidationAllViewModel : ViewModel() {
 
     private val isEmailValid: LiveData<Boolean> = email.map { it.isNotEmpty() }
     private val isPasswordValid: LiveData<Boolean> = password.map { it.isNotEmpty() }
-    val isLoginButtonEnabled: LiveData<Boolean> = listOf(isEmailValid, isPasswordValid).all(true)
+    val isLoginButtonEnabled: LiveData<Boolean> =
+        listOf(isEmailValid, isPasswordValid).all(value = true)
 }
