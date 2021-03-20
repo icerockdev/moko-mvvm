@@ -23,6 +23,14 @@ actual class EventsDispatcher<ListenerType : Any> {
         this.executor = executor
     }
 
+    /**
+     * Constructor without lifecycle connection. Used for tests
+     */
+    constructor(executor: Executor, listener: ListenerType) {
+        this.executor = executor
+        this.eventsListener = listener
+    }
+
     fun bind(lifecycleOwner: LifecycleOwner, listener: ListenerType) {
         val observer = object : LifecycleObserver {
 

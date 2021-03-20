@@ -4,7 +4,9 @@
 
 package dev.icerock.moko.mvvm
 
+import dev.icerock.moko.mvvm.internal.createUIDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-expect val Dispatchers.UI: CoroutineDispatcher
+val Dispatchers.UI: CoroutineDispatcher
+    get() = createUIDispatcher()

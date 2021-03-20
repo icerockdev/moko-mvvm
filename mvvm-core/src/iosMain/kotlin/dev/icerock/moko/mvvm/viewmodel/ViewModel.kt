@@ -4,9 +4,8 @@
 
 package dev.icerock.moko.mvvm.viewmodel
 
-import dev.icerock.moko.mvvm.UI
+import dev.icerock.moko.mvvm.internal.createViewModelScope
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import platform.UIKit.UIViewController
 import platform.darwin.dispatch_async
@@ -15,8 +14,7 @@ import kotlin.native.internal.GC
 
 @Suppress("EmptyDefaultConstructor")
 actual open class ViewModel actual constructor() {
-    // for now dispatcher fixed on Main. after implementing multithread coroutines on native - we can change it
-    protected actual val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.UI)
+    protected actual val viewModelScope: CoroutineScope = createViewModelScope()
 
     actual open fun onCleared() {
         viewModelScope.cancel()

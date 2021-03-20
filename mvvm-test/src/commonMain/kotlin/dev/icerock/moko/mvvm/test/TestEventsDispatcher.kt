@@ -7,3 +7,5 @@ package dev.icerock.moko.mvvm.test
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 
 expect fun <T : Any> createTestEventsDispatcher(): EventsDispatcher<T>
+
+expect fun <T : Any> createTestEventsDispatcher(listener: T): EventsDispatcher<T>
