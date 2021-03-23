@@ -23,6 +23,9 @@ internal class UIDispatcher : CoroutineDispatcher(), Delay {
     private val mQueue = dispatch_get_main_queue()
 
     override fun dispatch(context: CoroutineContext, block: Runnable) {
+        val exc = Exception()
+        println("dispatch ${platform.Foundation.NSThread.currentThread}")
+        exc.printStackTrace()
         dispatch_async(mQueue) {
             block.run()
         }
@@ -32,6 +35,9 @@ internal class UIDispatcher : CoroutineDispatcher(), Delay {
         timeMillis: Long,
         continuation: CancellableContinuation<Unit>
     ) {
+        val exc = Exception()
+        println("scheduleResumeAfterDelay ${platform.Foundation.NSThread.currentThread}")
+        exc.printStackTrace()
         dispatch_after(
             `when` = dispatch_time(
                 DISPATCH_TIME_NOW,
@@ -51,6 +57,9 @@ internal class UIDispatcher : CoroutineDispatcher(), Delay {
         block: Runnable,
         context: CoroutineContext
     ): DisposableHandle {
+        val exc = Exception()
+        println("invokeOnTimeout ${platform.Foundation.NSThread.currentThread}")
+        exc.printStackTrace()
         var disposed = false
         dispatch_after(
             `when` = dispatch_time(
