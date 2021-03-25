@@ -11,8 +11,13 @@ public final class dev/icerock/moko/mvvm/livedata/CheckBoxBindingsKt {
 }
 
 public abstract interface class dev/icerock/moko/mvvm/livedata/Closeable {
+	public static final field Companion Ldev/icerock/moko/mvvm/livedata/Closeable$Companion;
 	public abstract fun close ()V
 	public abstract fun plus (Ldev/icerock/moko/mvvm/livedata/Closeable;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/Closeable$Companion {
+	public final fun invoke (Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 
 public final class dev/icerock/moko/mvvm/livedata/Closeable$DefaultImpls {
