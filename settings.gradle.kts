@@ -4,13 +4,10 @@
 
 pluginManagement {
     repositories {
+        mavenCentral()
         google()
-        jcenter()
 
-        maven { url = uri("https://dl.bintray.com/kotlin/kotlin") }
-        maven { url = uri("https://kotlin.bintray.com/kotlinx") }
-        maven { url = uri("https://dl.bintray.com/icerockdev/moko") }
-        maven { url = uri("https://plugins.gradle.org/m2/") }
+        gradlePluginPortal()
     }
 }
 
