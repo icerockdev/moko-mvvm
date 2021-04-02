@@ -9,9 +9,6 @@ plugins {
     plugin(Deps.Plugins.mavenPublish)
 }
 
-group = "dev.icerock.moko"
-version = Deps.mokoMvvmVersion
-
 android {
     buildFeatures.viewBinding = true
 
