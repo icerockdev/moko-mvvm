@@ -16,5 +16,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Build K/N cache
+        run: ./gradlew :mvvm:runCommonizer
       - name: Build and test
-        run: ./gradlew detekt build publishToMavenLocal
+        run: ./gradlew build publishToMavenLocal
