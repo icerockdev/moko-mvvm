@@ -19,7 +19,7 @@ jobs:
       - name: Build K/N cache
         run: ./gradlew :mvvm:runCommonizer
       - name: Build and test
-        run: ./gradlew build publishToMavenLocal syncMultiPlatformLibraryDebugFrameworkIosX64
+        run: ./gradlew build publishToMavenLocal syncMultiPlatformLibraryDebugFrameworkIosX64 -x linkMultiPlatformLibraryDebugFrameworkIosArm64 -x linkMultiPlatformLibraryReleaseFrameworkIosArm64 -x linkMultiPlatformLibraryReleaseFrameworkIosX64
       - name: Install pods
         run: cd sample/ios-app && pod install
       - name: build ios sample
