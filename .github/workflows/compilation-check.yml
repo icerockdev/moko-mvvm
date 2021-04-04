@@ -16,5 +16,17 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Build K/N cache
+        run: ./gradlew :mvvm:runCommonizer
       - name: Build and test
-        run: ./gradlew detekt build publishToMavenLocal
+        run: ./gradlew build publishToMavenLocal syncMultiPlatformLibraryDebugFrameworkIosX64
+      - name: Install pods
+        run: cd sample/ios-app && pod install
+      - name: build ios sample
+        run: cd sample/ios-app && xcodebuild -scheme TestProj -workspace TestProj.xcworkspace -configuration Debug build CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v2
+        if: ${{ always() }}
+        with:
+          report_paths: '**/build/test-results/**/TEST-*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}

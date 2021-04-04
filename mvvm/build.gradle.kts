@@ -9,9 +9,6 @@ plugins {
     plugin(Deps.Plugins.mavenPublish)
 }
 
-group = "dev.icerock.moko"
-version = Deps.mokoMvvmVersion
-
 dependencies {
     // by default use old named state
     // core and livedata loaded transitive from it. not add directly - mergeDex will fail on android

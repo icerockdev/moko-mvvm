@@ -9,9 +9,6 @@ plugins {
     plugin(Deps.Plugins.mavenPublish)
 }
 
-group = "dev.icerock.moko"
-version = Deps.mokoMvvmVersion
-
 dependencies {
     commonMainApi(Deps.Libs.MultiPlatform.coroutines)
 

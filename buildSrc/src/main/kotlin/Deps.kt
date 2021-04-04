@@ -11,11 +11,10 @@ object Deps {
 
     private const val detektVersion = "1.15.0"
     private const val dokkaVersion = "1.4.20"
-    private const val bintrayPublishVersion = "0.1.0"
 
     private const val coroutinesVersion = "1.4.2"
-    private const val mokoResourcesVersion = "0.15.0"
-    private const val mokoTestVersion = "0.1.0"
+    private const val mokoResourcesVersion = "0.15.1"
+    private const val mokoTestVersion = "0.2.1"
     const val mokoMvvmVersion = "0.10.0"
 
     object Android {
@@ -50,10 +49,7 @@ object Deps {
             version = dokkaVersion
         )
 
-        val bintrayPublish = GradlePlugin(
-            id = "dev.icerock.gradle.bintray-publish",
-            module = "dev.icerock.gradle:bintray-publish:$bintrayPublishVersion"
-        )
+        val signing = GradlePlugin(id = "signing")
     }
 
     object Libs {
