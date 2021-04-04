@@ -8,9 +8,6 @@ plugins {
     plugin(Deps.Plugins.mavenPublish)
 }
 
-group = "dev.icerock.moko"
-version = Deps.mokoMvvmVersion
-
 android {
     sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
