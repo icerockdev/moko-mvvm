@@ -6,6 +6,8 @@ package dev.icerock.moko.mvvm
 
 import com.icerockdev.library.sample6.LoginViewModel
 import com.icerockdev.library.sample6.UserRepository
+import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
+import dev.icerock.moko.test.TestRule
 import dev.icerock.moko.mvvm.test.TestObserver
 import dev.icerock.moko.mvvm.test.TestViewModelScope
 import dev.icerock.moko.mvvm.test.createTestEventsDispatcher
@@ -18,6 +20,9 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class LoginViewModelTests {
+    @get:TestRule
+    val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
+
     @BeforeTest
     fun setup() {
         TestViewModelScope.setupViewModelScope(CoroutineScope(Dispatchers.Unconfined))
