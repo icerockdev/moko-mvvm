@@ -10,7 +10,7 @@ public extension UITextView {
     UITextViewBindingKt.bindText(
       self,
       liveData: liveData,
-      formatter__: nil
+      formatter: nil
     )
   }
 
@@ -18,7 +18,7 @@ public extension UITextView {
     UITextViewBindingKt.bindText(
       self,
       liveData: liveData,
-      formatter___: nil
+      formatter_: nil
     )
   }
 }

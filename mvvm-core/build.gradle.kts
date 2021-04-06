@@ -12,6 +12,8 @@ plugins {
 dependencies {
     commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
 
+    commonMainImplementation(project(":mvvm-internal"))
+
     androidMainApi(Deps.Libs.Android.appCompat)
     androidMainApi(Deps.Libs.Android.androidViewModel)
 

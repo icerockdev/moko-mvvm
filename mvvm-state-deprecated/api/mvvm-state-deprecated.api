@@ -1,0 +1,84 @@
+public abstract class dev/icerock/moko/mvvm/State {
+	public final fun dataValue ()Ljava/lang/Object;
+	public final fun errorValue ()Ljava/lang/Object;
+	public final fun isEmpty ()Z
+	public final fun isError ()Z
+	public final fun isLoading ()Z
+	public final fun isSuccess ()Z
+}
+
+public final class dev/icerock/moko/mvvm/State$Data : dev/icerock/moko/mvvm/State {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Ldev/icerock/moko/mvvm/State$Data;
+	public static synthetic fun copy$default (Ldev/icerock/moko/mvvm/State$Data;Ljava/lang/Object;ILjava/lang/Object;)Ldev/icerock/moko/mvvm/State$Data;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getData ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/icerock/moko/mvvm/State$Empty : dev/icerock/moko/mvvm/State {
+	public fun <init> ()V
+}
+
+public final class dev/icerock/moko/mvvm/State$Error : dev/icerock/moko/mvvm/State {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Ldev/icerock/moko/mvvm/State$Error;
+	public static synthetic fun copy$default (Ldev/icerock/moko/mvvm/State$Error;Ljava/lang/Object;ILjava/lang/Object;)Ldev/icerock/moko/mvvm/State$Error;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/icerock/moko/mvvm/State$Loading : dev/icerock/moko/mvvm/State {
+	public fun <init> ()V
+}
+
+public final class dev/icerock/moko/mvvm/StateExtKt {
+	public static final fun asState (Ljava/lang/Object;)Ldev/icerock/moko/mvvm/State;
+	public static final fun asState (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/State;
+	public static final fun asState (Ljava/util/List;)Ldev/icerock/moko/mvvm/State;
+	public static final fun asState (Ljava/util/List;Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/State;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/StateLiveDataConditionsKt {
+	public static final fun isEmptyState (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun isEmptyState (Ljava/util/List;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun isErrorState (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun isErrorState (Ljava/util/List;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun isLoadingState (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun isLoadingState (Ljava/util/List;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun isSuccessState (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun isSuccessState (Ljava/util/List;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/StateLiveDataExtKt {
+	public static final fun data (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun dataValue (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ljava/lang/Object;
+	public static final fun error (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun error (Ljava/util/List;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun errorValue (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ljava/lang/Object;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/StateLiveDataMergesKt {
+	public static final fun concatData (Ldev/icerock/moko/mvvm/livedata/LiveData;Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function2;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/StateLiveDataTransformsKt {
+	public static final fun dataTransform (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun emptyAsData (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun emptyAsError (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun emptyIf (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+	public static final fun errorTransform (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+}
+
+public final class dev/icerock/moko/mvvm/state/deprecated/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+

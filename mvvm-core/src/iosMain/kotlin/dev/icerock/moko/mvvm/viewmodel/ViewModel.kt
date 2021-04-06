@@ -4,27 +4,20 @@
 
 package dev.icerock.moko.mvvm.viewmodel
 
-import dev.icerock.moko.mvvm.UI
+import dev.icerock.moko.mvvm.internal.createViewModelScope
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
+import platform.darwin.dispatch_async
+import platform.darwin.dispatch_get_main_queue
 import kotlin.native.internal.GC
-
-@ThreadLocal
-private var isGCWorking = false
 
 @Suppress("EmptyDefaultConstructor")
 actual open class ViewModel actual constructor() {
-    // for now dispatcher fixed on Main. after implementing multithread coroutines on native - we can change it
-    protected actual val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.UI)
+    protected actual val viewModelScope: CoroutineScope = createViewModelScope()
 
     actual open fun onCleared() {
         viewModelScope.cancel()
-        // run Kotlin/Native GC
-        if (!isGCWorking) {
-            isGCWorking = true
-            GC.collect()
-            isGCWorking = false
-        }
+
+        dispatch_async(dispatch_get_main_queue()) { GC.collect() }
     }
 }

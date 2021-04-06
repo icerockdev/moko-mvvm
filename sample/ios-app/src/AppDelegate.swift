@@ -14,4 +14,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         return true
     }
+    
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        GarbageCollectorKt.collect()
+        GarbageCollectorKt.cycles()
+    }
 }

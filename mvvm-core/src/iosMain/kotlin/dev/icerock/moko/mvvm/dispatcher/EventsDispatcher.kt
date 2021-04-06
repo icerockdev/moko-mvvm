@@ -5,6 +5,7 @@
 package dev.icerock.moko.mvvm.dispatcher
 
 import platform.darwin.dispatch_async
+import platform.darwin.dispatch_get_current_queue
 import platform.darwin.dispatch_get_main_queue
 import platform.darwin.dispatch_queue_t
 import kotlin.native.ref.WeakReference
@@ -44,8 +45,10 @@ actual class EventsDispatcher<ListenerType : Any> {
             return
         }
 
-        dispatch_async(queue) {
+        if (dispatch_get_current_queue() == queue) {
             block(listener)
+        } else {
+            dispatch_async(queue) { block(listener) }
         }
     }
 }

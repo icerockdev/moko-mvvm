@@ -7,5 +7,9 @@ package dev.icerock.moko.mvvm.test
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 
 actual fun <T : Any> createTestEventsDispatcher(): EventsDispatcher<T> {
-    return EventsDispatcher { it.run() }
+    return EventsDispatcher(executor = { it.run() })
+}
+
+actual fun <T : Any> createTestEventsDispatcher(listener: T): EventsDispatcher<T> {
+    return EventsDispatcher(executor = { it.run() }, listener = listener)
 }
