@@ -13,6 +13,7 @@ dependencies {
     commonMainApi(Deps.Libs.MultiPlatform.coroutines)
 
     commonMainApi(project(":mvvm-core"))
+    commonMainImplementation(project(":mvvm-internal"))
 
     commonMainApi(Deps.Libs.Tests.kotlinTestJUnit)
     androidMainApi(Deps.Libs.Tests.coroutinesTest)

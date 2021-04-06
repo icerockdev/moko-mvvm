@@ -8,7 +8,8 @@ import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.not
+import dev.icerock.moko.mvvm.livedata.all
+import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.livedata.revert
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
@@ -28,7 +29,11 @@ class LoginViewModel(
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading.readOnly()
 
-    val isLoginButtonVisible: LiveData<Boolean> = isLoading.revert()
+    val isLoginButtonVisible: LiveData<Boolean> = listOf(
+        isLoading.revert(),
+        email.map { it.isNotBlank() },
+        password.map { it.isNotBlank() }
+    ).all(true)
 
     init {
         eventsDispatcher.dispatchEvent { showError("inited".desc()) }
@@ -51,7 +56,7 @@ class LoginViewModel(
                 userRepository.login(email = emailValue, password = passwordValue)
 
                 eventsDispatcher.dispatchEvent { routeToMainScreen() }
-            } catch (error: Throwable) {
+            } catch (error: Exception) {
                 val message = error.message ?: error.toString()
                 val errorDesc = message.desc()
 

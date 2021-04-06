@@ -1,0 +1,26 @@
+public final class dev/icerock/moko/mvvm/test/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public final class dev/icerock/moko/mvvm/test/TestEventsDispatcherKt {
+	public static final fun createTestEventsDispatcher ()Ldev/icerock/moko/mvvm/dispatcher/EventsDispatcher;
+	public static final fun createTestEventsDispatcher (Ljava/lang/Object;)Ldev/icerock/moko/mvvm/dispatcher/EventsDispatcher;
+}
+
+public final class dev/icerock/moko/mvvm/test/TestObserver : kotlin/jvm/functions/Function1 {
+	public fun <init> ()V
+	public final fun getInvokeCount ()I
+	public final fun getLastObservedValue ()Ljava/lang/Object;
+	public synthetic fun invoke (Ljava/lang/Object;)Ljava/lang/Object;
+	public fun invoke (Ljava/lang/Object;)V
+}
+
+public final class dev/icerock/moko/mvvm/test/TestViewModelScope {
+	public static final field INSTANCE Ldev/icerock/moko/mvvm/test/TestViewModelScope;
+	public final fun resetViewModelScope ()V
+	public final fun setupViewModelScope (Lkotlinx/coroutines/CoroutineScope;)V
+}
+

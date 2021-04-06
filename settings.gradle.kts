@@ -11,6 +11,7 @@ pluginManagement {
     }
 }
 
+include(":mvvm-internal")
 include(":mvvm-core")
 include(":mvvm-livedata")
 include(":mvvm-livedata-material")

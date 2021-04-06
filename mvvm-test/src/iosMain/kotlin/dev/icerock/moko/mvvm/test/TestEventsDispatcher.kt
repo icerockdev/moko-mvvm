@@ -9,3 +9,7 @@ import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 actual fun <T : Any> createTestEventsDispatcher(): EventsDispatcher<T> {
     return EventsDispatcher()
 }
+
+actual fun <T : Any> createTestEventsDispatcher(listener: T): EventsDispatcher<T> {
+    return EventsDispatcher(listener = listener)
+}

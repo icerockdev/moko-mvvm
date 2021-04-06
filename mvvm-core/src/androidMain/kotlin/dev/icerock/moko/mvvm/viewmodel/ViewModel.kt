@@ -5,15 +5,13 @@
 package dev.icerock.moko.mvvm.viewmodel
 
 import androidx.lifecycle.ViewModel
-import dev.icerock.moko.mvvm.UI
+import dev.icerock.moko.mvvm.internal.createViewModelScope
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 
 @Suppress("EmptyDefaultConstructor")
 actual open class ViewModel actual constructor() : ViewModel() {
-    // for now dispatcher fixed on Main. after implementing multithread coroutines on native - we can change it
-    protected actual val viewModelScope: CoroutineScope = CoroutineScope(Dispatchers.UI)
+    protected actual val viewModelScope: CoroutineScope = createViewModelScope()
 
     public actual override fun onCleared() {
         super.onCleared()

@@ -3,17 +3,17 @@ PODS:
   - AlamofireImage (4.1.0):
     - Alamofire (~> 5.1)
   - MultiPlatformLibrary (0.1.0)
-  - MultiPlatformLibraryMvvm (0.8.1):
+  - MultiPlatformLibraryMvvm (0.9.1):
     - MultiPlatformLibrary
-    - MultiPlatformLibraryMvvm/AlamofireImage (= 0.8.1)
-    - MultiPlatformLibraryMvvm/Core (= 0.8.1)
-    - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (= 0.8.1)
-  - MultiPlatformLibraryMvvm/AlamofireImage (0.8.1):
+    - MultiPlatformLibraryMvvm/AlamofireImage (= 0.9.1)
+    - MultiPlatformLibraryMvvm/Core (= 0.9.1)
+    - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (= 0.9.1)
+  - MultiPlatformLibraryMvvm/AlamofireImage (0.9.1):
     - AlamofireImage (~> 4.1.0)
     - MultiPlatformLibrary
-  - MultiPlatformLibraryMvvm/Core (0.8.1):
+  - MultiPlatformLibraryMvvm/Core (0.9.1):
     - MultiPlatformLibrary
-  - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (0.8.1):
+  - MultiPlatformLibraryMvvm/SkyFloatingLabelTextField (0.9.1):
     - MultiPlatformLibrary
     - SkyFloatingLabelTextField (~> 3.8.0)
   - SkyFloatingLabelTextField (3.8.0)
@@ -38,9 +38,9 @@ SPEC CHECKSUMS:
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   MultiPlatformLibrary: 176fb8ade516666cd47e93de1b71ba0441a541bb
-  MultiPlatformLibraryMvvm: 0a77485160fa428e6a9fec3f1fcfce653d017cfe
+  MultiPlatformLibraryMvvm: b5eb90eeae57e9f8d63dce913e7dfb7f84271aee
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
 
-PODFILE CHECKSUM: 8f0d11a22b8a433f8c575123e905e01cd4b049b8
+PODFILE CHECKSUM: 75dc53cf3febda3def87d3458f29d3390ea7c08d
 
 COCOAPODS: 1.10.0
