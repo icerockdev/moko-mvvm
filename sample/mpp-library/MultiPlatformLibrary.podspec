@@ -31,7 +31,7 @@ MPP_PROJECT_ROOT="$SRCROOT/../../mpp-library"
 MPP_OUTPUT_DIR="$MPP_PROJECT_ROOT/build/cocoapods/framework"
 MPP_OUTPUT_NAME="$MPP_OUTPUT_DIR/#{spec.name}.framework"
 
-"$MPP_PROJECT_ROOT/../gradlew" -p "$MPP_PROJECT_ROOT" "$GRADLE_TASK"
+"$MPP_PROJECT_ROOT/../gradlew" -p "$MPP_PROJECT_ROOT" "$GRADLE_TASK" | sed -e 's/^/warning: /;'
             SCRIPT
         }
     ]
