@@ -539,6 +539,12 @@ The `develop` branch is pushed to `master` on release.
 
 For more details on contributing please see the [contributing guide](CONTRIBUTING.md).
 
+## We’re hiring a Mobile Developers for our main team in Novosibirsk and remote team with Moscow timezone!
+
+If you like to develop mobile applications, are an expert in iOS/Swift or Android/Kotlin and eager to use Kotlin Multiplatform in production, we'd like to talk to you.
+
+[To learn more and apply](https://career.habr.com/companies/icerockdev)
+
 ## License
         
     Copyright 2019 IceRock MAG Inc.
