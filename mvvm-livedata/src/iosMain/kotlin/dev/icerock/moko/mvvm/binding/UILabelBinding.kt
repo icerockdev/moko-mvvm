@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.binding
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
 import dev.icerock.moko.mvvm.livedata.map
@@ -14,14 +15,14 @@ import platform.UIKit.UILabel
 fun UILabel.bindText(
     liveData: LiveData<String>,
     formatter: ((String) -> String) = { it }
-) {
-    liveData.map(formatter).bindStringToLabelText(label = this)
+): Closeable {
+    return liveData.map(formatter).bindStringToLabelText(label = this)
 }
 
 @Deprecated("use LiveData.bindToLabelText extension")
 fun UILabel.bindText(
     liveData: LiveData<StringDesc>,
     formatter: ((String) -> String) = { it }
-) {
-    liveData.map { it.localized() }.map(formatter).bindStringToLabelText(label = this)
+): Closeable {
+    return liveData.map { it.localized() }.map(formatter).bindStringToLabelText(label = this)
 }

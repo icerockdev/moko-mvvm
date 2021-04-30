@@ -6,9 +6,9 @@ public final class dev/icerock/moko/mvvm/livedata/glide/BuildConfig {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/glide/GlideImageViewBindingsKt {
-	public static final fun bindToImageViewSrc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V
-	public static final fun bindToImageViewSrc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
-	public static synthetic fun bindToImageViewSrc$default (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;ILjava/lang/Object;)V
-	public static synthetic fun bindToImageViewSrc$default (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public static final fun bindToImageViewSrc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static final fun bindToImageViewSrc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static synthetic fun bindToImageViewSrc$default (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;ILjava/lang/Object;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static synthetic fun bindToImageViewSrc$default (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/ImageView;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 

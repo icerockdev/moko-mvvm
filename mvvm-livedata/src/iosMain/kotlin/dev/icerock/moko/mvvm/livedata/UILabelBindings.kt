@@ -10,12 +10,12 @@ import platform.UIKit.UILabel
 
 fun <T : String?> LiveData<T>.bindStringToLabelText(
     label: UILabel
-) {
-    bind(label) { this.text = it }
+): Closeable {
+    return bind(label) { this.text = it }
 }
 
 fun <T : StringDesc?> LiveData<T>.bindStringDescToLabelText(
     label: UILabel
-) {
-    map { it?.localized() }.bindStringToLabelText(label)
+): Closeable {
+    return map { it?.localized() }.bindStringToLabelText(label)
 }

@@ -6,16 +6,18 @@ import UIKit
 import MultiPlatformLibrary
 
 public extension UITextView {
-  func bindText(liveData: LiveData<StringDesc>) {
-    UITextViewBindingKt.bindText(
+  @available(*, deprecated, message: "use LiveData.bindStringDescToTextViewText")
+  @discardableResult func bindText(liveData: LiveData<StringDesc>) -> Closeable {
+    return UITextViewBindingKt.bindText(
       self,
       liveData: liveData,
       formatter: nil
     )
   }
 
-  func bindText(liveData: LiveData<NSString>) {
-    UITextViewBindingKt.bindText(
+  @available(*, deprecated, message: "use LiveData.bindStringToTextViewText")
+  @discardableResult func bindText(liveData: LiveData<NSString>) -> Closeable {
+    return UITextViewBindingKt.bindText(
       self,
       liveData: liveData,
       formatter_: nil

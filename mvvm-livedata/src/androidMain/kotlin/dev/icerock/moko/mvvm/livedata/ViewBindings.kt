@@ -8,20 +8,29 @@ import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import dev.icerock.moko.mvvm.utils.bindNotNull
 
-fun LiveData<Boolean>.bindToViewVisibleOrGone(lifecycleOwner: LifecycleOwner, view: View) {
-    bindNotNull(lifecycleOwner) { value ->
+fun LiveData<Boolean>.bindToViewVisibleOrGone(
+    lifecycleOwner: LifecycleOwner,
+    view: View
+): Closeable {
+    return bindNotNull(lifecycleOwner) { value ->
         if (value) view.visibility = View.VISIBLE
         else view.visibility = View.GONE
     }
 }
 
-fun LiveData<Boolean>.bindToViewVisibleOrInvisible(lifecycleOwner: LifecycleOwner, view: View) {
-    bindNotNull(lifecycleOwner) { value ->
+fun LiveData<Boolean>.bindToViewVisibleOrInvisible(
+    lifecycleOwner: LifecycleOwner,
+    view: View
+): Closeable {
+    return bindNotNull(lifecycleOwner) { value ->
         if (value) view.visibility = View.VISIBLE
         else view.visibility = View.INVISIBLE
     }
 }
 
-fun LiveData<Boolean>.bindToViewEnabled(lifecycleOwner: LifecycleOwner, view: View) {
-    bindNotNull(lifecycleOwner) { view.isEnabled = it }
+fun LiveData<Boolean>.bindToViewEnabled(
+    lifecycleOwner: LifecycleOwner,
+    view: View
+): Closeable {
+    return bindNotNull(lifecycleOwner) { view.isEnabled = it }
 }

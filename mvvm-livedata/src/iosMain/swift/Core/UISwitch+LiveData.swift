@@ -6,15 +6,17 @@ import UIKit
 import MultiPlatformLibrary
 
 public extension UISwitch {
-  func bindValue(liveData: LiveData<KotlinBoolean>) {
-    UISwitchBindingKt.bindValue(
+  @available(*, deprecated, message: "use LiveData.bindBoolToSwitchOn")
+  @discardableResult func bindValue(liveData: LiveData<KotlinBoolean>) -> Closeable {
+    return UISwitchBindingKt.bindValue(
       self,
       liveData: liveData
     )
   }
 
-  func bindValueTwoWay(liveData: MutableLiveData<KotlinBoolean>) {
-    UISwitchBindingKt.bindValueTwoWay(
+  @available(*, deprecated, message: "use MutableLiveData.bindBoolTwoWayToSwitchOn")
+  @discardableResult func bindValueTwoWay(liveData: MutableLiveData<KotlinBoolean>) -> Closeable {
+    return UISwitchBindingKt.bindValueTwoWay(
       self,
       liveData: liveData
     )

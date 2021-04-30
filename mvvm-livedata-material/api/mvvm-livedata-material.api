@@ -6,7 +6,7 @@ public final class dev/icerock/moko/mvvm/livedata/material/BuildConfig {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/material/TextInputLayoutBindingsKt {
-	public static final fun bindToTextInputLayoutErrorString (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lcom/google/android/material/textfield/TextInputLayout;)V
-	public static final fun bindToTextInputLayoutErrorStringDesc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lcom/google/android/material/textfield/TextInputLayout;)V
+	public static final fun bindToTextInputLayoutErrorString (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lcom/google/android/material/textfield/TextInputLayout;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static final fun bindToTextInputLayoutErrorStringDesc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lcom/google/android/material/textfield/TextInputLayout;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 

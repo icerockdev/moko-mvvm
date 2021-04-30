@@ -6,8 +6,22 @@ public final class dev/icerock/moko/mvvm/livedata/BuildConfig {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/CheckBoxBindingsKt {
-	public static final fun bindToCheckBoxChecked (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/CheckBox;)V
-	public static final fun bindTwoWayToCheckBoxChecked (Ldev/icerock/moko/mvvm/livedata/MutableLiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/CheckBox;)V
+	public static final fun bindToCheckBoxChecked (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/CheckBox;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static final fun bindTwoWayToCheckBoxChecked (Ldev/icerock/moko/mvvm/livedata/MutableLiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/CheckBox;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+}
+
+public abstract interface class dev/icerock/moko/mvvm/livedata/Closeable {
+	public static final field Companion Ldev/icerock/moko/mvvm/livedata/Closeable$Companion;
+	public abstract fun close ()V
+	public abstract fun plus (Ldev/icerock/moko/mvvm/livedata/Closeable;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/Closeable$Companion {
+	public final fun invoke (Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/Closeable$DefaultImpls {
+	public static fun plus (Ldev/icerock/moko/mvvm/livedata/Closeable;Ldev/icerock/moko/mvvm/livedata/Closeable;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 
 public final class dev/icerock/moko/mvvm/livedata/DebounceLiveDataKt {
@@ -15,15 +29,23 @@ public final class dev/icerock/moko/mvvm/livedata/DebounceLiveDataKt {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/EditTextBindingsKt {
-	public static final fun bindTwoWayToEditTextText (Ldev/icerock/moko/mvvm/livedata/MutableLiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/EditText;)V
+	public static final fun bindTwoWayToEditTextText (Ldev/icerock/moko/mvvm/livedata/MutableLiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/EditText;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/FlatMapLiveDataKt {
+	public static final fun flatMap (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 }
 
 public class dev/icerock/moko/mvvm/livedata/LiveData {
-	public fun <init> (Landroidx/lifecycle/LiveData;)V
+	public fun <init> (Ljava/lang/Object;)V
 	public final fun addObserver (Lkotlin/jvm/functions/Function1;)V
-	protected final fun getArchLiveData ()Landroidx/lifecycle/LiveData;
+	protected final fun changeValue (Ljava/lang/Object;)V
+	protected final fun getArchLiveData ()Landroidx/lifecycle/MutableLiveData;
 	public fun getValue ()Ljava/lang/Object;
+	public final fun isActive ()Z
 	public fun ld ()Landroidx/lifecycle/LiveData;
+	protected fun onActive ()V
+	protected fun onInactive ()V
 	public final fun removeObserver (Lkotlin/jvm/functions/Function1;)V
 }
 
@@ -49,17 +71,25 @@ public final class dev/icerock/moko/mvvm/livedata/LiveDataExtKt {
 	public static final fun revert (Ldev/icerock/moko/mvvm/livedata/LiveData;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 }
 
+public final class dev/icerock/moko/mvvm/livedata/LiveDataKt {
+	public static final fun addCloseableObserver (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+}
+
 public final class dev/icerock/moko/mvvm/livedata/LiveDataTransformsKt {
-	public static final fun flatMap (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 	public static final fun flatMapBuffered (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function2;)Ldev/icerock/moko/mvvm/livedata/LiveData;
-	public static final fun map (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 	public static final fun mapBuffered (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function2;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 	public static final fun mergeWith (Ldev/icerock/moko/mvvm/livedata/LiveData;Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function2;)Ldev/icerock/moko/mvvm/livedata/MediatorLiveData;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/MapLiveDataKt {
+	public static final fun map (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 }
 
 public class dev/icerock/moko/mvvm/livedata/MediatorLiveData : dev/icerock/moko/mvvm/livedata/MutableLiveData {
 	public fun <init> (Ljava/lang/Object;)V
 	public final fun addSource (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)V
+	protected fun onActive ()V
+	protected fun onInactive ()V
 }
 
 public final class dev/icerock/moko/mvvm/livedata/MediatorLiveDataExtKt {
@@ -71,7 +101,6 @@ public final class dev/icerock/moko/mvvm/livedata/MediatorLiveDataExtKt {
 }
 
 public class dev/icerock/moko/mvvm/livedata/MutableLiveData : dev/icerock/moko/mvvm/livedata/LiveData {
-	public fun <init> (Landroidx/lifecycle/MutableLiveData;)V
 	public fun <init> (Ljava/lang/Object;)V
 	public fun getValue ()Ljava/lang/Object;
 	public synthetic fun ld ()Landroidx/lifecycle/LiveData;
@@ -86,8 +115,8 @@ public final class dev/icerock/moko/mvvm/livedata/MutableLiveDataExtKt {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/TextViewBindingsKt {
-	public static final fun bindToTextViewTextString (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/TextView;)V
-	public static final fun bindToTextViewTextStringDesc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/TextView;)V
+	public static final fun bindToTextViewTextString (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/TextView;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static final fun bindToTextViewTextStringDesc (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/TextView;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 
 public final class dev/icerock/moko/mvvm/livedata/ThrowableLiveDataExtKt {
@@ -96,13 +125,13 @@ public final class dev/icerock/moko/mvvm/livedata/ThrowableLiveDataExtKt {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/ViewBindingsKt {
-	public static final fun bindToViewEnabled (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/view/View;)V
-	public static final fun bindToViewVisibleOrGone (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/view/View;)V
-	public static final fun bindToViewVisibleOrInvisible (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/view/View;)V
+	public static final fun bindToViewEnabled (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/view/View;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static final fun bindToViewVisibleOrGone (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/view/View;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static final fun bindToViewVisibleOrInvisible (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/view/View;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 
 public final class dev/icerock/moko/mvvm/utils/LiveDataExtKt {
-	public static final fun bind (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function1;)V
-	public static final fun bindNotNull (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function1;)V
+	public static final fun bind (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/Closeable;
+	public static final fun bindNotNull (Ldev/icerock/moko/mvvm/livedata/LiveData;Landroidx/lifecycle/LifecycleOwner;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 

@@ -10,12 +10,18 @@ import dev.icerock.moko.mvvm.utils.bindNotNull
 import dev.icerock.moko.resources.desc.StringDesc
 
 @JvmName("bindToTextViewTextString")
-fun LiveData<String>.bindToTextViewText(lifecycleOwner: LifecycleOwner, textView: TextView) {
-    bindNotNull(lifecycleOwner) { textView.text = it }
+fun LiveData<String>.bindToTextViewText(
+    lifecycleOwner: LifecycleOwner,
+    textView: TextView
+): Closeable {
+    return bindNotNull(lifecycleOwner) { textView.text = it }
 }
 
 @JvmName("bindToTextViewTextStringDesc")
-fun LiveData<StringDesc>.bindToTextViewText(lifecycleOwner: LifecycleOwner, textView: TextView) {
+fun LiveData<StringDesc>.bindToTextViewText(
+    lifecycleOwner: LifecycleOwner,
+    textView: TextView
+): Closeable {
     val context = textView.context
-    bindNotNull(lifecycleOwner) { textView.text = it.toString(context) }
+    return bindNotNull(lifecycleOwner) { textView.text = it.toString(context) }
 }

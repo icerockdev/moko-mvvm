@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.utils
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import kotlinx.cinterop.ExportObjCClass
 import kotlinx.cinterop.ObjCAction
 import kotlinx.cinterop.cstr
@@ -13,14 +14,17 @@ import platform.UIKit.UIControlEvents
 import platform.darwin.NSObject
 import platform.objc.OBJC_ASSOCIATION_RETAIN
 import platform.objc.objc_setAssociatedObject
-import kotlin.native.ref.WeakReference
 
-fun <T : UIControl> T.setEventHandler(event: UIControlEvents, lambda: T.() -> Unit) {
-    val lambdaTarget = ControlLambdaTarget(this, lambda)
+fun <T : UIControl> T.setEventHandler(
+    event: UIControlEvents,
+    lambda: T.() -> Unit
+): Closeable {
+    val lambdaTarget = ControlLambdaTarget(lambda)
+    val action = NSSelectorFromString("action:")
 
     addTarget(
         target = lambdaTarget,
-        action = NSSelectorFromString("action"),
+        action = action,
         forControlEvents = event
     )
 
@@ -30,18 +34,21 @@ fun <T : UIControl> T.setEventHandler(event: UIControlEvents, lambda: T.() -> Un
         value = lambdaTarget,
         policy = OBJC_ASSOCIATION_RETAIN
     )
+
+    return Closeable {
+        removeTarget(target = lambdaTarget, action = action, forControlEvents = event)
+        // TODO remove associated object too, when it will be available in kotlin
+    }
 }
 
 @ExportObjCClass
-private class ControlLambdaTarget<T : Any>(
-    ref: T,
-    val lambda: T.() -> Unit
+private class ControlLambdaTarget<T : UIControl>(
+    private val lambda: T.() -> Unit
 ) : NSObject() {
-    private val weakRef = WeakReference(ref)
 
     @ObjCAction
-    fun action() {
-        val ref = weakRef.get() ?: return
-        lambda(ref)
+    fun action(sender: UIControl) {
+        @Suppress("UNCHECKED_CAST")
+        lambda(sender as T)
     }
 }

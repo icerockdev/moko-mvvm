@@ -6,6 +6,7 @@ package dev.icerock.moko.mvvm.livedata.swiperefresh
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.utils.bindNotNull
 import kotlinx.coroutines.CoroutineScope
@@ -14,10 +15,16 @@ import kotlinx.coroutines.launch
 fun MutableLiveData<Boolean>.bindToSwipeRefreshLayoutRefreshing(
     lifecycleOwner: LifecycleOwner,
     swipeRefreshLayout: SwipeRefreshLayout
-) {
-    bindNotNull(lifecycleOwner) { swipeRefreshLayout.isRefreshing = it }
+): Closeable {
+    val readCloseable = bindNotNull(lifecycleOwner) { swipeRefreshLayout.isRefreshing = it }
 
     swipeRefreshLayout.setOnRefreshListener { value = true }
+
+    val writeCloseable = Closeable {
+        swipeRefreshLayout.setOnRefreshListener(null)
+    }
+
+    return readCloseable + writeCloseable
 }
 
 fun SwipeRefreshLayout.setRefreshAction(
