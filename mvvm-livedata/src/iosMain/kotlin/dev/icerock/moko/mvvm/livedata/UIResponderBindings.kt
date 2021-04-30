@@ -4,19 +4,14 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-import dev.icerock.moko.mvvm.utils.bind
-import platform.UIKit.UIResponder
+import platform.UIKit.UIView
 
-fun LiveData<Boolean>.bindBoolToResponderFocus(responder: UIResponder) {
-    bind(responder) { value ->
-        if (value) {
-            becomeFirstResponder()
-        } else {
-            if (nextResponder?.canBecomeFirstResponder == true) {
-                nextResponder?.becomeFirstResponder()
-            } else {
-                resignFirstResponder()
-            }
-        }
-    }
-}
+@Deprecated(
+    message = "we can't use only UIResponder because need UIView lifecycle",
+    replaceWith = ReplaceWith(
+        expression = "bindBoolToViewFocus",
+        "dev.icerock.moko.mvvm.livedata.bindBoolToViewFocus"
+    ),
+    level = DeprecationLevel.WARNING
+)
+fun LiveData<Boolean>.bindBoolToResponderFocus(responder: UIView): Closeable = bindBoolToViewFocus(responder)

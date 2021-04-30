@@ -11,18 +11,20 @@ import platform.UIKit.UISwitch
 
 fun LiveData<Boolean>.bindBoolToSwitchOn(
     switch: UISwitch
-) {
-    bind(switch) { this.on = it }
+): Closeable {
+    return bind(switch) { this.on = it }
 }
 
 fun MutableLiveData<Boolean>.bindBoolTwoWayToSwitchOn(
     switch: UISwitch
-) {
-    bindBoolToSwitchOn(switch)
+): Closeable {
+    val readCloseable = bindBoolToSwitchOn(switch)
 
-    switch.setEventHandler(UIControlEventValueChanged) {
+    val writeCloseable = switch.setEventHandler(UIControlEventValueChanged) {
         if (value == on) return@setEventHandler
 
         value = on
     }
+
+    return readCloseable + writeCloseable
 }

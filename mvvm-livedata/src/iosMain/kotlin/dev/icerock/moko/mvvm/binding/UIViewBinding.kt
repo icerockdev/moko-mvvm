@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.binding
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.bindBoolToViewHidden
 import dev.icerock.moko.mvvm.livedata.revert
@@ -13,9 +14,9 @@ import platform.UIKit.UIView
 fun UIView.bindVisibility(
     liveData: LiveData<Boolean>,
     inverted: Boolean = false
-) {
+): Closeable {
     val source = if (inverted) liveData
     else liveData.revert()
 
-    source.bindBoolToViewHidden(view = this)
+    return source.bindBoolToViewHidden(view = this)
 }

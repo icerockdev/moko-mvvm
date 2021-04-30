@@ -4,10 +4,11 @@
 
 package dev.icerock.moko.mvvm.utils
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import kotlin.native.ref.WeakReference
 
-fun <T, V : Any> LiveData<T>.bind(view: V, setter: V.(T) -> Unit) {
+fun <T, V : Any> LiveData<T>.bind(view: V, setter: V.(T) -> Unit): Closeable {
     setter(view, value)
     val weakView = WeakReference(view)
     lateinit var observer: (T) -> Unit
@@ -17,4 +18,8 @@ fun <T, V : Any> LiveData<T>.bind(view: V, setter: V.(T) -> Unit) {
         else setter(strongView, value)
     }
     addObserver(observer)
+
+    return Closeable {
+        removeObserver(observer)
+    }
 }

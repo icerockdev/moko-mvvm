@@ -10,22 +10,22 @@ import platform.UIKit.UIButton
 import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UIImage
 
-fun <T : String?> LiveData<T>.bindStringToButtonTitle(button: UIButton) {
-    bind(button) { value ->
+fun <T : String?> LiveData<T>.bindStringToButtonTitle(button: UIButton): Closeable {
+    return bind(button) { value ->
         setTitle(value, forState = UIControlStateNormal)
     }
 }
 
-fun <T : StringDesc?> LiveData<T>.bindStringDescToButtonTitle(button: UIButton) {
-    map { it?.localized() }.bindStringToButtonTitle(button)
+fun <T : StringDesc?> LiveData<T>.bindStringDescToButtonTitle(button: UIButton): Closeable {
+    return map { it?.localized() }.bindStringToButtonTitle(button)
 }
 
 fun LiveData<Boolean>.bindBoolToButtonImage(
     button: UIButton,
     trueImage: UIImage,
     falseImage: UIImage
-) {
-    bind(button) { value ->
+): Closeable {
+    return bind(button) { value ->
         val image = when (value) {
             true -> trueImage
             false -> falseImage

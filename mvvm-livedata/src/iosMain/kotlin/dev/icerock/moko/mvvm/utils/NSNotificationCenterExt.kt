@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.utils
 
+import dev.icerock.moko.mvvm.livedata.Closeable
 import kotlinx.cinterop.ExportObjCClass
 import kotlinx.cinterop.ObjCAction
 import kotlinx.cinterop.cstr
@@ -19,7 +20,7 @@ fun <T : Any> NSNotificationCenter.setEventHandler(
     notification: NSNotificationName,
     ref: T,
     lambda: T.() -> Unit
-) {
+): Closeable {
     val lambdaTarget = NotificationLambdaTarget(lambda)
 
     addObserver(
@@ -35,6 +36,11 @@ fun <T : Any> NSNotificationCenter.setEventHandler(
         value = lambdaTarget,
         policy = OBJC_ASSOCIATION_RETAIN
     )
+
+    return Closeable {
+        removeObserver(lambdaTarget)
+        // TODO remove associated object too, when it will be available in kotlin
+    }
 }
 
 @ExportObjCClass
@@ -44,6 +50,7 @@ private class NotificationLambdaTarget<T>(
 
     @ObjCAction
     fun action(notification: NSNotification) {
+        @Suppress("UNCHECKED_CAST")
         val ref = notification.`object` as T
         lambda(ref)
     }

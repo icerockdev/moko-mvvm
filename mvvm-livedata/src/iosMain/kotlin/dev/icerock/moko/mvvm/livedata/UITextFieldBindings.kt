@@ -12,8 +12,8 @@ import platform.UIKit.UITextField
 
 fun <T : String?> LiveData<T>.bindStringToTextFieldText(
     textField: UITextField
-) {
-    bind(textField) { value ->
+): Closeable {
+    return bind(textField) { value ->
         if (this.text == value) return@bind
 
         this.text = value
@@ -22,20 +22,22 @@ fun <T : String?> LiveData<T>.bindStringToTextFieldText(
 
 fun <T : StringDesc?> LiveData<T>.bindStringDescToTextFieldText(
     textField: UITextField
-) {
-    map { it?.localized() }.bindStringToTextFieldText(textField)
+): Closeable {
+    return map { it?.localized() }.bindStringToTextFieldText(textField)
 }
 
 fun MutableLiveData<String>.bindStringTwoWayToTextFieldText(
     textField: UITextField
-) {
-    bindStringToTextFieldText(textField)
+): Closeable {
+    val readCloseable = bindStringToTextFieldText(textField)
 
-    textField.setEventHandler(UIControlEventEditingChanged) {
+    val writeCloseable = textField.setEventHandler(UIControlEventEditingChanged) {
         val newText = this.text.orEmpty()
 
         if (value == newText) return@setEventHandler
 
         value = newText
     }
+
+    return readCloseable + writeCloseable
 }

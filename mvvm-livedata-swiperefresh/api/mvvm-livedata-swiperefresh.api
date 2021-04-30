@@ -6,7 +6,7 @@ public final class dev/icerock/moko/mvvm/livedata/swiperefresh/BuildConfig {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/swiperefresh/SwipeRefreshBindingsKt {
-	public static final fun bindToSwipeRefreshLayoutRefreshing (Ldev/icerock/moko/mvvm/livedata/MutableLiveData;Landroidx/lifecycle/LifecycleOwner;Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;)V
+	public static final fun bindToSwipeRefreshLayoutRefreshing (Ldev/icerock/moko/mvvm/livedata/MutableLiveData;Landroidx/lifecycle/LifecycleOwner;Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 	public static final fun setRefreshAction (Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;Lkotlin/jvm/functions/Function1;)V
 	public static final fun setRefreshAction (Landroidx/swiperefreshlayout/widget/SwipeRefreshLayout;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)V
 }

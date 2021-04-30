@@ -6,10 +6,13 @@ import UIKit
 import MultiPlatformLibrary
 
 public extension UIButton {
-  func bindEnabled(liveData: LiveData<KotlinBoolean>,
-                   enabledColor: UIColor? = nil,
-                   disabledColor: UIColor? = nil) {
-    UIButtonBindingKt.bindEnabled(
+  @available(*, deprecated, message: "use LiveData.bindBoolToControlEnabled and LiveData.bindBoolToViewBackgroundColor")
+  @discardableResult func bindEnabled(
+    liveData: LiveData<KotlinBoolean>,
+    enabledColor: UIColor? = nil,
+    disabledColor: UIColor? = nil
+  ) -> Closeable {
+    return UIButtonBindingKt.bindEnabled(
       self,
       liveData: liveData,
       enabledColor: enabledColor,
@@ -17,24 +20,27 @@ public extension UIButton {
     )
   }
 
-  func bindTitle(liveData: LiveData<NSString>) {
-    UIButtonBindingKt.bindTitle(
+  @available(*, deprecated, message: "use LiveData.bindStringToButtonTitle")
+  @discardableResult func bindTitle(liveData: LiveData<NSString>) -> Closeable {
+    return UIButtonBindingKt.bindTitle(
       self,
       liveData_: liveData
     )
   }
 
-  func bindTitle(liveData: LiveData<StringDesc>) {
-    UIButtonBindingKt.bindTitle(
+  @available(*, deprecated, message: "use LiveData.bindStringDescToButtonTitle")
+  @discardableResult func bindTitle(liveData: LiveData<StringDesc>) -> Closeable {
+    return UIButtonBindingKt.bindTitle(
       self,
       liveData: liveData
     )
   }
 
-  func bindImages(liveData: LiveData<KotlinBoolean>,
+  @available(*, deprecated, message: "use LiveData.bindBoolToButtonImage")
+  @discardableResult func bindImages(liveData: LiveData<KotlinBoolean>,
                   trueImage: UIImage,
-                  falseImage: UIImage) {
-    UIButtonBindingKt.bindImages(
+                  falseImage: UIImage) -> Closeable {
+    return UIButtonBindingKt.bindImages(
       self,
       liveData: liveData,
       trueImage: trueImage,

@@ -6,11 +6,12 @@ import UIKit
 import MultiPlatformLibrary
 
 public extension UIView {
-  func bindVisibility(
+  @available(*, deprecated, message: "use LiveData.bindBoolToViewHidden")
+  @discardableResult func bindVisibility(
     liveData: LiveData<KotlinBoolean>,
     inverted: Bool = false
-  ) {
-    UIViewBindingKt.bindVisibility(
+  ) -> Closeable {
+    return UIViewBindingKt.bindVisibility(
       self,
       liveData: liveData,
       inverted: inverted

@@ -13,8 +13,8 @@ import dev.icerock.moko.mvvm.utils.bindNotNull
 fun MutableLiveData<String>.bindTwoWayToEditTextText(
     lifecycleOwner: LifecycleOwner,
     editText: EditText
-) {
-    bindNotNull(lifecycleOwner) {
+): Closeable {
+    val readCloseable = bindNotNull(lifecycleOwner) {
         if (editText.text.toString() == it) return@bindNotNull
 
         editText.setText(it)
@@ -34,4 +34,10 @@ fun MutableLiveData<String>.bindTwoWayToEditTextText(
         override fun afterTextChanged(s: Editable?) = Unit
     }
     editText.addTextChangedListener(watcher)
+
+    val writeCloseable = Closeable {
+        editText.removeTextChangedListener(watcher)
+    }
+
+    return readCloseable + writeCloseable
 }

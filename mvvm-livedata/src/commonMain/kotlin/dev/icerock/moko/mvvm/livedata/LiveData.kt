@@ -11,3 +11,8 @@ expect open class LiveData<T> {
 
     fun removeObserver(observer: (T) -> Unit)
 }
+
+fun <T> LiveData<T>.addCloseableObserver(observer: (T) -> Unit): Closeable {
+    addObserver(observer)
+    return Closeable { removeObserver(observer) }
+}
