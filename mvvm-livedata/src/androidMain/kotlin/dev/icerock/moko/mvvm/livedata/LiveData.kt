@@ -52,6 +52,8 @@ actual open class LiveData<T>(initialValue: T) {
     }
 
     actual fun addObserver(observer: (T) -> Unit) {
+        println("livedata $this addObserver $observer")
+
         if (observers.isEmpty()) onActive()
 
         observer(value)
@@ -59,6 +61,8 @@ actual open class LiveData<T>(initialValue: T) {
     }
 
     actual fun removeObserver(observer: (T) -> Unit) {
+        println("livedata $this removeObserver $observer")
+        
         if (observers.remove(observer).not()) return
 
         if (observers.isEmpty()) onInactive()
