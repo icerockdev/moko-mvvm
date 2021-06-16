@@ -4,6 +4,10 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+@Deprecated(
+    message = "Use mediatorOf() instead",
+    replaceWith = ReplaceWith("mediatorOf()")
+)
 fun <OT, I1T, I2T> LiveData<I1T>.mergeWith(
     secondLiveData: LiveData<I2T>,
     function: (I1T, I2T) -> OT
