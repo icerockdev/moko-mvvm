@@ -4,6 +4,13 @@
 
 package dev.icerock.moko.mvvm.livedata
 
+@Deprecated(
+    message = "Use mediatorOf() instead",
+    replaceWith = ReplaceWith(
+        expression = "mediatorOf()",
+        imports = arrayOf("dev.icerock.moko.mvvm.livedata.mediatorOf")
+    )
+)
 fun <OT, I1T, I2T> MediatorLiveData<OT>.compose(
     firstInput: LiveData<I1T>,
     secondInput: LiveData<I2T>,
