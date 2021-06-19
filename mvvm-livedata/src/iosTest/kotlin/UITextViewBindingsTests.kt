@@ -3,23 +3,13 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringDescToLabelText
-import dev.icerock.moko.mvvm.livedata.bindStringDescToTextFieldText
 import dev.icerock.moko.mvvm.livedata.bindStringDescToTextViewText
-import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
-import dev.icerock.moko.mvvm.livedata.bindStringToTextFieldText
 import dev.icerock.moko.mvvm.livedata.bindStringToTextViewText
-import dev.icerock.moko.mvvm.livedata.bindStringTwoWayToTextFieldText
 import dev.icerock.moko.mvvm.livedata.bindStringTwoWayToTextViewText
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
-import platform.UIKit.UIButton
-import platform.UIKit.UILabel
-import platform.UIKit.UITextField
 import platform.UIKit.UITextView
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -32,6 +22,7 @@ class UITextViewBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UITextView(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

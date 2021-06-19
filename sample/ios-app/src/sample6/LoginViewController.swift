@@ -2,9 +2,8 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import Foundation
+import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryMvvm
 
 class LoginViewController: UIViewController {
     @IBOutlet private var emailField: UITextField!
@@ -28,14 +27,12 @@ class LoginViewController: UIViewController {
         viewModel.password.bindStringTwoWayToTextFieldText(textField: passwordField)
         viewModel.isLoginButtonVisible.revert().bindBoolToViewHidden(view: loginButton)
         viewModel.isLoading.revert().bindBoolToViewHidden(view: progressBar)
+        
+        viewModel.clearOnDetach(viewController: self)
     }
     
     @IBAction func onLoginButtonPressed() {
         viewModel.onLoginButtonPressed()
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
     }
 }
 

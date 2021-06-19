@@ -9,7 +9,10 @@ import androidx.lifecycle.Observer
 import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 
-fun <T> LiveData<T>.bind(lifecycleOwner: LifecycleOwner, observer: (T?) -> Unit): Closeable {
+fun <T> LiveData<T>.bind(
+    lifecycleOwner: LifecycleOwner,
+    observer: (T?) -> Unit
+): Closeable {
     observer(value)
 
     val androidObserver = Observer<T> { value ->
@@ -24,7 +27,10 @@ fun <T> LiveData<T>.bind(lifecycleOwner: LifecycleOwner, observer: (T?) -> Unit)
     }
 }
 
-fun <T> LiveData<T>.bindNotNull(lifecycleOwner: LifecycleOwner, observer: (T) -> Unit): Closeable {
+fun <T> LiveData<T>.bindNotNull(
+    lifecycleOwner: LifecycleOwner,
+    observer: (T) -> Unit
+): Closeable {
     return bind(lifecycleOwner) { value ->
         if (value == null) return@bind
 

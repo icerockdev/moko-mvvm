@@ -7,6 +7,7 @@ object Deps {
     private const val androidCoreTestingVersion = "2.1.0"
     private const val glideVersion = "4.11.0"
     private const val swipeRefreshVersion = "1.1.0"
+    private const val mockitoVersion = "1.10.19"
 
     private const val detektVersion = "1.15.0"
     private const val dokkaVersion = "1.4.20"
@@ -98,6 +99,8 @@ object Deps {
                 "androidx.arch.core:core-testing:$androidCoreTestingVersion"
             const val coroutinesTest =
                 "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+            const val mockito =
+                "org.mockito:mockito-core:$mockitoVersion"
         }
 
         object Jvm {

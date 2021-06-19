@@ -5,20 +5,12 @@
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.bindBoolToSwitchOn
 import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToSwitchOn
-import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringDescToLabelText
-import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
-import dev.icerock.moko.resources.desc.StringDesc
-import dev.icerock.moko.resources.desc.desc
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.Foundation.NSDate
 import platform.Foundation.NSRunLoop
 import platform.Foundation.date
 import platform.Foundation.runUntilDate
-import platform.UIKit.UIButton
-import platform.UIKit.UILabel
 import platform.UIKit.UISwitch
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -31,6 +23,7 @@ class UISwitchBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UISwitch(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

@@ -20,5 +20,23 @@ dependencies {
     androidMainImplementation(Deps.Libs.Android.coroutines)
 
     commonTestApi(Deps.Libs.MultiPlatform.mokoTest)
+    commonTestApi(Deps.Libs.Tests.mockito)
     commonTestApi(project(":mvvm-test"))
+}
+
+// see https://github.com/Kotlin/kotlinx-datetime/blob/978ae2f8c77253b16065f0c414708f74b2033e70/core/build.gradle.kts#L110
+// as example
+kotlin.targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+    if (konanTarget.family != org.jetbrains.kotlin.konan.target.Family.IOS) return@withType
+
+    compilations["main"].cinterops {
+        create("lifecycle") {
+            val cinteropDir = "$projectDir/src/iosMain/cinterop"
+            headers("$cinteropDir/headers/UIViewLifecycle.h")
+            defFile("$cinteropDir/lifecycle.def")
+            extraOpts("-Xsource-compiler-option", "-I$cinteropDir/headers")
+            extraOpts("-Xcompile-source", "$cinteropDir/sources/UIViewLifecycle.m")
+            extraOpts("-Xsource-compiler-option", "-fobjc-arc")
+        }
+    }
 }

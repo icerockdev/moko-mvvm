@@ -2,9 +2,8 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import Foundation
+import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryMvvm
 
 class ValidationAllViewController: UIViewController {
     @IBOutlet private var emailField: UITextField!
@@ -18,12 +17,10 @@ class ValidationAllViewController: UIViewController {
         
         viewModel = ValidationAllViewModel()
         
-        emailField.bindTextTwoWay(liveData: viewModel.email)
-        passwordField.bindTextTwoWay(liveData: viewModel.password)
-        button.bindEnabled(liveData: viewModel.isLoginButtonEnabled)
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
+        viewModel.email.bindStringTwoWayToTextFieldText(textField: emailField)
+        viewModel.password.bindStringTwoWayToTextFieldText(textField: passwordField)
+        viewModel.isLoginButtonEnabled.bindBoolToControlEnabled(control: button)
+        
+        viewModel.clearOnDetach(viewController: self)
     }
 }

@@ -10,24 +10,23 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlin.math.exp
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class LiveDataFlowTest {
+class FlowTest {
     @get:TestRule
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
-    fun `flow to live data test`() {
+    fun `flow to live data close scope`() {
         val scope = CoroutineScope(Dispatchers.Unconfined)
 
         val source = MutableStateFlow(0)
         val destination = source.asLiveData(scope)
+
+        destination.addObserver { }
 
         assertEquals(expected = source.value, actual = destination.value)
 
@@ -35,6 +34,26 @@ class LiveDataFlowTest {
         assertEquals(expected = source.value, actual = destination.value)
 
         scope.cancel()
+
+        source.value = 2
+        assertEquals(expected = 1, actual = destination.value)
+    }
+
+    @Test
+    fun `flow to live data close observer`() {
+        val scope = CoroutineScope(Dispatchers.Unconfined)
+
+        val source = MutableStateFlow(0)
+        val destination = source.asLiveData(scope)
+
+        val closeable = destination.addCloseableObserver { }
+
+        assertEquals(expected = source.value, actual = destination.value)
+
+        source.value = 1
+        assertEquals(expected = source.value, actual = destination.value)
+
+        closeable.close()
 
         source.value = 2
         assertEquals(expected = 1, actual = destination.value)

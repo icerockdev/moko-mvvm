@@ -4,36 +4,6 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-fun <T, OT> LiveData<T>.map(function: (T) -> OT): LiveData<OT> {
-    val mutableLiveData = MutableLiveData(function(value))
-    addObserver { mutableLiveData.value = function(it) }
-    return mutableLiveData
-}
-
-fun <T, OT> LiveData<T>.flatMap(function: (T) -> LiveData<OT>): LiveData<OT> {
-    var shadowLiveData: LiveData<OT>? = null
-    var mutableLiveData: MutableLiveData<OT>? = null
-
-    val shadowObserver: (OT) -> Unit = {
-        mutableLiveData!!.value = it
-    }
-
-    addObserver { newValue ->
-        shadowLiveData?.removeObserver(shadowObserver)
-
-        val newShadowLiveData = function(newValue)
-        shadowLiveData = newShadowLiveData
-
-        if (mutableLiveData == null) {
-            mutableLiveData = MutableLiveData(newShadowLiveData.value)
-        }
-
-        newShadowLiveData.addObserver(shadowObserver)
-    }
-
-    return mutableLiveData!!
-}
-
 @Deprecated(
     message = "Use mediatorOf() instead",
     replaceWith = ReplaceWith(

@@ -3,26 +3,11 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToSwitchOn
 import dev.icerock.moko.mvvm.livedata.bindBoolToViewBackgroundColor
 import dev.icerock.moko.mvvm.livedata.bindBoolToViewHidden
-import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToSwitchOn
-import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringDescToLabelText
-import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
-import dev.icerock.moko.resources.desc.StringDesc
-import dev.icerock.moko.resources.desc.desc
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
-import platform.Foundation.NSDate
-import platform.Foundation.NSRunLoop
-import platform.Foundation.date
-import platform.Foundation.runUntilDate
-import platform.UIKit.UIButton
 import platform.UIKit.UIColor
-import platform.UIKit.UILabel
-import platform.UIKit.UISwitch
 import platform.UIKit.UIView
 import platform.UIKit.backgroundColor
 import platform.UIKit.isHidden
@@ -37,6 +22,7 @@ class UIViewBindingsTests {
     @BeforeTest
     fun setup() {
         destination = UIView(frame = CGRectZero.readValue())
+        destination.wrapIntoWindow().makeKeyAndVisible()
     }
 
     @Test

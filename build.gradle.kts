@@ -35,9 +35,9 @@ allprojects {
 
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         input.setFrom(
-            "src/commonMain/kotlin",
-            "src/androidMain/kotlin",
-            "src/iosMain/kotlin",
+            "src/commonMain/kotlin", "src/commonTest/kotlin",
+            "src/androidMain/kotlin", "src/androidTest/kotlin",
+            "src/iosMain/kotlin", "src/iosTest/kotlin",
             "src/main/kotlin"
         )
     }

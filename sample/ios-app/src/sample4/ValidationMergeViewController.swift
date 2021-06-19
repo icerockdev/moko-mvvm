@@ -2,9 +2,8 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import Foundation
+import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryMvvm
 
 class ValidationMergeViewController: UIViewController {
     @IBOutlet private var emailField: UITextField!
@@ -21,9 +20,7 @@ class ValidationMergeViewController: UIViewController {
         viewModel.email.bindStringTwoWayToTextFieldText(textField: emailField)
         viewModel.password.bindStringTwoWayToTextFieldText(textField: passwordField)
         viewModel.isLoginButtonEnabled.bindBoolToControlEnabled(control: button)
-    }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        if(parent == nil) { viewModel.onCleared() }
+        
+        viewModel.clearOnDetach(viewController: self)
     }
 }

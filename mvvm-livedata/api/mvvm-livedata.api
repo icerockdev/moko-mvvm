@@ -32,12 +32,20 @@ public final class dev/icerock/moko/mvvm/livedata/EditTextBindingsKt {
 	public static final fun bindTwoWayToEditTextText (Ldev/icerock/moko/mvvm/livedata/MutableLiveData;Landroidx/lifecycle/LifecycleOwner;Landroid/widget/EditText;)Ldev/icerock/moko/mvvm/livedata/Closeable;
 }
 
+public final class dev/icerock/moko/mvvm/livedata/FlatMapLiveDataKt {
+	public static final fun flatMap (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
+}
+
 public class dev/icerock/moko/mvvm/livedata/LiveData {
-	public fun <init> (Landroidx/lifecycle/LiveData;)V
+	public fun <init> (Ljava/lang/Object;)V
 	public final fun addObserver (Lkotlin/jvm/functions/Function1;)V
-	protected final fun getArchLiveData ()Landroidx/lifecycle/LiveData;
+	protected final fun changeValue (Ljava/lang/Object;)V
+	protected final fun getArchLiveData ()Landroidx/lifecycle/MutableLiveData;
 	public fun getValue ()Ljava/lang/Object;
+	public final fun isActive ()Z
 	public fun ld ()Landroidx/lifecycle/LiveData;
+	protected fun onActive ()V
+	protected fun onInactive ()V
 	public final fun removeObserver (Lkotlin/jvm/functions/Function1;)V
 }
 
@@ -68,11 +76,13 @@ public final class dev/icerock/moko/mvvm/livedata/LiveDataKt {
 }
 
 public final class dev/icerock/moko/mvvm/livedata/LiveDataTransformsKt {
-	public static final fun flatMap (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 	public static final fun flatMapBuffered (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function2;)Ldev/icerock/moko/mvvm/livedata/LiveData;
-	public static final fun map (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 	public static final fun mapBuffered (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function2;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 	public static final fun mergeWith (Ldev/icerock/moko/mvvm/livedata/LiveData;Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function2;)Ldev/icerock/moko/mvvm/livedata/MediatorLiveData;
+}
+
+public final class dev/icerock/moko/mvvm/livedata/MapLiveDataKt {
+	public static final fun map (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)Ldev/icerock/moko/mvvm/livedata/LiveData;
 }
 
 public final class dev/icerock/moko/mvvm/livedata/MediatorComposeKt {
@@ -90,6 +100,8 @@ public final class dev/icerock/moko/mvvm/livedata/MediatorComposeKt {
 public class dev/icerock/moko/mvvm/livedata/MediatorLiveData : dev/icerock/moko/mvvm/livedata/MutableLiveData {
 	public fun <init> (Ljava/lang/Object;)V
 	public final fun addSource (Ldev/icerock/moko/mvvm/livedata/LiveData;Lkotlin/jvm/functions/Function1;)V
+	protected fun onActive ()V
+	protected fun onInactive ()V
 }
 
 public final class dev/icerock/moko/mvvm/livedata/MediatorLiveDataExtKt {
@@ -101,7 +113,6 @@ public final class dev/icerock/moko/mvvm/livedata/MediatorLiveDataExtKt {
 }
 
 public class dev/icerock/moko/mvvm/livedata/MutableLiveData : dev/icerock/moko/mvvm/livedata/LiveData {
-	public fun <init> (Landroidx/lifecycle/MutableLiveData;)V
 	public fun <init> (Ljava/lang/Object;)V
 	public fun getValue ()Ljava/lang/Object;
 	public synthetic fun ld ()Landroidx/lifecycle/LiveData;
