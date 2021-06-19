@@ -11,6 +11,7 @@ fun <T1, T2, R> mediatorOf(
     function: (T1, T2) -> R
 ): LiveData<R> =
     listOf(source1, source2).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -25,6 +26,7 @@ fun <T1, T2, T3, R> mediatorOf(
     function: (T1, T2, T3) -> R
 ): LiveData<R> =
     listOf(source1, source2, source3).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -41,6 +43,7 @@ fun <T1, T2, T3, T4, R> mediatorOf(
     function: (T1, T2, T3, T4) -> R
 ): LiveData<R> =
     listOf(source1, source2, source3, source4).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -49,7 +52,7 @@ fun <T1, T2, T3, T4, R> mediatorOf(
         )
     }
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "LongParameterList")
 fun <T1, T2, T3, T4, T5, R> mediatorOf(
     source1: LiveData<T1>,
     source2: LiveData<T2>,
@@ -59,6 +62,7 @@ fun <T1, T2, T3, T4, T5, R> mediatorOf(
     function: (T1, T2, T3, T4, T5) -> R
 ): LiveData<R> =
     listOf(source1, source2, source3, source4, source5).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -68,7 +72,7 @@ fun <T1, T2, T3, T4, T5, R> mediatorOf(
         )
     }
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "LongParameterList")
 fun <T1, T2, T3, T4, T5, T6, R> mediatorOf(
     source1: LiveData<T1>,
     source2: LiveData<T2>,
@@ -86,6 +90,7 @@ fun <T1, T2, T3, T4, T5, T6, R> mediatorOf(
         source5,
         source6,
     ).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -96,7 +101,7 @@ fun <T1, T2, T3, T4, T5, T6, R> mediatorOf(
         )
     }
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "LongParameterList")
 fun <T1, T2, T3, T4, T5, T6, T7, R> mediatorOf(
     source1: LiveData<T1>,
     source2: LiveData<T2>,
@@ -116,6 +121,7 @@ fun <T1, T2, T3, T4, T5, T6, T7, R> mediatorOf(
         source6,
         source7,
     ).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -127,7 +133,7 @@ fun <T1, T2, T3, T4, T5, T6, T7, R> mediatorOf(
         )
     }
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "LongParameterList")
 fun <T1, T2, T3, T4, T5, T6, T7, T8, R> mediatorOf(
     source1: LiveData<T1>,
     source2: LiveData<T2>,
@@ -149,6 +155,7 @@ fun <T1, T2, T3, T4, T5, T6, T7, T8, R> mediatorOf(
         source7,
         source8,
     ).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -161,7 +168,7 @@ fun <T1, T2, T3, T4, T5, T6, T7, T8, R> mediatorOf(
         )
     }
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "LongParameterList")
 fun <T1, T2, T3, T4, T5, T6, T7, T8, T9, R> mediatorOf(
     source1: LiveData<T1>,
     source2: LiveData<T2>,
@@ -185,6 +192,7 @@ fun <T1, T2, T3, T4, T5, T6, T7, T8, T9, R> mediatorOf(
         source8,
         source9,
     ).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
@@ -198,7 +206,7 @@ fun <T1, T2, T3, T4, T5, T6, T7, T8, T9, R> mediatorOf(
         )
     }
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "LongParameterList")
 fun <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> mediatorOf(
     source1: LiveData<T1>,
     source2: LiveData<T2>,
@@ -224,6 +232,7 @@ fun <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, R> mediatorOf(
         source9,
         source10
     ).mediator { values ->
+        @Suppress("MagicNumber")
         function(
             values[0] as T1,
             values[1] as T2,
