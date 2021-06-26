@@ -9,13 +9,16 @@ dependencies {
     commonMainImplementation(libs.coroutines)
 
     commonMainApi(libs.mokoResources)
-    commonMainApi(libs.mokoMvvm)
+    commonMainApi(projects.mvvm)
+    commonMainApi(projects.mvvmTest)
+    commonMainApi(projects.mvvmLivedata)
+    commonMainApi(projects.mvvmCore)
 
-    androidMainApi(libs.mokoMvvmLiveDataGlide)
-    androidMainApi(libs.mokoMvvmLiveDataMaterial)
-    androidMainApi(libs.mokoMvvmLiveDataSwipeRefresh)
+    androidMainApi(projects.mvvmLivedataGlide)
+    androidMainApi(projects.mvvmLivedataMaterial)
+    androidMainApi(projects.mvvmLivedataSwiperefresh)
 
-    commonTestImplementation(libs.mokoTest)
+    commonTestImplementation(projects.mvvmTest)
     commonTestImplementation(libs.mokoMvvmTest)
 }
 

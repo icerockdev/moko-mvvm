@@ -1,5 +1,5 @@
 [versions]
-kotlinVersion = "1.5.10"
+kotlinVersion = "1.5.20"
 androidAppCompatVersion = "1.2.0"
 materialDesignVersion = "1.2.1"
 androidLifecycleVersion = "2.2.0"
