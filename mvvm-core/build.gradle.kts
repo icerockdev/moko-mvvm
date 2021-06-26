@@ -3,19 +3,19 @@
  */
 
 plugins {
-    plugin(Deps.Plugins.androidLibrary)
-    plugin(Deps.Plugins.kotlinMultiplatform)
-    plugin(Deps.Plugins.mobileMultiplatform)
-    plugin(Deps.Plugins.mavenPublish)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.multiplatform")
+    id("dev.icerock.mobile.multiplatform")
+    id("org.gradle.maven-publish")
 }
 
 dependencies {
-    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
+    commonMainImplementation(libs.coroutines)
 
-    commonMainImplementation(project(":mvvm-internal"))
+    commonMainImplementation(projects.mvvmInternal)
 
-    androidMainApi(Deps.Libs.Android.appCompat)
-    androidMainApi(Deps.Libs.Android.androidViewModel)
+    androidMainApi(libs.appCompat)
+    androidMainApi(libs.androidViewModel)
 
-    androidMainImplementation(Deps.Libs.Android.coroutines)
+    androidMainImplementation(libs.coroutines)
 }

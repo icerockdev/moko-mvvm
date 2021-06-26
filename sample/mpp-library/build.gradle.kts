@@ -1,26 +1,26 @@
 plugins {
-    plugin(Deps.Plugins.androidLibrary)
-    plugin(Deps.Plugins.kotlinMultiplatform)
-    plugin(Deps.Plugins.mobileMultiplatform)
-    plugin(Deps.Plugins.iosFramework)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.multiplatform")
+    id("dev.icerock.mobile.multiplatform")
+    id("dev.icerock.mobile.multiplatform.ios-framework")
 }
 
 dependencies {
-    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
+    commonMainImplementation(libs.coroutines)
 
-    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
-    commonMainApi(Deps.Libs.MultiPlatform.mokoMvvm)
+    commonMainApi(libs.mokoResources)
+    commonMainApi(libs.mokoMvvm)
 
-    androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataGlide)
-    androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataMaterial)
-    androidMainApi(Deps.Libs.MultiPlatform.mokoMvvmLiveDataSwipeRefresh)
+    androidMainApi(libs.mokoMvvmLiveDataGlide)
+    androidMainApi(libs.mokoMvvmLiveDataMaterial)
+    androidMainApi(libs.mokoMvvmLiveDataSwipeRefresh)
 
-    commonTestImplementation(Deps.Libs.MultiPlatform.mokoTest)
-    commonTestImplementation(Deps.Libs.MultiPlatform.mokoMvvmTest)
+    commonTestImplementation(libs.mokoTest)
+    commonTestImplementation(libs.mokoMvvmTest)
 }
 
 framework {
     export(project(":mvvm-core"))
     export(project(":mvvm-livedata"))
-    export(Deps.Libs.MultiPlatform.mokoResources)
+    export(libs.mokoResources)
 }

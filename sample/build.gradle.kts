@@ -6,17 +6,16 @@ subprojects {
     configurations.all {
         resolutionStrategy.dependencySubstitution {
             listOf(
-                Deps.Libs.MultiPlatform.mokoMvvm to ":mvvm",
-                Deps.Libs.MultiPlatform.mokoMvvmCore to ":mvvm-core",
-                Deps.Libs.MultiPlatform.mokoMvvmLiveData to ":mvvm-livedata",
-                Deps.Libs.MultiPlatform.mokoMvvmLiveDataMaterial to ":mvvm-livedata-material",
-                Deps.Libs.MultiPlatform.mokoMvvmLiveDataGlide to ":mvvm-livedata-glide",
-                Deps.Libs.MultiPlatform.mokoMvvmLiveDataSwipeRefresh to ":mvvm-livedata-swiperefresh",
-                Deps.Libs.MultiPlatform.mokoMvvmDataBinding to ":mvvm-databinding",
-                Deps.Libs.MultiPlatform.mokoMvvmViewBinding to ":mvvm-viewbinding",
-                Deps.Libs.MultiPlatform.mokoMvvmState to ":mvvm-state",
-                Deps.Libs.MultiPlatform.mokoMvvmStateDeprecated to ":mvvm-state-deprecated",
-                Deps.Libs.MultiPlatform.mokoMvvmTest to ":mvvm-test"
+                "${libs.mokoMvvm.get().module.group}:${libs.mokoMvvm.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm",
+                "${libs.mokoMvvmCore.get().module.group}:${libs.mokoMvvmCore.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-core",
+                "${libs.mokoMvvmLiveData.get().module.group}:${libs.mokoMvvmLiveData.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-livedata",
+                "${libs.mokoMvvmLiveDataMaterial.get().module.group}:${libs.mokoMvvmLiveDataMaterial.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-livedata-material",
+                "${libs.mokoMvvmLiveDataSwipeRefresh.get().module.group}:${libs.mokoMvvmLiveDataSwipeRefresh.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-livedata-swiperefresh",
+                "${libs.mokoMvvmDataBinding.get().module.group}:${libs.mokoMvvmDataBinding.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-databinding",
+                "${libs.mokoMvvmViewBinding.get().module.group}:${libs.mokoMvvmViewBinding.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-viewbinding",
+                "${libs.mokoMvvmState.get().module.group}:${libs.mokoMvvmState.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-state",
+                "${libs.mokoMvvmStateDeprecated.get().module.group}:${libs.mokoMvvmStateDeprecated.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-state-deprecated",
+                "${libs.mokoMvvmTest.get().module.group}:${libs.mokoMvvmTest.get().module.name}:${libs.versions.mokoMvvmVersion.get()}" to ":mvvm-test"
             ).forEach { (module, path) ->
                 substitute(module(module)).with(project(path))
             }

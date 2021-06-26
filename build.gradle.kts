@@ -5,33 +5,31 @@
 import java.util.Base64
 
 plugins {
-    plugin(Deps.Plugins.detekt) apply false
-    plugin(Deps.Plugins.dokka) apply false
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.5.0"
 }
 
 buildscript {
     repositories {
+        mavenCentral()
+        google()
+
         gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.15.0")
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
+
+        classpath("dev.icerock:mobile-multiplatform:0.11.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20")
+        classpath("com.android.tools.build:gradle:4.2.1")
     }
 }
 
 allprojects {
-    repositories {
-        mavenCentral()
-        google()
-        mavenCentral()
 
-        jcenter {
-            content {
-                includeGroup("org.jetbrains.trove4j")
-                includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
-            }
-        }
-    }
-
-    apply(plugin = Deps.Plugins.detekt.id)
-    apply(plugin = Deps.Plugins.dokka.id)
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = "org.jetbrains.dokka")
 
     configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
         input.setFrom(
@@ -43,23 +41,23 @@ allprojects {
     }
 
     dependencies {
-        "detektPlugins"(Deps.Libs.Jvm.detektFormatting)
+        "detektPlugins"(rootProject.libs.detektFormatting)
     }
 
-    plugins.withId(Deps.Plugins.androidLibrary.id) {
+    plugins.withId("com.android.library") {
         configure<com.android.build.gradle.LibraryExtension> {
-            compileSdkVersion(Deps.Android.compileSdk)
+            compileSdkVersion(libs.versions.compileSdk.get().toInt())
 
             defaultConfig {
-                minSdkVersion(Deps.Android.minSdk)
-                targetSdkVersion(Deps.Android.targetSdk)
+                minSdkVersion(libs.versions.minSdk.get().toInt())
+                targetSdkVersion(libs.versions.targetSdk.get().toInt())
             }
         }
     }
 
-    plugins.withId(Deps.Plugins.mavenPublish.id) {
+    plugins.withId("org.gradle.maven-publish") {
         group = "dev.icerock.moko"
-        version = Deps.mokoMvvmVersion
+        version = libs.versions.mokoMvvmVersion.get()
 
         val javadocJar by tasks.registering(Jar::class) {
             archiveClassifier.set("javadoc")
@@ -106,7 +104,7 @@ allprojects {
                 }
             }
 
-            apply(plugin = Deps.Plugins.signing.id)
+            apply(plugin = "signing")
 
             configure<SigningExtension> {
                 val signingKeyId: String? = System.getenv("SIGNING_KEY_ID")

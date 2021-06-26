@@ -3,10 +3,10 @@
  */
 
 plugins {
-    plugin(Deps.Plugins.androidLibrary)
-    plugin(Deps.Plugins.kotlinAndroid)
-    plugin(Deps.Plugins.kotlinKapt)
-    plugin(Deps.Plugins.mavenPublish)
+    id("com.android.library")
+    id("kotlin-android")
+    id("kotlin-kapt")
+    id("org.gradle.maven-publish")
 }
 
 android {
@@ -16,15 +16,15 @@ android {
 }
 
 dependencies {
-    implementation(Deps.Libs.MultiPlatform.coroutines)
+    implementation(libs.coroutines)
 
     api(project(":mvvm-core"))
 
-    api(Deps.Libs.MultiPlatform.mokoResources.common)
+    api(libs.mokoResources)
 
-    api(Deps.Libs.Android.appCompat)
-    api(Deps.Libs.Android.lifecycle)
-    api(Deps.Libs.Android.coroutines)
+    api(libs.appCompat)
+    api(libs.lifecycle)
+    api(libs.coroutines)
 }
 
 afterEvaluate {

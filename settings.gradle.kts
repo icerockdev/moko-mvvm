@@ -2,12 +2,20 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-pluginManagement {
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
 
-        gradlePluginPortal()
+        jcenter {
+            content {
+                includeGroup("org.jetbrains.trove4j")
+                includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
+            }
+        }
     }
 }
 
