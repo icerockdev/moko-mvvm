@@ -3,13 +3,9 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("org.gradle.maven-publish")
-}
-
-android {
-    sourceSets.all { java.srcDir("src/$name/kotlin") }
+    id("android-library-convention")
+    id("detekt-convention")
+    id("android-publication-convention")
 }
 
 dependencies {
@@ -23,12 +19,4 @@ dependencies {
     api(libs.lifecycle)
     api(libs.glide)
     api(libs.coroutines)
-}
-
-afterEvaluate {
-    publishing.publications {
-        create("release", MavenPublication::class.java) {
-            from(components.getByName("release"))
-        }
-    }
 }

@@ -12,12 +12,13 @@ dependencyResolutionManagement {
 
         jcenter {
             content {
-                includeGroup("org.jetbrains.trove4j")
                 includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
             }
         }
     }
 }
+
+includeBuild("mvvm-build-logic")
 
 include(":mvvm-internal")
 include(":mvvm-core")

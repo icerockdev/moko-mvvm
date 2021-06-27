@@ -3,34 +3,24 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
+    id("android-library-convention")
+    id("detekt-convention")
     id("kotlin-kapt")
-    id("org.gradle.maven-publish")
+    id("android-publication-convention")
 }
 
 android {
     buildFeatures.viewBinding = true
-
-    sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
 
 dependencies {
     implementation(libs.coroutines)
 
-    api(project(":mvvm-core"))
+    api(projects.mvvmCore)
 
     api(libs.mokoResources)
 
     api(libs.appCompat)
     api(libs.lifecycle)
     api(libs.coroutines)
-}
-
-afterEvaluate {
-    publishing.publications {
-        create("release", MavenPublication::class.java) {
-            from(components.getByName("release"))
-        }
-    }
 }

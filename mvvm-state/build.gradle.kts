@@ -3,10 +3,9 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("dev.icerock.mobile.multiplatform")
-    id("org.gradle.maven-publish")
+    id("multiplatform-library-convention")
+    id("detekt-convention")
+    id("publication-convention")
 }
 
 dependencies {
@@ -14,10 +13,8 @@ dependencies {
 
     commonMainApi(projects.mvvmLivedata)
 
-    androidMainApi(libs.appCompat)
-    androidMainApi(libs.androidViewModel)
-
-    androidMainImplementation(libs.coroutines)
+    "androidMainApi"(libs.appCompat)
+    "androidMainApi"(libs.androidViewModel)
 
     commonTestApi(libs.mokoTest)
     commonTestApi(projects.mvvmTest)

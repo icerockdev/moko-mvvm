@@ -1,8 +1,15 @@
 plugins {
     id("com.android.library")
+    id("android-base-convention")
+    id("detekt-convention")
     id("org.jetbrains.kotlin.multiplatform")
-    id("dev.icerock.mobile.multiplatform")
+    id("dev.icerock.mobile.multiplatform.android-manifest")
     id("dev.icerock.mobile.multiplatform.ios-framework")
+}
+
+kotlin {
+    android()
+    ios()
 }
 
 dependencies {
@@ -14,16 +21,16 @@ dependencies {
     commonMainApi(projects.mvvmLivedata)
     commonMainApi(projects.mvvmCore)
 
-    androidMainApi(projects.mvvmLivedataGlide)
-    androidMainApi(projects.mvvmLivedataMaterial)
-    androidMainApi(projects.mvvmLivedataSwiperefresh)
+    "androidMainApi"(projects.mvvmLivedataGlide)
+    "androidMainApi"(projects.mvvmLivedataMaterial)
+    "androidMainApi"(projects.mvvmLivedataSwiperefresh)
 
     commonTestImplementation(projects.mvvmTest)
-    commonTestImplementation(libs.mokoMvvmTest)
+    commonTestImplementation(libs.mokoTest)
 }
 
 framework {
-    export(project(":mvvm-core"))
-    export(project(":mvvm-livedata"))
+    export(projects.mvvmCore)
+    export(projects.mvvmLivedata)
     export(libs.mokoResources)
 }

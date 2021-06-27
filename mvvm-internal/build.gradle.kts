@@ -3,14 +3,10 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("dev.icerock.mobile.multiplatform")
-    id("org.gradle.maven-publish")
+    id("multiplatform-library-convention")
+    id("detekt-convention")
+    id("publication-convention")
 }
-
-group = "dev.icerock.moko"
-version = libs.versions.mokoMvvmVersion.get()
 
 dependencies {
     commonMainApi(libs.coroutines)

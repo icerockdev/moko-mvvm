@@ -6,15 +6,11 @@ androidLifecycleVersion = "2.2.0"
 androidCoreTestingVersion = "2.1.0"
 glideVersion = "4.11.0"
 swipeRefreshVersion = "1.1.0"
-detektVersion = "1.15.0"
 dokkaVersion = "1.4.20"
-coroutinesVersion = "1.4.2"
-mokoResourcesVersion = "0.15.1"
-mokoTestVersion = "0.2.1"
-mokoMvvmVersion = "0.10.1"
-compileSdk = "29"
-targetSdk = "29"
-minSdk = "16"
+coroutinesVersion = "1.5.0-native-mt"
+mokoResourcesVersion = "0.16.0"
+mokoTestVersion = "0.4.0"
+mokoMvvmVersion = "0.11.0"
 
 [libraries]
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompatVersion" }
@@ -26,20 +22,7 @@ glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersio
 swipeRefresh = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swipeRefreshVersion" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 mokoResources = { module = "dev.icerock.moko:resources", version.ref = "mokoResourcesVersion" }
-mokoTest = { module = "dev.icerock.moko:test", version.ref = "mokoTestVersion" }
-mokoMvvm = { module = "dev.icerock.moko:mvvm", version.ref = "mokoMvvmVersion" }
-mokoMvvmCore = { module = "dev.icerock.moko:mvvm-core", version.ref = "mokoMvvmVersion" }
-mokoMvvmLiveData = { module = "dev.icerock.moko:mvvm-livedata", version.ref = "mokoMvvmVersion" }
-mokoMvvmLiveDataMaterial = { module = "dev.icerock.moko:mvvm-livedata-material", version.ref = "mokoMvvmVersion" }
-mokoMvvmLiveDataGlide = { module = "dev.icerock.moko:mvvm-livedata-glide", version.ref = "mokoMvvmVersion" }
-mokoMvvmLiveDataSwipeRefresh = { module = "dev.icerock.moko:mvvm-livedata-swiperefresh", version.ref = "mokoMvvmVersion" }
-mokoMvvmDataBinding = { module = "dev.icerock.moko:mvvm-databinding", version.ref = "mokoMvvmVersion" }
-mokoMvvmViewBinding = { module = "dev.icerock.moko:mvvm-viewbinding", version.ref = "mokoMvvmVersion" }
-mokoMvvmState = { module = "dev.icerock.moko:mvvm-state", version.ref = "mokoMvvmVersion" }
-mokoMvvmStateDeprecated = { module ="dev.icerock.moko:mvvm-state-deprecated", version.ref = "mokoMvvmVersion" }
-mokoMvvmTest = { module = "dev.icerock.moko:mvvm-test", version.ref = "mokoMvvmVersion" }
+mokoTest = { module = "dev.icerock.moko:test-core", version.ref = "mokoTestVersion" }
 kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinVersion" }
 androidCoreTesting = { module = "androidx.arch.core:core-testing", version.ref = "androidCoreTestingVersion" }
 coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
-detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detektVersion" }
-

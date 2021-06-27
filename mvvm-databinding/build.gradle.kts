@@ -3,16 +3,14 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
+    id("android-library-convention")
+    id("detekt-convention")
+    id("android-publication-convention")
     id("kotlin-kapt")
-    id("org.gradle.maven-publish")
 }
 
 android {
     buildFeatures.dataBinding = true
-
-    sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
 
 dependencies {
@@ -29,12 +27,4 @@ dependencies {
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     compileOnly("javax.annotation:jsr250-api:1.0")
-}
-
-afterEvaluate {
-    publishing.publications {
-        create("release", MavenPublication::class.java) {
-            from(components.getByName("release"))
-        }
-    }
 }
