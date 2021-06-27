@@ -70,12 +70,14 @@ project build.gradle
 dependencies {
     commonMainApi("dev.icerock.moko:mvvm-core:0.10.1") // only ViewModel, EventsDispatcher, Dispatchers.UI
     commonMainApi("dev.icerock.moko:mvvm-livedata:0.10.1") // api mvvm-core, LiveData and extensions
+    commonMainApi("dev.icerock.moko:mvvm-state:0.10.1") // api mvvm-livedata, ResourceState class and extensions
+    
     androidMainApi("dev.icerock.moko:mvvm-livedata-material:0.10.1") // api mvvm-livedata, Material library android extensions
     androidMainApi("dev.icerock.moko:mvvm-livedata-glide:0.10.1") // api mvvm-livedata, Glide library android extensions
     androidMainApi("dev.icerock.moko:mvvm-livedata-swiperefresh:0.10.1") // api mvvm-livedata, SwipeRefreshLayout library android extensions
-    commonMainApi("dev.icerock.moko:mvvm-state:0.10.1") // api mvvm-livedata, ResourceState class and extensions
     androidMainApi("dev.icerock.moko:mvvm-databinding:0.10.1") // api mvvm-livedata, DataBinding support for Android
     androidMainApi("dev.icerock.moko:mvvm-viewbinding:0.10.1") // api mvvm-livedata, ViewBinding support for Android
+    
     commonTestImplementation("dev.icerock.moko:mvvm-test:0.10.1") // test utilities
 }
 ```
@@ -85,13 +87,10 @@ Also required export of dependency to iOS framework. For example:
 kotlin {
     // export correct artifact to use all classes of library directly from Swift
     targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
-        val arch = when (this.konanTarget) {	
-            org.jetbrains.kotlin.konan.target.KonanTarget.IOS_ARM64 -> "iosarm64"	
-            org.jetbrains.kotlin.konan.target.KonanTarget.IOS_X64 -> "iosx64"	
-            else -> throw IllegalArgumentException()	
-        }
         binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
-            export("dev.icerock.moko:mvvm-$arch:0.10.1")
+            export("dev.icerock.moko:mvvm-core:0.10.1")
+            export("dev.icerock.moko:mvvm-livedata:0.10.1")
+            export("dev.icerock.moko:mvvm-state:0.10.1")
         }
     }
 }
