@@ -3,22 +3,19 @@
  */
 
 plugins {
-    plugin(Deps.Plugins.androidLibrary)
-    plugin(Deps.Plugins.kotlinMultiplatform)
-    plugin(Deps.Plugins.mobileMultiplatform)
-    plugin(Deps.Plugins.mavenPublish)
+    id("multiplatform-library-convention")
+    id("detekt-convention")
+    id("publication-convention")
 }
 
 dependencies {
-    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
+    commonMainImplementation(libs.coroutines)
 
-    commonMainApi(project(":mvvm-livedata"))
+    commonMainApi(projects.mvvmLivedata)
 
-    androidMainApi(Deps.Libs.Android.appCompat)
-    androidMainApi(Deps.Libs.Android.androidViewModel)
+    "androidMainApi"(libs.appCompat)
+    "androidMainApi"(libs.androidViewModel)
 
-    androidMainImplementation(Deps.Libs.Android.coroutines)
-
-    commonTestApi(Deps.Libs.MultiPlatform.mokoTest)
-    commonTestApi(project(":mvvm-test"))
+    commonTestApi(libs.mokoTest)
+    commonTestApi(projects.mvvmTest)
 }
