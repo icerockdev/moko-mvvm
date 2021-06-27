@@ -3,38 +3,28 @@
  */
 
 plugins {
-    plugin(Deps.Plugins.androidLibrary)
-    plugin(Deps.Plugins.kotlinAndroid)
-    plugin(Deps.Plugins.kotlinKapt)
-    plugin(Deps.Plugins.mavenPublish)
+    id("android-library-convention")
+    id("detekt-convention")
+    id("android-publication-convention")
+    id("kotlin-kapt")
 }
 
 android {
     buildFeatures.dataBinding = true
-
-    sourceSets.all { java.srcDir("src/$name/kotlin") }
 }
 
 dependencies {
-    implementation(Deps.Libs.MultiPlatform.coroutines)
+    implementation(libs.coroutines)
 
-    api(project(":mvvm-livedata"))
+    api(projects.mvvmLivedata)
 
-    api(Deps.Libs.MultiPlatform.mokoResources.common)
+    api(libs.mokoResources)
 
-    api(Deps.Libs.Android.appCompat)
-    api(Deps.Libs.Android.lifecycle)
-    api(Deps.Libs.Android.material)
-    api(Deps.Libs.Android.coroutines)
+    api(libs.appCompat)
+    api(libs.lifecycle)
+    api(libs.material)
+    api(libs.coroutines)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     compileOnly("javax.annotation:jsr250-api:1.0")
-}
-
-afterEvaluate {
-    publishing.publications {
-        create("release", MavenPublication::class.java) {
-            from(components.getByName("release"))
-        }
-    }
 }

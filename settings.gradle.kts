@@ -2,14 +2,23 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-pluginManagement {
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
 
-        gradlePluginPortal()
+        jcenter {
+            content {
+                includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
+            }
+        }
     }
 }
+
+includeBuild("mvvm-build-logic")
 
 include(":mvvm-internal")
 include(":mvvm-core")

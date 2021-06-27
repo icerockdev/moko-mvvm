@@ -3,15 +3,11 @@
  */
 
 plugins {
-    plugin(Deps.Plugins.androidLibrary)
-    plugin(Deps.Plugins.kotlinMultiplatform)
-    plugin(Deps.Plugins.mobileMultiplatform)
-    plugin(Deps.Plugins.mavenPublish)
+    id("multiplatform-library-convention")
+    id("detekt-convention")
+    id("publication-convention")
 }
 
-group = "dev.icerock.moko"
-version = Deps.mokoMvvmVersion
-
 dependencies {
-    commonMainApi(Deps.Libs.MultiPlatform.coroutines)
+    commonMainApi(libs.coroutines)
 }

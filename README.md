@@ -1,5 +1,5 @@
 ![moko-mvvm](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://img.shields.io/maven-central/v/dev.icerock.moko/mvvm) ](https://repo1.maven.org/maven2/dev/icerock/moko/mvvm) ![kotlin-version](https://img.shields.io/badge/kotlin-1.4.31-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://img.shields.io/maven-central/v/dev.icerock.moko/mvvm-core) ](https://repo1.maven.org/maven2/dev/icerock/moko/mvvm-core) ![kotlin-version](https://kotlin-version.aws.icerock.dev/kotlin-version?group=dev.icerock.moko&name=mvvm-core)
 
 # Mobile Kotlin Model-View-ViewModel architecture components
 This is a Kotlin Multiplatform library that provides architecture components of Model-View-ViewModel
@@ -8,7 +8,6 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 ## Table of Contents
 - [Features](#features)
 - [Requirements](#requirements)
-- [Versions](#versions)
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [Usage](#usage)
@@ -24,36 +23,9 @@ This is a Kotlin Multiplatform library that provides architecture components of 
 - **DataBinding, ViewBinding support** - integrate to android app with commonly used tools.
 
 ## Requirements
-- Gradle version 6.0+
+- Gradle version 6.8+
 - Android API 16+
-- iOS version 9.0+
-
-## Versions
-### Bintray
-- kotlin 1.3.50
-  - 0.1.0
-  - 0.2.0
-  - 0.3.0
-  - 0.3.1
-- kotlin 1.3.61
-  - 0.4.0
-  - 0.5.0
-- kotlin 1.3.70
-  - 0.6.0
-- kotlin 1.3.72
-  - 0.7.0
-  - 0.7.1
-- kotlin 1.4.0
-  - 0.8.0
-- kotlin 1.4.21
-  - 0.8.1
-  - 0.9.0
-  - 0.9.1
-### mavenCentral
-- kotlin 1.4.31
-  - 0.9.2
-  - 0.10.0
-  - 0.10.1
+- iOS version 11.0+
 
 ## Installation
 root build.gradle  
@@ -68,15 +40,17 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm-core:0.10.1") // only ViewModel, EventsDispatcher, Dispatchers.UI
-    commonMainApi("dev.icerock.moko:mvvm-livedata:0.10.1") // api mvvm-core, LiveData and extensions
-    androidMainApi("dev.icerock.moko:mvvm-livedata-material:0.10.1") // api mvvm-livedata, Material library android extensions
-    androidMainApi("dev.icerock.moko:mvvm-livedata-glide:0.10.1") // api mvvm-livedata, Glide library android extensions
-    androidMainApi("dev.icerock.moko:mvvm-livedata-swiperefresh:0.10.1") // api mvvm-livedata, SwipeRefreshLayout library android extensions
-    commonMainApi("dev.icerock.moko:mvvm-state:0.10.1") // api mvvm-livedata, ResourceState class and extensions
-    androidMainApi("dev.icerock.moko:mvvm-databinding:0.10.1") // api mvvm-livedata, DataBinding support for Android
-    androidMainApi("dev.icerock.moko:mvvm-viewbinding:0.10.1") // api mvvm-livedata, ViewBinding support for Android
-    commonTestImplementation("dev.icerock.moko:mvvm-test:0.10.1") // test utilities
+    commonMainApi("dev.icerock.moko:mvvm-core:0.11.0") // only ViewModel, EventsDispatcher, Dispatchers.UI
+    commonMainApi("dev.icerock.moko:mvvm-livedata:0.11.0") // api mvvm-core, LiveData and extensions
+    commonMainApi("dev.icerock.moko:mvvm-state:0.11.0") // api mvvm-livedata, ResourceState class and extensions
+    
+    androidMainApi("dev.icerock.moko:mvvm-livedata-material:0.11.0") // api mvvm-livedata, Material library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-livedata-glide:0.11.0") // api mvvm-livedata, Glide library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-livedata-swiperefresh:0.11.0") // api mvvm-livedata, SwipeRefreshLayout library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-databinding:0.11.0") // api mvvm-livedata, DataBinding support for Android
+    androidMainApi("dev.icerock.moko:mvvm-viewbinding:0.11.0") // api mvvm-livedata, ViewBinding support for Android
+    
+    commonTestImplementation("dev.icerock.moko:mvvm-test:0.11.0") // test utilities
 }
 ```
 
@@ -85,13 +59,10 @@ Also required export of dependency to iOS framework. For example:
 kotlin {
     // export correct artifact to use all classes of library directly from Swift
     targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
-        val arch = when (this.konanTarget) {	
-            org.jetbrains.kotlin.konan.target.KonanTarget.IOS_ARM64 -> "iosarm64"	
-            org.jetbrains.kotlin.konan.target.KonanTarget.IOS_X64 -> "iosx64"	
-            else -> throw IllegalArgumentException()	
-        }
         binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
-            export("dev.icerock.moko:mvvm-$arch:0.10.1")
+            export("dev.icerock.moko:mvvm-core:0.11.0")
+            export("dev.icerock.moko:mvvm-livedata:0.11.0")
+            export("dev.icerock.moko:mvvm-state:0.11.0")
         }
     }
 }
@@ -99,7 +70,7 @@ kotlin {
 
 On iOS, in addition to the Kotlin library add in Podfile
 ```ruby
-pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.10.1'
+pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.11.0'
 ```
 **`MultiPlatformLibraryMvvm` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
