@@ -61,7 +61,7 @@ class LiveDataTest {
     @Test
     fun `dataTransform + mergeWith test`() {
         val vmIsAuthorized = MutableLiveData(true)
-        val state: MutableLiveData<ResourceState<Int, Throwable>> = MutableLiveData(ResourceState.Empty())
+        val state: MutableLiveData<ResourceState<Int, Throwable>> = MutableLiveData(ResourceState.Empty)
         val isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
 
         var dataTransformCounter = 0
@@ -91,7 +91,7 @@ class LiveDataTest {
         assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 3)
         assertTrue { result.value.isEmpty() }
 
-        state.value = ResourceState.Loading()
+        state.value = ResourceState.Loading
 
         assertEquals(actual = dataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithDataTransformCounter, expected = 0)
