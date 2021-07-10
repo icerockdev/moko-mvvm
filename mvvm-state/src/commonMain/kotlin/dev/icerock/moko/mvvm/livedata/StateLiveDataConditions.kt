@@ -17,23 +17,23 @@ fun <T, E> LiveData<ResourceState<T, E>>.isEmptyState(): LiveData<Boolean> = map
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isSuccessState(): LiveData<Boolean> =
     MediatorLiveData(false)
         .composition(this) { list ->
-            list.firstOrNull { it !is ResourceState.Success<*, *> } == null
+            list.firstOrNull { it !is ResourceState.Success<*> } == null
         }
 
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isLoadingState(): LiveData<Boolean> =
     MediatorLiveData(false)
         .composition(this) { list ->
-            list.firstOrNull { it is ResourceState.Loading<*, *> } != null
+            list.firstOrNull { it is ResourceState.Loading } != null
         }
 
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isErrorState(): LiveData<Boolean> =
     MediatorLiveData(false)
         .composition(this) { list ->
-            list.firstOrNull { it is ResourceState.Failed<*, *> } != null
+            list.firstOrNull { it is ResourceState.Failed<*> } != null
         }
 
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isEmptyState(): LiveData<Boolean> =
     MediatorLiveData(false)
         .composition(this) { list ->
-            list.firstOrNull { it is ResourceState.Empty<*, *> } != null
+            list.firstOrNull { it is ResourceState.Empty } != null
         }

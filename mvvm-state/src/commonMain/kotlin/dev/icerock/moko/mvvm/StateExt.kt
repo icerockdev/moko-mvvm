@@ -11,7 +11,7 @@ fun <T, E> T?.asState(whenNull: () -> ResourceState<T, E>): ResourceState<T, E> 
     this?.asState() ?: whenNull()
 
 fun <T, E> List<T>.asState(): ResourceState<List<T>, E> = if (this.isEmpty()) {
-    ResourceState.Empty()
+    ResourceState.Empty
 } else {
     ResourceState.Success(this)
 }
@@ -20,7 +20,7 @@ fun <T, E> List<T>?.asState(whenNull: () -> ResourceState<List<T>, E>): Resource
     this?.asState() ?: whenNull()
 
 inline fun <reified T, reified E> ResourceState<T, E>?.nullAsEmpty(): ResourceState<T, E> =
-    this ?: ResourceState.Empty()
+    this ?: ResourceState.Empty
 
 inline fun <reified T, reified E> ResourceState<T, E>?.nullAsLoading(): ResourceState<T, E> =
-    this ?: ResourceState.Loading()
+    this ?: ResourceState.Loading
