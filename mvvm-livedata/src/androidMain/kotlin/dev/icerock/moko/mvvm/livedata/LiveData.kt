@@ -8,8 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.LiveData as ArchLiveData
 
 actual open class LiveData<T> {
-    protected val archLiveData: ArchLiveData<T>
-    private val observers = mutableMapOf<(T) -> Unit, Observer<T>>()
+    val archLiveData: ArchLiveData<T>
+    val observers = mutableMapOf<(T) -> Unit, Observer<T>>()
 
     @Suppress("ConvertSecondaryConstructorToPrimary")
     constructor(liveData: ArchLiveData<T>) {
@@ -20,7 +20,7 @@ actual open class LiveData<T> {
     actual open val value: T
         get() = archLiveData.value as T
 
-    actual fun addObserver(observer: (T) -> Unit) {
+    actual open fun addObserver(observer: (T) -> Unit) {
         val archObserver = Observer<T> { value ->
             if (value is T) observer(value)
         }
@@ -29,7 +29,7 @@ actual open class LiveData<T> {
         archLiveData.observeForever(archObserver)
     }
 
-    actual fun removeObserver(observer: (T) -> Unit) {
+    actual open fun removeObserver(observer: (T) -> Unit) {
         val archObserver = observers.remove(observer) ?: return
         archLiveData.removeObserver(archObserver)
     }
