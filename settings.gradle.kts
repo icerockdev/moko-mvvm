@@ -19,6 +19,7 @@ dependencyResolutionManagement {
 }
 
 includeBuild("mvvm-build-logic")
+includeBuild("plugins")
 
 include(":mvvm-internal")
 include(":mvvm-core")

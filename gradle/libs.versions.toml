@@ -11,6 +11,7 @@ coroutinesVersion = "1.5.0-native-mt"
 mokoResourcesVersion = "0.16.0"
 mokoTestVersion = "0.4.0"
 mokoMvvmVersion = "0.11.0"
+autoServiceVersion = "1.0-rc6"
 
 [libraries]
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompatVersion" }
@@ -26,3 +27,9 @@ mokoTest = { module = "dev.icerock.moko:test-core", version.ref = "mokoTestVersi
 kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinVersion" }
 androidCoreTesting = { module = "androidx.arch.core:core-testing", version.ref = "androidCoreTestingVersion" }
 coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
+
+autoService = { module = "com.google.auto.service:auto-service", version.ref = "autoServiceVersion" }
+
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinVersion" }
+kotlinGradlePluginApi = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api", version.ref = "kotlinVersion" }
+kotlinCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlinVersion" }
