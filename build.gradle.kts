@@ -44,7 +44,7 @@ tasks.register("clean", Delete::class).configure {
 }
 
 tasks.withType<org.jetbrains.dokka.gradle.DokkaMultiModuleTask>().all {
-    removeChildTasks(sampleProjects.plus(project(":mvvm")))
+    removeChildTasks(sampleProjects)
 
     doLast {
         val dir = outputDirectory.get()

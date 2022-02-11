@@ -16,7 +16,6 @@ dependencies {
     commonMainImplementation(libs.coroutines)
 
     commonMainApi(libs.mokoResources)
-    commonMainApi(projects.mvvm)
     commonMainApi(projects.mvvmTest)
     commonMainApi(projects.mvvmLivedata)
     commonMainApi(projects.mvvmCore)
