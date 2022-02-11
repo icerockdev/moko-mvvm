@@ -14,12 +14,12 @@ fun <T, E> LiveData<ResourceState<T, E>>.error(): LiveData<E?> = map { it.errorV
 
 fun <T, E> LiveData<ResourceState<T, E>>.errorValue(): E? = value.errorValue()
 
-fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.error(): LiveData<E?> =
+fun <E, ST : ResourceState<Nothing, E>, LD : LiveData<out ST>> List<LD>.error(): LiveData<E?> =
     MediatorLiveData<E?>(null)
         .composition(this) { list ->
             @Suppress("UNCHECKED_CAST")
             val errorItem = list.firstOrNull {
-                (it is ResourceState.Failed<*, *>)
-            } as? ResourceState.Failed<T, E>
+                (it is ResourceState.Failed<*>)
+            } as? ResourceState.Failed<E>
             errorItem?.error
         }
