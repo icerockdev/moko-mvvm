@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 @UseExperimental(ExperimentalCoroutinesApi::class)
 fun <T> LiveData<T>.asFlow(): Flow<T> = channelFlow {
-    val observer: (T) -> Unit = { offer(it) }
+    val observer: (T) -> Unit = { trySend(it) }
 
     addObserver(observer)
 
