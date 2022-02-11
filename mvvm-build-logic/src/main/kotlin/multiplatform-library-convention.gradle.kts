@@ -11,7 +11,8 @@ plugins {
 
 kotlin {
     android {
-        publishLibraryVariants("release", "debug")
+        publishAllLibraryVariants()
+        publishLibraryVariantsGroupedByFlavor = true
     }
     ios()
 }
