@@ -7,6 +7,11 @@ public final class dev/icerock/moko/mvvm/ViewModelFactory : androidx/lifecycle/V
 	public fun create (Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
 }
 
+public final class dev/icerock/moko/mvvm/ViewModelFactoryKt {
+	public static final synthetic fun createViewModelFactory (Landroidx/lifecycle/ViewModelStoreOwner;Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/ViewModelFactory;
+	public static final synthetic fun getViewModel (Landroidx/lifecycle/ViewModelStoreOwner;Lkotlin/jvm/functions/Function0;)Landroidx/lifecycle/ViewModel;
+}
+
 public final class dev/icerock/moko/mvvm/core/BuildConfig {
 	public static final field BUILD_TYPE Ljava/lang/String;
 	public static final field DEBUG Z
@@ -24,6 +29,7 @@ public final class dev/icerock/moko/mvvm/dispatcher/EventsDispatcher {
 
 public final class dev/icerock/moko/mvvm/dispatcher/EventsDispatcherExtKt {
 	public static final fun createExecutorOnMainLooper ()Ljava/util/concurrent/Executor;
+	public static final synthetic fun eventsDispatcherOnMain ()Ldev/icerock/moko/mvvm/dispatcher/EventsDispatcher;
 }
 
 public abstract interface class dev/icerock/moko/mvvm/dispatcher/EventsDispatcherOwner {

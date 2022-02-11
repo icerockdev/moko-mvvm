@@ -42,6 +42,8 @@ public final class dev/icerock/moko/mvvm/StateExtKt {
 	public static final fun asState (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/State;
 	public static final fun asState (Ljava/util/List;)Ldev/icerock/moko/mvvm/State;
 	public static final fun asState (Ljava/util/List;Lkotlin/jvm/functions/Function0;)Ldev/icerock/moko/mvvm/State;
+	public static final synthetic fun nullAsEmpty (Ldev/icerock/moko/mvvm/State;)Ldev/icerock/moko/mvvm/State;
+	public static final synthetic fun nullAsLoading (Ldev/icerock/moko/mvvm/State;)Ldev/icerock/moko/mvvm/State;
 }
 
 public final class dev/icerock/moko/mvvm/livedata/StateLiveDataConditionsKt {

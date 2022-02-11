@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.5.0"
+    alias(libs.plugins.binaryValidator)
 }
 
 buildscript {
@@ -15,7 +15,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
+        classpath(libs.dokkaGradlePlugin)
 
         classpath(":mvvm-build-logic")
     }
