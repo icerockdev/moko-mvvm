@@ -3,19 +3,10 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringDescToLabelText
-import dev.icerock.moko.mvvm.livedata.bindStringDescToTextFieldText
-import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
 import dev.icerock.moko.mvvm.livedata.bindStringToTextFieldText
 import dev.icerock.moko.mvvm.livedata.bindStringTwoWayToTextFieldText
-import dev.icerock.moko.resources.desc.StringDesc
-import dev.icerock.moko.resources.desc.desc
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
-import platform.UIKit.UIButton
-import platform.UIKit.UILabel
 import platform.UIKit.UITextField
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -33,7 +24,7 @@ class UITextFieldBindingsTests {
     @Test
     fun `nonnullable string text`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        source.bindStringToTextFieldText(destination)
+        destination.bindStringToTextFieldText(source)
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -49,7 +40,7 @@ class UITextFieldBindingsTests {
 //    @Test
     fun `nonnullable two way string text`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        source.bindStringTwoWayToTextFieldText(destination)
+        destination.bindStringTwoWayToTextFieldText(source)
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -71,42 +62,12 @@ class UITextFieldBindingsTests {
     @Test
     fun `nullable string text`() {
         val source: MutableLiveData<String?> = MutableLiveData(null)
-        source.bindStringToTextFieldText(destination)
+        destination.bindStringToTextFieldText(source)
         assertEquals(
             expected = "",
             actual = destination.text
         )
         source.value = "value"
-        assertEquals(
-            expected = "value",
-            actual = destination.text
-        )
-    }
-
-    @Test
-    fun `nonnullable stringdesc text`() {
-        val source: MutableLiveData<StringDesc> = MutableLiveData("init".desc())
-        source.bindStringDescToTextFieldText(destination)
-        assertEquals(
-            expected = "init",
-            actual = destination.text
-        )
-        source.value = "second".desc()
-        assertEquals(
-            expected = "second",
-            actual = destination.text
-        )
-    }
-
-    @Test
-    fun `nullable stringdesc text`() {
-        val source: MutableLiveData<StringDesc?> = MutableLiveData(null)
-        source.bindStringDescToTextFieldText(destination)
-        assertEquals(
-            expected = "",
-            actual = destination.text
-        )
-        source.value = "value".desc()
         assertEquals(
             expected = "value",
             actual = destination.text

@@ -6,37 +6,30 @@ package dev.icerock.moko.mvvm.livedata
 
 import dev.icerock.moko.mvvm.utils.bind
 import dev.icerock.moko.mvvm.utils.setEventHandler
-import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UIControlEventEditingChanged
 import platform.UIKit.UITextField
 
-fun <T : String?> LiveData<T>.bindStringToTextFieldText(
-    textField: UITextField
+fun <T : String?> UITextField.bindStringToTextFieldText(
+    liveData: LiveData<T>
 ): Closeable {
-    return bind(textField) { value ->
+    return bind(liveData) { value ->
         if (this.text == value) return@bind
 
         this.text = value
     }
 }
 
-fun <T : StringDesc?> LiveData<T>.bindStringDescToTextFieldText(
-    textField: UITextField
+fun UITextField.bindStringTwoWayToTextFieldText(
+    liveData: MutableLiveData<String>
 ): Closeable {
-    return map { it?.localized() }.bindStringToTextFieldText(textField)
-}
+    val readCloseable = bindStringToTextFieldText(liveData)
 
-fun MutableLiveData<String>.bindStringTwoWayToTextFieldText(
-    textField: UITextField
-): Closeable {
-    val readCloseable = bindStringToTextFieldText(textField)
-
-    val writeCloseable = textField.setEventHandler(UIControlEventEditingChanged) {
+    val writeCloseable = setEventHandler(UIControlEventEditingChanged) {
         val newText = this.text.orEmpty()
 
-        if (value == newText) return@setEventHandler
+        if (liveData.value == newText) return@setEventHandler
 
-        value = newText
+        liveData.value = newText
     }
 
     return readCloseable + writeCloseable

@@ -56,7 +56,7 @@ class LoginViewModelTests {
             }
         )
         val loginButtonVisibleObserver = TestObserver<Boolean>()
-        viewModel.isLoginButtonVisible.addObserver(loginButtonVisibleObserver)
+        viewModel.isLoginButtonVisible.addObserver(loginButtonVisibleObserver.lambda)
 
         assertEquals(expected = false, actual = viewModel.isLoginButtonVisible.value)
 

@@ -3,7 +3,7 @@ kotlinVersion = "1.6.10"
 androidLifecycleVersion = "2.2.0"
 coroutinesVersion = "1.6.0"
 mokoResourcesVersion = "0.18.0"
-mokoTestVersion = "0.5.0"
+mokoTestVersion = "0.6.1"
 mokoMvvmVersion = "0.12.0"
 
 [libraries]
@@ -36,4 +36,4 @@ androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.
 detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.15.0" }
 
 [plugins]
-binaryValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.5.0" }
+nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version = "1.1.0" }

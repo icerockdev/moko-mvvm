@@ -8,7 +8,6 @@ import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class LiveDataTest {
 
@@ -16,7 +15,7 @@ class LiveDataTest {
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
-    fun `live data observer testing`() {
+    fun liveDataObserverTesting() {
         val ld: MutableLiveData<Int> = MutableLiveData(initialValue = 0)
 
         var observedCounter = 0
@@ -64,13 +63,13 @@ class LiveDataTest {
     }
 
     @Test
-    fun `mergeWith test`() {
+    fun mergeWithTest() {
         val ld: MutableLiveData<Int> = MutableLiveData(10)
         val ldBool: MutableLiveData<Boolean> = MutableLiveData(false)
 
         var mergeWithCounter = 0
 
-        val mapLd: LiveData<Long> = ld.mergeWith(ldBool) { a1, a2 ->
+        val mapLd: LiveData<Long> = mediatorOf(ld, ldBool) { a1, a2 ->
             mergeWithCounter++
             if (a2) a1.toLong() else -a1.toLong()
         }
@@ -90,7 +89,7 @@ class LiveDataTest {
     }
 
     @Test
-    fun `live data map testing`() {
+    fun liveDataMapTesting() {
         val ld: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
         val mapLd: LiveData<Int> = ld.map { it * -1 }
 
@@ -144,10 +143,10 @@ class LiveDataTest {
     }
 
     @Test
-    fun `live data merge testing`() {
+    fun liveDataMergeTesting() {
         val firstLd: MutableLiveData<Int> = MutableLiveData(initialValue = 0)
         val secondLd: MutableLiveData<Int> = MutableLiveData(initialValue = 0)
-        val mergedLd: LiveData<Int> = firstLd.mergeWith(secondLd) { first, second ->
+        val mergedLd: LiveData<Int> = mediatorOf(firstLd, secondLd) { first, second ->
             first * second
         }
 
@@ -197,7 +196,7 @@ class LiveDataTest {
     }
 
     @Test
-    fun `live data distinct testing`() {
+    fun liveDataDistinctTesting() {
         val ld: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
         val distinctLd: LiveData<Int> = ld.distinct()
 
@@ -259,7 +258,7 @@ class LiveDataTest {
     }
 
     @Test
-    fun `live data mediator testing`() {
+    fun liveDataMediatorTesting() {
         val firstLd: MutableLiveData<Int> = MutableLiveData(initialValue = 1)
         val secondLd: MutableLiveData<Int> = MutableLiveData(initialValue = 2)
         val mediatorLd: LiveData<Int> = MediatorLiveData(initialValue = 3).apply {

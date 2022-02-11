@@ -11,23 +11,23 @@ import platform.UIKit.UIControlEventEditingDidBegin
 import platform.UIKit.UIControlEventEditingDidEnd
 import platform.UIKit.UIControlEventEditingDidEndOnExit
 
-fun LiveData<Boolean>.bindBoolToControlEnabled(
-    control: UIControl
+fun UIControl.bindBoolToControlEnabled(
+    liveData: LiveData<Boolean>
 ): Closeable {
-    return bind(control) { this.enabled = it }
+    return bind(liveData) { this.enabled = it }
 }
 
-fun MutableLiveData<Boolean>.bindBoolTwoWayToControlFocus(control: UIControl): Closeable {
-    val readCloseable = bindBoolToViewFocus(view = control)
+fun UIControl.bindBoolTwoWayToControlFocus(liveData: MutableLiveData<Boolean>): Closeable {
+    val readCloseable = bindBoolToViewFocus(liveData)
 
     val handler: UIControl.() -> Unit = {
         val focused = isFocused()
-        if (value != focused) value = focused
+        if (liveData.value != focused) liveData.value = focused
     }
 
-    val beginCloseable = control.setEventHandler(UIControlEventEditingDidBegin, handler)
-    val endCloseable = control.setEventHandler(UIControlEventEditingDidEnd, handler)
-    val endOnExitCloseable = control.setEventHandler(UIControlEventEditingDidEndOnExit, handler)
+    val beginCloseable = setEventHandler(UIControlEventEditingDidBegin, handler)
+    val endCloseable = setEventHandler(UIControlEventEditingDidEnd, handler)
+    val endOnExitCloseable = setEventHandler(UIControlEventEditingDidEndOnExit, handler)
 
     return readCloseable + beginCloseable + endCloseable + endOnExitCloseable
 }

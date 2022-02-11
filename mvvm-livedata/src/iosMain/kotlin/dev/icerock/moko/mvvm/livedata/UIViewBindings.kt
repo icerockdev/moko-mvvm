@@ -10,12 +10,12 @@ import platform.UIKit.UIView
 import platform.UIKit.backgroundColor
 import platform.UIKit.hidden
 
-fun LiveData<Boolean>.bindBoolToViewBackgroundColor(
-    view: UIView,
+fun UIView.bindBoolToViewBackgroundColor(
+    liveData: LiveData<Boolean>,
     trueColor: UIColor,
     falseColor: UIColor
 ): Closeable {
-    return bind(view) { value ->
+    return bind(liveData) { value ->
         val color = when (value) {
             true -> trueColor
             false -> falseColor
@@ -25,16 +25,18 @@ fun LiveData<Boolean>.bindBoolToViewBackgroundColor(
     }
 }
 
-fun LiveData<Boolean>.bindBoolToViewHidden(
-    view: UIView
+fun UIView.bindBoolToViewHidden(
+    liveData: LiveData<Boolean>
 ): Closeable {
-    return bind(view) { value ->
+    return bind(liveData) { value ->
         hidden = value
     }
 }
 
-fun LiveData<Boolean>.bindBoolToViewFocus(view: UIView): Closeable {
-    return bind(view) { value ->
+fun UIView.bindBoolToViewFocus(
+    liveData: LiveData<Boolean>
+): Closeable {
+    return bind(liveData) { value ->
         if (value) {
             becomeFirstResponder()
         } else {

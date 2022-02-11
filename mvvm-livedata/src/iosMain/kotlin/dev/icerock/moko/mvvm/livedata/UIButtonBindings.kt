@@ -5,27 +5,22 @@
 package dev.icerock.moko.mvvm.livedata
 
 import dev.icerock.moko.mvvm.utils.bind
-import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UIButton
 import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UIImage
 
-fun <T : String?> LiveData<T>.bindStringToButtonTitle(button: UIButton): Closeable {
-    return bind(button) { value ->
+fun <T : String?> UIButton.bindStringToButtonTitle(liveData: LiveData<T>): Closeable {
+    return bind(liveData) { value ->
         setTitle(value, forState = UIControlStateNormal)
     }
 }
 
-fun <T : StringDesc?> LiveData<T>.bindStringDescToButtonTitle(button: UIButton): Closeable {
-    return map { it?.localized() }.bindStringToButtonTitle(button)
-}
-
-fun LiveData<Boolean>.bindBoolToButtonImage(
-    button: UIButton,
+fun UIButton.bindBoolToButtonImage(
+    liveData: LiveData<Boolean>,
     trueImage: UIImage,
     falseImage: UIImage
 ): Closeable {
-    return bind(button) { value ->
+    return bind(liveData) { value ->
         val image = when (value) {
             true -> trueImage
             false -> falseImage

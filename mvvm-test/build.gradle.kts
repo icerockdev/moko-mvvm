@@ -3,18 +3,17 @@
  */
 
 plugins {
-    id("multiplatform-library-convention")
+    id("kmp-library-convention")
     id("detekt-convention")
     id("publication-convention")
 }
 
 dependencies {
-    commonMainApi(libs.coroutines)
-
-    commonMainApi(projects.mvvmCore)
     commonMainImplementation(projects.mvvmInternal)
 
+    commonMainApi(projects.mvvmCore)
     commonMainApi(libs.kotlinTestJUnit)
-    "androidMainApi"(libs.coroutinesTest)
-    "androidMainApi"(libs.androidCoreTesting)
+    
+    androidMainApi(libs.coroutinesTest)
+    androidMainApi(libs.androidCoreTesting)
 }
