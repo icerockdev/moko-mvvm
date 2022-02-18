@@ -6,12 +6,14 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-
         gradlePluginPortal()
+
+        maven("https://jitpack.io")
     }
 
     dependencies {
         classpath(":mvvm-build-logic")
+        classpath("dev.icerock.moko:kswift-gradle-plugin:0.3.0")
     }
 }
 

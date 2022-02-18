@@ -5,11 +5,20 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("dev.icerock.mobile.multiplatform.android-manifest")
     id("dev.icerock.mobile.multiplatform.ios-framework")
+    id("dev.icerock.moko.kswift")
 }
 
 kotlin {
     android()
     ios()
+    iosSimulatorArm64()
+
+    sourceSets {
+        val iosMain by getting
+        val iosSimulatorArm64Main by getting
+
+        iosSimulatorArm64Main.dependsOn(iosMain)
+    }
 }
 
 dependencies {
@@ -32,4 +41,8 @@ framework {
     export(projects.mvvmCore)
     export(projects.mvvmLivedata)
     export(libs.mokoResources)
+}
+
+kswift {
+    install(dev.icerock.moko.kswift.plugin.feature.PlatformExtensionFunctionsFeature)
 }
