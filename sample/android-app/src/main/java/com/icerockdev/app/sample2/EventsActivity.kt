@@ -15,8 +15,9 @@ import dev.icerock.moko.mvvm.MvvmActivity
 import dev.icerock.moko.mvvm.createViewModelFactory
 import dev.icerock.moko.mvvm.dispatcher.eventsDispatcherOnMain
 
-class EventsActivity : MvvmActivity<ActivityEventsBinding, EventsViewModel>(),
-    EventsViewModel.EventsListener {
+class EventsActivity :
+    MvvmActivity<ActivityEventsBinding, EventsViewModel>(), EventsViewModel.EventsListener {
+
     override val layoutId: Int = R.layout.activity_events
     override val viewModelVariableId: Int = BR.viewModel
     override val viewModelClass: Class<EventsViewModel> = EventsViewModel::class.java

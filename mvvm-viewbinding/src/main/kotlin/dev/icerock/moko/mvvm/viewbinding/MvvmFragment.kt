@@ -17,7 +17,7 @@ import dev.icerock.moko.mvvm.viewmodel.ViewModel
 abstract class MvvmFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
     private var _binding: VB? = null
     protected val binding: VB
-        get() = _binding!!
+        get() = requireNotNull(_binding) { "can't read binding when view not created" }
 
     protected lateinit var viewModel: VM
 
