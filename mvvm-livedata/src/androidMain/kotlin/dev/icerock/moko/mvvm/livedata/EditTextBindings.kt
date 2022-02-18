@@ -10,17 +10,16 @@ import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import dev.icerock.moko.mvvm.utils.bindNotNull
 
-fun MutableLiveData<String>.bindTwoWayToEditTextText(
+fun EditText.bindTextTwoWay(
     lifecycleOwner: LifecycleOwner,
-    editText: EditText
+    liveData: MutableLiveData<String>
 ): Closeable {
-    val readCloseable = bindNotNull(lifecycleOwner) {
-        if (editText.text.toString() == it) return@bindNotNull
+    val readCloseable = liveData.bindNotNull(lifecycleOwner) { value ->
+        if (this.text.toString() == value) return@bindNotNull
 
-        editText.setText(it)
+        this.setText(value)
     }
 
-    val liveData = this
     val watcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 
@@ -33,10 +32,10 @@ fun MutableLiveData<String>.bindTwoWayToEditTextText(
 
         override fun afterTextChanged(s: Editable?) = Unit
     }
-    editText.addTextChangedListener(watcher)
+    this.addTextChangedListener(watcher)
 
     val writeCloseable = Closeable {
-        editText.removeTextChangedListener(watcher)
+        this.removeTextChangedListener(watcher)
     }
 
     return readCloseable + writeCloseable

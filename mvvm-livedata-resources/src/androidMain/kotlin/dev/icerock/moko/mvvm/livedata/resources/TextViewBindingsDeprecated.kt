@@ -8,12 +8,15 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.utils.bindNotNull
 import dev.icerock.moko.resources.desc.StringDesc
 
-fun TextView.bindText(
+@Deprecated(
+    "Use TextView.bindText",
+    replaceWith = ReplaceWith("TextView.bindText")
+)
+fun LiveData<StringDesc>.bindToTextViewText(
     lifecycleOwner: LifecycleOwner,
-    liveData: LiveData<StringDesc>
+    textView: TextView
 ): Closeable {
-    return liveData.bindNotNull(lifecycleOwner) { this.text = it.toString(this.context) }
+    return textView.bindText(lifecycleOwner, this)
 }

@@ -9,13 +9,21 @@ import android.widget.CompoundButton
 import androidx.lifecycle.LifecycleOwner
 import dev.icerock.moko.mvvm.utils.bindNotNull
 
+@Deprecated(
+    "Use CompoundButton.bindChecked",
+    replaceWith = ReplaceWith("CompoundButton.bindChecked")
+)
 fun LiveData<Boolean>.bindToCheckBoxChecked(
     lifecycleOwner: LifecycleOwner,
     checkBox: CheckBox
 ): Closeable {
-    return bindNotNull(lifecycleOwner) { checkBox.isChecked = it }
+    return checkBox.bindChecked(lifecycleOwner, this)
 }
 
+@Deprecated(
+    "Use CompoundButton.bindCheckedTwoWay",
+    replaceWith = ReplaceWith("CompoundButton.bindCheckedTwoWay")
+)
 fun MutableLiveData<Boolean>.bindTwoWayToCheckBoxChecked(
     lifecycleOwner: LifecycleOwner,
     checkBox: CheckBox

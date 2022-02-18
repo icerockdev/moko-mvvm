@@ -12,16 +12,19 @@ import dev.icerock.moko.mvvm.utils.bindNotNull
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-fun MutableLiveData<Boolean>.bindToSwipeRefreshLayoutRefreshing(
+fun SwipeRefreshLayout.bindRefreshingTwoWay(
     lifecycleOwner: LifecycleOwner,
-    swipeRefreshLayout: SwipeRefreshLayout
+    liveData: MutableLiveData<Boolean>
 ): Closeable {
-    val readCloseable = bindNotNull(lifecycleOwner) { swipeRefreshLayout.isRefreshing = it }
+    val readCloseable = liveData.bindNotNull(lifecycleOwner) { value ->
+        if (this.isRefreshing == value) return@bindNotNull
+        this.isRefreshing = value
+    }
 
-    swipeRefreshLayout.setOnRefreshListener { value = true }
+    this.setOnRefreshListener { liveData.value = true }
 
     val writeCloseable = Closeable {
-        swipeRefreshLayout.setOnRefreshListener(null)
+        this.setOnRefreshListener(null)
     }
 
     return readCloseable + writeCloseable
