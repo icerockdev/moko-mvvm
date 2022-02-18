@@ -35,6 +35,20 @@ kotlin {
         iosTargets.map { "${it}Main" }.forEach { getByName(it).dependsOn(iosMain) }
         iosTargets.map { "${it}Test" }.forEach { getByName(it).dependsOn(iosTest) }
 
+        val mobileMain by creating
+        val mobileTest by creating
+        val androidMain by getting
+        val androidTest by getting
+
+        mobileMain.dependsOn(commonMain)
+        mobileTest.dependsOn(commonTest)
+
+        androidMain.dependsOn(mobileMain)
+        androidTest.dependsOn(mobileTest)
+
+        iosMain.dependsOn(mobileMain)
+        iosTest.dependsOn(mobileTest)
+
         all {
             languageSettings {
                 optIn("kotlin.RequiresOptIn")

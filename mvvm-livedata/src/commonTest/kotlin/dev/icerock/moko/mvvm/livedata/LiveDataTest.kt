@@ -46,19 +46,12 @@ class LiveDataTest {
             assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
 
-        ld.postValue(2)
-        "postValue should set value on mainThread, so change should be applied".let { msg ->
-            assertEquals(expected = 2, actual = ld.value, message = msg)
-            assertEquals(expected = 2, actual = lastValue, message = msg)
-            assertEquals(expected = 4, actual = observedCounter, message = msg)
-        }
-
         ld.removeObserver(observer)
         ld.value = 3
         "observer was removed - we should not got any changes".let { msg ->
             assertEquals(expected = 3, actual = ld.value, message = msg)
-            assertEquals(expected = 2, actual = lastValue, message = msg)
-            assertEquals(expected = 4, actual = observedCounter, message = msg)
+            assertEquals(expected = 1, actual = lastValue, message = msg)
+            assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
     }
 
@@ -124,21 +117,13 @@ class LiveDataTest {
             assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
 
-        ld.postValue(3)
-        "postValue should set value on mainThread, so change should be applied".let { msg ->
-            assertEquals(expected = 3, actual = ld.value, message = msg)
-            assertEquals(expected = -3, actual = mapLd.value, message = msg)
-            assertEquals(expected = -3, actual = lastValue, message = msg)
-            assertEquals(expected = 4, actual = observedCounter, message = msg)
-        }
-
         mapLd.removeObserver(observer)
         ld.value = 4
         "observer was removed - we should not got any changes".let { msg ->
             assertEquals(expected = 4, actual = ld.value, message = msg)
             assertEquals(expected = -4, actual = mapLd.value, message = msg)
-            assertEquals(expected = -3, actual = lastValue, message = msg)
-            assertEquals(expected = 4, actual = observedCounter, message = msg)
+            assertEquals(expected = -2, actual = lastValue, message = msg)
+            assertEquals(expected = 3, actual = observedCounter, message = msg)
         }
     }
 
@@ -231,29 +216,13 @@ class LiveDataTest {
             assertEquals(expected = 2, actual = observedCounter, message = msg)
         }
 
-        ld.postValue(2)
-        "postValue set but not changed, we should not got any changes".let { msg ->
-            assertEquals(expected = 2, actual = ld.value, message = msg)
-            assertEquals(expected = 2, actual = distinctLd.value, message = msg)
-            assertEquals(expected = 2, actual = lastValue, message = msg)
-            assertEquals(expected = 2, actual = observedCounter, message = msg)
-        }
-
-        ld.postValue(4)
-        "postValue set, we should got changes".let { msg ->
-            assertEquals(expected = 4, actual = ld.value, message = msg)
-            assertEquals(expected = 4, actual = distinctLd.value, message = msg)
-            assertEquals(expected = 4, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
-        }
-
         distinctLd.removeObserver(observer)
         ld.value = 5
         "observer was removed - we should not got any changes".let { msg ->
             assertEquals(expected = 5, actual = ld.value, message = msg)
             assertEquals(expected = 5, actual = distinctLd.value, message = msg)
-            assertEquals(expected = 4, actual = lastValue, message = msg)
-            assertEquals(expected = 3, actual = observedCounter, message = msg)
+            assertEquals(expected = 2, actual = lastValue, message = msg)
+            assertEquals(expected = 2, actual = observedCounter, message = msg)
         }
     }
 
