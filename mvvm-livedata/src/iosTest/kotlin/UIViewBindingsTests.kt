@@ -3,8 +3,8 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToViewBackgroundColor
-import dev.icerock.moko.mvvm.livedata.bindBoolToViewHidden
+import dev.icerock.moko.mvvm.livedata.bindBackgroundColor
+import dev.icerock.moko.mvvm.livedata.bindHidden
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UIColor
@@ -27,7 +27,7 @@ class UIViewBindingsTests {
     @Test
     fun `bool hidden`() {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        destination.bindBoolToViewHidden(source)
+        destination.bindHidden(source)
         assertEquals(
             expected = false,
             actual = destination.isHidden()
@@ -44,7 +44,7 @@ class UIViewBindingsTests {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
         val trueColor = UIColor.blueColor
         val falseColor = UIColor.redColor
-        destination.bindBoolToViewBackgroundColor(
+        destination.bindBackgroundColor(
             liveData = source,
             trueColor = trueColor,
             falseColor = falseColor

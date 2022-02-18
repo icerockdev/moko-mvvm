@@ -3,8 +3,8 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToButtonImage
-import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
+import dev.icerock.moko.mvvm.livedata.bindImage
+import dev.icerock.moko.mvvm.livedata.bindTitle
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UIButton
@@ -25,7 +25,7 @@ class UIButtonBindingsTests {
     @Test
     fun `nonnullable string title`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        destination.bindStringToButtonTitle(source)
+        destination.bindTitle(source)
         assertEquals(
             expected = "init",
             actual = destination.currentTitle
@@ -40,7 +40,7 @@ class UIButtonBindingsTests {
     @Test
     fun `nullable string title`() {
         val source: MutableLiveData<String?> = MutableLiveData(null)
-        destination.bindStringToButtonTitle(source)
+        destination.bindTitle(source)
         assertEquals(
             expected = null,
             actual = destination.currentTitle
@@ -57,7 +57,7 @@ class UIButtonBindingsTests {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
         val trueImage = UIImage()
         val falseImage = UIImage()
-        destination.bindBoolToButtonImage(
+        destination.bindImage(
             liveData = source,
             trueImage = trueImage,
             falseImage = falseImage

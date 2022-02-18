@@ -9,7 +9,7 @@ import dev.icerock.moko.mvvm.utils.setEventHandler
 import platform.UIKit.UIControlEventEditingChanged
 import platform.UIKit.UITextField
 
-fun <T : String?> UITextField.bindStringToTextFieldText(
+fun <T : String?> UITextField.bindText(
     liveData: LiveData<T>
 ): Closeable {
     return bind(liveData) { value ->
@@ -19,10 +19,10 @@ fun <T : String?> UITextField.bindStringToTextFieldText(
     }
 }
 
-fun UITextField.bindStringTwoWayToTextFieldText(
+fun UITextField.bindTextTwoWay(
     liveData: MutableLiveData<String>
 ): Closeable {
-    val readCloseable = bindStringToTextFieldText(liveData)
+    val readCloseable = bindText(liveData)
 
     val writeCloseable = setEventHandler(UIControlEventEditingChanged) {
         val newText = this.text.orEmpty()

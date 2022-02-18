@@ -3,8 +3,8 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindStringToTextFieldText
-import dev.icerock.moko.mvvm.livedata.bindStringTwoWayToTextFieldText
+import dev.icerock.moko.mvvm.livedata.bindText
+import dev.icerock.moko.mvvm.livedata.bindTextTwoWay
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UITextField
@@ -24,7 +24,7 @@ class UITextFieldBindingsTests {
     @Test
     fun `nonnullable string text`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        destination.bindStringToTextFieldText(source)
+        destination.bindText(source)
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -40,7 +40,7 @@ class UITextFieldBindingsTests {
 //    @Test
     fun `nonnullable two way string text`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        destination.bindStringTwoWayToTextFieldText(source)
+        destination.bindTextTwoWay(source)
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -62,7 +62,7 @@ class UITextFieldBindingsTests {
     @Test
     fun `nullable string text`() {
         val source: MutableLiveData<String?> = MutableLiveData(null)
-        destination.bindStringToTextFieldText(source)
+        destination.bindText(source)
         assertEquals(
             expected = "",
             actual = destination.text

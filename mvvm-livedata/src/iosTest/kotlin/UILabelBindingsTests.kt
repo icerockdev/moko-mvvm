@@ -3,7 +3,7 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
+import dev.icerock.moko.mvvm.livedata.bindText
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UILabel
@@ -23,7 +23,7 @@ class UILabelBindingsTests {
     @Test
     fun `nonnullable string text`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        destination.bindStringToLabelText(source)
+        destination.bindText(source)
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -38,7 +38,7 @@ class UILabelBindingsTests {
     @Test
     fun `nullable string text`() {
         val source: MutableLiveData<String?> = MutableLiveData(null)
-        destination.bindStringToLabelText(source)
+        destination.bindText(source)
         assertEquals(
             expected = null,
             actual = destination.text

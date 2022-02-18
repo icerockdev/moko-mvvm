@@ -3,8 +3,8 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindStringToTextViewText
-import dev.icerock.moko.mvvm.livedata.bindStringTwoWayToTextViewText
+import dev.icerock.moko.mvvm.livedata.bindText
+import dev.icerock.moko.mvvm.livedata.bindTextTwoWay
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UITextView
@@ -24,7 +24,7 @@ class UITextViewBindingsTests {
     @Test
     fun `nonnullable string text`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        destination.bindStringToTextViewText(source)
+        destination.bindText(source)
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -40,7 +40,7 @@ class UITextViewBindingsTests {
 //    @Test
     fun `nonnullable two way string text`() {
         val source: MutableLiveData<String> = MutableLiveData("init")
-        destination.bindStringTwoWayToTextViewText(source)
+        destination.bindTextTwoWay(source)
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -62,7 +62,7 @@ class UITextViewBindingsTests {
     @Test
     fun `nullable string text`() {
         val source: MutableLiveData<String?> = MutableLiveData(null)
-        destination.bindStringToTextViewText(source)
+        destination.bindText(source)
         assertEquals(
             expected = "",
             actual = destination.text

@@ -7,7 +7,7 @@ package dev.icerock.moko.mvvm.livedata
 import dev.icerock.moko.mvvm.utils.bind
 import platform.UIKit.UILabel
 
-fun <T : String?> UILabel.bindStringToLabelText(
+fun <T : String?> UILabel.bindText(
     label: LiveData<T>
 ): Closeable {
     return bind(label) { this.text = it }

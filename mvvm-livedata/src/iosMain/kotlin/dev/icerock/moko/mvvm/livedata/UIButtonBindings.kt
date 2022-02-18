@@ -9,13 +9,13 @@ import platform.UIKit.UIButton
 import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UIImage
 
-fun <T : String?> UIButton.bindStringToButtonTitle(liveData: LiveData<T>): Closeable {
+fun <T : String?> UIButton.bindTitle(liveData: LiveData<T>): Closeable {
     return bind(liveData) { value ->
         setTitle(value, forState = UIControlStateNormal)
     }
 }
 
-fun UIButton.bindBoolToButtonImage(
+fun UIButton.bindImage(
     liveData: LiveData<Boolean>,
     trueImage: UIImage,
     falseImage: UIImage

@@ -3,7 +3,7 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToViewFocus
+import dev.icerock.moko.mvvm.livedata.bindFocus
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.Foundation.NSDate
@@ -27,7 +27,7 @@ class UIResponderBindingsTests {
 //    @Test
     fun `bool focused`() {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        destination.bindBoolToViewFocus(source)
+        destination.bindFocus(source)
         assertEquals(
             expected = false,
             actual = destination.focused

@@ -9,16 +9,16 @@ import dev.icerock.moko.mvvm.utils.setEventHandler
 import platform.UIKit.UIControlEventValueChanged
 import platform.UIKit.UISwitch
 
-fun UISwitch.bindBoolToSwitchOn(
+fun UISwitch.bindSwitchOn(
     liveData: LiveData<Boolean>
 ): Closeable {
     return bind(liveData) { this.on = it }
 }
 
-fun UISwitch.bindBoolTwoWayToSwitchOn(
+fun UISwitch.bindSwitchOnTwoWay(
     liveData: MutableLiveData<Boolean>
 ): Closeable {
-    val readCloseable = bindBoolToSwitchOn(liveData)
+    val readCloseable = bindSwitchOn(liveData)
 
     val writeCloseable = setEventHandler(UIControlEventValueChanged) {
         if (liveData.value == on) return@setEventHandler

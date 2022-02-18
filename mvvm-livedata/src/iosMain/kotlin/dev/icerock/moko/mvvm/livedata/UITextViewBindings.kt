@@ -12,7 +12,7 @@ import platform.UIKit.UITextViewTextDidBeginEditingNotification
 import platform.UIKit.UITextViewTextDidChangeNotification
 import platform.UIKit.UITextViewTextDidEndEditingNotification
 
-fun <T : String?> UITextView.bindStringToTextViewText(
+fun <T : String?> UITextView.bindText(
     liveData: LiveData<T>
 ): Closeable {
     return bind(liveData) { value ->
@@ -22,10 +22,10 @@ fun <T : String?> UITextView.bindStringToTextViewText(
     }
 }
 
-fun UITextView.bindStringTwoWayToTextViewText(
+fun UITextView.bindTextTwoWay(
     liveData: MutableLiveData<String>
 ): Closeable {
-    val readCloseable = bindStringToTextViewText(liveData)
+    val readCloseable = bindText(liveData)
 
     val writeCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidChangeNotification,
@@ -41,10 +41,10 @@ fun UITextView.bindStringTwoWayToTextViewText(
     return readCloseable + writeCloseable
 }
 
-fun UITextView.bindBoolTwoWayToTextViewFocus(
+fun UITextView.bindFocusTwoWay(
     liveData: MutableLiveData<Boolean>
 ): Closeable {
-    val readCloseable = bindBoolToViewFocus(liveData)
+    val readCloseable = bindFocus(liveData)
 
     val handler: UITextView.() -> Unit = {
         val focused = isFocused()
