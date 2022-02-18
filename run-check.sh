@@ -1,6 +1,5 @@
 if [ "$1" == "macos-latest" ]; then
-  ./gradlew detektIosArm32Main \
-    detektIosArm64Main \
+  ./gradlew detektIosArm64Main \
     detektIosSimulatorArm64Main \
     detektIosX64Main \
     detektMacosArm64Main \
@@ -22,7 +21,6 @@ if [ "$1" == "macos-latest" ]; then
     watchosSimulatorArm64Test \
     watchosX64Test \
     watchosX86Test \
-    publishIosArm32PublicationToMavenLocal \
     publishIosArm64PublicationToMavenLocal \
     publishIosSimulatorArm64PublicationToMavenLocal \
     publishIosX64PublicationToMavenLocal \

@@ -1,8 +1,7 @@
 OS=$1
 
 if [ "$OS" == "macos-latest" ]; then
-  ./gradlew publishIosArm32PublicationToSonatypeRepository \
-    publishIosArm64PublicationToSonatypeRepository \
+  ./gradlew publishIosArm64PublicationToSonatypeRepository \
     publishIosSimulatorArm64PublicationToSonatypeRepository \
     publishIosX64PublicationToSonatypeRepository \
     publishMacosArm64PublicationToSonatypeRepository \
