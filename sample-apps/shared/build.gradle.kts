@@ -15,7 +15,6 @@ val mokoMvvmVersion = "0.12.0"
 val dependenciesList = listOf(
     "dev.icerock.moko:mvvm-core:$mokoMvvmVersion",
     "dev.icerock.moko:mvvm-livedata:$mokoMvvmVersion",
-    "dev.icerock.moko:mvvm-state:$mokoMvvmVersion",
     "dev.icerock.moko:mvvm-livedata-resources:$mokoMvvmVersion",
     "dev.icerock.moko:resources:$mokoResourcesVersion"
 )
@@ -82,18 +81,39 @@ android {
 }
 
 afterEvaluate {
+    val xcodeDir = File(project.buildDir, "xcode")
+
     tasks.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkTask>()
         .forEach { xcFrameworkTask ->
             val syncName: String = xcFrameworkTask.name.replace("assemble", "sync")
+            val xcframeworkDir =
+                File(xcFrameworkTask.outputDir, xcFrameworkTask.buildType.getName())
 
             tasks.create(syncName, Sync::class) {
                 this.group = "xcode"
 
-                this.from(File(xcFrameworkTask.outputDir, xcFrameworkTask.buildType.getName()))
-                this.into(File(project.buildDir, "xcode"))
+                this.from(xcframeworkDir)
+                this.into(xcodeDir)
 
                 this.dependsOn(xcFrameworkTask)
             }
+        }
+
+    tasks.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkTask>()
+        .forEach { xcFrameworkTask ->
+            val frameworkDir: File = xcFrameworkTask.frameworks.first().outputFile
+            val swiftGenDir = File(frameworkDir.parent, frameworkDir.nameWithoutExtension + "Swift")
+            val xcframeworkDir =
+                File(xcFrameworkTask.outputDir, xcFrameworkTask.buildType.getName())
+            val targetDir = File(xcframeworkDir, swiftGenDir.name)
+
+            @Suppress("ObjectLiteralToLambda")
+            xcFrameworkTask.doLast(object : Action<Task> {
+                override fun execute(t: Task) {
+                    targetDir.mkdirs()
+                    swiftGenDir.copyRecursively(targetDir, overwrite = true)
+                }
+            })
         }
 }
 

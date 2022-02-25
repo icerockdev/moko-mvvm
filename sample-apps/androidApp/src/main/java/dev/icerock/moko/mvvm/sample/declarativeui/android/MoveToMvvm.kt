@@ -29,6 +29,8 @@ fun <T> LiveData<T>.observeAsState(): State<T> {
     return ld().observeAsState(initial = this.value)
 }
 
+// TODO change this logic...maybe remove eventsdispatcher usage at all
+//  https://developer.android.com/jetpack/compose/interop/interop-apis
 @Composable
 fun <T : Any> EventsDispatcher<T>.bindToComposable(listener: T) {
     val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
