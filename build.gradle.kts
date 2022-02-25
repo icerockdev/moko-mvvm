@@ -7,7 +7,6 @@ buildscript {
         mavenCentral()
         google()
         gradlePluginPortal()
-        mavenLocal()
 
         maven("https://jitpack.io")
     }
