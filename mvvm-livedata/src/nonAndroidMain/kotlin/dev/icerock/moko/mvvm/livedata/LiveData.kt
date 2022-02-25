@@ -23,6 +23,6 @@ actual open class LiveData<T>(initialValue: T) {
     protected fun changeValue(value: T) {
         storedValue = value
 
-        observers.forEach { it(value) }
+        observers.forEach { it(storedValue) }
     }
 }
