@@ -9,12 +9,6 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
-
-        jcenter {
-            content {
-                includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
-            }
-        }
     }
 }
 
@@ -24,13 +18,12 @@ include(":mvvm-internal")
 include(":mvvm-core")
 include(":mvvm-livedata")
 include(":mvvm-livedata-material")
+include(":mvvm-livedata-resources")
 include(":mvvm-livedata-glide")
 include(":mvvm-livedata-swiperefresh")
 include(":mvvm-databinding")
 include(":mvvm-viewbinding")
 include(":mvvm-state")
-include(":mvvm-state-deprecated")
 include(":mvvm-test")
-include(":mvvm")
 include(":sample:android-app")
 include(":sample:mpp-library")

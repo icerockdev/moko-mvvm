@@ -3,26 +3,11 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToSwitchOn
-import dev.icerock.moko.mvvm.livedata.bindBoolToViewBackgroundColor
-import dev.icerock.moko.mvvm.livedata.bindBoolToViewHidden
-import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToSwitchOn
-import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringDescToLabelText
-import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
-import dev.icerock.moko.resources.desc.StringDesc
-import dev.icerock.moko.resources.desc.desc
+import dev.icerock.moko.mvvm.livedata.bindBackgroundColor
+import dev.icerock.moko.mvvm.livedata.bindHidden
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
-import platform.Foundation.NSDate
-import platform.Foundation.NSRunLoop
-import platform.Foundation.date
-import platform.Foundation.runUntilDate
-import platform.UIKit.UIButton
 import platform.UIKit.UIColor
-import platform.UIKit.UILabel
-import platform.UIKit.UISwitch
 import platform.UIKit.UIView
 import platform.UIKit.backgroundColor
 import platform.UIKit.isHidden
@@ -42,7 +27,7 @@ class UIViewBindingsTests {
     @Test
     fun `bool hidden`() {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        source.bindBoolToViewHidden(destination)
+        destination.bindHidden(source)
         assertEquals(
             expected = false,
             actual = destination.isHidden()
@@ -59,8 +44,8 @@ class UIViewBindingsTests {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
         val trueColor = UIColor.blueColor
         val falseColor = UIColor.redColor
-        source.bindBoolToViewBackgroundColor(
-            view = destination,
+        destination.bindBackgroundColor(
+            liveData = source,
             trueColor = trueColor,
             falseColor = falseColor
         )

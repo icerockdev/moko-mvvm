@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.mvvm.utils
 
+import dev.icerock.moko.kswift.KSwiftExclude
 import dev.icerock.moko.mvvm.livedata.Closeable
 import kotlinx.cinterop.ExportObjCClass
 import kotlinx.cinterop.ObjCAction
@@ -15,6 +16,7 @@ import platform.darwin.NSObject
 import platform.objc.OBJC_ASSOCIATION_RETAIN
 import platform.objc.objc_setAssociatedObject
 
+@KSwiftExclude
 fun <T : UIControl> T.setEventHandler(
     event: UIControlEvents,
     lambda: T.() -> Unit

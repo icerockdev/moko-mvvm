@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id("multiplatform-library-convention")
+    id("kmp-library-convention")
     id("detekt-convention")
     id("publication-convention")
 }

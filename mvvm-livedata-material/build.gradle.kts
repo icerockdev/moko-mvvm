@@ -9,14 +9,7 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.coroutines)
+    api(projects.mvvmLivedataResources)
 
-    api(projects.mvvmLivedata)
-
-    api(libs.mokoResources)
-
-    api(libs.appCompat)
-    api(libs.lifecycle)
     api(libs.material)
-    api(libs.coroutines)
 }

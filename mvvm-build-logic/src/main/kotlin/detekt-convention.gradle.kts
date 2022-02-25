@@ -2,14 +2,17 @@
  * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
     id("io.gitlab.arturbosch.detekt")
 }
 
-detekt {
-    input.setFrom("src/commonMain/kotlin", "src/androidMain/kotlin", "src/iosMain/kotlin", "src/main/kotlin")
+tasks.register("detektWithoutTests") {
+    group = "verification"
+    dependsOn(tasks.withType<Detekt>().matching { it.name.contains("Test").not() })
 }
 
 dependencies {
-    "detektPlugins"("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
+    "detektPlugins"("io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0")
 }

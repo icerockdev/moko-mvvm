@@ -7,21 +7,10 @@ package dev.icerock.moko.mvvm.livedata
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import dev.icerock.moko.mvvm.utils.bindNotNull
-import dev.icerock.moko.resources.desc.StringDesc
 
-@JvmName("bindToTextViewTextString")
-fun LiveData<String>.bindToTextViewText(
+fun TextView.bindText(
     lifecycleOwner: LifecycleOwner,
-    textView: TextView
+    liveData: LiveData<String>
 ): Closeable {
-    return bindNotNull(lifecycleOwner) { textView.text = it }
-}
-
-@JvmName("bindToTextViewTextStringDesc")
-fun LiveData<StringDesc>.bindToTextViewText(
-    lifecycleOwner: LifecycleOwner,
-    textView: TextView
-): Closeable {
-    val context = textView.context
-    return bindNotNull(lifecycleOwner) { textView.text = it.toString(context) }
+    return liveData.bindNotNull(lifecycleOwner) { this.text = it }
 }

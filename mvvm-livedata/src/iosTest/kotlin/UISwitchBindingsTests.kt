@@ -3,22 +3,14 @@
  */
 
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.bindBoolToSwitchOn
-import dev.icerock.moko.mvvm.livedata.bindBoolTwoWayToSwitchOn
-import dev.icerock.moko.mvvm.livedata.bindStringDescToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringDescToLabelText
-import dev.icerock.moko.mvvm.livedata.bindStringToButtonTitle
-import dev.icerock.moko.mvvm.livedata.bindStringToLabelText
-import dev.icerock.moko.resources.desc.StringDesc
-import dev.icerock.moko.resources.desc.desc
+import dev.icerock.moko.mvvm.livedata.bindSwitchOn
+import dev.icerock.moko.mvvm.livedata.bindSwitchOnTwoWay
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.Foundation.NSDate
 import platform.Foundation.NSRunLoop
 import platform.Foundation.date
 import platform.Foundation.runUntilDate
-import platform.UIKit.UIButton
-import platform.UIKit.UILabel
 import platform.UIKit.UISwitch
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -36,7 +28,7 @@ class UISwitchBindingsTests {
     @Test
     fun `bool switch on`() {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        source.bindBoolToSwitchOn(destination)
+        destination.bindSwitchOn(source)
         assertEquals(
             expected = false,
             actual = destination.isOn()
@@ -52,7 +44,7 @@ class UISwitchBindingsTests {
 //    @Test
     fun `bool two way switch on`() {
         val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        source.bindBoolTwoWayToSwitchOn(destination)
+        destination.bindSwitchOnTwoWay(source)
         assertEquals(
             expected = false,
             actual = destination.isOn()

@@ -5,7 +5,5 @@
 package dev.icerock.moko.mvvm.livedata
 
 expect open class MutableLiveData<T>(initialValue: T) : LiveData<T> {
-    fun postValue(value: T)
-
     override var value: T
 }

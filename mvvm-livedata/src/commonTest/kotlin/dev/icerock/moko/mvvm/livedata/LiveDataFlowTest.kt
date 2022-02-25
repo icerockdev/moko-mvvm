@@ -10,20 +10,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlin.math.exp
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class LiveDataFlowTest {
+    @Suppress("unused")
     @get:TestRule
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
-    fun `flow to live data test`() {
+    fun flowToLiveDataTest() {
         val scope = CoroutineScope(Dispatchers.Unconfined)
 
         val source = MutableStateFlow(0)
@@ -41,7 +39,7 @@ class LiveDataFlowTest {
     }
 
     @Test
-    fun `live data to flow test`() {
+    fun liveDataToFlowTest() {
         val scope = CoroutineScope(Dispatchers.Unconfined)
 
         val source = MutableLiveData(0)

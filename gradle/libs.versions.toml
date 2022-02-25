@@ -1,10 +1,11 @@
 [versions]
 kotlinVersion = "1.6.10"
 androidLifecycleVersion = "2.2.0"
-coroutinesVersion = "1.6.0"
+coroutinesVersion = "1.6.0-native-mt"
 mokoResourcesVersion = "0.18.0"
-mokoTestVersion = "0.5.0"
+mokoTestVersion = "0.6.1"
 mokoMvvmVersion = "0.12.0"
+mokoKSwiftVersion = "0.4.0"
 
 [libraries]
 # android
@@ -23,6 +24,7 @@ coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ver
 # moko
 mokoResources = { module = "dev.icerock.moko:resources", version.ref = "mokoResourcesVersion" }
 mokoTest = { module = "dev.icerock.moko:test-core", version.ref = "mokoTestVersion" }
+mokoKSwift = { module = "dev.icerock.moko:kswift-runtime", version.ref = "mokoKSwiftVersion"}
 
 # tests
 kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinVersion" }
@@ -33,7 +35,8 @@ dokkaGradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", versio
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinVersion" }
 mobileMultiplatformGradlePlugin = { module = "dev.icerock:mobile-multiplatform", version = "0.13.0" }
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.0.4" }
-detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.15.0" }
+detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.19.0" }
+kswiftGradlePlugin = { module = "dev.icerock.moko:kswift-gradle-plugin", version.ref = "mokoKSwiftVersion" }
 
 [plugins]
-binaryValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.5.0" }
+nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version = "1.1.0" }

@@ -6,14 +6,14 @@ package com.icerockdev.library.sample4
 
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.mergeWith
+import dev.icerock.moko.mvvm.livedata.mediatorOf
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
 class ValidationMergeViewModel : ViewModel() {
     val email: MutableLiveData<String> = MutableLiveData("")
     val password: MutableLiveData<String> = MutableLiveData("")
 
-    val isLoginButtonEnabled: LiveData<Boolean> = email.mergeWith(password) { email, password ->
+    val isLoginButtonEnabled: LiveData<Boolean> = mediatorOf(email, password) { email, password ->
         email.isNotEmpty() && password.isNotEmpty()
     }
 }

@@ -23,4 +23,5 @@ dependencies {
     implementation(libs.appCompat)
 
     implementation(projects.sample.mppLibrary)
+    implementation(projects.mvvmDatabinding)
 }

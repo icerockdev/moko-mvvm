@@ -19,9 +19,9 @@ actual open class MutableLiveData<T> : LiveData<T> {
             (archLiveData as MutableLiveData<T>).value = newValue
         }
 
-    actual fun postValue(value: T) {
-        (archLiveData as MutableLiveData<T>).postValue(value)
-    }
-
     override fun ld(): MutableLiveData<T> = archLiveData as MutableLiveData<T>
+}
+
+actual fun <T> dev.icerock.moko.mvvm.livedata.MutableLiveData<T>.postValue(value: T) {
+    ld().postValue(value)
 }

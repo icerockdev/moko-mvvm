@@ -8,20 +8,25 @@ on:
 
 jobs:
   test:
-    runs-on: macOS-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest, ubuntu-latest ]
     steps:
       - uses: actions/checkout@v1
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Build and test
-        run: ./gradlew build publishToMavenLocal
+      - name: Check build
+        run: ./run-check.sh "${{ matrix.os }}"
+        shell: bash
       - name: Install pods
         run: cd sample/ios-app && pod install
+        if: matrix.os == 'macOS-latest'
       - name: build ios sample
         run: cd sample/ios-app && set -o pipefail && xcodebuild -scheme TestProj -workspace TestProj.xcworkspace -configuration Debug -sdk iphonesimulator -arch x86_64 build CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO | xcpretty
+        if: matrix.os == 'macOS-latest'
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v2
         if: ${{ always() }}

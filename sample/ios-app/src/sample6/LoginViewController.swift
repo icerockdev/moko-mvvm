@@ -2,9 +2,8 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import Foundation
+import UIKit
 import MultiPlatformLibrary
-import MultiPlatformLibraryMvvm
 
 class LoginViewController: UIViewController {
     @IBOutlet private var emailField: UITextField!
@@ -23,11 +22,11 @@ class LoginViewController: UIViewController {
         
         viewModel.eventsDispatcher.listener = self
 
-        viewModel.email.bindStringTwoWayToTextFieldText(textField: emailField)
-        viewModel.emailValidation.bindStringToLabelText(label: emailValidationLabel)
-        viewModel.password.bindStringTwoWayToTextFieldText(textField: passwordField)
-        viewModel.isLoginButtonVisible.revert().bindBoolToViewHidden(view: loginButton)
-        viewModel.isLoading.revert().bindBoolToViewHidden(view: progressBar)
+        emailField.bindTextTwoWay(liveData: viewModel.email)
+        emailValidationLabel.bindText(liveData: viewModel.emailValidation)
+        passwordField.bindTextTwoWay(liveData: viewModel.password)
+        loginButton.bindHidden(liveData: viewModel.isLoginButtonVisible.revert())
+        progressBar.bindHidden(liveData: viewModel.isLoading.revert())
     }
     
     @IBAction func onLoginButtonPressed() {

@@ -3,16 +3,16 @@
  */
 
 plugins {
-    id("multiplatform-library-convention")
+    id("kmp-library-convention")
     id("detekt-convention")
     id("publication-convention")
 }
 
 dependencies {
-    commonMainImplementation(libs.coroutines)
-
     commonMainImplementation(projects.mvvmInternal)
 
-    "androidMainApi"(libs.appCompat)
-    "androidMainApi"(libs.androidViewModel)
+    commonMainApi(libs.coroutines)
+
+    androidMainApi(libs.appCompat)
+    androidMainApi(libs.androidViewModel)
 }

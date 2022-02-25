@@ -11,19 +11,18 @@ import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.utils.bindNotNull
 import dev.icerock.moko.resources.desc.StringDesc
 
-@JvmName("bindToTextInputLayoutErrorString")
-fun LiveData<String>.bindToTextInputLayoutError(
+@JvmName("bindErrorString")
+fun TextInputLayout.bindError(
     lifecycleOwner: LifecycleOwner,
-    textInputLayout: TextInputLayout
+    liveData: LiveData<String>
 ): Closeable {
-    return bindNotNull(lifecycleOwner) { textInputLayout.error = it }
+    return liveData.bindNotNull(lifecycleOwner) { this.error = it }
 }
 
-@JvmName("bindToTextInputLayoutErrorStringDesc")
-fun LiveData<StringDesc>.bindToTextInputLayoutError(
+@JvmName("bindErrorStringDesc")
+fun TextInputLayout.bindError(
     lifecycleOwner: LifecycleOwner,
-    textInputLayout: TextInputLayout
+    liveData: LiveData<StringDesc>
 ): Closeable {
-    val context = textInputLayout.context
-    return bindNotNull(lifecycleOwner) { textInputLayout.error = it.toString(context) }
+    return liveData.bindNotNull(lifecycleOwner) { this.error = it.toString(this.context) }
 }
