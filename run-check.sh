@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "$1" == "macos-latest" ]; then
   ./gradlew detektIosArm64Main \
     detektIosSimulatorArm64Main \

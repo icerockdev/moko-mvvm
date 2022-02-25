@@ -1,3 +1,5 @@
+#!/bin/bash
+
 OS=$1
 
 if [ "$OS" == "macos-latest" ]; then
