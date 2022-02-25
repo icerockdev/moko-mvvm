@@ -15,6 +15,6 @@ abstract class MvvmEventsFragment<DB : ViewDataBinding, VM, Listener : Any> :
         super.onCreate(savedInstanceState)
 
         @Suppress("UNCHECKED_CAST")
-        viewModel.eventsDispatcher.bind(this, this as Listener)
+        viewModel.eventsDispatcher.bind(viewLifecycleOwner, this as Listener)
     }
 }

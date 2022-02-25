@@ -5,17 +5,14 @@
 package dev.icerock.moko.mvvm.livedata
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-@UseExperimental(ExperimentalCoroutinesApi::class)
 fun <T> LiveData<T>.asFlow(): Flow<T> = channelFlow {
-    val observer: (T) -> Unit = { offer(it) }
+    val observer: (T) -> Unit = { trySend(it) }
 
     addObserver(observer)
 

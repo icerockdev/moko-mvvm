@@ -18,7 +18,7 @@ import dev.icerock.moko.mvvm.viewmodel.ViewModel
 abstract class MvvmFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
     private var _binding: DB? = null
     protected val binding: DB
-        get() = _binding!!
+        get() = requireNotNull(_binding) { "can't read binding when view not created" }
 
     protected lateinit var viewModel: VM
 
@@ -43,7 +43,7 @@ abstract class MvvmFragment<DB : ViewDataBinding, VM : ViewModel> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

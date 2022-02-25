@@ -5,10 +5,12 @@
 package dev.icerock.moko.mvvm.livedata
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
+@OptIn(FlowPreview::class)
 fun <T> LiveData<T>.debounce(
     coroutineScope: CoroutineScope,
     timeInMillis: Long

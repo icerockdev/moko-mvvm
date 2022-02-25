@@ -17,8 +17,9 @@ class LiveDataTest {
     val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     @Test
-    fun `dataTransform test`() {
-        val ld: MutableLiveData<ResourceState<Int, Throwable>> = MutableLiveData(ResourceState.Success(10))
+    fun dataTransformTest() {
+        val ld: MutableLiveData<ResourceState<Int, Throwable>> =
+            MutableLiveData(ResourceState.Success(10))
         val ldBool: MutableLiveData<Boolean> = MutableLiveData(false)
 
         var dataTransformCounter = 0
@@ -26,7 +27,7 @@ class LiveDataTest {
 
         val mapLd: LiveData<ResourceState<Long, Throwable>> = ld.dataTransform {
             dataTransformCounter++
-            mergeWith(ldBool) { a1, a2 ->
+            mediatorOf(this, ldBool) { a1, a2 ->
                 mergeWithCounter++
                 if (a2) a1.toLong() else -a1.toLong()
             }
@@ -59,10 +60,11 @@ class LiveDataTest {
     }
 
     @Test
-    fun `dataTransform + mergeWith test`() {
+    fun dataTransformMergeWithTest() {
         val vmIsAuthorized = MutableLiveData(true)
-        val state: MutableLiveData<ResourceState<Int, Throwable>> = MutableLiveData(ResourceState.Empty())
-        val isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
+        val state: MutableLiveData<ResourceState<Int, Throwable>> =
+            MutableLiveData(ResourceState.Empty())
+        val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
 
         var dataTransformCounter = 0
         var mergeWithDataTransformCounter = 0
@@ -70,21 +72,23 @@ class LiveDataTest {
 
         val dataTransform: LiveData<ResourceState<Long, Throwable>> = state.dataTransform {
             dataTransformCounter++
-            mergeWith(isLoading) { a1, a2 ->
+            mediatorOf(this, isLoading) { a1, a2 ->
                 mergeWithDataTransformCounter++
                 if (a2) a1.toLong() else -a1.toLong()
             }
         }
 
-        val result: LiveData<ResourceState<Long, Throwable>> = vmIsAuthorized
-            .mergeWith(dataTransform) { isAuthorized, dataState ->
-                mergeWithIsAuthorizedCounter++
-                if (isAuthorized) {
-                    dataState
-                } else {
-                    ResourceState.Failed(Exception())
-                }
+        val result: LiveData<ResourceState<Long, Throwable>> = mediatorOf(
+            vmIsAuthorized,
+            dataTransform
+        ) { isAuthorized, dataState ->
+            mergeWithIsAuthorizedCounter++
+            if (isAuthorized) {
+                dataState
+            } else {
+                ResourceState.Failed(Exception())
             }
+        }
 
         assertEquals(actual = dataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithDataTransformCounter, expected = 0)

@@ -1,28 +1,42 @@
 [versions]
-kotlinVersion = "1.5.20"
-androidAppCompatVersion = "1.2.0"
-materialDesignVersion = "1.2.1"
+kotlinVersion = "1.6.10"
 androidLifecycleVersion = "2.2.0"
-androidCoreTestingVersion = "2.1.0"
-glideVersion = "4.11.0"
-swipeRefreshVersion = "1.1.0"
-dokkaVersion = "1.4.20"
-coroutinesVersion = "1.5.0-native-mt"
-mokoResourcesVersion = "0.16.0"
-mokoTestVersion = "0.4.0"
-mokoMvvmVersion = "0.11.0"
+coroutinesVersion = "1.6.0-native-mt"
+mokoResourcesVersion = "0.18.0"
+mokoTestVersion = "0.6.1"
+mokoMvvmVersion = "0.12.0"
+mokoKSwiftVersion = "0.4.0"
 
 [libraries]
-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompatVersion" }
-material = { module = "com.google.android.material:material", version.ref = "materialDesignVersion" }
+# android
+appCompat = { module = "androidx.appcompat:appcompat", version = "1.2.0" }
+material = { module = "com.google.android.material:material", version = "1.2.1" }
 lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidLifecycleVersion" }
 androidViewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidLifecycleVersion" }
 androidLiveData = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidLifecycleVersion" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
-swipeRefresh = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swipeRefreshVersion" }
+glide = { module = "com.github.bumptech.glide:glide", version = "4.11.0" }
+swipeRefresh = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version = "1.1.0" }
+
+# coroutines
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
+
+# moko
 mokoResources = { module = "dev.icerock.moko:resources", version.ref = "mokoResourcesVersion" }
 mokoTest = { module = "dev.icerock.moko:test-core", version.ref = "mokoTestVersion" }
+mokoKSwift = { module = "dev.icerock.moko:kswift-runtime", version.ref = "mokoKSwiftVersion"}
+
+# tests
 kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinVersion" }
-androidCoreTesting = { module = "androidx.arch.core:core-testing", version.ref = "androidCoreTestingVersion" }
-coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
+androidCoreTesting = { module = "androidx.arch.core:core-testing", version = "2.1.0" }
+
+# gradle plugins
+dokkaGradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlinVersion" }
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinVersion" }
+mobileMultiplatformGradlePlugin = { module = "dev.icerock:mobile-multiplatform", version = "0.13.0" }
+androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.0.4" }
+detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.19.0" }
+kswiftGradlePlugin = { module = "dev.icerock.moko:kswift-gradle-plugin", version.ref = "mokoKSwiftVersion" }
+
+[plugins]
+nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version = "1.1.0" }

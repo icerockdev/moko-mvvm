@@ -2,57 +2,47 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-plugins {
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.5.0"
-}
-
 buildscript {
     repositories {
         mavenCentral()
         google()
-
         gradlePluginPortal()
     }
 
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
-
         classpath(":mvvm-build-logic")
+        classpath(libs.kswiftGradlePlugin)
     }
 }
 
+plugins {
+    alias(libs.plugins.nexusPublish)
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            username.set(System.getenv("OSSRH_USER"))
+            password.set(System.getenv("OSSRH_KEY"))
+        }
+    }
+}
+
+val mokoVersion = libs.versions.mokoMvvmVersion.get()
 allprojects {
-    apply(plugin = "org.jetbrains.dokka")
+    group = "dev.icerock.moko"
+    version = mokoVersion
 
-    plugins.withId("org.gradle.maven-publish") {
-        group = "dev.icerock.moko"
-        version = libs.versions.mokoMvvmVersion.get()
+    configurations.configureEach {
+        resolutionStrategy {
+            force(rootProject.libs.coroutines)
+        }
     }
 }
 
-val sampleProjects: Set<Project> = project(":sample").allprojects
-
-apiValidation {
-    ignoredPackages.add("dev.icerock.moko.mvvm.internal")
-
-    ignoredProjects.addAll(sampleProjects.map { it.name })
-}
-
-tasks.register("clean", Delete::class).configure {
-    group = "build"
-    delete(rootProject.buildDir)
-}
-
-tasks.withType<org.jetbrains.dokka.gradle.DokkaMultiModuleTask>().all {
-    removeChildTasks(sampleProjects.plus(project(":mvvm")))
-
-    doLast {
-        val dir = outputDirectory.get()
-        val from = File(dir, "-modules.html")
-        val to = File(dir, "index.html")
-
-        from.renameTo(to)
-
-        dir.renameTo(file("docs"))
-    }
+// temporary fix for Apple Silicon (remove after 1.6.20 update)
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion =
+        "16.0.0"
 }

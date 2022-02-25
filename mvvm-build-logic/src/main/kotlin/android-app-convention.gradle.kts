@@ -9,12 +9,8 @@ plugins {
 }
 
 android {
-    dexOptions {
-        javaMaxHeapSize = "2g"
-    }
-
     defaultConfig {
-        minSdkVersion(21)
+        minSdk = 21
         multiDexEnabled = true
     }
 
@@ -30,8 +26,10 @@ android {
     }
 
     packagingOptions {
-        exclude("META-INF/*.kotlin_module")
-        exclude("META-INF/AL2.0")
-        exclude("META-INF/LGPL2.1")
+        with(resources.excludes) {
+            add("META-INF/*.kotlin_module")
+            add("META-INF/AL2.0")
+            add("META-INF/LGPL2.1")
+        }
     }
 }

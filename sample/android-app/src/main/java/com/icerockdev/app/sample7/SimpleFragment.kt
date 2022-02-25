@@ -17,5 +17,4 @@ class SimpleFragment : MvvmFragment<FragmentSimpleBinding, SimpleViewModel>() {
     override fun viewModelFactory(): ViewModelProvider.Factory {
         return createViewModelFactory { SimpleViewModel() }
     }
-
 }

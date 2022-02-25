@@ -25,31 +25,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun onSample1ButtonPressed(view: View) {
+    fun onSample1ButtonPressed(@Suppress("UnusedPrivateMember") view: View) {
         openScreen(SimpleActivity::class)
     }
 
-    fun onSample2ButtonPressed(view: View) {
+    fun onSample2ButtonPressed(@Suppress("UnusedPrivateMember") view: View) {
         openScreen(EventsActivity::class)
     }
 
-    fun onSample3ButtonPressed(view: View) {
+    fun onSample3ButtonPressed(@Suppress("UnusedPrivateMember") view: View) {
         openScreen(EventsOwnerActivity::class)
     }
 
-    fun onSample4ButtonPressed(view: View) {
+    fun onSample4ButtonPressed(@Suppress("UnusedPrivateMember") view: View) {
         openScreen(ValidationMergeActivity::class)
     }
 
-    fun onSample5ButtonPressed(view: View) {
+    fun onSample5ButtonPressed(@Suppress("UnusedPrivateMember") view: View) {
         openScreen(ValidationAllActivity::class)
     }
 
-    fun onSample6ButtonPressed(view: View) {
+    fun onSample6ButtonPressed(@Suppress("UnusedPrivateMember") view: View) {
         openScreen(LoginActivity::class)
     }
 
-    fun onSample7ButtonPressed(view: View) {
+    fun onSample7ButtonPressed(@Suppress("UnusedPrivateMember") view: View) {
         openScreen(ContainerActivity::class)
     }
 

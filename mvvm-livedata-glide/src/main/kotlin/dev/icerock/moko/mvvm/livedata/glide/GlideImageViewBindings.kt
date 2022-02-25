@@ -14,33 +14,32 @@ import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.utils.bindNotNull
 
-fun LiveData<String>.bindToImageViewSrc(
+fun ImageView.bindSrc(
     lifecycleOwner: LifecycleOwner,
-    imageView: ImageView,
+    liveData: LiveData<String>,
     requestManager: (RequestManager.() -> Unit)? = null,
-    requestBuilder: (RequestBuilder<Drawable>.() -> Unit)? = null
+    requestBuilder: ((RequestBuilder<Drawable>) -> RequestBuilder<Drawable>) = { it }
 ): Closeable {
-    return bindNotNull(lifecycleOwner) { url ->
-        Glide.with(imageView)
+    return liveData.bindNotNull(lifecycleOwner) { url ->
+        Glide.with(this)
             .also { requestManager?.invoke(it) }
             .load(url)
-            .also { requestBuilder?.invoke(it) }
-            .into(imageView)
+            .let { requestBuilder.invoke(it) }
+            .into(this)
     }
 }
 
-fun LiveData<String>.bindToImageViewSrc(
+fun ImageView.bindSrc(
     lifecycleOwner: LifecycleOwner,
-    imageView: ImageView,
+    liveData: LiveData<String>,
     loadingPlaceholder: Drawable? = null,
     errorPlaceholder: Drawable? = null
 ): Closeable {
-    return bindToImageViewSrc(
+    return bindSrc(
         lifecycleOwner = lifecycleOwner,
-        imageView = imageView,
+        liveData = liveData,
         requestBuilder = {
-            placeholder(loadingPlaceholder)
-            error(errorPlaceholder)
+            it.placeholder(loadingPlaceholder).error(errorPlaceholder)
         }
     )
 }

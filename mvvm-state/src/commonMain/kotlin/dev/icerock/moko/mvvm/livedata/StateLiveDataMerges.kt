@@ -10,7 +10,7 @@ fun <T1, E, T2, OT> LiveData<ResourceState<T1, E>>.concatData(
     liveData: LiveData<ResourceState<T2, E>>,
     function: (T1, T2) -> OT
 ): LiveData<ResourceState<OT, E>> =
-    mergeWith(liveData) { firstState, secondState ->
+    mediatorOf(this, liveData) { firstState, secondState ->
         val state: ResourceState<OT, E> = when {
             (firstState is ResourceState.Loading || secondState is ResourceState.Loading) -> ResourceState.Loading()
             (firstState is ResourceState.Failed) -> ResourceState.Failed(firstState.error)

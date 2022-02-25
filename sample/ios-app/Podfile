@@ -19,6 +19,4 @@ end
 target 'TestProj' do
   # MultiPlatformLibrary
   pod 'MultiPlatformLibrary', :path => '../mpp-library'
-  # pod 'MultiPlatformLibraryMvvm', :git => 'https://github.com/icerockdev/moko-mvvm.git', :tag => 'release/0.8.1'
-  pod 'MultiPlatformLibraryMvvm', :path => '../../'
 end

@@ -6,67 +6,60 @@ package dev.icerock.moko.mvvm.livedata
 
 import dev.icerock.moko.mvvm.utils.bind
 import dev.icerock.moko.mvvm.utils.setEventHandler
-import dev.icerock.moko.resources.desc.StringDesc
 import platform.Foundation.NSNotificationCenter
 import platform.UIKit.UITextView
 import platform.UIKit.UITextViewTextDidBeginEditingNotification
 import platform.UIKit.UITextViewTextDidChangeNotification
 import platform.UIKit.UITextViewTextDidEndEditingNotification
 
-fun <T : String?> LiveData<T>.bindStringToTextViewText(
-    textView: UITextView
+fun <T : String?> UITextView.bindText(
+    liveData: LiveData<T>
 ): Closeable {
-    return bind(textView) { value ->
+    return bind(liveData) { value ->
         if (this.text == value) return@bind
 
         this.text = value.orEmpty()
     }
 }
 
-fun <T : StringDesc?> LiveData<T>.bindStringDescToTextViewText(
-    textView: UITextView
+fun UITextView.bindTextTwoWay(
+    liveData: MutableLiveData<String>
 ): Closeable {
-    return map { it?.localized() }.bindStringToTextViewText(textView)
-}
-
-fun MutableLiveData<String>.bindStringTwoWayToTextViewText(
-    textView: UITextView
-): Closeable {
-    val readCloseable = bindStringToTextViewText(textView)
+    val readCloseable = bindText(liveData)
 
     val writeCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidChangeNotification,
-        ref = textView
+        ref = this
     ) {
         val newText = this.text
 
-        if (value == newText) return@setEventHandler
+        if (liveData.value == newText) return@setEventHandler
 
-        value = newText
+        liveData.value = newText
     }
 
     return readCloseable + writeCloseable
 }
 
-fun MutableLiveData<Boolean>.bindBoolTwoWayToTextViewFocus(
-    textView: UITextView
+fun UITextView.bindFocusTwoWay(
+    liveData: MutableLiveData<Boolean>
 ): Closeable {
-    val readCloseable = bindBoolToViewFocus(view = textView)
+    val readCloseable = bindFocus(liveData)
 
     val handler: UITextView.() -> Unit = {
         val focused = isFocused()
 
-        if (value != focused) value = focused
+        if (liveData.value != focused) liveData.value = focused
     }
 
     val beginCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidBeginEditingNotification,
-        ref = textView,
+        ref = this,
         lambda = handler
     )
     val endCloseable = NSNotificationCenter.defaultCenter.setEventHandler(
         notification = UITextViewTextDidEndEditingNotification,
-        ref = textView,
+        ref = this,
         lambda = handler
     )
 
