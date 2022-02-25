@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
         viewModel.eventsDispatcher.listener = self
 
         emailField.bindTextTwoWay(liveData: viewModel.email)
-        //emailValidationLabel.bindText(liveData: viewModel.emailValidation)
+        emailValidationLabel.bindText(liveData: viewModel.emailValidation)
         passwordField.bindTextTwoWay(liveData: viewModel.password)
         loginButton.bindHidden(liveData: viewModel.isLoginButtonVisible.revert())
         progressBar.bindHidden(liveData: viewModel.isLoading.revert())

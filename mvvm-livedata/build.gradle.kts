@@ -9,6 +9,7 @@ plugins {
 }
 
 dependencies {
+    commonMainImplementation(libs.mokoKSwift)
     commonMainApi(projects.mvvmCore)
 
     androidMainApi(libs.androidLiveData)

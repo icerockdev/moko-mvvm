@@ -27,6 +27,7 @@ dependencies {
     commonMainApi(libs.mokoResources)
     commonMainApi(projects.mvvmTest)
     commonMainApi(projects.mvvmLivedata)
+    commonMainApi(projects.mvvmLivedataResources)
     commonMainApi(projects.mvvmCore)
 
     "androidMainApi"(projects.mvvmLivedataGlide)
@@ -40,9 +41,11 @@ dependencies {
 framework {
     export(projects.mvvmCore)
     export(projects.mvvmLivedata)
+    export(projects.mvvmLivedataResources)
     export(libs.mokoResources)
 }
 
 kswift {
     install(dev.icerock.moko.kswift.plugin.feature.PlatformExtensionFunctionsFeature)
+    install(dev.icerock.moko.kswift.plugin.feature.SealedToSwiftEnumFeature)
 }

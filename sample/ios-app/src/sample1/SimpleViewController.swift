@@ -15,7 +15,7 @@ class SimpleViewController: UIViewController {
         
         viewModel = SimpleViewModel()
         
-//        counterLabel.bindText(liveData: viewModel.counter)
+        counterLabel.bindText(liveData: viewModel.counter)
     }
     
     @IBAction func onCounterButtonPressed() {
