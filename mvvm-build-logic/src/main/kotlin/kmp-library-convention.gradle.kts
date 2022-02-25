@@ -85,5 +85,31 @@ kotlin {
         commonMain.dependencies {
             implementation(kotlin("stdlib"))
         }
+
+        // apple source sets
+        val appleMain by creating
+        val appleTest by creating
+
+        appleMain.dependsOn(nativeMain)
+        appleTest.dependsOn(nativeTest)
+
+        with(
+            listOf(
+                "ios",
+                "macosArm64",
+                "macosX64",
+                "watchosX64",
+                "watchosX86",
+                "watchosArm32",
+                "watchosArm64",
+                "watchosSimulatorArm64",
+                "tvosArm64",
+                "tvosSimulatorArm64",
+                "tvosX64"
+            )
+        ) {
+            map { "${it}Main" }.forEach { getByName(it).dependsOn(appleMain) }
+            map { "${it}Test" }.forEach { getByName(it).dependsOn(appleTest) }
+        }
     }
 }

@@ -24,17 +24,20 @@ kotlin {
     sourceSets {
         val commonMain by getting
         val commonTest by getting
+
+        // ios source sets
         val iosMain by creating
         val iosTest by creating
 
         iosMain.dependsOn(commonMain)
         iosTest.dependsOn(commonTest)
 
-        val iosTargets = listOf("iosArm64", "iosX64", "iosSimulatorArm64")
+        with(listOf("iosArm64", "iosX64", "iosSimulatorArm64")) {
+            map { "${it}Main" }.forEach { getByName(it).dependsOn(iosMain) }
+            map { "${it}Test" }.forEach { getByName(it).dependsOn(iosTest) }
+        }
 
-        iosTargets.map { "${it}Main" }.forEach { getByName(it).dependsOn(iosMain) }
-        iosTargets.map { "${it}Test" }.forEach { getByName(it).dependsOn(iosTest) }
-
+        // mobile source sets
         val mobileMain by creating
         val mobileTest by creating
         val androidMain by getting
