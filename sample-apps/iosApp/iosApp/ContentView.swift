@@ -118,10 +118,8 @@ struct ContentView: View {
                 viewModel: LoginViewModel(
                     eventsDispatcher: EventsDispatcher()
                 ).observed { vm in
-                    [
-                        vm.login.readOnly(),
-                        vm.password.readOnly()
-                    ]
+                    vm.login.readOnly()
+                    vm.password.readOnly()
                 },
                 onLoginSuccess: {  }
             )
@@ -203,10 +201,16 @@ struct LiveDataObserverBuilder {
     static func buildBlock() -> [LiveData<AnyObject>] { [] }
 }
 
+extension LiveDataObserverBuilder {
+    static func buildBlock(_ settings: LiveData<AnyObject>...) -> [LiveData<AnyObject>] {
+        settings
+    }
+}
+
 extension ObservableObject where Self: ViewModel {
     
     func observed(
-        _ content: (Self) -> [LiveData<AnyObject>]
+        @LiveDataObserverBuilder _ content: (Self) -> [LiveData<AnyObject>]
     ) -> Self {
         let allLiveData: [LiveData<AnyObject>] = content(self)
         
