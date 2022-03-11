@@ -115,14 +115,6 @@ struct ContentView: View {
 //            }
 
             LoginView(
-                viewModel: LoginViewModel(
-                    eventsDispatcher: EventsDispatcher()
-                ).observed { vm in
-                    vm.login.readOnly()
-                    vm.password.readOnly()
-                    vm.isLoading.distinct()
-                    vm.isLoginButtonEnabled.distinct()
-                },
                 onLoginSuccess: {  }
             )
 
@@ -175,29 +167,6 @@ struct MainView: View {
     }
 }
 
-class LoginViewModelWrapper: ObservableObject {
-    let wrapped: LoginViewModel
-    
-    let login: Binding<String>
-    let password: Binding<String>
-    var isButtonEnabled: Bool {
-        get { wrapped.isLoginButtonEnabled.value!.boolValue }
-    }
-    var isLoading: Bool {
-        get { wrapped.isLoading.value!.boolValue }
-    }
-    
-    init(viewModel: LoginViewModel) {
-        self.wrapped = viewModel
-        
-        self.login = createBinding(viewModel.login)
-        self.password = createBinding(viewModel.password)
-        
-        createState(wrapped.isLoginButtonEnabled)
-        createState(wrapped.isLoading)
-    }
-}
-
 @resultBuilder
 struct LiveDataObserverBuilder {
     static func buildBlock() -> [LiveData<AnyObject>] { [] }
@@ -215,38 +184,7 @@ extension ObservableObject where Self: ViewModel {
         @LiveDataObserverBuilder _ content: (Self) -> [LiveData<AnyObject>]
     ) -> Self {
         let allLiveData: [LiveData<AnyObject>] = content(self)
-        
-//        var propertiesCount : CUnsignedInt = 0
-//        let propertiesInAClass = class_copyPropertyList(Self.self, &propertiesCount)
-//        var propertiesDictionary = [String:Any]()
-//
-//        for i in 0 ..< Int(propertiesCount) {
-//          if let property = propertiesInAClass?[i],
-//             let strKey = NSString(utf8String: property_getName(property)) as String? {
-//              print(strKey)
-//          }
-//        }
-//
-//        var methodsCount : CUnsignedInt = 0
-//        let methodsInAClass = class_copyMethodList(Self.self, &methodsCount)
-//        var methodsDictionary = [String:Any]()
-//
-//        for i in 0 ..< Int(methodsCount) {
-//          if let method = methodsInAClass?[i] {
-//              print(method_getName(method))
-//
-//              print(String(cString: method_copyReturnType(method)))
-//          }
-//        }
-//
-//        let mirror = Mirror(reflecting: self)
-//
-//        let allLiveData = mirror
-//            .children
-//            .compactMap {
-//                $0.value as? LiveData<AnyObject>
-//            }
-        
+
         for liveData in allLiveData {
             liveData.addObserver { _ in
                 self.objectWillChange.send()
@@ -262,19 +200,24 @@ extension ViewModel: ObservableObject {
 }
 
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel
+    @ObservedObject var viewModel: LoginViewModel = LoginViewModel(
+        eventsDispatcher: EventsDispatcher()
+    ).observed { vm in
+        vm.login.readOnly()
+        vm.password.readOnly()
+        vm.isLoading.distinct()
+        vm.isLoginButtonEnabled.distinct()
+    }
     let onLoginSuccess: () -> Void
     
     var body: some View {
         LoginViewBody(
-            login: createBinding(viewModel.login),
-            password: createBinding(viewModel.password),
-            isButtonEnabled: viewModel.isLoginButtonEnabled.value?.boolValue ?? false,
-            isLoading: viewModel.isLoading.value?.boolValue ?? false,
+            login: binding(viewModel.login),
+            password: binding(viewModel.password),
+            isButtonEnabled: state(viewModel.isLoginButtonEnabled),
+            isLoading: state(viewModel.isLoading),
             onLoginPressed: { viewModel.onLoginPressed() }
-        ).onReceive(viewModel.objectWillChange) { data in
-            print("updated \(data)")
-        }
+        )
     }
 }
 
@@ -304,89 +247,32 @@ struct LoginViewBody: View {
     }
 }
 
-//@propertyWrapper
-//struct LiveDataBinding<Value, InternalValue: AnyObject> {
-//    private var value: Value
-//
-//    init(liveData: LiveData<InternalValue>, mapper: @escaping (InternalValue) -> Value) {
-//        self.value = mapper(liveData.value as! InternalValue)
-//
-//        liveData.addObserver { newValue in
-//            print("LiveDataBinding - got new value \(newValue)")
-//            if let value = newValue {
-//                self.value = mapper(value)
-//            }
-//        }
-//    }
-//
-//    var wrappedValue: Value {
-//        get { value }
-//    }
-//}
-
-//func createLiveDataBinding<Value, InternalValue: AnyObject>(
-//    _ liveData: LiveData<InternalValue>,
-//    mapper: @escaping (InternalValue) -> Value
-//) -> LiveDataBinding<Value, InternalValue> {
-//    return LiveDataBinding(liveData: liveData, mapper: mapper)
-//}
-
-
-// TODO think about https://kean.blog/post/rxui
-func createBinding<T, R>(
+func binding<T, R>(
     _ liveData: MutableLiveData<T>,
     getMapper: @escaping (T) -> R,
     setMapper: @escaping (R) -> T
 ) -> Binding<R> {
     return Binding(
         get: { getMapper(liveData.value!) },
-        set: {
-            liveData.value = setMapper($0)
-        }
+        set: { liveData.value = setMapper($0) }
     )
 }
 
-extension ObservableObject where ObjectWillChangePublisher: Combine.ObservableObjectPublisher {
-    
-    func createState<T, R>(
-        _ liveData: LiveData<T>,
-        mapper: @escaping (T) -> R
-    ) -> State<R> {
-        var result: State<R> = State(initialValue: mapper(liveData.value!))
-        result.update()
-        
-        print("i create new state!")
-        
-        liveData.addObserver { newValue in
-            print("createState - got new value \(newValue)")
-            result.wrappedValue = mapper(newValue!)
-            self.objectWillChange.send()
-        }
-        
-        return result
-    }
-    
-    func createState(_ liveData: LiveData<KotlinBoolean>) -> State<Bool> {
-        return createState(liveData, mapper: { $0.boolValue })
-    }
-}
-
-func createBinding(_ liveData: MutableLiveData<NSString>) -> Binding<String> {
-    return createBinding(
+func binding(_ liveData: MutableLiveData<NSString>) -> Binding<String> {
+    return binding(
         liveData,
         getMapper: { $0 as String },
         setMapper: { $0 as NSString }
     )
 }
 
-@propertyWrapper
-public struct LiveDataPublished<T: AnyObject, Value> {
-    let liveData: MutableLiveData<T>
-    let getMapper: (T) -> Value
-    let setMapper: (Value) -> T
-    
-    public var wrappedValue: Value {
-        set { liveData.value = setMapper(newValue) }
-        get { getMapper(liveData.value!) }
-    }
+func state<T, R>(
+    _ liveData: LiveData<T>,
+    mapper: @escaping (T) -> R
+) -> R {
+    return mapper(liveData.value!)
+}
+
+func state(_ liveData: LiveData<KotlinBoolean>) -> Bool {
+    return state(liveData, mapper: { $0.boolValue })
 }
