@@ -120,6 +120,8 @@ struct ContentView: View {
                 ).observed { vm in
                     vm.login.readOnly()
                     vm.password.readOnly()
+                    vm.isLoading.distinct()
+                    vm.isLoginButtonEnabled.distinct()
                 },
                 onLoginSuccess: {  }
             )
@@ -336,27 +338,12 @@ func createBinding<T, R>(
     getMapper: @escaping (T) -> R,
     setMapper: @escaping (R) -> T
 ) -> Binding<R> {
-    var setEnabled = true
-    var result = Binding(
+    return Binding(
         get: { getMapper(liveData.value!) },
         set: {
-            if setEnabled {
-                liveData.value = setMapper($0)
-            }
+            liveData.value = setMapper($0)
         }
     )
-    
-    print("i create new binding!")
-    
-    liveData.addObserver { newValue in
-        print("createBinding - got new value \(newValue)")
-        setEnabled = false
-        result.wrappedValue = getMapper(newValue!)
-        setEnabled = true
-//        result.update()
-    }
-    
-    return result
 }
 
 extension ObservableObject where ObjectWillChangePublisher: Combine.ObservableObjectPublisher {
