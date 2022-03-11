@@ -1,5 +1,6 @@
 import SwiftUI
 import shared
+import Combine
 
 enum Screen {
     case main
@@ -81,39 +82,50 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Button("to main") {
-                    self.route = .toMain
-                }
-                Button("to second") {
-                    self.route = .toSecond(text: "from root")
-                }
-            }
-            
-            switch(self.route) {
-            case .toMain:
-                NavigationLink(
-                    isActive: createRouteActiveBinding(route: $route),
-                    destination: {
-                        MainView(onBackPressed: {
-                            self.route = .toSecond(text: "hello!")
-                        })
-                    },
-                    label: { EmptyView().hidden() }
-                )
-            case .toSecond(let text):
-                NavigationLink(
-                    isActive: createRouteActiveBinding(route: $route),
-                    destination: {
-                        Text("got \(text)")
-                    },
-                    label: { EmptyView().hidden() }
-                )
-            case nil:
-                EmptyView().hidden()
-            }
-            
+//            VStack {
+//                Button("to main") {
+//                    self.route = .toMain
+//                }
+//                Button("to second") {
+//                    self.route = .toSecond(text: "from root")
+//                }
+//            }
 //
+//            switch(self.route) {
+//            case .toMain:
+//                NavigationLink(
+//                    isActive: createRouteActiveBinding(route: $route),
+//                    destination: {
+//                        MainView(onBackPressed: {
+//                            self.route = .toSecond(text: "hello!")
+//                        })
+//                    },
+//                    label: { EmptyView().hidden() }
+//                )
+//            case .toSecond(let text):
+//                NavigationLink(
+//                    isActive: createRouteActiveBinding(route: $route),
+//                    destination: {
+//                        Text("got \(text)")
+//                    },
+//                    label: { EmptyView().hidden() }
+//                )
+//            case nil:
+//                EmptyView().hidden()
+//            }
+
+            LoginView(
+                viewModel: LoginViewModel(
+                    eventsDispatcher: EventsDispatcher()
+                ).observed { vm in
+                    [
+                        vm.login.readOnly(),
+                        vm.password.readOnly()
+                    ]
+                },
+                onLoginSuccess: {  }
+            )
+
 //            NavigationLink(
 //                "Main Screen",
 //                isActive: $isOnMainScreen,
@@ -163,57 +175,156 @@ struct MainView: View {
     }
 }
 
-struct LoginView: View {
-    let viewModel: LoginViewModel
-    let onLoginSuccess: () -> Void
+class LoginViewModelWrapper: ObservableObject {
+    let wrapped: LoginViewModel
     
-    init(
-        viewModel: LoginViewModel = LoginViewModel(eventsDispatcher: EventsDispatcher()),
-        onLoginSuccess: @escaping () -> Void
-    ) {
-        self.viewModel = viewModel
-        self.onLoginSuccess = onLoginSuccess
-        
-        let any: Any? = viewModel.password2.value
-        let string: NSString? = viewModel.password2S.value
+    let login: Binding<String>
+    let password: Binding<String>
+    var isButtonEnabled: Bool {
+        get { wrapped.isLoginButtonEnabled.value!.boolValue }
     }
+    var isLoading: Bool {
+        get { wrapped.isLoading.value!.boolValue }
+    }
+    
+    init(viewModel: LoginViewModel) {
+        self.wrapped = viewModel
+        
+        self.login = createBinding(viewModel.login)
+        self.password = createBinding(viewModel.password)
+        
+        createState(wrapped.isLoginButtonEnabled)
+        createState(wrapped.isLoading)
+    }
+}
+
+@resultBuilder
+struct LiveDataObserverBuilder {
+    static func buildBlock() -> [LiveData<AnyObject>] { [] }
+}
+
+extension ObservableObject where Self: ViewModel {
+    
+    func observed(
+        _ content: (Self) -> [LiveData<AnyObject>]
+    ) -> Self {
+        let allLiveData: [LiveData<AnyObject>] = content(self)
+        
+//        var propertiesCount : CUnsignedInt = 0
+//        let propertiesInAClass = class_copyPropertyList(Self.self, &propertiesCount)
+//        var propertiesDictionary = [String:Any]()
+//
+//        for i in 0 ..< Int(propertiesCount) {
+//          if let property = propertiesInAClass?[i],
+//             let strKey = NSString(utf8String: property_getName(property)) as String? {
+//              print(strKey)
+//          }
+//        }
+//
+//        var methodsCount : CUnsignedInt = 0
+//        let methodsInAClass = class_copyMethodList(Self.self, &methodsCount)
+//        var methodsDictionary = [String:Any]()
+//
+//        for i in 0 ..< Int(methodsCount) {
+//          if let method = methodsInAClass?[i] {
+//              print(method_getName(method))
+//
+//              print(String(cString: method_copyReturnType(method)))
+//          }
+//        }
+//
+//        let mirror = Mirror(reflecting: self)
+//
+//        let allLiveData = mirror
+//            .children
+//            .compactMap {
+//                $0.value as? LiveData<AnyObject>
+//            }
+        
+        for liveData in allLiveData {
+            liveData.addObserver { _ in
+                self.objectWillChange.send()
+            }
+        }
+        
+        return self
+    }
+}
+
+extension ViewModel: ObservableObject {
+    
+}
+
+struct LoginView: View {
+    @ObservedObject var viewModel: LoginViewModel
+    let onLoginSuccess: () -> Void
     
     var body: some View {
         LoginViewBody(
             login: createBinding(viewModel.login),
             password: createBinding(viewModel.password),
-            isButtonEnabled: createState(viewModel.isLoginButtonEnabled),
-            isLoading: createState(viewModel.isLoading),
+            isButtonEnabled: viewModel.isLoginButtonEnabled.value?.boolValue ?? false,
+            isLoading: viewModel.isLoading.value?.boolValue ?? false,
             onLoginPressed: { viewModel.onLoginPressed() }
-        )
+        ).onReceive(viewModel.objectWillChange) { data in
+            print("updated \(data)")
+        }
     }
 }
 
 struct LoginViewBody: View {
-    let login: Binding<String>
-    let password: Binding<String>
-    let isButtonEnabled: State<Bool>
-    let isLoading: State<Bool>
+    @Binding var login: String
+    @Binding var password: String
+    let isButtonEnabled: Bool
+    let isLoading: Bool
     let onLoginPressed: () -> Void
     
     var body: some View {
         VStack(spacing: 8.0) {
-            TextField("Login", text: login)
+            TextField("Login", text: $login)
                 .textFieldStyle(.roundedBorder)
             
-            TextField("Password", text: password)
+            TextField("Password", text: $password)
                 .textFieldStyle(.roundedBorder)
             
-            if isLoading.wrappedValue {
+            if isLoading {
                 ProgressView()
             } else {
                 Button("Login") {
                     onLoginPressed()
-                }.disabled(!isButtonEnabled.wrappedValue)
+                }.disabled(!isButtonEnabled)
             }
         }.padding()
     }
 }
+
+//@propertyWrapper
+//struct LiveDataBinding<Value, InternalValue: AnyObject> {
+//    private var value: Value
+//
+//    init(liveData: LiveData<InternalValue>, mapper: @escaping (InternalValue) -> Value) {
+//        self.value = mapper(liveData.value as! InternalValue)
+//
+//        liveData.addObserver { newValue in
+//            print("LiveDataBinding - got new value \(newValue)")
+//            if let value = newValue {
+//                self.value = mapper(value)
+//            }
+//        }
+//    }
+//
+//    var wrappedValue: Value {
+//        get { value }
+//    }
+//}
+
+//func createLiveDataBinding<Value, InternalValue: AnyObject>(
+//    _ liveData: LiveData<InternalValue>,
+//    mapper: @escaping (InternalValue) -> Value
+//) -> LiveDataBinding<Value, InternalValue> {
+//    return LiveDataBinding(liveData: liveData, mapper: mapper)
+//}
+
 
 // TODO think about https://kean.blog/post/rxui
 func createBinding<T, R>(
@@ -221,37 +332,52 @@ func createBinding<T, R>(
     getMapper: @escaping (T) -> R,
     setMapper: @escaping (R) -> T
 ) -> Binding<R> {
+    var setEnabled = true
     var result = Binding(
         get: { getMapper(liveData.value!) },
         set: {
-            liveData.value = setMapper($0)
+            if setEnabled {
+                liveData.value = setMapper($0)
+            }
         }
     )
     
-    liveData.addObserver { _ in
-        result.update()
+    print("i create new binding!")
+    
+    liveData.addObserver { newValue in
+        print("createBinding - got new value \(newValue)")
+        setEnabled = false
+        result.wrappedValue = getMapper(newValue!)
+        setEnabled = true
+//        result.update()
     }
     
     return result
 }
 
-func createState<T, R>(
-    _ liveData: LiveData<T>,
-    mapper: (T) -> R
-) -> State<R> {
-    var result = State(
-        wrappedValue: mapper(liveData.value!)
-    )
+extension ObservableObject where ObjectWillChangePublisher: Combine.ObservableObjectPublisher {
     
-    liveData.addObserver { _ in
+    func createState<T, R>(
+        _ liveData: LiveData<T>,
+        mapper: @escaping (T) -> R
+    ) -> State<R> {
+        var result: State<R> = State(initialValue: mapper(liveData.value!))
         result.update()
+        
+        print("i create new state!")
+        
+        liveData.addObserver { newValue in
+            print("createState - got new value \(newValue)")
+            result.wrappedValue = mapper(newValue!)
+            self.objectWillChange.send()
+        }
+        
+        return result
     }
     
-    return result
-}
-
-func createState(_ liveData: LiveData<KotlinBoolean>) -> State<Bool> {
-    return createState(liveData, mapper: { $0.boolValue })
+    func createState(_ liveData: LiveData<KotlinBoolean>) -> State<Bool> {
+        return createState(liveData, mapper: { $0.boolValue })
+    }
 }
 
 func createBinding(_ liveData: MutableLiveData<NSString>) -> Binding<String> {
