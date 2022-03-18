@@ -125,7 +125,7 @@ extension ObservableObject where Self: ViewModel {
     }
 }
 
-func publisher<T>(_ cFlow: CFlow<T>) -> AnyPublisher<T, Never> {
+func createPublisher<T>(_ cFlow: CFlow<T>) -> AnyPublisher<T, Never> {
     return CFlowPublisher(cFlow: cFlow).eraseToAnyPublisher()
 }
 

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import shared
+import Combine
 
 func createViewModel() -> BookListViewModel {
     return BookListViewModel().start()
@@ -33,16 +34,11 @@ struct BookListView: View {
             }
 
             BookListViewBody(
-                state: viewModel.state(
-                    \.state,
-                    equals: { $0 === $1 },
-                    mapper: { BookListViewModelStateKs($0) }
-                ),
+                state: viewModel.stateKs,
                 onRetryPressed: {
                     viewModel.onRetryPressed()
                 }
-            ).onReceive(publisher(viewModel.actions)) { action in
-                let action = BookListViewModelActionKs(action)
+            ).onReceive(viewModel.actionsKs) { action in
                 switch(action) {
                 case .routeToBookDetails(let data):
                     detailBookId = data.id
@@ -51,6 +47,26 @@ struct BookListView: View {
                     UIApplication.shared.open(URL(string: data.url)!)
                 }
             }.navigationTitle("Books")
+        }
+    }
+}
+
+extension BookListViewModel {
+    var stateKs: BookListViewModelStateKs {
+        get {
+            return self.state(
+                \.state,
+                equals: { $0 === $1 },
+                mapper: { BookListViewModelStateKs($0) }
+            )
+        }
+    }
+    
+    var actionsKs: AnyPublisher<BookListViewModelActionKs, Never> {
+        get {
+            return createPublisher(self.actions)
+                .map { BookListViewModelActionKs($0) }
+                .eraseToAnyPublisher()
         }
     }
 }
