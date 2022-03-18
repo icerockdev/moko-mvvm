@@ -13,6 +13,7 @@ plugins {
 val mokoResourcesVersion = "0.18.0"
 val mokoMvvmVersion = "0.12.0"
 val dependenciesList = listOf(
+    "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt",
     "dev.icerock.moko:mvvm-core:$mokoMvvmVersion",
     "dev.icerock.moko:mvvm-livedata:$mokoMvvmVersion",
     "dev.icerock.moko:mvvm-livedata-resources:$mokoMvvmVersion",

@@ -44,6 +44,10 @@ fun LoginScreen(
             override fun routeSuccessfulAuth() {
                 currentOnLoginSuccess()
             }
+
+            override fun showError(message: String) {
+                TODO("Not yet implemented")
+            }
         }
     )
 

@@ -101,6 +101,27 @@ extension ObservableObject where Self: ViewModel {
             mapper: { $0.boolValue }
         )
     }
+    
+    func state<T, R>(
+        _ getFlow: (Self) -> CStateFlow<T>,
+        equals: @escaping (T?, T?) -> Bool,
+        mapper: @escaping (T) -> R
+    ) -> R {
+        let stateFlow: CStateFlow<T> = getFlow(self)
+        var lastValue: T? = stateFlow.value
+        
+        var disposable: CFlowDisposable? = nil
+        
+        disposable = stateFlow.subscribe(onCollect: { value in
+            if !equals(lastValue, value) {
+                lastValue = value
+                self.objectWillChange.send()
+                disposable?.dispose()
+            }
+        })
+        
+        return mapper(stateFlow.value!)
+    }
 }
 
 extension ViewModel: ObservableObject {

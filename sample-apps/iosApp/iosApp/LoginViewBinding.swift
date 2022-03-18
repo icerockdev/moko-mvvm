@@ -15,6 +15,8 @@ struct LoginView: View {
     )
     let onLoginSuccess: () -> Void
     
+    @ObservedObject private var listener: LoginEventsListener = LoginEventsListener()
+    
     var body: some View {
         LoginViewBody(
             login: viewModel.binding { $0.login },
@@ -24,13 +26,35 @@ struct LoginView: View {
             onLoginPressed: { viewModel.onLoginPressed() }
         ).onAppear {
             let listener = LoginEventsListener()
-            listener.doRouteSuccessfulAuth = { self.onLoginSuccess() }
+            listener.doRouteSuccessfulAuth = {
+                self.onLoginSuccess()
+            }
             viewModel.eventsDispatcher.listener = listener
+        }.alert(
+            isPresented: listener.$isErrorShowed
+        ) {
+            Alert(
+                title: Text("Error"),
+                message: Text(listener.errorText ?? ""),
+                dismissButton: .default(Text("Close"))
+            )
         }
     }
 }
 
-private class LoginEventsListener: NSObject, LoginViewModelEventsListener {
+private class LoginEventsListener: ObservableObject, LoginViewModelEventsListener {
+    @State var isErrorShowed: Bool = false
+    @State var errorText: String? = nil
+    
+    init() {
+        print("test")
+    }
+    
+    func showError(message: String) {
+        isErrorShowed = true
+        errorText = message
+    }
+    
     var doRouteSuccessfulAuth: () -> Void = {}
     
     func routeSuccessfulAuth() {

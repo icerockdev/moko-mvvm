@@ -33,7 +33,11 @@ class LoginViewModel(
         viewModelScope.launch {
             delay(3.seconds)
 
-            eventsDispatcher.dispatchEvent { routeSuccessfulAuth() }
+            if (login.value != "error") {
+                eventsDispatcher.dispatchEvent { routeSuccessfulAuth() }
+            } else {
+                eventsDispatcher.dispatchEvent { showError("some error!") }
+            }
 
             _isLoading.value = false
         }
@@ -41,5 +45,7 @@ class LoginViewModel(
 
     interface EventsListener {
         fun routeSuccessfulAuth()
+        fun showError(message: String)
     }
 }
+

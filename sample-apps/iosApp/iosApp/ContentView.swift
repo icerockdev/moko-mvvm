@@ -3,7 +3,7 @@ import shared
 import Combine
 
 struct ContentView: View {
-    @State var isAuthorized: Bool = false
+    @State var isAuthorized: Bool = true
     
     var body: some View {
         if isAuthorized {
@@ -33,7 +33,7 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            BooksView()
+            BookListView()
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Logout") {
@@ -42,20 +42,6 @@ struct MainView: View {
                     }
                 }
         }
-    }
-}
-
-struct BooksView: View {
-    let items: Array<String> = ["test", "test2", "test3", "test4", "test5"]
-    
-    var body: some View {
-        List(items, id: \.hashValue) { text in
-            NavigationLink {
-                BookDetailsView(id: text)
-            } label: {
-                Text(text)
-            }
-        }.navigationTitle("Books")
     }
 }
 
