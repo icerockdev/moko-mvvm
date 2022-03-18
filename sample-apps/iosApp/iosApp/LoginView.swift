@@ -13,11 +13,11 @@ import shared
 struct LoginView: View {
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel(
         eventsDispatcher: EventsDispatcher()
-    ).observed { vm in
-        vm.login.distinct()
-        vm.password.distinct()
-        vm.isLoading.distinct()
-        vm.isLoginButtonEnabled.distinct()
+    ).observed {
+        $0.login.distinct()
+        $0.password.distinct()
+        $0.isLoading.distinct()
+        $0.isLoginButtonEnabled.distinct()
     }
     let onLoginSuccess: () -> Void
     
