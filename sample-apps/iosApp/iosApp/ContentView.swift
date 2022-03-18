@@ -46,13 +46,13 @@ struct MainView: View {
 }
 
 struct BookDetailsView: View {
-    let id: String
+    let id: Int32
     
     var body: some View {
         ScrollView {
             VStack {
                 Text("id: ")
-                Text(id)
+                Text("\(id)")
             }
         }.navigationTitle("Book details")
     }
