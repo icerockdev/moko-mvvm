@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		226D765D27E44894004964F6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D765C27E44894004964F6 /* LoginView.swift */; };
 		226D765F27E448CA004964F6 /* mokoMvvmExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D765E27E448CA004964F6 /* mokoMvvmExt.swift */; };
+		226D766127E453AB004964F6 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D766027E453AB004964F6 /* Routing.swift */; };
 		22EE33FF27C9235100538774 /* dev_icerock_moko_mvvm-livedata-resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE33FB27C9235100538774 /* dev_icerock_moko_mvvm-livedata-resources.swift */; };
 		22EE340027C9235100538774 /* dev_icerock_moko_mvvm-livedata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE33FC27C9235100538774 /* dev_icerock_moko_mvvm-livedata.swift */; };
 		22EE340127C9235100538774 /* dev_icerock_moko_resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE33FD27C9235100538774 /* dev_icerock_moko_resources.swift */; };
@@ -40,6 +41,7 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		226D765C27E44894004964F6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		226D765E27E448CA004964F6 /* mokoMvvmExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mokoMvvmExt.swift; sourceTree = "<group>"; };
+		226D766027E453AB004964F6 /* Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
 		22EE33F727C9233900538774 /* shared.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = shared.xcframework; path = ../shared/build/xcode/shared.xcframework; sourceTree = "<group>"; };
 		22EE33FB27C9235100538774 /* dev_icerock_moko_mvvm-livedata-resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "dev_icerock_moko_mvvm-livedata-resources.swift"; sourceTree = "<group>"; };
 		22EE33FC27C9235100538774 /* dev_icerock_moko_mvvm-livedata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "dev_icerock_moko_mvvm-livedata.swift"; sourceTree = "<group>"; };
@@ -105,10 +107,11 @@
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				226D765C27E44894004964F6 /* LoginView.swift */,
-				7555FF8C242A565B00829871 /* Info.plist */,
-				2152FB032600AC8F00CF470E /* iOSApp.swift */,
-				058557D7273AAEEB004C7B11 /* Preview Content */,
 				226D765E27E448CA004964F6 /* mokoMvvmExt.swift */,
+				226D766027E453AB004964F6 /* Routing.swift */,
+				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				7555FF8C242A565B00829871 /* Info.plist */,
+				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226D766127E453AB004964F6 /* Routing.swift in Sources */,
 				226D765D27E44894004964F6 /* LoginView.swift in Sources */,
 				22EE340127C9235100538774 /* dev_icerock_moko_resources.swift in Sources */,
 				226D765F27E448CA004964F6 /* mokoMvvmExt.swift in Sources */,

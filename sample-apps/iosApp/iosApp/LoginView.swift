@@ -28,7 +28,19 @@ struct LoginView: View {
             isButtonEnabled: state(viewModel.isLoginButtonEnabled),
             isLoading: state(viewModel.isLoading),
             onLoginPressed: { viewModel.onLoginPressed() }
-        )
+        ).onAppear {
+            let listener = LoginEventsListener()
+            listener.doRouteSuccessfulAuth = { self.onLoginSuccess() }
+            viewModel.eventsDispatcher.listener = listener
+        }
+    }
+}
+
+private class LoginEventsListener: NSObject, LoginViewModelEventsListener {
+    var doRouteSuccessfulAuth: () -> Void = {}
+    
+    func routeSuccessfulAuth() {
+        doRouteSuccessfulAuth()
     }
 }
 
