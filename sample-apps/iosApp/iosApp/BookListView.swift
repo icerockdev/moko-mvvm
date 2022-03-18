@@ -11,22 +11,23 @@ import SwiftUI
 import shared
 
 struct BookListViewBody: View {
-    let state: BookListViewModelState
+    let state: BookListViewModelStateKs
     let onRetryPressed: () -> Void
     
     var body: some View {
-        if let _ = state as? BookListViewModelStateLoading {
+        switch(state) {
+        case .loading:
             ProgressView()
-        } else if let empty = state as? BookListViewModelStateEmpty {
-            Text(empty.message.localized())
-        } else if let error = state as? BookListViewModelStateError {
+        case .empty(let data):
+            Text(data.message.localized())
+        case .error(let data):
             VStack {
-                Text(error.message.localized())
+                Text(data.message.localized())
                 Button("Retry") {
                     onRetryPressed()
                 }
             }
-        } else if let data = state as? BookListViewModelStateSuccess {
+        case .success(let data):
             List(data.items, id: \.id) { unit in
                 if let bookUnit = unit as? BookListViewModelListUnitBookUnit {
                     Text(bookUnit.title).onTapGesture {
@@ -40,8 +41,6 @@ struct BookListViewBody: View {
                     fatalError()
                 }
             }
-        } else {
-            fatalError()
         }
     }
 }

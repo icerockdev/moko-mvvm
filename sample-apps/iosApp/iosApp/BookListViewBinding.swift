@@ -19,7 +19,7 @@ struct BookListView: View {
             state: viewModel.state(
                 { $0.state },
                 equals: { $0 === $1 },
-                mapper: { $0 }
+                mapper: { BookListViewModelStateKs($0) }
             ),
             onRetryPressed: {
                 viewModel.onRetryPressed()
@@ -29,13 +29,12 @@ struct BookListView: View {
         }.onDisappear {
             viewModel.onCleared()
         }.onReceive(publisher(viewModel.actions)) { action in
-            if let routeToDetails = action as? BookListViewModelActionRouteToBookDetails {
-                print(routeToDetails.id)
-                // here should be routing
-            } else if let openUrl = action as? BookListViewModelActionOpenUrl {
-                UIApplication.shared.open(URL(string: openUrl.url)!)
-            } else {
-                fatalError()
+            let action = BookListViewModelActionKs(action)
+            switch(action) {
+            case .routeToBookDetails(let data):
+                print(data.id)
+            case .openUrl(let data):
+                UIApplication.shared.open(URL(string: data.url)!)
             }
         }.navigationTitle("Books")
     }
