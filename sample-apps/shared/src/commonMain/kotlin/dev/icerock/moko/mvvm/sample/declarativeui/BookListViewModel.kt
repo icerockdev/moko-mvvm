@@ -61,11 +61,21 @@ class BookListViewModel : ViewModel() {
     }
 
     private fun onBookPressed(book: Book) {
-        _actions.tryEmit(Action.RouteToBookDetails(book.id))
+        println("pressed $book")
+        viewModelScope.launch {
+            println("before")
+            _actions.emit(Action.RouteToBookDetails(book.id))
+            println("after")
+        }
     }
 
     private fun onAdvertisementPressed(advert: Advertisement) {
-        _actions.tryEmit(Action.OpenUrl(advert.url))
+        println("pressed $advert")
+        viewModelScope.launch {
+            println("before")
+            _actions.emit(Action.OpenUrl(advert.url))
+            println("after")
+        }
     }
 
     sealed interface State {

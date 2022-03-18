@@ -24,10 +24,19 @@ struct BookListView: View {
             onRetryPressed: {
                 viewModel.onRetryPressed()
             }
-        ).onAppear(perform: {
+        ).onAppear {
             viewModel.start()
-        }).onDisappear {
+        }.onDisappear {
             viewModel.onCleared()
+        }.onReceive(publisher(viewModel.actions)) { action in
+            if let routeToDetails = action as? BookListViewModelActionRouteToBookDetails {
+                print(routeToDetails.id)
+                // here should be routing
+            } else if let openUrl = action as? BookListViewModelActionOpenUrl {
+                UIApplication.shared.open(URL(string: openUrl.url)!)
+            } else {
+                fatalError()
+            }
         }.navigationTitle("Books")
     }
 }

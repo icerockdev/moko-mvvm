@@ -29,9 +29,13 @@ struct BookListViewBody: View {
         } else if let data = state as? BookListViewModelStateSuccess {
             List(data.items, id: \.id) { unit in
                 if let bookUnit = unit as? BookListViewModelListUnitBookUnit {
-                    Text(bookUnit.title)
+                    Text(bookUnit.title).onTapGesture {
+                        bookUnit.onPressed()
+                    }
                 } else if let adUnit = unit as? BookListViewModelListUnitAdvertUnit {
-                    Text(adUnit.text)
+                    Text(adUnit.text).onTapGesture {
+                        adUnit.onPressed()
+                    }
                 } else {
                     fatalError()
                 }

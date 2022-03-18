@@ -19,11 +19,15 @@ actual open class CFlow<T> actual constructor(private val flow: Flow<T>) : Flow<
 
     fun subscribe(coroutineScope: CoroutineScope, onCollect: (T) -> Unit): Disposable {
         val job: Job = coroutineScope.launch(Dispatchers.Main) {
-            flow.onEach { onCollect(it) }
+            flow.onEach {
+                println("collect $it")
+                onCollect(it)
+            }
                 .collect()
         }
         return object : Disposable {
             override fun dispose() {
+                println("cancel job")
                 job.cancel()
             }
         }
