@@ -3,7 +3,7 @@ import shared
 import Combine
 
 struct ContentView: View {
-    @State var isAuthorized: Bool = true
+    @State var isAuthorized: Bool = false
     
     var body: some View {
         if isAuthorized {

@@ -6,43 +6,7 @@
 //  Copyright © 2022 orgName. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
-import shared
-
-struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel(
-        eventsDispatcher: EventsDispatcher()
-    ).observed {
-        $0.login.distinct()
-        $0.password.distinct()
-        $0.isLoading.distinct()
-        $0.isLoginButtonEnabled.distinct()
-    }
-    let onLoginSuccess: () -> Void
-    
-    var body: some View {
-        LoginViewBody(
-            login: binding(viewModel.login),
-            password: binding(viewModel.password),
-            isButtonEnabled: state(viewModel.isLoginButtonEnabled),
-            isLoading: state(viewModel.isLoading),
-            onLoginPressed: { viewModel.onLoginPressed() }
-        ).onAppear {
-            let listener = LoginEventsListener()
-            listener.doRouteSuccessfulAuth = { self.onLoginSuccess() }
-            viewModel.eventsDispatcher.listener = listener
-        }
-    }
-}
-
-private class LoginEventsListener: NSObject, LoginViewModelEventsListener {
-    var doRouteSuccessfulAuth: () -> Void = {}
-    
-    func routeSuccessfulAuth() {
-        doRouteSuccessfulAuth()
-    }
-}
 
 struct LoginViewBody: View {
     @Binding var login: String

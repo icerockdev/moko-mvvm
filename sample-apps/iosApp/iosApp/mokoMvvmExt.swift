@@ -38,6 +38,69 @@ extension ObservableObject where Self: ViewModel {
         
         return self
     }
+    
+    func binding<T, R>(
+        _ getLiveData: (Self) -> MutableLiveData<T>,
+        equals: @escaping (T?, T?) -> Bool,
+        getMapper: @escaping (T) -> R,
+        setMapper: @escaping (R) -> T
+    ) -> Binding<R> {
+        let liveData = getLiveData(self)
+        var lastValue = liveData.value
+        
+        var observer: (T?) -> Void = { _ in }
+        observer = { value in
+            if !equals(lastValue, value) {
+                lastValue = value
+                self.objectWillChange.send()
+                liveData.removeObserver(observer: observer)
+            }
+        }
+        liveData.addObserver(observer: observer)
+        
+        return Binding(
+            get: { getMapper(liveData.value!) },
+            set: { liveData.value = setMapper($0) }
+        )
+    }
+    
+    func binding(_ getLiveData: (Self) -> MutableLiveData<NSString>) -> Binding<String> {
+        return binding(
+            getLiveData,
+            equals: { $0 == $1 },
+            getMapper: { $0 as String },
+            setMapper: { $0 as NSString }
+        )
+    }
+    
+    func state<T, R>(
+        _ getLiveData: (Self) -> LiveData<T>,
+        equals: @escaping (T?, T?) -> Bool,
+        mapper: @escaping (T) -> R
+    ) -> R {
+        let liveData = getLiveData(self)
+        var lastValue = liveData.value
+        
+        var observer: (T?) -> Void = { _ in }
+        observer = { value in
+            if !equals(lastValue, value) {
+                lastValue = value
+                self.objectWillChange.send()
+                liveData.removeObserver(observer: observer)
+            }
+        }
+        liveData.addObserver(observer: observer)
+        
+        return mapper(liveData.value!)
+    }
+
+    func state(_ getLiveData: (Self) -> LiveData<KotlinBoolean>) -> Bool {
+        return state(
+            getLiveData,
+            equals: { $0?.boolValue == $1?.boolValue },
+            mapper: { $0.boolValue }
+        )
+    }
 }
 
 extension ViewModel: ObservableObject {
