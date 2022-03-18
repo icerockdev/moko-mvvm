@@ -41,12 +41,12 @@ extension ObservableObject where Self: ViewModel {
     }
     
     func binding<T, R>(
-        _ getLiveData: (Self) -> MutableLiveData<T>,
+        _ liveDataKey: KeyPath<Self, MutableLiveData<T>>,
         equals: @escaping (T?, T?) -> Bool,
         getMapper: @escaping (T) -> R,
         setMapper: @escaping (R) -> T
     ) -> Binding<R> {
-        let liveData = getLiveData(self)
+        let liveData = self[keyPath: liveDataKey]
         var lastValue = liveData.value
         
         var observer: (T?) -> Void = { _ in }
@@ -65,9 +65,9 @@ extension ObservableObject where Self: ViewModel {
         )
     }
     
-    func binding(_ getLiveData: (Self) -> MutableLiveData<NSString>) -> Binding<String> {
+    func binding(_ liveDataKey: KeyPath<Self, MutableLiveData<NSString>>) -> Binding<String> {
         return binding(
-            getLiveData,
+            liveDataKey,
             equals: { $0 == $1 },
             getMapper: { $0 as String },
             setMapper: { $0 as NSString }
@@ -75,11 +75,11 @@ extension ObservableObject where Self: ViewModel {
     }
     
     func state<T, R>(
-        _ getLiveData: (Self) -> LiveData<T>,
+        _ liveDataKey: KeyPath<Self, LiveData<T>>,
         equals: @escaping (T?, T?) -> Bool,
         mapper: @escaping (T) -> R
     ) -> R {
-        let liveData = getLiveData(self)
+        let liveData = self[keyPath: liveDataKey]
         var lastValue = liveData.value
         
         var observer: (T?) -> Void = { _ in }
@@ -95,20 +95,20 @@ extension ObservableObject where Self: ViewModel {
         return mapper(liveData.value!)
     }
 
-    func state(_ getLiveData: (Self) -> LiveData<KotlinBoolean>) -> Bool {
+    func state(_ liveDataKey: KeyPath<Self, LiveData<KotlinBoolean>>) -> Bool {
         return state(
-            getLiveData,
+            liveDataKey,
             equals: { $0?.boolValue == $1?.boolValue },
             mapper: { $0.boolValue }
         )
     }
     
     func state<T, R>(
-        _ getFlow: (Self) -> CStateFlow<T>,
+        _ flowKey: KeyPath<Self, CStateFlow<T>>,
         equals: @escaping (T?, T?) -> Bool,
         mapper: @escaping (T) -> R
     ) -> R {
-        let stateFlow: CStateFlow<T> = getFlow(self)
+        let stateFlow: CStateFlow<T> = self[keyPath: flowKey]
         var lastValue: T? = stateFlow.value
         
         var disposable: CFlowDisposable? = nil

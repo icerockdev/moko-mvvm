@@ -17,7 +17,7 @@ struct BookListView: View {
     var body: some View {
         BookListViewBody(
             state: viewModel.state(
-                { $0.state },
+                \.state,
                 equals: { $0 === $1 },
                 mapper: { BookListViewModelStateKs($0) }
             ),

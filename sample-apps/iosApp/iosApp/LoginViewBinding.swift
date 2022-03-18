@@ -19,10 +19,10 @@ struct LoginView: View {
     
     var body: some View {
         LoginViewBody(
-            login: viewModel.binding { $0.login },
-            password: viewModel.binding { $0.password },
-            isButtonEnabled: viewModel.state { $0.isLoginButtonEnabled },
-            isLoading: viewModel.state { $0.isLoading },
+            login: viewModel.binding(\.login),
+            password: viewModel.binding(\.password),
+            isButtonEnabled: viewModel.state(\.isLoginButtonEnabled),
+            isLoading: viewModel.state(\.isLoading),
             onLoginPressed: { viewModel.onLoginPressed() }
         ).onAppear {
             let listener = LoginEventsListener()
