@@ -46,10 +46,6 @@ private class LoginEventsListener: ObservableObject, LoginViewModelEventsListene
     @State var isErrorShowed: Bool = false
     @State var errorText: String? = nil
     
-    init() {
-        print("test")
-    }
-    
     func showError(message: String) {
         isErrorShowed = true
         errorText = message
