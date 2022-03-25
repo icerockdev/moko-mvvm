@@ -14,6 +14,15 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
+/**
+ * Sample ViewModel with state in multiple LiveData and actions by EventsDispatcher
+ *
+ * Notes:
+ * - EventsDispatcher require class for implementation of EventsListener interface and with
+ *   SwiftUI/Jetpack Compose creation of this class uncomfortable
+ * - LiveData and MutableLiveData without problems can be used with SwiftUI/Jetpack Compose
+ *   by multiple utils functions on both platforms (observeAsState on Kotlin and binding/state on Swift)
+ */
 class LoginViewModel(
     override val eventsDispatcher: EventsDispatcher<EventsListener>
 ) : ViewModel(), EventsDispatcherOwner<LoginViewModel.EventsListener> {

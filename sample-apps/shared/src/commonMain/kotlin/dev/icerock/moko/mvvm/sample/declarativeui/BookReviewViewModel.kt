@@ -17,6 +17,20 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
+/**
+ * Sample ViewModel for screen with input forms implemented by state
+ * in single StateFlow (mapped to class) and actions by Flow (also mapped to class).
+ * User can change state by onRateChange and onMessageChange - ViewModel
+ * just like reducer in Redux will change state and send new version to UI.
+ *
+ * Notes:
+ * - Flow and StateFlow lost generics on Swift side (because it's interfaces), so we should convert
+ *   it to classes - it was done by cStateFlow and cFlow extensions. CFlow and CStateFlow it's
+ *   generic classes that can be used from Swift without problems
+ * - Flow and StateFlow can be observed with Jetpack Compose out of box. For SwiftUI required
+ *   multiple utils functions - binding/state on Swift
+ * - To use exhaust swift enum we should use moko-kswift plugin
+ */
 class BookReviewViewModel(
     private val bookId: Int
 ) : ViewModel() {
@@ -51,9 +65,14 @@ class BookReviewViewModel(
             if (form.rate == 0) {
                 _state.value = State.Error(form, "invalid rate!".desc())
             } else {
-                _actions.tryEmit(Action.CloseScreen)
+                _actions.emit(Action.CloseScreen)
             }
         }
+    }
+
+    fun onErrorClosed() {
+        val state: State.Error = _state.value as? State.Error ?: return
+        _state.value = State.Idle(state.form)
     }
 
     sealed interface State {

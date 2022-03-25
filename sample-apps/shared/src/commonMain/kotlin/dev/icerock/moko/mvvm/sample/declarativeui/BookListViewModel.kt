@@ -8,6 +8,8 @@ import dev.icerock.moko.mvvm.CFlow
 import dev.icerock.moko.mvvm.CStateFlow
 import dev.icerock.moko.mvvm.cFlow
 import dev.icerock.moko.mvvm.cStateFlow
+import dev.icerock.moko.mvvm.sample.declarativeui.model.Advertisement
+import dev.icerock.moko.mvvm.sample.declarativeui.model.Book
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -19,6 +21,18 @@ import kotlin.math.abs
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.seconds
 
+/**
+ * Sample ViewModel with state in single StateFlow (mapped to class) and actions by Flow
+ * (also mapped to class)
+ *
+ * Notes:
+ * - Flow and StateFlow lost generics on Swift side (because it's interfaces), so we should convert
+ *   it to classes - it was done by cStateFlow and cFlow extensions. CFlow and CStateFlow it's
+ *   generic classes that can be used from Swift without problems
+ * - Flow and StateFlow can be observed with Jetpack Compose out of box. For SwiftUI required
+ *   multiple utils functions - binding/state on Swift
+ * - To use exhaust swift enum we should use moko-kswift plugin
+ */
 class BookListViewModel : ViewModel() {
 
     private val _state = MutableStateFlow<State>(State.Loading)

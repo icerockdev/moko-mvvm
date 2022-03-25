@@ -2,7 +2,7 @@
  * Copyright 2022 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package dev.icerock.moko.mvvm.sample.declarativeui
+package dev.icerock.moko.mvvm.sample.declarativeui.model
 
 data class Book(
     val id: Int,
