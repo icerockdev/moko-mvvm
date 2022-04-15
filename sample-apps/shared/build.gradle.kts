@@ -11,12 +11,10 @@ plugins {
 }
 
 val mokoResourcesVersion = "0.18.0"
-val mokoMvvmVersion = "0.12.0"
+val mokoMvvmVersion = "0.13.0"
 val dependenciesList = listOf(
-    "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt",
     "dev.icerock.moko:mvvm-core:$mokoMvvmVersion",
-    "dev.icerock.moko:mvvm-livedata:$mokoMvvmVersion",
-    "dev.icerock.moko:mvvm-livedata-resources:$mokoMvvmVersion",
+    "dev.icerock.moko:mvvm-flow:$mokoMvvmVersion",
     "dev.icerock.moko:resources:$mokoResourcesVersion"
 )
 
@@ -42,6 +40,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 dependenciesList.forEach { api(it) }
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt")
             }
         }
         val commonTest by getting {

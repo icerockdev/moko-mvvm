@@ -4,57 +4,79 @@
 
 package dev.icerock.moko.mvvm.sample.declarativeui
 
-import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
-import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
-import dev.icerock.moko.mvvm.livedata.mediatorOf
+import dev.icerock.moko.mvvm.flow.CFlow
+import dev.icerock.moko.mvvm.flow.CStateFlow
+import dev.icerock.moko.mvvm.flow.cFlow
+import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
-/**
- * Sample ViewModel with state in multiple LiveData and actions by EventsDispatcher
- *
- * Notes:
- * - EventsDispatcher require class for implementation of EventsListener interface and with
- *   SwiftUI/Jetpack Compose creation of this class uncomfortable
- * - LiveData and MutableLiveData without problems can be used with SwiftUI/Jetpack Compose
- *   by multiple utils functions on both platforms (observeAsState on Kotlin and binding/state on Swift)
- */
-class LoginViewModel(
-    override val eventsDispatcher: EventsDispatcher<EventsListener>
-) : ViewModel(), EventsDispatcherOwner<LoginViewModel.EventsListener> {
-    val login: MutableLiveData<String> = MutableLiveData("")
-    val password: MutableLiveData<String> = MutableLiveData("")
+class LoginViewModel : ViewModel() {
 
-    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isLoading: LiveData<Boolean> get() = _isLoading
+    private val _state: MutableStateFlow<State> = InputForm(
+        login = "",
+        password = ""
+    ).let { MutableStateFlow(State.Idle(it)) }
+    val state: CStateFlow<State> = _state.cStateFlow()
 
-    val isLoginButtonEnabled: LiveData<Boolean> =
-        mediatorOf(isLoading, login, password) { isLoading, login, password ->
-            isLoading.not() && login.isNotBlank() && password.isNotBlank()
-        }
+    private val _actions = Channel<Action>(Channel.BUFFERED)
+    val actions: CFlow<Action> get() = _actions.receiveAsFlow().cFlow()
+
+    fun onLoginChanged(value: String) {
+        val idle: State.Idle = _state.value as? State.Idle ?: return
+        _state.value = idle.copy(form = idle.form.copy(login = value))
+    }
+
+    fun onPasswordChanged(value: String) {
+        val idle: State.Idle = _state.value as? State.Idle ?: return
+        _state.value = idle.copy(form = idle.form.copy(password = value))
+    }
 
     fun onLoginPressed() {
-        _isLoading.value = true
-        viewModelScope.launch {
-            delay(3.seconds)
+        val form: InputForm = _state.value.form
 
-            if (login.value != "error") {
-                eventsDispatcher.dispatchEvent { routeSuccessfulAuth() }
+        _state.value = State.Loading(form)
+        viewModelScope.launch {
+            delay(1.seconds)
+
+            if (form.login != "error") {
+                _actions.send(Action.RouteToSuccess)
             } else {
-                eventsDispatcher.dispatchEvent { showError("some error!") }
+                _actions.send(Action.ShowError("some error!".desc()))
             }
 
-            _isLoading.value = false
+            _state.value = State.Idle(form)
         }
     }
 
-    interface EventsListener {
-        fun routeSuccessfulAuth()
-        fun showError(message: String)
-    }
-}
+    sealed interface State {
+        data class Idle(override val form: InputForm) : State {
+            override val isLoginButtonEnabled: Boolean =
+                form.login.isNotBlank() && form.password.isNotBlank()
+        }
 
+        data class Loading(override val form: InputForm) : State {
+            override val isLoginButtonEnabled: Boolean get() = false
+        }
+
+        val form: InputForm
+        val isLoginButtonEnabled: Boolean
+    }
+
+    sealed interface Action {
+        object RouteToSuccess : Action
+        data class ShowError(val error: StringDesc) : Action
+    }
+
+    data class InputForm(
+        val login: String,
+        val password: String
+    )
+}

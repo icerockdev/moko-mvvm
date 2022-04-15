@@ -16,6 +16,7 @@ includeBuild("mvvm-build-logic")
 
 include(":mvvm-internal")
 include(":mvvm-core")
+include(":mvvm-flow")
 include(":mvvm-livedata")
 include(":mvvm-livedata-material")
 include(":mvvm-livedata-resources")

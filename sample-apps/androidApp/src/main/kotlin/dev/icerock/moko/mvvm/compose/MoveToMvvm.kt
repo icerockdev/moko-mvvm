@@ -5,16 +5,9 @@
 package dev.icerock.moko.mvvm.compose
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
-import dev.icerock.moko.mvvm.livedata.LiveData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -27,11 +20,11 @@ inline fun <reified T : ViewModel> viewModelFactory(crossinline block: () -> T):
         }
     }
 }
-
-@Composable
-fun <T> LiveData<T>.observeAsState(): State<T> {
-    return ld().observeAsState(initial = this.value)
-}
+//
+//@Composable
+//fun <T> LiveData<T>.observeAsState(): State<T> {
+//    return ld().observeAsState(initial = this.value)
+//}
 
 @Composable
 fun <T> Flow<T>.observeAsActions(onEach: (T) -> Unit) {

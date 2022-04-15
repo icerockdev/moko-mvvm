@@ -4,16 +4,17 @@
 
 package dev.icerock.moko.mvvm.sample.declarativeui
 
-import dev.icerock.moko.mvvm.CFlow
-import dev.icerock.moko.mvvm.CStateFlow
-import dev.icerock.moko.mvvm.cFlow
-import dev.icerock.moko.mvvm.cStateFlow
+import dev.icerock.moko.mvvm.flow.CFlow
+import dev.icerock.moko.mvvm.flow.CStateFlow
+import dev.icerock.moko.mvvm.flow.cFlow
+import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
@@ -40,8 +41,8 @@ class BookReviewViewModel(
     )
     val state: CStateFlow<State> get() = _state.cStateFlow()
 
-    private val _actions = MutableSharedFlow<Action>()
-    val actions: CFlow<Action> get() = _actions.cFlow()
+    private val _actions = Channel<Action>(Channel.BUFFERED)
+    val actions: CFlow<Action> get() = _actions.receiveAsFlow().cFlow()
 
     fun onRateChange(rate: Int) {
         val state: State.Idle = _state.value as? State.Idle ?: return
@@ -65,7 +66,7 @@ class BookReviewViewModel(
             if (form.rate == 0) {
                 _state.value = State.Error(form, "invalid rate!".desc())
             } else {
-                _actions.emit(Action.CloseScreen)
+                _actions.send(Action.CloseScreen)
             }
         }
     }
@@ -76,9 +77,11 @@ class BookReviewViewModel(
     }
 
     sealed interface State {
-        data class Idle(val form: InputForm) : State
-        data class Loading(val form: InputForm) : State
-        data class Error(val form: InputForm, val message: StringDesc) : State
+        data class Idle(override val form: InputForm) : State
+        data class Loading(override val form: InputForm) : State
+        data class Error(override val form: InputForm, val message: StringDesc) : State
+
+        val form: InputForm
     }
 
     sealed interface Action {

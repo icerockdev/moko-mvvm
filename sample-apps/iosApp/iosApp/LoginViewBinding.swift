@@ -8,52 +8,102 @@
 
 import SwiftUI
 import shared
+import Combine
 
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel(
-        eventsDispatcher: EventsDispatcher()
-    )
+    @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
     let onLoginSuccess: () -> Void
-    
-    @ObservedObject private var listener: LoginEventsListener = LoginEventsListener()
+    @State var alertShowed: Bool = false
+    @State var alertMessage: String = ""
     
     var body: some View {
         LoginViewBody(
-            login: viewModel.binding(\.login),
-            password: viewModel.binding(\.password),
-            isButtonEnabled: viewModel.state(\.isLoginButtonEnabled),
-            isLoading: viewModel.state(\.isLoading),
+            login: viewModel.stateKs.login(viewModel),
+            password: viewModel.stateKs.password(viewModel),
+            isButtonEnabled: viewModel.stateKs.isButtonEnabled,
+            isLoading: viewModel.stateKs.isLoadingEnabled,
             onLoginPressed: { viewModel.onLoginPressed() }
-        ).onAppear {
-            let listener = LoginEventsListener()
-            listener.doRouteSuccessfulAuth = {
-                self.onLoginSuccess()
+        ).onReceive(viewModel.actionsKs) { action in
+            switch(action) {
+            case .routeToSuccess:
+                onLoginSuccess()
+            case .showError(let data):
+                print(data)
             }
-            viewModel.eventsDispatcher.listener = listener
         }.alert(
-            isPresented: listener.$isErrorShowed
+            isPresented: $alertShowed
         ) {
             Alert(
                 title: Text("Error"),
-                message: Text(listener.errorText ?? ""),
+                message: Text(alertMessage),
                 dismissButton: .default(Text("Close"))
             )
         }
     }
 }
 
-private class LoginEventsListener: ObservableObject, LoginViewModelEventsListener {
-    @State var isErrorShowed: Bool = false
-    @State var errorText: String? = nil
-    
-    func showError(message: String) {
-        isErrorShowed = true
-        errorText = message
+extension LoginViewModel {
+    var stateKs: LoginViewModelStateKs {
+        get {
+            return self.state(
+                \.state,
+                equals: { $0 === $1 },
+                mapper: { LoginViewModelStateKs($0) }
+            )
+        }
     }
     
-    var doRouteSuccessfulAuth: () -> Void = {}
+    var actionsKs: AnyPublisher<LoginViewModelActionKs, Never> {
+        get {
+            return createPublisher(self.actions)
+                .map { LoginViewModelActionKs($0) }
+                .eraseToAnyPublisher()
+        }
+    }
+}
+
+extension LoginViewModelStateKs {
+    var isButtonEnabled: Bool {
+        get {
+            switch(self) {
+            case .idle(let data):
+                return data.isLoginButtonEnabled
+            case .loading(let data):
+                return data.isLoginButtonEnabled
+            }
+        }
+    }
     
-    func routeSuccessfulAuth() {
-        doRouteSuccessfulAuth()
+    var isLoadingEnabled: Bool {
+        get {
+            switch(self) {
+            case .loading(_): return true
+            default: return false
+            }
+        }
+    }
+    
+    func login(_ viewModel: LoginViewModel) -> Binding<String> {
+        return Binding(
+            get: {
+                switch(self) {
+                case .loading(let data): return data.form.login
+                case .idle(let data): return data.form.login
+                }
+            },
+            set: { viewModel.onLoginChanged(value: $0) }
+        )
+    }
+    
+    func password(_ viewModel: LoginViewModel) -> Binding<String> {
+        return Binding(
+            get: {
+                switch(self) {
+                case .loading(let data): return data.form.password
+                case .idle(let data): return data.form.password
+                }
+            },
+            set: { viewModel.onPasswordChanged(value: $0) }
+        )
     }
 }

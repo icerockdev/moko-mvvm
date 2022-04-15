@@ -4,6 +4,8 @@
 
 package dev.icerock.moko.mvvm.sample.declarativeui.android
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,43 +17,37 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.icerock.moko.mvvm.compose.observeAsState
+import dev.icerock.moko.mvvm.compose.observeAsActions
 import dev.icerock.moko.mvvm.compose.viewModelFactory
-import dev.icerock.moko.mvvm.dispatcher.eventsDispatcherOnMain
 import dev.icerock.moko.mvvm.sample.declarativeui.LoginViewModel
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = viewModel(
-        factory = viewModelFactory { LoginViewModel(eventsDispatcherOnMain()) }
+        factory = viewModelFactory { LoginViewModel() }
     ),
     onLoginSuccess: () -> Unit = {}
 ) {
-    val login: String by viewModel.login.observeAsState()
-    val password: String by viewModel.password.observeAsState()
-    val isLoading: Boolean by viewModel.isLoading.observeAsState()
-    val isLoginButtonEnabled: Boolean by viewModel.isLoginButtonEnabled.observeAsState()
-
     val currentOnLoginSuccess by rememberUpdatedState(onLoginSuccess)
-    viewModel.eventsDispatcher.bindToComposable(
-        object : LoginViewModel.EventsListener {
-            override fun routeSuccessfulAuth() {
-                currentOnLoginSuccess()
-            }
+    val context: Context = LocalContext.current
 
-            override fun showError(message: String) {
-                TODO("Not yet implemented")
-            }
-        }
-    )
+    val state: LoginViewModel.State by viewModel.state.collectAsState()
+    val login: String = state.form.login
+    val password: String = state.form.password
+    val isLoading: Boolean = state is LoginViewModel.State.Loading
+    val isLoginButtonEnabled: Boolean = state.isLoginButtonEnabled
+
+    viewModel.actions.observeAsActions { it.handleAction(context, currentOnLoginSuccess) }
 
     Column(
         modifier = Modifier.padding(16.dp),
@@ -61,7 +57,7 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth(),
             value = login,
             label = { Text(text = "Login") },
-            onValueChange = { viewModel.login.value = it }
+            onValueChange = { viewModel.onLoginChanged(it) }
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
@@ -69,7 +65,7 @@ fun LoginScreen(
             value = password,
             label = { Text(text = "Password") },
             visualTransformation = PasswordVisualTransformation(),
-            onValueChange = { viewModel.password.value = it }
+            onValueChange = { viewModel.onPasswordChanged(it) }
         )
         Spacer(modifier = Modifier.height(8.dp))
         Button(
@@ -85,6 +81,18 @@ fun LoginScreen(
     }
 }
 
+private fun LoginViewModel.Action.handleAction(
+    context: Context,
+    onLoginSuccess: () -> Unit
+) {
+    when (this) {
+        LoginViewModel.Action.RouteToSuccess -> onLoginSuccess()
+        is LoginViewModel.Action.ShowError -> {
+            Toast.makeText(context, this.error.toString(context), Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
 @Preview(showSystemUi = true, group = "empty")
 @Composable
 fun LoginScreen_Preview() {
@@ -95,8 +103,8 @@ fun LoginScreen_Preview() {
 @Composable
 fun LoginScreenFilledLogin_Preview() {
     LoginScreen(
-        viewModel = LoginViewModel(eventsDispatcherOnMain()).apply {
-            login.value = "test"
+        viewModel = LoginViewModel().apply {
+            onLoginChanged("test")
         }
     )
 }
@@ -105,9 +113,9 @@ fun LoginScreenFilledLogin_Preview() {
 @Composable
 fun LoginScreenFilledAll_Preview() {
     LoginScreen(
-        viewModel = LoginViewModel(eventsDispatcherOnMain()).apply {
-            login.value = "test"
-            password.value = "test"
+        viewModel = LoginViewModel().apply {
+            onLoginChanged("test")
+            onPasswordChanged("test pass")
         }
     )
 }
@@ -116,9 +124,9 @@ fun LoginScreenFilledAll_Preview() {
 @Composable
 fun LoginScreenLoading_Preview() {
     LoginScreen(
-        viewModel = LoginViewModel(eventsDispatcherOnMain()).apply {
-            login.value = "test"
-            password.value = "test"
+        viewModel = LoginViewModel().apply {
+            onLoginChanged("test")
+            onPasswordChanged("test pass")
             onLoginPressed()
         }
     )

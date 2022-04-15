@@ -4,18 +4,19 @@
 
 package dev.icerock.moko.mvvm.sample.declarativeui
 
-import dev.icerock.moko.mvvm.CFlow
-import dev.icerock.moko.mvvm.CStateFlow
-import dev.icerock.moko.mvvm.cFlow
-import dev.icerock.moko.mvvm.cStateFlow
+import dev.icerock.moko.mvvm.flow.CFlow
+import dev.icerock.moko.mvvm.flow.CStateFlow
+import dev.icerock.moko.mvvm.flow.cFlow
+import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.sample.declarativeui.model.Advertisement
 import dev.icerock.moko.mvvm.sample.declarativeui.model.Book
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.random.Random
@@ -38,8 +39,8 @@ class BookListViewModel : ViewModel() {
     private val _state = MutableStateFlow<State>(State.Loading)
     val state: CStateFlow<State> get() = _state.cStateFlow()
 
-    private val _actions = MutableSharedFlow<Action>()
-    val actions: CFlow<Action> get() = _actions.cFlow()
+    private val _actions = Channel<Action>(Channel.BUFFERED)
+    val actions: CFlow<Action> get() = _actions.receiveAsFlow().cFlow()
 
     fun start() = apply { loadBooks() }
 
@@ -75,21 +76,11 @@ class BookListViewModel : ViewModel() {
     }
 
     private fun onBookPressed(book: Book) {
-        println("pressed $book")
-        viewModelScope.launch {
-            println("before")
-            _actions.emit(Action.RouteToBookDetails(book.id))
-            println("after")
-        }
+        _actions.trySend(Action.RouteToBookDetails(book.id))
     }
 
     private fun onAdvertisementPressed(advert: Advertisement) {
-        println("pressed $advert")
-        viewModelScope.launch {
-            println("before")
-            _actions.emit(Action.OpenUrl(advert.url))
-            println("after")
-        }
+        _actions.trySend(Action.OpenUrl(advert.url))
     }
 
     sealed interface State {
