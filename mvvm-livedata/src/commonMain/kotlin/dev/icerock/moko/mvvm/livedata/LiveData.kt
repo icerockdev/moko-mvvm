@@ -7,9 +7,9 @@ package dev.icerock.moko.mvvm.livedata
 expect open class LiveData<T> {
     open val value: T
 
-    fun addObserver(observer: (T) -> Unit)
+    open fun addObserver(observer: (T) -> Unit)
 
-    fun removeObserver(observer: (T) -> Unit)
+    open fun removeObserver(observer: (T) -> Unit)
 }
 
 fun <T> LiveData<T>.addCloseableObserver(observer: (T) -> Unit): Closeable {
