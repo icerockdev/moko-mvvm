@@ -18,10 +18,10 @@ struct LoginView: View {
     
     var body: some View {
         LoginViewBody(
-            login: viewModel.stateKs.login(viewModel),
-            password: viewModel.stateKs.password(viewModel),
-            isButtonEnabled: viewModel.stateKs.isButtonEnabled,
-            isLoading: viewModel.stateKs.isLoadingEnabled,
+            login: viewModel.binding(\.login),
+            password: viewModel.binding(\.password),
+            isButtonEnabled: viewModel.state(\.isLoginButtonEnabled),
+            isLoading: viewModel.state(\.isLoading),
             onLoginPressed: { viewModel.onLoginPressed() }
         ).onReceive(viewModel.actionsKs) { action in
             switch(action) {
@@ -43,67 +43,11 @@ struct LoginView: View {
 }
 
 extension LoginViewModel {
-    var stateKs: LoginViewModelStateKs {
-        get {
-            return self.state(
-                \.state,
-                equals: { $0 === $1 },
-                mapper: { LoginViewModelStateKs($0) }
-            )
-        }
-    }
-    
     var actionsKs: AnyPublisher<LoginViewModelActionKs, Never> {
         get {
             return createPublisher(self.actions)
                 .map { LoginViewModelActionKs($0) }
                 .eraseToAnyPublisher()
         }
-    }
-}
-
-extension LoginViewModelStateKs {
-    var isButtonEnabled: Bool {
-        get {
-            switch(self) {
-            case .idle(let data):
-                return data.isLoginButtonEnabled
-            case .loading(let data):
-                return data.isLoginButtonEnabled
-            }
-        }
-    }
-    
-    var isLoadingEnabled: Bool {
-        get {
-            switch(self) {
-            case .loading(_): return true
-            default: return false
-            }
-        }
-    }
-    
-    func login(_ viewModel: LoginViewModel) -> Binding<String> {
-        return Binding(
-            get: {
-                switch(self) {
-                case .loading(let data): return data.form.login
-                case .idle(let data): return data.form.login
-                }
-            },
-            set: { viewModel.onLoginChanged(value: $0) }
-        )
-    }
-    
-    func password(_ viewModel: LoginViewModel) -> Binding<String> {
-        return Binding(
-            get: {
-                switch(self) {
-                case .loading(let data): return data.form.password
-                case .idle(let data): return data.form.password
-                }
-            },
-            set: { viewModel.onPasswordChanged(value: $0) }
-        )
     }
 }

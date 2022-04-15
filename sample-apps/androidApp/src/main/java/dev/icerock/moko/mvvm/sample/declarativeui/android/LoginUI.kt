@@ -41,11 +41,10 @@ fun LoginScreen(
     val currentOnLoginSuccess by rememberUpdatedState(onLoginSuccess)
     val context: Context = LocalContext.current
 
-    val state: LoginViewModel.State by viewModel.state.collectAsState()
-    val login: String = state.form.login
-    val password: String = state.form.password
-    val isLoading: Boolean = state is LoginViewModel.State.Loading
-    val isLoginButtonEnabled: Boolean = state.isLoginButtonEnabled
+    val login: String by viewModel.login.collectAsState()
+    val password: String by viewModel.password.collectAsState()
+    val isLoading: Boolean by viewModel.isLoading.collectAsState()
+    val isLoginButtonEnabled: Boolean by viewModel.isLoginButtonEnabled.collectAsState()
 
     viewModel.actions.observeAsActions { it.handleAction(context, currentOnLoginSuccess) }
 
@@ -57,7 +56,7 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth(),
             value = login,
             label = { Text(text = "Login") },
-            onValueChange = { viewModel.onLoginChanged(it) }
+            onValueChange = { viewModel.login.value = it }
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
@@ -65,7 +64,7 @@ fun LoginScreen(
             value = password,
             label = { Text(text = "Password") },
             visualTransformation = PasswordVisualTransformation(),
-            onValueChange = { viewModel.onPasswordChanged(it) }
+            onValueChange = { viewModel.password.value = it }
         )
         Spacer(modifier = Modifier.height(8.dp))
         Button(
@@ -104,7 +103,7 @@ fun LoginScreen_Preview() {
 fun LoginScreenFilledLogin_Preview() {
     LoginScreen(
         viewModel = LoginViewModel().apply {
-            onLoginChanged("test")
+            login.value = "test"
         }
     )
 }
@@ -114,8 +113,8 @@ fun LoginScreenFilledLogin_Preview() {
 fun LoginScreenFilledAll_Preview() {
     LoginScreen(
         viewModel = LoginViewModel().apply {
-            onLoginChanged("test")
-            onPasswordChanged("test pass")
+            login.value = "test"
+            password.value = "test pass"
         }
     )
 }
@@ -125,8 +124,8 @@ fun LoginScreenFilledAll_Preview() {
 fun LoginScreenLoading_Preview() {
     LoginScreen(
         viewModel = LoginViewModel().apply {
-            onLoginChanged("test")
-            onPasswordChanged("test pass")
+            login.value = "test"
+            password.value = "test pass"
             onLoginPressed()
         }
     )
