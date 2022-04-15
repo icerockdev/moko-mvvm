@@ -11,7 +11,7 @@ actual open class LiveData<T>(initialValue: T) {
     actual open val value: T
         get() = storedValue
 
-    actual fun addObserver(observer: (T) -> Unit) {
+    actual open fun addObserver(observer: (T) -> Unit) {
         observer(value)
         observers.add(observer)
     }
