@@ -16,7 +16,7 @@ actual open class LiveData<T>(initialValue: T) {
         observers.add(observer)
     }
 
-    actual fun removeObserver(observer: (T) -> Unit) {
+    actual open fun removeObserver(observer: (T) -> Unit) {
         observers.remove(observer)
     }
 
