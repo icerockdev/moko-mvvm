@@ -41,8 +41,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.icerock.moko.mvvm.compose.observeAsActions
-import dev.icerock.moko.mvvm.compose.viewModelFactory
+import dev.icerock.moko.mvvm.createViewModelFactory
+import dev.icerock.moko.mvvm.flow.compose.observeAsActions
 import dev.icerock.moko.mvvm.sample.declarativeui.BookListViewModel
 import dev.icerock.moko.resources.compose.localized
 import dev.icerock.moko.resources.desc.StringDesc
@@ -51,17 +51,14 @@ import dev.icerock.moko.resources.desc.desc
 @Composable
 fun BookListScreen(
     viewModel: BookListViewModel = viewModel(
-        factory = viewModelFactory { BookListViewModel().start() }
+        factory = createViewModelFactory { BookListViewModel().start() }
     ),
     onOpenBook: (Int) -> Unit = {}
 ) {
     val state: BookListViewModel.State by viewModel.state.collectAsState()
     val context: Context = LocalContext.current
 
-    // collect actions
-    viewModel.actions.observeAsActions { action ->
-        action.handleAction(context, onOpenBook)
-    }
+    viewModel.actions.observeAsActions { it.handleAction(context, onOpenBook) }
 
     when (@Suppress("NAME_SHADOWING") val state = state) {
         is BookListViewModel.State.Empty -> EmptyState(message = state.message)

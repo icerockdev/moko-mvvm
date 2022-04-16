@@ -10,7 +10,7 @@ plugins {
     id("dev.icerock.moko.kswift")
 }
 
-val mokoResourcesVersion = "0.18.0"
+val mokoResourcesVersion = "0.19.0"
 val mokoMvvmVersion = "0.13.0"
 val dependenciesList = listOf(
     "dev.icerock.moko:mvvm-core:$mokoMvvmVersion",
@@ -48,7 +48,12 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                api("dev.icerock.moko:mvvm-flow-compose:$mokoMvvmVersion")
+                api("dev.icerock.moko:resources-compose:$mokoResourcesVersion")
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

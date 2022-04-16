@@ -24,7 +24,7 @@ struct BookListView: View {
         ZStack {
             NavigationLink(isActive: $detailOpened) {
                 if let id = detailBookId {
-                    BookDetailsView(id: id)
+                    BookReviewView(id: id)
                 } else {
                     EmptyView()
                 }

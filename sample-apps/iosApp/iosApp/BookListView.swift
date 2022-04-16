@@ -28,19 +28,66 @@ struct BookListViewBody: View {
                 }
             }
         case .success(let data):
-            List(data.items, id: \.id) { unit in
+            List(
+                data.items,
+                id: \.id
+            ) { unit in
                 let unit = BookListViewModelListUnitKs(unit)
                 switch(unit) {
                 case .bookUnit(let bookUnit):
-                    Text(bookUnit.title).onTapGesture {
-                        bookUnit.onPressed()
-                    }
+                    Button(
+                        action: { bookUnit.onPressed() },
+                        label: { Text(bookUnit.title) }
+                    ).buttonStyle(DefaultButtonStyle())
                 case .advertUnit(let adUnit):
-                    Text(adUnit.text).onTapGesture {
-                        adUnit.onPressed()
-                    }
+                    Button(
+                        action: { adUnit.onPressed() },
+                        label: { Text(adUnit.text) }
+                    ).buttonStyle(DefaultButtonStyle())
                 }
             }
         }
+    }
+}
+
+struct BookListViewBody_Previews: PreviewProvider {
+    struct Preview: View {
+        var body: some View {
+            BookListViewBody(
+                state: .loading,
+                onRetryPressed: {}
+            )
+            BookListViewBody(
+                state: .empty(BookListViewModelStateEmpty(message: "empty".desc())),
+                onRetryPressed: {}
+            )
+            BookListViewBody(
+                state: .error(BookListViewModelStateError(message: "error".desc())),
+                onRetryPressed: {}
+            )
+            BookListViewBody(
+                state: .success(
+                    BookListViewModelStateSuccess(
+                        items: [
+                            BookListViewModelListUnitBookUnit(id: "1", title: "test", onPressed: {}),
+                            BookListViewModelListUnitAdvertUnit(id: "2", text: "advert", onPressed: {})
+                        ]
+                    )
+                ),
+                onRetryPressed: {}
+            )
+        }
+    }
+    
+    static var previews: some View {
+        Group {
+            Preview()
+        }.previewDisplayName("Light theme")
+            .preferredColorScheme(.light)
+        
+        Group {
+            Preview()
+        }.previewDisplayName("Dark theme")
+            .preferredColorScheme(.dark)
     }
 }

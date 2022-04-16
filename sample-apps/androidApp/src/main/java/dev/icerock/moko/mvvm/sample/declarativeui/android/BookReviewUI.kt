@@ -4,19 +4,23 @@
 
 package dev.icerock.moko.mvvm.sample.declarativeui.android
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Slider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -27,8 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.icerock.moko.mvvm.compose.observeAsActions
-import dev.icerock.moko.mvvm.compose.viewModelFactory
+import dev.icerock.moko.mvvm.createViewModelFactory
+import dev.icerock.moko.mvvm.flow.compose.observeAsActions
 import dev.icerock.moko.mvvm.sample.declarativeui.BookReviewViewModel
 import dev.icerock.moko.resources.compose.localized
 import dev.icerock.moko.resources.desc.StringDesc
@@ -38,16 +42,13 @@ import dev.icerock.moko.resources.desc.desc
 fun BookReviewScreen(
     bookId: Int,
     viewModel: BookReviewViewModel = viewModel(
-        factory = viewModelFactory { BookReviewViewModel(bookId) }
+        factory = createViewModelFactory { BookReviewViewModel(bookId) }
     ),
     onCloseScreen: () -> Unit = {}
 ) {
     val state: BookReviewViewModel.State by viewModel.state.collectAsState()
 
-    // collect actions
-    viewModel.actions.observeAsActions { action ->
-        action.handleAction(onCloseScreen)
-    }
+    viewModel.actions.observeAsActions { it.handleAction(onCloseScreen) }
 
     when (@Suppress("NAME_SHADOWING") val state = state) {
         is BookReviewViewModel.State.Error -> ErrorState(
@@ -87,20 +88,31 @@ private fun ReviewInputForm(
         modifier = Modifier
             .fillMaxWidth()
             .verticalScroll(scrollState)
+            .padding(16.dp)
     ) {
-        Slider(
-            modifier = Modifier.padding(8.dp),
-            value = inputForm.rate.toFloat(),
-            valueRange = 0f..5f,
-            steps = 5,
-            enabled = onRateChanged != null,
-            onValueChange = { onRateChanged?.invoke(it.toInt()) }
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            for (i in 1..5) {
+                if (i != 1) {
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                Button(
+                    onClick = { onRateChanged?.invoke(i) },
+                    enabled = onRateChanged != null,
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        backgroundColor = if (inputForm.rate == i) MaterialTheme.colors.secondary
+                        else MaterialTheme.colors.surface
+                    )
+                ) {
+                    Text(text = i.toString())
+                }
+            }
+        }
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             value = inputForm.message,
             enabled = onMessageChanged != null,
             onValueChange = { onMessageChanged?.invoke(it) }
@@ -150,9 +162,10 @@ private fun ErrorState(
     Box(modifier = Modifier.fillMaxSize()) {
         ReviewInputForm(inputForm)
         AlertDialog(
+            title = { Text("Error") },
             text = { Text(message.localized()) },
             onDismissRequest = onClose,
-            buttons = {
+            confirmButton = {
                 Button(onClick = onClose) { Text(text = "Close") }
             }
         )

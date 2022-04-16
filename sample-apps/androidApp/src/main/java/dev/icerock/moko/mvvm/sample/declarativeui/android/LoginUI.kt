@@ -27,14 +27,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.icerock.moko.mvvm.compose.observeAsActions
-import dev.icerock.moko.mvvm.compose.viewModelFactory
+import dev.icerock.moko.mvvm.createViewModelFactory
+import dev.icerock.moko.mvvm.flow.compose.observeAsActions
 import dev.icerock.moko.mvvm.sample.declarativeui.LoginViewModel
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = viewModel(
-        factory = viewModelFactory { LoginViewModel() }
+        factory = createViewModelFactory { LoginViewModel() }
     ),
     onLoginSuccess: () -> Unit = {}
 ) {

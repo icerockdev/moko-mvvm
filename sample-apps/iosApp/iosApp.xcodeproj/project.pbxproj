@@ -20,6 +20,7 @@
 		22EE340127C9235100538774 /* dev_icerock_moko_resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE33FD27C9235100538774 /* dev_icerock_moko_resources.swift */; };
 		22EE340227C923D100538774 /* shared.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EE33F727C9233900538774 /* shared.xcframework */; };
 		22EE340327C923D100538774 /* shared.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EE33F727C9233900538774 /* shared.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22EFAD46280A8BCE007A8DCB /* BookReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		226D766827E4A55B004964F6 /* declarative-ui-sample_shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "declarative-ui-sample_shared.swift"; sourceTree = "<group>"; };
 		22EE33F727C9233900538774 /* shared.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = shared.xcframework; path = ../shared/build/xcode/shared.xcframework; sourceTree = "<group>"; };
 		22EE33FD27C9235100538774 /* dev_icerock_moko_resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dev_icerock_moko_resources.swift; sourceTree = "<group>"; };
+		22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReviewView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				226D766227E45FCC004964F6 /* LoginViewBinding.swift */,
 				226D766427E48C15004964F6 /* BookListView.swift */,
 				226D766627E48C3C004964F6 /* BookListViewBinding.swift */,
+				22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */,
 				226D765E27E448CA004964F6 /* mokoMvvmExt.swift */,
 				226D766027E453AB004964F6 /* Routing.swift */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22EFAD46280A8BCE007A8DCB /* BookReviewView.swift in Sources */,
 				226D766127E453AB004964F6 /* Routing.swift in Sources */,
 				226D766927E4A55B004964F6 /* declarative-ui-sample_shared.swift in Sources */,
 				226D765D27E44894004964F6 /* LoginView.swift in Sources */,
