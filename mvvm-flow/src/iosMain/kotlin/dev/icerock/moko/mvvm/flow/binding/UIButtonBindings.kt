@@ -5,7 +5,7 @@
 package dev.icerock.moko.mvvm.flow.binding
 
 import dev.icerock.moko.mvvm.flow.CStateFlow
-import kotlinx.coroutines.DisposableHandle
+import dev.icerock.moko.mvvm.flow.DisposableHandle
 import platform.UIKit.UIButton
 import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UIImage

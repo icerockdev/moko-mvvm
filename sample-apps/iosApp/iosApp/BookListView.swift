@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftUI
-import shared
+import MultiPlatformLibrary
 
 struct BookListViewBody: View {
     let state: BookListViewModelStateKs

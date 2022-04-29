@@ -1,0 +1,910 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		22BDE72D281BD39900259368 /* mokoMvvmFlowSwiftUI */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 22BDE72E281BD39900259368 /* Build configuration list for PBXAggregateTarget "mokoMvvmFlowSwiftUI" */;
+			buildPhases = (
+				22BDE745281BD9FB00259368 /* build XCFramework */,
+			);
+			dependencies = (
+				22BDE732281BD3A600259368 /* PBXTargetDependency */,
+				22BDE734281BD3A600259368 /* PBXTargetDependency */,
+			);
+			name = mokoMvvmFlowSwiftUI;
+			productName = mokoMvvmFlowSwiftUI;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		22BDE710281BD34C00259368 /* mokoMvvmFlowSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 22BDE702281BD34C00259368 /* mokoMvvmFlowSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22BDE713281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE700281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework */; };
+		22BDE714281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE700281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22BDE727281BD37100259368 /* mokoMvvmFlowSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE721281BD37100259368 /* mokoMvvmFlowSwiftUI.framework */; };
+		22BDE728281BD37100259368 /* mokoMvvmFlowSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE721281BD37100259368 /* mokoMvvmFlowSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22BDE737281BD55400259368 /* MultiPlatformLibrary.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE735281BD54E00259368 /* MultiPlatformLibrary.xcframework */; };
+		22BDE738281BD55500259368 /* MultiPlatformLibrary.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE735281BD54E00259368 /* MultiPlatformLibrary.xcframework */; };
+		22BDE73A281BD56700259368 /* CFlowExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE739281BD56700259368 /* CFlowExt.swift */; };
+		22BDE73B281BD56A00259368 /* CFlowExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE739281BD56700259368 /* CFlowExt.swift */; };
+		22BDE73D281BD67C00259368 /* ViewModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE73C281BD67C00259368 /* ViewModelObservable.swift */; };
+		22BDE73E281BD67C00259368 /* ViewModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE73C281BD67C00259368 /* ViewModelObservable.swift */; };
+		22BDE740281BD6A300259368 /* ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE73F281BD6A300259368 /* ViewModelState.swift */; };
+		22BDE741281BD6A300259368 /* ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE73F281BD6A300259368 /* ViewModelState.swift */; };
+		22BDE743281BD6C600259368 /* ViewModelBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE742281BD6C600259368 /* ViewModelBinding.swift */; };
+		22BDE744281BD6C600259368 /* ViewModelBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE742281BD6C600259368 /* ViewModelBinding.swift */; };
+		22D5AD5C281BD2F700008F57 /* mokoMvvmFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5AD4C281BD2F600008F57 /* mokoMvvmFlowApp.swift */; };
+		22D5AD5D281BD2F700008F57 /* mokoMvvmFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5AD4C281BD2F600008F57 /* mokoMvvmFlowApp.swift */; };
+		22D5AD5E281BD2F700008F57 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5AD4D281BD2F600008F57 /* ContentView.swift */; };
+		22D5AD5F281BD2F700008F57 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D5AD4D281BD2F600008F57 /* ContentView.swift */; };
+		22D5AD60281BD2F700008F57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D5AD4E281BD2F700008F57 /* Assets.xcassets */; };
+		22D5AD61281BD2F700008F57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22D5AD4E281BD2F700008F57 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22BDE711281BD34C00259368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22D5AD47281BD2F600008F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BDE6FF281BD34C00259368;
+			remoteInfo = mokoMvvmFlowSwiftUI;
+		};
+		22BDE725281BD37100259368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22D5AD47281BD2F600008F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BDE720281BD37100259368;
+			remoteInfo = mokoMvvmFlowSwiftUI;
+		};
+		22BDE731281BD3A600259368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22D5AD47281BD2F600008F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BDE6FF281BD34C00259368;
+			remoteInfo = "mokoMvvmFlowSwiftUI (iOS)";
+		};
+		22BDE733281BD3A600259368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22D5AD47281BD2F600008F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BDE720281BD37100259368;
+			remoteInfo = "mokoMvvmFlowSwiftUI (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22BDE715281BD34C00259368 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22BDE714281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BDE72C281BD37100259368 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22BDE728281BD37100259368 /* mokoMvvmFlowSwiftUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		22BDE700281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mokoMvvmFlowSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BDE702281BD34C00259368 /* mokoMvvmFlowSwiftUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mokoMvvmFlowSwiftUI.h; sourceTree = "<group>"; };
+		22BDE721281BD37100259368 /* mokoMvvmFlowSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mokoMvvmFlowSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BDE735281BD54E00259368 /* MultiPlatformLibrary.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MultiPlatformLibrary.xcframework; path = ../build/XCFrameworks/debug/MultiPlatformLibrary.xcframework; sourceTree = "<group>"; };
+		22BDE739281BD56700259368 /* CFlowExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFlowExt.swift; sourceTree = "<group>"; };
+		22BDE73C281BD67C00259368 /* ViewModelObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelObservable.swift; sourceTree = "<group>"; };
+		22BDE73F281BD6A300259368 /* ViewModelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelState.swift; sourceTree = "<group>"; };
+		22BDE742281BD6C600259368 /* ViewModelBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBinding.swift; sourceTree = "<group>"; };
+		22D5AD4C281BD2F600008F57 /* mokoMvvmFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mokoMvvmFlowApp.swift; sourceTree = "<group>"; };
+		22D5AD4D281BD2F600008F57 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		22D5AD4E281BD2F700008F57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22D5AD53281BD2F700008F57 /* mokoMvvmFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mokoMvvmFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D5AD59281BD2F700008F57 /* mokoMvvmFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mokoMvvmFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D5AD5B281BD2F700008F57 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22BDE6FD281BD34C00259368 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BDE737281BD55400259368 /* MultiPlatformLibrary.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BDE71E281BD37100259368 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BDE738281BD55500259368 /* MultiPlatformLibrary.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D5AD50281BD2F700008F57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BDE713281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D5AD56281BD2F700008F57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BDE727281BD37100259368 /* mokoMvvmFlowSwiftUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22BDE701281BD34C00259368 /* mokoMvvmFlowSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				22BDE702281BD34C00259368 /* mokoMvvmFlowSwiftUI.h */,
+				22BDE739281BD56700259368 /* CFlowExt.swift */,
+				22BDE73C281BD67C00259368 /* ViewModelObservable.swift */,
+				22BDE73F281BD6A300259368 /* ViewModelState.swift */,
+				22BDE742281BD6C600259368 /* ViewModelBinding.swift */,
+			);
+			path = mokoMvvmFlowSwiftUI;
+			sourceTree = "<group>";
+		};
+		22D5AD46281BD2F600008F57 = {
+			isa = PBXGroup;
+			children = (
+				22BDE735281BD54E00259368 /* MultiPlatformLibrary.xcframework */,
+				22D5AD4B281BD2F600008F57 /* Shared */,
+				22D5AD5A281BD2F700008F57 /* macOS */,
+				22BDE701281BD34C00259368 /* mokoMvvmFlowSwiftUI */,
+				22D5AD54281BD2F700008F57 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22D5AD4B281BD2F600008F57 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				22D5AD4C281BD2F600008F57 /* mokoMvvmFlowApp.swift */,
+				22D5AD4D281BD2F600008F57 /* ContentView.swift */,
+				22D5AD4E281BD2F700008F57 /* Assets.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		22D5AD54281BD2F700008F57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22D5AD53281BD2F700008F57 /* mokoMvvmFlow.app */,
+				22D5AD59281BD2F700008F57 /* mokoMvvmFlow.app */,
+				22BDE700281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework */,
+				22BDE721281BD37100259368 /* mokoMvvmFlowSwiftUI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22D5AD5A281BD2F700008F57 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				22D5AD5B281BD2F700008F57 /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		22BDE6FB281BD34C00259368 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BDE710281BD34C00259368 /* mokoMvvmFlowSwiftUI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BDE71C281BD37100259368 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		22BDE6FF281BD34C00259368 /* mokoMvvmFlowSwiftUI (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BDE71A281BD34C00259368 /* Build configuration list for PBXNativeTarget "mokoMvvmFlowSwiftUI (iOS)" */;
+			buildPhases = (
+				22BDE6FB281BD34C00259368 /* Headers */,
+				22BDE6FC281BD34C00259368 /* Sources */,
+				22BDE6FD281BD34C00259368 /* Frameworks */,
+				22BDE6FE281BD34C00259368 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mokoMvvmFlowSwiftUI (iOS)";
+			productName = mokoMvvmFlowSwiftUI;
+			productReference = 22BDE700281BD34C00259368 /* mokoMvvmFlowSwiftUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		22BDE720281BD37100259368 /* mokoMvvmFlowSwiftUI (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BDE729281BD37100259368 /* Build configuration list for PBXNativeTarget "mokoMvvmFlowSwiftUI (macOS)" */;
+			buildPhases = (
+				22BDE71C281BD37100259368 /* Headers */,
+				22BDE71D281BD37100259368 /* Sources */,
+				22BDE71E281BD37100259368 /* Frameworks */,
+				22BDE71F281BD37100259368 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mokoMvvmFlowSwiftUI (macOS)";
+			productName = mokoMvvmFlowSwiftUI;
+			productReference = 22BDE721281BD37100259368 /* mokoMvvmFlowSwiftUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		22D5AD52281BD2F700008F57 /* mokoMvvmFlow (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22D5AD64281BD2F700008F57 /* Build configuration list for PBXNativeTarget "mokoMvvmFlow (iOS)" */;
+			buildPhases = (
+				22D5AD4F281BD2F700008F57 /* Sources */,
+				22D5AD50281BD2F700008F57 /* Frameworks */,
+				22D5AD51281BD2F700008F57 /* Resources */,
+				22BDE715281BD34C00259368 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22BDE712281BD34C00259368 /* PBXTargetDependency */,
+			);
+			name = "mokoMvvmFlow (iOS)";
+			productName = "mokoMvvmFlow (iOS)";
+			productReference = 22D5AD53281BD2F700008F57 /* mokoMvvmFlow.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22D5AD58281BD2F700008F57 /* mokoMvvmFlow (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22D5AD67281BD2F700008F57 /* Build configuration list for PBXNativeTarget "mokoMvvmFlow (macOS)" */;
+			buildPhases = (
+				22D5AD55281BD2F700008F57 /* Sources */,
+				22D5AD56281BD2F700008F57 /* Frameworks */,
+				22D5AD57281BD2F700008F57 /* Resources */,
+				22BDE72C281BD37100259368 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22BDE726281BD37100259368 /* PBXTargetDependency */,
+			);
+			name = "mokoMvvmFlow (macOS)";
+			productName = "mokoMvvmFlow (macOS)";
+			productReference = 22D5AD59281BD2F700008F57 /* mokoMvvmFlow.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22D5AD47281BD2F600008F57 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					22BDE6FF281BD34C00259368 = {
+						CreatedOnToolsVersion = 13.3.1;
+						LastSwiftMigration = 1330;
+					};
+					22BDE720281BD37100259368 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					22BDE72D281BD39900259368 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					22D5AD52281BD2F700008F57 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					22D5AD58281BD2F700008F57 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 22D5AD4A281BD2F600008F57 /* Build configuration list for PBXProject "mokoMvvmFlow" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22D5AD46281BD2F600008F57;
+			productRefGroup = 22D5AD54281BD2F700008F57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22D5AD52281BD2F700008F57 /* mokoMvvmFlow (iOS) */,
+				22D5AD58281BD2F700008F57 /* mokoMvvmFlow (macOS) */,
+				22BDE6FF281BD34C00259368 /* mokoMvvmFlowSwiftUI (iOS) */,
+				22BDE720281BD37100259368 /* mokoMvvmFlowSwiftUI (macOS) */,
+				22BDE72D281BD39900259368 /* mokoMvvmFlowSwiftUI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22BDE6FE281BD34C00259368 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BDE71F281BD37100259368 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D5AD51281BD2F700008F57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D5AD60281BD2F700008F57 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D5AD57281BD2F700008F57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D5AD61281BD2F700008F57 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		22BDE745281BD9FB00259368 /* build XCFramework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "build XCFramework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCHEME_NAME_IOS=\"mokoMvvmFlowSwiftUI-iOS\"\nSCHEME_NAME_MACOS=\"mokoMvvmFlowSwiftUI-macOS\"\nFRAMEWORK_NAME=\"mokoMvvmFlowSwiftUI\"\nSIMULATOR_ARCHIVE_PATH=\"${BUILD_DIR}/${CONFIGURATION}/${FRAMEWORK_NAME}-simulator\"\nDEVICE_ARCHIVE_PATH=\"${BUILD_DIR}/${CONFIGURATION}/${FRAMEWORK_NAME}-device\"\nOUTPUT_DIC=\"./xcframework/\"\n\n# Simulator xcarchieve\nxcodebuild archive \\\n  -scheme ${SCHEME_NAME_IOS} \\\n  -archivePath \"${SIMULATOR_ARCHIVE_PATH}/ios\" \\\n  -sdk iphonesimulator \\\n  SKIP_INSTALL=NO\n# Device xcarchieve\nxcodebuild archive \\\n  -scheme ${SCHEME_NAME_IOS} \\\n  -archivePath \"${DEVICE_ARCHIVE_PATH}/ios\" \\\n  -sdk iphoneos \\\n  SKIP_INSTALL=NO\n\n# Device xcarchieve\nxcodebuild archive \\\n  -scheme ${SCHEME_NAME_MACOS} \\\n  -archivePath \"${DEVICE_ARCHIVE_PATH}/macos\" \\\n  SKIP_INSTALL=NO\n\n# Clean up old output directory\nrm -rf \"${OUTPUT_DIC}\"\n# Create xcframwork combine of all frameworks\nxcodebuild -create-xcframework \\\n  -framework ${SIMULATOR_ARCHIVE_PATH}/ios.xcarchive/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework \\\n  -framework ${DEVICE_ARCHIVE_PATH}/ios.xcarchive/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework \\\n  -framework ${DEVICE_ARCHIVE_PATH}/macos.xcarchive/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework \\\n  -output ${OUTPUT_DIC}/${FRAMEWORK_NAME}.xcframework\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22BDE6FC281BD34C00259368 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BDE743281BD6C600259368 /* ViewModelBinding.swift in Sources */,
+				22BDE73A281BD56700259368 /* CFlowExt.swift in Sources */,
+				22BDE73D281BD67C00259368 /* ViewModelObservable.swift in Sources */,
+				22BDE740281BD6A300259368 /* ViewModelState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BDE71D281BD37100259368 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BDE744281BD6C600259368 /* ViewModelBinding.swift in Sources */,
+				22BDE73B281BD56A00259368 /* CFlowExt.swift in Sources */,
+				22BDE73E281BD67C00259368 /* ViewModelObservable.swift in Sources */,
+				22BDE741281BD6A300259368 /* ViewModelState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D5AD4F281BD2F700008F57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D5AD5E281BD2F700008F57 /* ContentView.swift in Sources */,
+				22D5AD5C281BD2F700008F57 /* mokoMvvmFlowApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22D5AD55281BD2F700008F57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D5AD5F281BD2F700008F57 /* ContentView.swift in Sources */,
+				22D5AD5D281BD2F700008F57 /* mokoMvvmFlowApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22BDE712281BD34C00259368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BDE6FF281BD34C00259368 /* mokoMvvmFlowSwiftUI (iOS) */;
+			targetProxy = 22BDE711281BD34C00259368 /* PBXContainerItemProxy */;
+		};
+		22BDE726281BD37100259368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BDE720281BD37100259368 /* mokoMvvmFlowSwiftUI (macOS) */;
+			targetProxy = 22BDE725281BD37100259368 /* PBXContainerItemProxy */;
+		};
+		22BDE732281BD3A600259368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BDE6FF281BD34C00259368 /* mokoMvvmFlowSwiftUI (iOS) */;
+			targetProxy = 22BDE731281BD3A600259368 /* PBXContainerItemProxy */;
+		};
+		22BDE734281BD3A600259368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BDE720281BD37100259368 /* mokoMvvmFlowSwiftUI (macOS) */;
+			targetProxy = 22BDE733281BD3A600259368 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		22BDE716281BD34C00259368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlowSwiftUI;
+				PRODUCT_NAME = mokoMvvmFlowSwiftUI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		22BDE717281BD34C00259368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlowSwiftUI;
+				PRODUCT_NAME = mokoMvvmFlowSwiftUI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		22BDE72A281BD37100259368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_ARCHS = arm64;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlowSwiftUI;
+				PRODUCT_NAME = mokoMvvmFlowSwiftUI;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		22BDE72B281BD37100259368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_ARCHS = arm64;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlowSwiftUI;
+				PRODUCT_NAME = mokoMvvmFlowSwiftUI;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		22BDE72F281BD39900259368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		22BDE730281BD39900259368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		22D5AD62281BD2F700008F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		22D5AD63281BD2F700008F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		22D5AD65281BD2F700008F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlow;
+				PRODUCT_NAME = mokoMvvmFlow;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22D5AD66281BD2F700008F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlow;
+				PRODUCT_NAME = mokoMvvmFlow;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22D5AD68281BD2F700008F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlow;
+				PRODUCT_NAME = mokoMvvmFlow;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		22D5AD69281BD2F700008F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.mokoMvvmFlow;
+				PRODUCT_NAME = mokoMvvmFlow;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22BDE71A281BD34C00259368 /* Build configuration list for PBXNativeTarget "mokoMvvmFlowSwiftUI (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BDE716281BD34C00259368 /* Debug */,
+				22BDE717281BD34C00259368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BDE729281BD37100259368 /* Build configuration list for PBXNativeTarget "mokoMvvmFlowSwiftUI (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BDE72A281BD37100259368 /* Debug */,
+				22BDE72B281BD37100259368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BDE72E281BD39900259368 /* Build configuration list for PBXAggregateTarget "mokoMvvmFlowSwiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BDE72F281BD39900259368 /* Debug */,
+				22BDE730281BD39900259368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22D5AD4A281BD2F600008F57 /* Build configuration list for PBXProject "mokoMvvmFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D5AD62281BD2F700008F57 /* Debug */,
+				22D5AD63281BD2F700008F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22D5AD64281BD2F700008F57 /* Build configuration list for PBXNativeTarget "mokoMvvmFlow (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D5AD65281BD2F700008F57 /* Debug */,
+				22D5AD66281BD2F700008F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22D5AD67281BD2F700008F57 /* Build configuration list for PBXNativeTarget "mokoMvvmFlow (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D5AD68281BD2F700008F57 /* Debug */,
+				22D5AD69281BD2F700008F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22D5AD47281BD2F600008F57 /* Project object */;
+}

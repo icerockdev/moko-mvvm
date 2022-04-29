@@ -8,7 +8,8 @@
 
 import Foundation
 import SwiftUI
-import shared
+import MultiPlatformLibrary
+import mokoMvvmFlowSwiftUI
 import Combine
 
 func createViewModel() -> BookListViewModel {

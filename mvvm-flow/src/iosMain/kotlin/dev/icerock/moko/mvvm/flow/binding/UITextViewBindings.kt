@@ -8,7 +8,6 @@ import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.DisposableHandle
 import dev.icerock.moko.mvvm.flow.plus
-import dev.icerock.moko.mvvm.flow.binding.setEventHandler
 import platform.Foundation.NSNotificationCenter
 import platform.UIKit.UITextView
 import platform.UIKit.UITextViewTextDidBeginEditingNotification

@@ -7,7 +7,8 @@
 //
 
 import SwiftUI
-import shared
+import MultiPlatformLibrary
+import mokoMvvmFlowSwiftUI
 import Combine
 
 struct LoginView: View {

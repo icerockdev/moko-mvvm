@@ -21,14 +21,14 @@ val dependenciesList = listOf(
 kotlin {
     android()
 
-    val xcf = XCFramework()
+    val xcf = XCFramework("MultiPlatformLibrary")
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { target ->
         target.binaries.framework {
-            baseName = "shared"
+            baseName = "MultiPlatformLibrary"
 
             xcf.add(this)
 

@@ -11,15 +11,16 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		226D765D27E44894004964F6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D765C27E44894004964F6 /* LoginView.swift */; };
-		226D765F27E448CA004964F6 /* mokoMvvmExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D765E27E448CA004964F6 /* mokoMvvmExt.swift */; };
-		226D766127E453AB004964F6 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D766027E453AB004964F6 /* Routing.swift */; };
 		226D766327E45FCC004964F6 /* LoginViewBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D766227E45FCC004964F6 /* LoginViewBinding.swift */; };
 		226D766527E48C15004964F6 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D766427E48C15004964F6 /* BookListView.swift */; };
 		226D766727E48C3C004964F6 /* BookListViewBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D766627E48C3C004964F6 /* BookListViewBinding.swift */; };
-		226D766927E4A55B004964F6 /* declarative-ui-sample_shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D766827E4A55B004964F6 /* declarative-ui-sample_shared.swift */; };
-		22EE340127C9235100538774 /* dev_icerock_moko_resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE33FD27C9235100538774 /* dev_icerock_moko_resources.swift */; };
-		22EE340227C923D100538774 /* shared.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EE33F727C9233900538774 /* shared.xcframework */; };
-		22EE340327C923D100538774 /* shared.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22EE33F727C9233900538774 /* shared.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22BDE74B281BEDC700259368 /* dev_icerock_moko_resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE748281BEDC700259368 /* dev_icerock_moko_resources.swift */; };
+		22BDE74C281BEDC700259368 /* declarative-ui-sample_shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE749281BEDC700259368 /* declarative-ui-sample_shared.swift */; };
+		22BDE74D281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE74A281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift */; };
+		22BDE750281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE74E281BEDE000259368 /* mokoMvvmFlowSwiftUI.xcframework */; };
+		22BDE751281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE74E281BEDE000259368 /* mokoMvvmFlowSwiftUI.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22BDE752281BEE8000259368 /* MultiPlatformLibrary.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE746281BEDBA00259368 /* MultiPlatformLibrary.xcframework */; };
+		22BDE753281BEE8000259368 /* MultiPlatformLibrary.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE746281BEDBA00259368 /* MultiPlatformLibrary.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22EFAD46280A8BCE007A8DCB /* BookReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +32,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				22EE340327C923D100538774 /* shared.xcframework in Embed Frameworks */,
+				22BDE753281BEE8000259368 /* MultiPlatformLibrary.xcframework in Embed Frameworks */,
+				22BDE751281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,14 +45,14 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		226D765C27E44894004964F6 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		226D765E27E448CA004964F6 /* mokoMvvmExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mokoMvvmExt.swift; sourceTree = "<group>"; };
-		226D766027E453AB004964F6 /* Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
 		226D766227E45FCC004964F6 /* LoginViewBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewBinding.swift; sourceTree = "<group>"; };
 		226D766427E48C15004964F6 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
 		226D766627E48C3C004964F6 /* BookListViewBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewBinding.swift; sourceTree = "<group>"; };
-		226D766827E4A55B004964F6 /* declarative-ui-sample_shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "declarative-ui-sample_shared.swift"; sourceTree = "<group>"; };
-		22EE33F727C9233900538774 /* shared.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = shared.xcframework; path = ../shared/build/xcode/shared.xcframework; sourceTree = "<group>"; };
-		22EE33FD27C9235100538774 /* dev_icerock_moko_resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dev_icerock_moko_resources.swift; sourceTree = "<group>"; };
+		22BDE746281BEDBA00259368 /* MultiPlatformLibrary.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MultiPlatformLibrary.xcframework; path = ../shared/build/xcode/MultiPlatformLibrary.xcframework; sourceTree = "<group>"; };
+		22BDE748281BEDC700259368 /* dev_icerock_moko_resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dev_icerock_moko_resources.swift; path = ../MultiPlatformLibrarySwift/dev_icerock_moko_resources.swift; sourceTree = "<group>"; };
+		22BDE749281BEDC700259368 /* declarative-ui-sample_shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "declarative-ui-sample_shared.swift"; path = "../MultiPlatformLibrarySwift/declarative-ui-sample_shared.swift"; sourceTree = "<group>"; };
+		22BDE74A281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "dev_icerock_moko_mvvm-flow.swift"; path = "../MultiPlatformLibrarySwift/dev_icerock_moko_mvvm-flow.swift"; sourceTree = "<group>"; };
+		22BDE74E281BEDE000259368 /* mokoMvvmFlowSwiftUI.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mokoMvvmFlowSwiftUI.xcframework; path = "../../mvvm-flow/apple/xcode/xcframework/mokoMvvmFlowSwiftUI.xcframework"; sourceTree = "<group>"; };
 		22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReviewView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,7 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22EE340227C923D100538774 /* shared.xcframework in Frameworks */,
+				22BDE752281BEE8000259368 /* MultiPlatformLibrary.xcframework in Frameworks */,
+				22BDE750281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,8 +83,9 @@
 		22EE33F927C9235100538774 /* kswift */ = {
 			isa = PBXGroup;
 			children = (
-				226D766827E4A55B004964F6 /* declarative-ui-sample_shared.swift */,
-				22EE33FD27C9235100538774 /* dev_icerock_moko_resources.swift */,
+				22BDE749281BEDC700259368 /* declarative-ui-sample_shared.swift */,
+				22BDE74A281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift */,
+				22BDE748281BEDC700259368 /* dev_icerock_moko_resources.swift */,
 			);
 			name = kswift;
 			path = ../shared/build/xcode/sharedSwift;
@@ -90,7 +94,8 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
-				22EE33F727C9233900538774 /* shared.xcframework */,
+				22BDE74E281BEDE000259368 /* mokoMvvmFlowSwiftUI.xcframework */,
+				22BDE746281BEDBA00259368 /* MultiPlatformLibrary.xcframework */,
 				22EE33F927C9235100538774 /* kswift */,
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
@@ -116,8 +121,6 @@
 				226D766427E48C15004964F6 /* BookListView.swift */,
 				226D766627E48C3C004964F6 /* BookListViewBinding.swift */,
 				22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */,
-				226D765E27E448CA004964F6 /* mokoMvvmExt.swift */,
-				226D766027E453AB004964F6 /* Routing.swift */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
@@ -227,14 +230,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				22EFAD46280A8BCE007A8DCB /* BookReviewView.swift in Sources */,
-				226D766127E453AB004964F6 /* Routing.swift in Sources */,
-				226D766927E4A55B004964F6 /* declarative-ui-sample_shared.swift in Sources */,
+				22BDE74C281BEDC700259368 /* declarative-ui-sample_shared.swift in Sources */,
 				226D765D27E44894004964F6 /* LoginView.swift in Sources */,
-				22EE340127C9235100538774 /* dev_icerock_moko_resources.swift in Sources */,
-				226D765F27E448CA004964F6 /* mokoMvvmExt.swift in Sources */,
+				22BDE74D281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift in Sources */,
 				226D766327E45FCC004964F6 /* LoginViewBinding.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				226D766527E48C15004964F6 /* BookListView.swift in Sources */,
+				22BDE74B281BEDC700259368 /* dev_icerock_moko_resources.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				226D766727E48C3C004964F6 /* BookListViewBinding.swift in Sources */,
 			);
@@ -363,20 +365,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUILD_KOTLIN_GRADLE_TASK = syncDebugXCFramework;
+				BUILD_KOTLIN_GRADLE_TASK = syncMultiPlatformLibraryDebugXCFramework;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					shared,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -389,20 +385,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUILD_KOTLIN_GRADLE_TASK = syncReleaseXCFramework;
+				BUILD_KOTLIN_GRADLE_TASK = syncMultiPlatformLibraryReleaseXCFramework;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					shared,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

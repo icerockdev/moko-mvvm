@@ -1,5 +1,5 @@
 import SwiftUI
-import shared
+import MultiPlatformLibrary
 import Combine
 
 struct ContentView: View {
