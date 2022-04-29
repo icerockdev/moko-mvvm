@@ -2,10 +2,12 @@
  * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.flow.binding.bindEnabled
 import dev.icerock.moko.mvvm.flow.binding.bindFocusTwoWay
+import dev.icerock.moko.mvvm.flow.cMutableStateFlow
+import dev.icerock.moko.mvvm.flow.cStateFlow
 import kotlinx.cinterop.readValue
+import kotlinx.coroutines.flow.MutableStateFlow
 import platform.CoreGraphics.CGRectZero
 import platform.Foundation.NSDate
 import platform.Foundation.NSRunLoop
@@ -27,8 +29,8 @@ class UIControlBindingsTests {
 
     @Test
     fun `bool enabled`() {
-        val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        destination.bindEnabled(source)
+        val source: MutableStateFlow<Boolean> = MutableStateFlow(false)
+        destination.bindEnabled(source.cStateFlow())
         assertEquals(
             expected = false,
             actual = destination.enabled
@@ -43,8 +45,8 @@ class UIControlBindingsTests {
     // disabled while not found way to sync becomeFirstResponder logic with current thread
 //    @Test
     fun `bool two way focused`() {
-        val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        destination.bindFocusTwoWay(source)
+        val source: MutableStateFlow<Boolean> = MutableStateFlow(false)
+        destination.bindFocusTwoWay(source.cMutableStateFlow())
         assertEquals(
             expected = false,
             actual = destination.focused

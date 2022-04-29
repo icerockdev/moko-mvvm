@@ -2,10 +2,12 @@
  * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.flow.binding.bindSwitchOn
 import dev.icerock.moko.mvvm.flow.binding.bindSwitchOnTwoWay
+import dev.icerock.moko.mvvm.flow.cMutableStateFlow
+import dev.icerock.moko.mvvm.flow.cStateFlow
 import kotlinx.cinterop.readValue
+import kotlinx.coroutines.flow.MutableStateFlow
 import platform.CoreGraphics.CGRectZero
 import platform.Foundation.NSDate
 import platform.Foundation.NSRunLoop
@@ -27,8 +29,8 @@ class UISwitchBindingsTests {
 
     @Test
     fun `bool switch on`() {
-        val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        destination.bindSwitchOn(source)
+        val source: MutableStateFlow<Boolean> = MutableStateFlow(false)
+        destination.bindSwitchOn(source.cStateFlow())
         assertEquals(
             expected = false,
             actual = destination.isOn()
@@ -43,8 +45,8 @@ class UISwitchBindingsTests {
     // disabled while not found way to sync setOn logic with current thread
 //    @Test
     fun `bool two way switch on`() {
-        val source: MutableLiveData<Boolean> = MutableLiveData(false)
-        destination.bindSwitchOnTwoWay(source)
+        val source: MutableStateFlow<Boolean> = MutableStateFlow(false)
+        destination.bindSwitchOnTwoWay(source.cMutableStateFlow())
         assertEquals(
             expected = false,
             actual = destination.isOn()
