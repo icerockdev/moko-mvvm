@@ -17,12 +17,11 @@
 		22BDE74B281BEDC700259368 /* dev_icerock_moko_resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE748281BEDC700259368 /* dev_icerock_moko_resources.swift */; };
 		22BDE74C281BEDC700259368 /* declarative-ui-sample_shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE749281BEDC700259368 /* declarative-ui-sample_shared.swift */; };
 		22BDE74D281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BDE74A281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift */; };
-		22BDE750281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE74E281BEDE000259368 /* mokoMvvmFlowSwiftUI.xcframework */; };
-		22BDE751281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE74E281BEDE000259368 /* mokoMvvmFlowSwiftUI.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22BDE752281BEE8000259368 /* MultiPlatformLibrary.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE746281BEDBA00259368 /* MultiPlatformLibrary.xcframework */; };
 		22BDE753281BEE8000259368 /* MultiPlatformLibrary.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22BDE746281BEDBA00259368 /* MultiPlatformLibrary.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22EFAD46280A8BCE007A8DCB /* BookReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		FCF4E6E3EA1204EC05EEF872 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E36C38F63DF79F7CEEAE3E /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,7 +32,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				22BDE753281BEE8000259368 /* MultiPlatformLibrary.xcframework in Embed Frameworks */,
-				22BDE751281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,9 +52,12 @@
 		22BDE74A281BEDC700259368 /* dev_icerock_moko_mvvm-flow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "dev_icerock_moko_mvvm-flow.swift"; path = "../MultiPlatformLibrarySwift/dev_icerock_moko_mvvm-flow.swift"; sourceTree = "<group>"; };
 		22BDE74E281BEDE000259368 /* mokoMvvmFlowSwiftUI.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mokoMvvmFlowSwiftUI.xcframework; path = "../../mvvm-flow/apple/xcode/xcframework/mokoMvvmFlowSwiftUI.xcframework"; sourceTree = "<group>"; };
 		22EFAD45280A8BCE007A8DCB /* BookReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReviewView.swift; sourceTree = "<group>"; };
+		44E36C38F63DF79F7CEEAE3E /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4745F88F44B963D7A59D2180 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C67D2807155711FDB9BBDD09 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22BDE752281BEE8000259368 /* MultiPlatformLibrary.xcframework in Frameworks */,
-				22BDE750281BEE7F00259368 /* mokoMvvmFlowSwiftUI.xcframework in Frameworks */,
+				FCF4E6E3EA1204EC05EEF872 /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +79,15 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		140DDE5BD0BCDADF6482A380 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C67D2807155711FDB9BBDD09 /* Pods-iosApp.debug.xcconfig */,
+				4745F88F44B963D7A59D2180 /* Pods-iosApp.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		22EE33F927C9235100538774 /* kswift */ = {
@@ -100,6 +110,7 @@
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
 				7555FFB0242A642200829871 /* Frameworks */,
+				140DDE5BD0BCDADF6482A380 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +142,7 @@
 		7555FFB0242A642200829871 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44E36C38F63DF79F7CEEAE3E /* Pods_iosApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,11 +154,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
+				D1546C3CE06A9BC9D549831A /* [CP] Check Pods Manifest.lock */,
 				7555FFB5242A651A00829871 /* Build Kotlin */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF78242A565900829871 /* Frameworks */,
 				7555FF79242A565900829871 /* Resources */,
 				7555FFB4242A642300829871 /* Embed Frameworks */,
+				ABFB989EF8553B224A07F82C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,6 +235,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT/..\"\n./gradlew \":shared:$BUILD_KOTLIN_GRADLE_TASK\"\n";
+		};
+		ABFB989EF8553B224A07F82C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1546C3CE06A9BC9D549831A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iosApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -363,6 +416,7 @@
 		};
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C67D2807155711FDB9BBDD09 /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_KOTLIN_GRADLE_TASK = syncMultiPlatformLibraryDebugXCFramework;
@@ -383,6 +437,7 @@
 		};
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4745F88F44B963D7A59D2180 /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_KOTLIN_GRADLE_TASK = syncMultiPlatformLibraryReleaseXCFramework;

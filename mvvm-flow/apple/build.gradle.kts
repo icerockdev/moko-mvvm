@@ -4,6 +4,7 @@ plugins {
     id("detekt-convention")
     id("org.jetbrains.kotlin.multiplatform")
     id("dev.icerock.mobile.multiplatform.apple-framework")
+    id("publication-convention")
 }
 
 kotlin {
@@ -33,4 +34,52 @@ framework {
     export(projects.mvvmCore)
     export(projects.mvvmFlow)
     export(libs.mokoResources)
+}
+
+val swiftXCFrameworkProject = File(projectDir, "xcode/mokoMvvmFlow.xcodeproj")
+val swiftXCFrameworkOutput = File(projectDir, "xcode/xcframework")
+val swiftXCFramework = File(swiftXCFrameworkOutput, "mokoMvvmFlowSwiftUI.xcframework")
+val swiftXCFrameworkArchive = File(swiftXCFrameworkOutput, "mokoMvvmFlowSwiftUI.xcframework.zip")
+
+val compileTask = tasks.create("compileMokoFlowSwiftUIXCFramework", Exec::class) {
+    group = "xcode"
+
+    commandLine = listOf(
+        "xcodebuild",
+        "-scheme",
+        "mokoMvvmFlowSwiftUI",
+        "-project",
+        swiftXCFrameworkProject.absolutePath,
+        "build"
+    )
+
+    dependsOn("assembleMultiPlatformLibraryDebugXCFramework")
+}
+
+val archiveTask = tasks.create("archiveMokoFlowSwiftUIXCFramework", Zip::class) {
+    group = "xcode"
+
+    from(swiftXCFramework)
+    into(swiftXCFramework.name)
+
+    archiveFileName.set(swiftXCFrameworkArchive.name)
+    destinationDirectory.set(swiftXCFrameworkOutput)
+
+    dependsOn(compileTask)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("swiftuiAdditions") {
+            artifactId = "mvvm-flow-swiftui"
+
+            artifact(archiveTask.archiveFile) {
+                extension = "zip"
+            }
+
+            pom {
+                packaging = "zip"
+            }
+        }
+    }
 }
