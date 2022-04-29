@@ -39,4 +39,52 @@ public extension ObservableObject where Self: ViewModel {
             mapper: { $0.boolValue }
         )
     }
+    
+    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinDouble>>) -> Double {
+        return state(
+            flowKey,
+            equals: { $0?.doubleValue == $1?.doubleValue },
+            mapper: { $0.doubleValue }
+        )
+    }
+    
+    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinFloat>>) -> Float {
+        return state(
+            flowKey,
+            equals: { $0?.floatValue == $1?.floatValue },
+            mapper: { $0.floatValue }
+        )
+    }
+    
+    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinInt>>) -> Int {
+        return state(
+            flowKey,
+            equals: { $0?.intValue == $1?.intValue },
+            mapper: { $0.intValue }
+        )
+    }
+    
+    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinLong>>) -> Int64 {
+        return state(
+            flowKey,
+            equals: { $0?.int64Value == $1?.int64Value },
+            mapper: { $0.int64Value }
+        )
+    }
+    
+    func state(_ flowKey: KeyPath<Self, CStateFlow<NSString>>) -> String {
+        return state(
+            flowKey,
+            equals: { $0 == $1 },
+            mapper: { $0 as String }
+        )
+    }
+    
+    func state<T>(_ flowKey: KeyPath<Self, CStateFlow<NSArray>>) -> Array<T> {
+        return state(
+            flowKey,
+            equals: { $0 === $1 },
+            mapper: { $0 as! Array<T> }
+        )
+    }
 }
