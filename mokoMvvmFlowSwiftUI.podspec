@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'Apache 2' }
   s.authors          = 'IceRock Development'
   s.source           = {
-    :http => "https://s01.oss.sonatype.org/service/local/repositories/devicerock-1230/content/dev/icerock/moko/mvvm-flow-swiftui/#{s.version}/mvvm-flow-swiftui-#{s.version}.zip",
+    :http => "https://repo1.maven.org/maven2/dev/icerock/moko/mvvm-flow-swiftui/#{s.version}/mvvm-flow-swiftui-#{s.version}.zip",
     :type => "zip"
   }
 
