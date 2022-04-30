@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
     id("detekt-convention")
@@ -54,6 +55,8 @@ val compileTask = tasks.create("compileMokoFlowSwiftUIXCFramework", Exec::class)
     )
 
     dependsOn("assembleMultiPlatformLibraryDebugXCFramework")
+
+    onlyIf { HostManager.hostIsMac }
 }
 
 val archiveTask = tasks.create("archiveMokoFlowSwiftUIXCFramework", Zip::class) {
@@ -66,6 +69,8 @@ val archiveTask = tasks.create("archiveMokoFlowSwiftUIXCFramework", Zip::class) 
     destinationDirectory.set(swiftXCFrameworkOutput)
 
     dependsOn(compileTask)
+
+    onlyIf { HostManager.hostIsMac }
 }
 
 val publicationName = "swiftuiAdditions"
@@ -87,5 +92,7 @@ publishing {
 }
 
 tasks.withType<AbstractPublishToMaven>()
-    .matching { it.publication.name != publicationName }
-    .configureEach { enabled = false }
+    .configureEach {
+        if (publication.name != publicationName) enabled = false
+        else onlyIf { HostManager.hostIsMac }
+    }
