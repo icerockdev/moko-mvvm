@@ -15,7 +15,8 @@ if [ "$OS" == "macos-latest" ]; then
     publishWatchosArm64PublicationToSonatypeRepository \
     publishWatchosSimulatorArm64PublicationToSonatypeRepository \
     publishWatchosX64PublicationToSonatypeRepository \
-    publishWatchosX86PublicationToSonatypeRepository
+    publishWatchosX86PublicationToSonatypeRepository \
+    publishSwiftuiAdditionsPublicationToSonatypeRepository
 elif [ "$OS" == "windows-latest" ]; then
   ./gradlew publishMingwX64PublicationToSonatypeRepository
 elif [ "$OS" == "ubuntu-latest" ]; then

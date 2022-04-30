@@ -35,7 +35,8 @@ if [ "$1" == "macos-latest" ]; then
     publishWatchosArm64PublicationToMavenLocal \
     publishWatchosSimulatorArm64PublicationToMavenLocal \
     publishWatchosX64PublicationToMavenLocal \
-    publishWatchosX86PublicationToMavenLocal
+    publishWatchosX86PublicationToMavenLocal \
+    publishSwiftuiAdditionsPublicationToMavenLocal
 elif [ "$1" == "windows-latest" ]; then
   ./gradlew detektMingwX64Main \
     mingwX64Test \
