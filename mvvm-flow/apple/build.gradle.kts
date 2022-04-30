@@ -68,9 +68,11 @@ val archiveTask = tasks.create("archiveMokoFlowSwiftUIXCFramework", Zip::class) 
     dependsOn(compileTask)
 }
 
+val publicationName = "swiftuiAdditions"
+
 publishing {
     publications {
-        create<MavenPublication>("swiftuiAdditions") {
+        create<MavenPublication>(publicationName) {
             artifactId = "mvvm-flow-swiftui"
 
             artifact(archiveTask.archiveFile) {
@@ -83,3 +85,7 @@ publishing {
         }
     }
 }
+
+tasks.withType<AbstractPublishToMaven>()
+    .matching { it.publication.name != publicationName }
+    .configureEach { enabled = false }
