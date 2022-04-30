@@ -13,8 +13,10 @@ import platform.Foundation.date
 import platform.Foundation.runUntilDate
 import platform.UIKit.UITextField
 import kotlin.test.BeforeTest
+import kotlin.test.Ignore
 import kotlin.test.assertEquals
 
+@Ignore
 class UIResponderBindingsTests {
 
     private lateinit var destination: UITextField

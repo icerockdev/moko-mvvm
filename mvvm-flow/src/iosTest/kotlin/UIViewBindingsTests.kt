@@ -13,9 +13,11 @@ import platform.UIKit.UIView
 import platform.UIKit.backgroundColor
 import platform.UIKit.isHidden
 import kotlin.test.BeforeTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@Ignore
 class UIViewBindingsTests {
 
     private lateinit var destination: UIView
