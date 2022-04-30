@@ -5,5 +5,5 @@ target 'iosApp' do
   use_frameworks!
 
   # Pods for iosApp
-  pod 'mokoMvvmFlowSwiftUI', :podspec => '../../mokoMvvmFlowSwiftUI.podspec'
+  # pod 'mokoMvvmFlowSwiftUI', :podspec => '../../mokoMvvmFlowSwiftUI.podspec'
 end
