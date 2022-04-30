@@ -24,7 +24,7 @@ inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(
     ViewModelFactory { viewModelBlock() }
 ).get(T::class.java)
 
-inline fun <reified T : ViewModel> ViewModelStoreOwner.createViewModelFactory(
+inline fun <reified T : ViewModel> createViewModelFactory(
     noinline viewModelBlock: () -> T
 ): ViewModelFactory = ViewModelFactory {
     viewModelBlock()

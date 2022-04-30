@@ -12,6 +12,7 @@ buildscript {
     dependencies {
         classpath(":mvvm-build-logic")
         classpath(libs.kswiftGradlePlugin)
+        classpath(libs.composeJetBrainsGradlePlugin)
     }
 }
 
