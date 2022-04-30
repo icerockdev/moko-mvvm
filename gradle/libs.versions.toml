@@ -4,18 +4,25 @@ androidLifecycleVersion = "2.2.0"
 coroutinesVersion = "1.6.0-native-mt"
 mokoResourcesVersion = "0.18.0"
 mokoTestVersion = "0.6.1"
-mokoMvvmVersion = "0.12.0"
+mokoMvvmVersion = "0.13.0"
 mokoKSwiftVersion = "0.4.0"
+composeVersion = "1.1.1"
+composeJetBrainsVersion = "1.1.1"
 
 [libraries]
 # android
 appCompat = { module = "androidx.appcompat:appcompat", version = "1.2.0" }
 material = { module = "com.google.android.material:material", version = "1.2.1" }
 lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidLifecycleVersion" }
+lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidLifecycleVersion" }
 androidViewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidLifecycleVersion" }
 androidLiveData = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidLifecycleVersion" }
 glide = { module = "com.github.bumptech.glide:glide", version = "4.11.0" }
 swipeRefresh = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version = "1.1.0" }
+
+# compose
+composeFoundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeVersion" }
+composeLiveData = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeVersion" }
 
 # coroutines
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
@@ -37,6 +44,7 @@ mobileMultiplatformGradlePlugin = { module = "dev.icerock:mobile-multiplatform",
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.0.4" }
 detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.19.0" }
 kswiftGradlePlugin = { module = "dev.icerock.moko:kswift-gradle-plugin", version.ref = "mokoKSwiftVersion" }
+composeJetBrainsGradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeJetBrainsVersion" }
 
 [plugins]
 nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version = "1.1.0" }
