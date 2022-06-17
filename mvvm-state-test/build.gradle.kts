@@ -5,7 +5,6 @@
 plugins {
     id("kmp-library-convention")
     id("detekt-convention")
-    id("publication-convention")
 }
 
 dependencies {
