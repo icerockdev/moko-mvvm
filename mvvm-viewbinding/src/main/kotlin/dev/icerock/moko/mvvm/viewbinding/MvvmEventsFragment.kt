@@ -5,6 +5,7 @@
 package dev.icerock.moko.mvvm.viewbinding
 
 import android.os.Bundle
+import android.view.View
 import androidx.viewbinding.ViewBinding
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
