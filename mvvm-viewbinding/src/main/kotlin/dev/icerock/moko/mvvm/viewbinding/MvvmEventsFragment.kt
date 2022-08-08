@@ -11,8 +11,8 @@ import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
 abstract class MvvmEventsFragment<VB : ViewBinding, VM, Listener : Any> :
     MvvmFragment<VB, VM>() where VM : ViewModel, VM : EventsDispatcherOwner<Listener> {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         @Suppress("UNCHECKED_CAST")
         viewModel.eventsDispatcher.bind(viewLifecycleOwner, this as Listener)
