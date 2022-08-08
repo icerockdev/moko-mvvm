@@ -5,14 +5,15 @@
 package dev.icerock.moko.mvvm
 
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.ViewDataBinding
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
 abstract class MvvmEventsFragment<DB : ViewDataBinding, VM, Listener : Any> :
     MvvmFragment<DB, VM>() where VM : ViewModel, VM : EventsDispatcherOwner<Listener> {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         @Suppress("UNCHECKED_CAST")
         viewModel.eventsDispatcher.bind(viewLifecycleOwner, this as Listener)
