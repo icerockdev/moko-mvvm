@@ -2,8 +2,7 @@
  * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import dev.icerock.moko.mvvm.flow.CMutableStateFlow
-import dev.icerock.moko.mvvm.flow.cMutableStateFlow
+import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.flow.resources.bindText
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -26,8 +25,8 @@ class UITextViewBindingsTests {
 
     @Test
     fun `nonnullable stringdesc text`() {
-        val source: CMutableStateFlow<StringDesc> = MutableStateFlow<StringDesc>("init".desc()).cMutableStateFlow()
-        destination.bindText(source)
+        val source: MutableStateFlow<StringDesc> = MutableStateFlow("init".desc())
+        destination.bindText(source.cStateFlow())
         assertEquals(
             expected = "init",
             actual = destination.text
@@ -41,8 +40,8 @@ class UITextViewBindingsTests {
 
     @Test
     fun `nullable stringdesc text`() {
-        val source: CMutableStateFlow<StringDesc?> = MutableStateFlow<StringDesc?>(null).cMutableStateFlow()
-        destination.bindText(source)
+        val source: MutableStateFlow<StringDesc?> = MutableStateFlow(null)
+        destination.bindText(source.cStateFlow())
         assertEquals(
             expected = "",
             actual = destination.text
