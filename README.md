@@ -55,6 +55,7 @@ dependencies {
     commonMainApi("dev.icerock.moko:mvvm-livedata:0.13.1") // api mvvm-core, LiveData and extensions
     commonMainApi("dev.icerock.moko:mvvm-state:0.13.1") // api mvvm-livedata, ResourceState class and extensions
     commonMainApi("dev.icerock.moko:mvvm-livedata-resources:0.13.1") // api mvvm-core, moko-resources, extensions for LiveData with moko-resources
+    commonMainApi("dev.icerock.moko:mvvm-flow-resources:0.13.1") // api mvvm-core, moko-resources, extensions for Flow with moko-resources
     
     androidMainApi("dev.icerock.moko:mvvm-flow-compose:0.13.1") // api mvvm-flow, binding extensions for Jetpack Compose (jvm, js, android)
     androidMainApi("dev.icerock.moko:mvvm-livedata-compose:0.13.1") // api mvvm-livedata, binding extensions for Jetpack Compose (jvm, js, android)
