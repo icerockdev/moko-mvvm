@@ -11,9 +11,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UILabel
 import kotlin.test.BeforeTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@Ignore
 class UILabelBindingsTests {
 
     private lateinit var destination: UILabel
