@@ -11,9 +11,9 @@ import dev.icerock.moko.mvvm.flow.binding.bind
 import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.DisposableHandle
 
-fun TextView.bindText(
+fun <T : StringDesc?> TextView.bindText(
     lifecycleOwner: LifecycleOwner,
-    flow: CStateFlow<StringDesc?>
+    flow: CStateFlow<T>
 ): DisposableHandle {
     return flow.bind(lifecycleOwner) { this.text = it?.toString(this.context) }
 }
