@@ -13,7 +13,7 @@ import kotlinx.coroutines.DisposableHandle
 
 fun TextView.bindText(
     lifecycleOwner: LifecycleOwner,
-    flow: CStateFlow<StringDesc>
+    flow: CStateFlow<StringDesc?>
 ): DisposableHandle {
-    return flow.bind(lifecycleOwner) { this.text = it.toString(this.context) }
+    return flow.bind(lifecycleOwner) { this.text = it?.toString(this.context) }
 }
