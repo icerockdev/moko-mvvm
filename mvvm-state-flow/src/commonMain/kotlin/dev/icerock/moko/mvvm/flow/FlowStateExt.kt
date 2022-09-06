@@ -33,7 +33,7 @@ inline fun <TData, TError, reified ST : ResourceState<TData, TError>, LD : Flow<
     combine(this) { list ->
         @Suppress("UNCHECKED_CAST")
         val errorItem = list.firstOrNull {
-            (it is ResourceState.Failed<*>)
-        } as? ResourceState.Failed<TError>
+            (it is ResourceState.Failed<*, *>)
+        } as? ResourceState.Failed<TData, TError>
         errorItem?.error
     }

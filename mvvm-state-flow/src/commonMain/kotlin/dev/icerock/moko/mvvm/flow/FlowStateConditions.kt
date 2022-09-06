@@ -23,20 +23,20 @@ fun <TData, TError> Flow<ResourceState<TData, TError>>.isEmptyState(): Flow<Bool
 
 inline fun <TData, TError, reified ST : ResourceState<TData, TError>, FL : Flow<ST>> List<FL>.isSuccessState(): Flow<Boolean> =
     combine(this) { list ->
-        list.firstOrNull { it !is ResourceState.Success<*> } == null
+        list.firstOrNull { it !is ResourceState.Success<*, *> } == null
     }
 
 inline fun <TData, TError, reified ST : ResourceState<TData, TError>, LD : Flow<ST>> List<LD>.isLoadingState(): Flow<Boolean> =
     combine(this) { list ->
-        list.firstOrNull() { it is ResourceState.Loading } != null
+        list.firstOrNull() { it is ResourceState.Loading<*, *> } != null
     }
 
 inline fun <TData, TError, reified ST : ResourceState<TData, TError>, LD : Flow<ST>> List<LD>.isErrorState(): Flow<Boolean> =
     combine(this) { list ->
-        list.firstOrNull { it is ResourceState.Failed<*> } != null
+        list.firstOrNull { it is ResourceState.Failed<*, *> } != null
     }
 
 inline fun <TData, TError, reified ST : ResourceState<TData, TError>, LD : Flow<ST>> List<LD>.isEmptyState(): Flow<Boolean> =
     combine(this) { list ->
-        list.firstOrNull { it is ResourceState.Empty } != null
+        list.firstOrNull { it is ResourceState.Empty<*, *> } != null
     }

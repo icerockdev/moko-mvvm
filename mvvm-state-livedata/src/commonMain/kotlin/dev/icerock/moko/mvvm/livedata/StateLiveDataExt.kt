@@ -23,7 +23,7 @@ fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.error(): Li
         .composition(this) { list ->
             @Suppress("UNCHECKED_CAST")
             val errorItem = list.firstOrNull {
-                (it is ResourceState.Failed<*>)
-            } as? ResourceState.Failed<E>
+                (it is ResourceState.Failed<*, *>)
+            } as? ResourceState.Failed<T, E>
             errorItem?.error
         }

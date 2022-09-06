@@ -17,17 +17,17 @@ fun <T1, E, T2, OT> Flow<ResourceState<T1, E>>.concatData(
         flow
     ) { firstState, secondState ->
         val state: ResourceState<OT, E> = when {
-            (firstState is ResourceState.Loading || secondState is ResourceState.Loading) -> ResourceState.Loading
+            (firstState is ResourceState.Loading || secondState is ResourceState.Loading) -> ResourceState.Loading()
             (firstState is ResourceState.Failed) -> ResourceState.Failed(firstState.error)
             (secondState is ResourceState.Failed) -> ResourceState.Failed(secondState.error)
-            (firstState is ResourceState.Empty || secondState is ResourceState.Empty) -> ResourceState.Empty
+            (firstState is ResourceState.Empty || secondState is ResourceState.Empty) -> ResourceState.Empty()
             (firstState is ResourceState.Success && secondState is ResourceState.Success) -> ResourceState.Success(
                 function(
                     firstState.data,
                     secondState.data
                 )
             )
-            else -> ResourceState.Empty
+            else -> ResourceState.Empty()
         }
 
         state

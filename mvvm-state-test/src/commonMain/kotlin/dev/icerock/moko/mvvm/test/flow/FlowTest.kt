@@ -44,7 +44,7 @@ open class FlowTest {
                 mergeWithCounter++
                 if (a2) a1.toLong() else -a1.toLong()
             }
-        }.stateIn(coroutineScope, SharingStarted.Eagerly, ResourceState.Loading)
+        }.stateIn(coroutineScope, SharingStarted.Eagerly, ResourceState.Loading())
 
         assertEquals(actual = dataTransformCounter, expected = 1)
         assertEquals(actual = mergeWithCounter, expected = 1)
@@ -78,7 +78,7 @@ open class FlowTest {
 
         val vmIsAuthorized = MutableStateFlow(true)
         val state: MutableStateFlow<ResourceState<Int, Throwable>> =
-            MutableStateFlow(ResourceState.Empty)
+            MutableStateFlow(ResourceState.Empty())
         val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
         var dataTransformCounter = 0
@@ -91,7 +91,7 @@ open class FlowTest {
                 mergeWithDataTransformCounter++
                 if (a2) a1.toLong() else -a1.toLong()
             }
-        }.stateIn(coroutineScope, SharingStarted.Eagerly, ResourceState.Loading)
+        }.stateIn(coroutineScope, SharingStarted.Eagerly, ResourceState.Loading())
 
         val result: StateFlow<ResourceState<Long, Throwable>> = combine(
             vmIsAuthorized,
@@ -103,14 +103,14 @@ open class FlowTest {
             } else {
                 ResourceState.Failed(Exception())
             }
-        }.stateIn(coroutineScope, SharingStarted.Eagerly, ResourceState.Loading)
+        }.stateIn(coroutineScope, SharingStarted.Eagerly, ResourceState.Loading())
 
         assertEquals(actual = dataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithDataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 1)
         assertTrue { result.value.isEmpty() }
 
-        state.value = ResourceState.Loading
+        state.value = ResourceState.Loading()
 
         assertEquals(actual = dataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithDataTransformCounter, expected = 0)
