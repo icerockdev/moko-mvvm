@@ -5,6 +5,7 @@
 package dev.icerock.moko.mvvm.flow
 
 import dev.icerock.moko.mvvm.state.ResourceState
+import dev.icerock.moko.mvvm.state.mergeState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
@@ -13,22 +14,7 @@ fun <T1, E, T2, OT> Flow<ResourceState<T1, E>>.concatData(
     function: (T1, T2) -> OT
 ): Flow<ResourceState<OT, E>> =
     combine(
-        this,
-        flow
+        this, flow
     ) { firstState, secondState ->
-        val state: ResourceState<OT, E> = when {
-            (firstState is ResourceState.Loading || secondState is ResourceState.Loading) -> ResourceState.Loading()
-            (firstState is ResourceState.Failed) -> ResourceState.Failed(firstState.error)
-            (secondState is ResourceState.Failed) -> ResourceState.Failed(secondState.error)
-            (firstState is ResourceState.Empty || secondState is ResourceState.Empty) -> ResourceState.Empty()
-            (firstState is ResourceState.Success && secondState is ResourceState.Success) -> ResourceState.Success(
-                function(
-                    firstState.data,
-                    secondState.data
-                )
-            )
-            else -> ResourceState.Empty()
-        }
-
-        state
+        mergeState(firstState, secondState, function)
     }
