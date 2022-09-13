@@ -50,21 +50,22 @@ allprojects {
 project build.gradle
 ```groovy
 dependencies {
-    commonMainApi("dev.icerock.moko:mvvm-core:0.13.1") // only ViewModel, EventsDispatcher, Dispatchers.UI
-    commonMainApi("dev.icerock.moko:mvvm-flow:0.13.1") // api mvvm-core, CFlow for native and binding extensions
-    commonMainApi("dev.icerock.moko:mvvm-livedata:0.13.1") // api mvvm-core, LiveData and extensions
-    commonMainApi("dev.icerock.moko:mvvm-state:0.13.1") // api mvvm-livedata, ResourceState class and extensions
-    commonMainApi("dev.icerock.moko:mvvm-livedata-resources:0.13.1") // api mvvm-core, moko-resources, extensions for LiveData with moko-resources
+    commonMainApi("dev.icerock.moko:mvvm-core:0.14.0") // only ViewModel, EventsDispatcher, Dispatchers.UI
+    commonMainApi("dev.icerock.moko:mvvm-flow:0.14.0") // api mvvm-core, CFlow for native and binding extensions
+    commonMainApi("dev.icerock.moko:mvvm-livedata:0.14.0") // api mvvm-core, LiveData and extensions
+    commonMainApi("dev.icerock.moko:mvvm-state:0.14.0") // api mvvm-livedata, ResourceState class and extensions
+    commonMainApi("dev.icerock.moko:mvvm-livedata-resources:0.14.0") // api mvvm-core, moko-resources, extensions for LiveData with moko-resources
+    commonMainApi("dev.icerock.moko:mvvm-flow-resources:0.14.0") // api mvvm-core, moko-resources, extensions for Flow with moko-resources
     
-    androidMainApi("dev.icerock.moko:mvvm-flow-compose:0.13.1") // api mvvm-flow, binding extensions for Jetpack Compose (jvm, js, android)
-    androidMainApi("dev.icerock.moko:mvvm-livedata-compose:0.13.1") // api mvvm-livedata, binding extensions for Jetpack Compose (jvm, js, android)
-    androidMainApi("dev.icerock.moko:mvvm-livedata-material:0.13.1") // api mvvm-livedata, Material library android extensions
-    androidMainApi("dev.icerock.moko:mvvm-livedata-glide:0.13.1") // api mvvm-livedata, Glide library android extensions
-    androidMainApi("dev.icerock.moko:mvvm-livedata-swiperefresh:0.13.1") // api mvvm-livedata, SwipeRefreshLayout library android extensions
-    androidMainApi("dev.icerock.moko:mvvm-databinding:0.13.1") // api mvvm-livedata, DataBinding support for Android
-    androidMainApi("dev.icerock.moko:mvvm-viewbinding:0.13.1") // api mvvm-livedata, ViewBinding support for Android
+    androidMainApi("dev.icerock.moko:mvvm-flow-compose:0.14.0") // api mvvm-flow, binding extensions for Jetpack Compose (jvm, js, android)
+    androidMainApi("dev.icerock.moko:mvvm-livedata-compose:0.14.0") // api mvvm-livedata, binding extensions for Jetpack Compose (jvm, js, android)
+    androidMainApi("dev.icerock.moko:mvvm-livedata-material:0.14.0") // api mvvm-livedata, Material library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-livedata-glide:0.14.0") // api mvvm-livedata, Glide library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-livedata-swiperefresh:0.14.0") // api mvvm-livedata, SwipeRefreshLayout library android extensions
+    androidMainApi("dev.icerock.moko:mvvm-databinding:0.14.0") // api mvvm-livedata, DataBinding support for Android
+    androidMainApi("dev.icerock.moko:mvvm-viewbinding:0.14.0") // api mvvm-livedata, ViewBinding support for Android
     
-    commonTestImplementation("dev.icerock.moko:mvvm-test:0.13.1") // test utilities
+    commonTestImplementation("dev.icerock.moko:mvvm-test:0.14.0") // test utilities
 }
 ```
 
@@ -74,10 +75,10 @@ kotlin {
     // export correct artifact to use all classes of library directly from Swift
     targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
         binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
-            export("dev.icerock.moko:mvvm-core:0.13.1")
-            export("dev.icerock.moko:mvvm-livedata:0.13.1")
-            export("dev.icerock.moko:mvvm-livedata-resources:0.13.1")
-            export("dev.icerock.moko:mvvm-state:0.13.1")
+            export("dev.icerock.moko:mvvm-core:0.14.0")
+            export("dev.icerock.moko:mvvm-livedata:0.14.0")
+            export("dev.icerock.moko:mvvm-livedata-resources:0.14.0")
+            export("dev.icerock.moko:mvvm-state:0.14.0")
         }
     }
 }
@@ -93,7 +94,7 @@ generation enabled. All `LiveData` to `UIView` bindings is extensions for UI ele
 To use MOKO MVVM with SwiftUI set name of your kotlin framework to `MultiPlatformLibrary` and add
 dependency to CocoaPods:
 ```ruby
-pod 'mokoMvvmFlowSwiftUI', :podspec => 'https://raw.githubusercontent.com/icerockdev/moko-mvvm/release/0.13.1/mokoMvvmFlowSwiftUI.podspec'
+pod 'mokoMvvmFlowSwiftUI', :podspec => 'https://raw.githubusercontent.com/icerockdev/moko-mvvm/release/0.14.0/mokoMvvmFlowSwiftUI.podspec'
 ```
 required export of `mvvm-core` and `mvvm-flow`.
 
