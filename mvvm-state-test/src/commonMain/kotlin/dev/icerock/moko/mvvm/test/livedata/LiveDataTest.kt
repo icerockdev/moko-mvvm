@@ -17,9 +17,6 @@ import kotlin.test.assertTrue
 
 open class LiveDataTest {
 
-    @get:TestRule
-    val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
-
     @Test
     open fun dataTransformTest() {
         val ld: MutableLiveData<ResourceState<Int, Throwable>> =
