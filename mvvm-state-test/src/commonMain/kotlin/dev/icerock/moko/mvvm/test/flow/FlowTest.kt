@@ -6,8 +6,6 @@ package dev.icerock.moko.mvvm.test.flow
 
 import dev.icerock.moko.mvvm.flow.dataTransform
 import dev.icerock.moko.mvvm.state.ResourceState
-import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
-import dev.icerock.moko.test.TestRule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,9 +21,6 @@ import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 open class FlowTest {
-
-    @get:TestRule
-    val instantTaskExecutorRule = AndroidArchitectureInstantTaskExecutorRule()
 
     private val coroutineScope = CoroutineScope(Dispatchers.Unconfined)
 
