@@ -17,14 +17,12 @@ fun <IT, E, OT> Flow<ResourceState<IT, E>>.dataTransform(
     transform: Flow<IT>.() -> Flow<OT>
 ): Flow<ResourceState<OT, E>> = flatMapLatest { state ->
     when (state) {
-        is ResourceState.Success -> transform
-            .invoke(flowOf(state.data))
+        is ResourceState.Success -> transform(flowOf(state.data))
             .map { ResourceState.Success(it) }
         is ResourceState.Empty -> flowOf(ResourceState.Empty())
         is ResourceState.Failed -> flowOf(ResourceState.Failed(state.error))
         is ResourceState.Loading -> flowOf(ResourceState.Loading())
     }
-
 }
 
 fun <T, IE, OE> Flow<ResourceState<T, IE>>.errorTransform(

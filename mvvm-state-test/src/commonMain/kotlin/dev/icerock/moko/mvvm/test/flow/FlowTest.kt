@@ -68,7 +68,7 @@ open class FlowTest {
         assertEquals(
             actual = mergeWithCounter,
             expected = 4
-        ) // FIXME: there's an extra mergeWith lambda call
+        )
         assertEquals(expected = -11, actual = mapFlow.value.dataValue())
     }
 

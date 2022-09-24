@@ -2,6 +2,8 @@
  * Copyright 2022 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
+@file:Suppress("MaximumLineLength", "MaxLineLength")
+
 package dev.icerock.moko.mvvm.flow
 
 import dev.icerock.moko.mvvm.state.ResourceState
@@ -26,17 +28,17 @@ inline fun <TData, TError, reified ST : ResourceState<TData, TError>, FL : Flow<
         list.firstOrNull { it !is ResourceState.Success<*, *> } == null
     }
 
-inline fun <TData, TError, reified ST : ResourceState<TData, TError>, LD : Flow<ST>> List<LD>.isLoadingState(): Flow<Boolean> =
+inline fun <TData, TError, reified ST : ResourceState<TData, TError>, F : Flow<ST>> List<F>.isLoadingState(): Flow<Boolean> =
     combine(this) { list ->
         list.firstOrNull() { it is ResourceState.Loading<*, *> } != null
     }
 
-inline fun <TData, TError, reified ST : ResourceState<TData, TError>, LD : Flow<ST>> List<LD>.isErrorState(): Flow<Boolean> =
+inline fun <TData, TError, reified ST : ResourceState<TData, TError>, F : Flow<ST>> List<F>.isErrorState(): Flow<Boolean> =
     combine(this) { list ->
         list.firstOrNull { it is ResourceState.Failed<*, *> } != null
     }
 
-inline fun <TData, TError, reified ST : ResourceState<TData, TError>, LD : Flow<ST>> List<LD>.isEmptyState(): Flow<Boolean> =
+inline fun <TData, TError, reified ST : ResourceState<TData, TError>, F : Flow<ST>> List<F>.isEmptyState(): Flow<Boolean> =
     combine(this) { list ->
         list.firstOrNull { it is ResourceState.Empty<*, *> } != null
     }

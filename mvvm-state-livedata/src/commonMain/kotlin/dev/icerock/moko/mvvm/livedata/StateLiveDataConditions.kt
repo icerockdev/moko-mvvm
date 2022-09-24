@@ -21,7 +21,7 @@ fun <T, E> LiveData<ResourceState<T, E>>.isEmptyState(): LiveData<Boolean> =
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isSuccessState(): LiveData<Boolean> =
     MediatorLiveData(false)
         .composition(this) { list ->
-            list.firstOrNull { it !is ResourceState.Success<*, *>} == null
+            list.firstOrNull { it !is ResourceState.Success<*, *> } == null
         }
 
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isLoadingState(): LiveData<Boolean> =
