@@ -9,8 +9,6 @@ import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.dataTransform
 import dev.icerock.moko.mvvm.livedata.mediatorOf
 import dev.icerock.moko.mvvm.state.ResourceState
-import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
-import dev.icerock.moko.test.TestRule
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
