@@ -30,7 +30,7 @@ extension ObservableObject where Self: ViewModel {
         return mapper(stateFlow.value)
     }
     
-    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinBoolean>>) -> Bool? {
+    func stateNullable(_ flowKey: KeyPath<Self, CStateFlow<KotlinBoolean>>) -> Bool? {
         return stateNullable(
             flowKey,
             equals: { $0?.boolValue == $1?.boolValue },
@@ -38,7 +38,7 @@ extension ObservableObject where Self: ViewModel {
         )
     }
     
-    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinDouble>>) -> Double? {
+    func stateNullable(_ flowKey: KeyPath<Self, CStateFlow<KotlinDouble>>) -> Double? {
         return stateNullable(
             flowKey,
             equals: { $0?.doubleValue == $1?.doubleValue },
@@ -46,7 +46,7 @@ extension ObservableObject where Self: ViewModel {
         )
     }
     
-    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinFloat>>) -> Float? {
+    func stateNullable(_ flowKey: KeyPath<Self, CStateFlow<KotlinFloat>>) -> Float? {
         return stateNullable(
             flowKey,
             equals: { $0?.floatValue == $1?.floatValue },
@@ -54,7 +54,7 @@ extension ObservableObject where Self: ViewModel {
         )
     }
     
-    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinInt>>) -> Int? {
+    func stateNullable(_ flowKey: KeyPath<Self, CStateFlow<KotlinInt>>) -> Int? {
         return stateNullable(
             flowKey,
             equals: { $0?.intValue == $1?.intValue },
@@ -62,7 +62,7 @@ extension ObservableObject where Self: ViewModel {
         )
     }
     
-    func state(_ flowKey: KeyPath<Self, CStateFlow<KotlinLong>>) -> Int64? {
+    func stateNullable(_ flowKey: KeyPath<Self, CStateFlow<KotlinLong>>) -> Int64? {
         return stateNullable(
             flowKey,
             equals: { $0?.int64Value == $1?.int64Value },
@@ -70,7 +70,7 @@ extension ObservableObject where Self: ViewModel {
         )
     }
     
-    func state(_ flowKey: KeyPath<Self, CStateFlow<NSString>>) -> String? {
+    func stateNullable(_ flowKey: KeyPath<Self, CStateFlow<NSString>>) -> String? {
         return stateNullable(
             flowKey,
             equals: { $0 == $1 },
@@ -78,7 +78,7 @@ extension ObservableObject where Self: ViewModel {
         )
     }
     
-    func state<T>(_ flowKey: KeyPath<Self, CStateFlow<NSArray>>) -> Array<T>? {
+    func stateNullable<T>(_ flowKey: KeyPath<Self, CStateFlow<NSArray>>) -> Array<T>? {
         return state(
             flowKey,
             equals: { $0 === $1 },
