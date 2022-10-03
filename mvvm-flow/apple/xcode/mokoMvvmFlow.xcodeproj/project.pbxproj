@@ -117,6 +117,7 @@
 		22D5AD53281BD2F700008F57 /* mokoMvvmFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mokoMvvmFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D5AD59281BD2F700008F57 /* mokoMvvmFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mokoMvvmFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D5AD5B281BD2F700008F57 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		455E6FFE28DF859B001DAA93 /* ViewModelStateNullable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelStateNullable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +159,7 @@
 		22BDE701281BD34C00259368 /* mokoMvvmFlowSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				455E6FFE28DF859B001DAA93 /* ViewModelStateNullable.swift */,
 				22BDE702281BD34C00259368 /* mokoMvvmFlowSwiftUI.h */,
 				22BDE739281BD56700259368 /* CFlowExt.swift */,
 				22BDE73C281BD67C00259368 /* ViewModelObservable.swift */,
