@@ -13,6 +13,6 @@ dependencies {
 
     commonMainApi(libs.coroutines)
 
-    androidMainApi(libs.appCompat)
+    androidMainApi(libs.lifecycleKtx)
     androidMainApi(libs.androidViewModel)
 }
