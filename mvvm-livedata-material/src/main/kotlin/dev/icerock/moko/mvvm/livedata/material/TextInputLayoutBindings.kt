@@ -9,9 +9,10 @@ import com.google.android.material.textfield.TextInputLayout
 import dev.icerock.moko.mvvm.livedata.Closeable
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.utils.bind
+import dev.icerock.moko.mvvm.utils.bindNotNull
 import dev.icerock.moko.resources.desc.StringDesc
 
-@JvmName("bindErrorString")
+@JvmName("bindErrorStringWithState")
 fun TextInputLayout.bindError(
     lifecycleOwner: LifecycleOwner,
     liveData: LiveData<String?>
@@ -22,7 +23,7 @@ fun TextInputLayout.bindError(
     }
 }
 
-@JvmName("bindErrorStringDesc")
+@JvmName("bindErrorStringDescWithState")
 fun TextInputLayout.bindError(
     lifecycleOwner: LifecycleOwner,
     liveData: LiveData<StringDesc?>
@@ -30,5 +31,25 @@ fun TextInputLayout.bindError(
     return liveData.bind(lifecycleOwner) {
         error = it?.toString(context)
         isErrorEnabled = it != null
+    }
+}
+
+@JvmName("bindErrorString")
+fun TextInputLayout.bindError(
+    lifecycleOwner: LifecycleOwner,
+    liveData: LiveData<String>
+): Closeable {
+    return liveData.bindNotNull(lifecycleOwner) {
+        error = it
+    }
+}
+
+@JvmName("bindErrorStringDesc")
+fun TextInputLayout.bindError(
+    lifecycleOwner: LifecycleOwner,
+    liveData: LiveData<StringDesc>
+): Closeable {
+    return liveData.bindNotNull(lifecycleOwner) {
+        error = it.toString(context)
     }
 }
