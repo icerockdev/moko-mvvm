@@ -4,7 +4,7 @@ androidLifecycleVersion = "2.2.0"
 coroutinesVersion = "1.6.0-native-mt"
 mokoResourcesVersion = "0.18.0"
 mokoTestVersion = "0.6.1"
-mokoMvvmVersion = "0.14.0"
+mokoMvvmVersion = "0.14.1"
 mokoKSwiftVersion = "0.4.0"
 composeVersion = "1.1.1"
 composeJetBrainsVersion = "1.1.1"
@@ -41,7 +41,7 @@ androidCoreTesting = { module = "androidx.arch.core:core-testing", version = "2.
 dokkaGradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlinVersion" }
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinVersion" }
 mobileMultiplatformGradlePlugin = { module = "dev.icerock:mobile-multiplatform", version = "0.13.0" }
-androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.0.4" }
+androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.2.2" }
 detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.19.0" }
 kswiftGradlePlugin = { module = "dev.icerock.moko:kswift-gradle-plugin", version.ref = "mokoKSwiftVersion" }
 composeJetBrainsGradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeJetBrainsVersion" }
