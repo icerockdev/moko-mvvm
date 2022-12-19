@@ -83,7 +83,16 @@ public extension ObservableObject where Self: ViewModel {
     func state<T>(_ flowKey: KeyPath<Self, CStateFlow<NSArray>>) -> Array<T> {
         return state(
             flowKey,
-            equals: { $0 === $1 },
+            equals: { oldValue, newValue in
+                if let oldValue = oldValue {
+                    guard let newValue = newValue as? Array<T> else {
+                        return false
+                    }
+                    return oldValue.isEqual(to: newValue)
+                } else {
+                    return newValue == nil
+                }
+            },
             mapper: { $0 as! Array<T> }
         )
     }
