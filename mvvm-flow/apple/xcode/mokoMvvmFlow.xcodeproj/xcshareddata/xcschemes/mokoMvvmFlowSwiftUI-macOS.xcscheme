@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22BDE720281BD37100259368"
-               BuildableName = "mokoMvvmFlowSwiftUI__macOS_.framework"
+               BuildableName = "mokoMvvmFlowSwiftUI.framework"
                BlueprintName = "mokoMvvmFlowSwiftUI (macOS)"
                ReferencedContainer = "container:mokoMvvmFlow.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22BDE720281BD37100259368"
-            BuildableName = "mokoMvvmFlowSwiftUI__macOS_.framework"
+            BuildableName = "mokoMvvmFlowSwiftUI.framework"
             BlueprintName = "mokoMvvmFlowSwiftUI (macOS)"
             ReferencedContainer = "container:mokoMvvmFlow.xcodeproj">
          </BuildableReference>

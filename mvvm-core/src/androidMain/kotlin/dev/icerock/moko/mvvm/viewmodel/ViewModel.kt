@@ -11,7 +11,7 @@ import kotlinx.coroutines.cancel
 
 @Suppress("EmptyDefaultConstructor")
 actual open class ViewModel actual constructor() : ViewModel() {
-    protected actual val viewModelScope: CoroutineScope = createViewModelScope()
+    actual val viewModelScope: CoroutineScope = createViewModelScope()
 
     public actual override fun onCleared() {
         super.onCleared()

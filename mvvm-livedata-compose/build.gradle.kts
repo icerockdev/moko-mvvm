@@ -19,6 +19,12 @@ java {
     }
 }
 
+android {
+    defaultConfig {
+        minSdk = 21
+    }
+}
+
 kotlin {
     android()
     jvm()

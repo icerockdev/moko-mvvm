@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @Suppress("EmptyDefaultConstructor")
 expect open class ViewModel() {
-    protected val viewModelScope: CoroutineScope
+    val viewModelScope: CoroutineScope
 
     open fun onCleared()
 }
