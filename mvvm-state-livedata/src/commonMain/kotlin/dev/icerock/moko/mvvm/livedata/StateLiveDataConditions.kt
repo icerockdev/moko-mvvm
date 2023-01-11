@@ -4,35 +4,40 @@
 
 package dev.icerock.moko.mvvm.livedata
 
-import dev.icerock.moko.mvvm.ResourceState
+import dev.icerock.moko.mvvm.state.ResourceState
+import dev.icerock.moko.mvvm.state.livedata.isEmptyState
+import dev.icerock.moko.mvvm.state.livedata.isErrorState
+import dev.icerock.moko.mvvm.state.livedata.isLoadingState
+import dev.icerock.moko.mvvm.state.livedata.isSuccessState
+
 
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("isSuccessState", "dev.icerock.moko.mvvm.state.livedata"),
     level = DeprecationLevel.WARNING
 )
-fun <T, E> LiveData<ResourceState<T, E>>.isSuccessState(): LiveData<Boolean> = map { it.isSuccess() }
+fun <T, E> LiveData<ResourceState<T, E>>.isSuccessState(): LiveData<Boolean> = this.isSuccessState()
 
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("isLoadingState", "dev.icerock.moko.mvvm.state.livedata"),
     level = DeprecationLevel.WARNING
 )
-fun <T, E> LiveData<ResourceState<T, E>>.isLoadingState(): LiveData<Boolean> = map { it.isLoading() }
+fun <T, E> LiveData<ResourceState<T, E>>.isLoadingState(): LiveData<Boolean> = this.isLoadingState()
 
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("isErrorState", "dev.icerock.moko.mvvm.state.livedata"),
     level = DeprecationLevel.WARNING
 )
-fun <T, E> LiveData<ResourceState<T, E>>.isErrorState(): LiveData<Boolean> = map { it.isFailed() }
+fun <T, E> LiveData<ResourceState<T, E>>.isErrorState(): LiveData<Boolean> = this.isErrorState()
 
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("isEmptyState", "dev.icerock.moko.mvvm.state.livedata"),
     level = DeprecationLevel.WARNING
 )
-fun <T, E> LiveData<ResourceState<T, E>>.isEmptyState(): LiveData<Boolean> = map { it.isEmpty() }
+fun <T, E> LiveData<ResourceState<T, E>>.isEmptyState(): LiveData<Boolean> = this.isEmptyState()
 
 @Deprecated(
     message = "deprecated due to package renaming",
@@ -40,10 +45,7 @@ fun <T, E> LiveData<ResourceState<T, E>>.isEmptyState(): LiveData<Boolean> = map
     level = DeprecationLevel.WARNING
 )
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isSuccessState(): LiveData<Boolean> =
-    MediatorLiveData(false)
-        .composition(this) { list ->
-            list.firstOrNull { it !is ResourceState.Success<*, *> } == null
-        }
+    this.isSuccessState()
 
 @Deprecated(
     message = "deprecated due to package renaming",
@@ -51,10 +53,7 @@ fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isSuccessSt
     level = DeprecationLevel.WARNING
 )
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isLoadingState(): LiveData<Boolean> =
-    MediatorLiveData(false)
-        .composition(this) { list ->
-            list.firstOrNull { it is ResourceState.Loading<*, *> } != null
-        }
+    this.isLoadingState()
 
 @Deprecated(
     message = "deprecated due to package renaming",
@@ -62,10 +61,7 @@ fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isLoadingSt
     level = DeprecationLevel.WARNING
 )
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isErrorState(): LiveData<Boolean> =
-    MediatorLiveData(false)
-        .composition(this) { list ->
-            list.firstOrNull { it is ResourceState.Failed<*, *> } != null
-        }
+    this.isErrorState()
 
 @Deprecated(
     message = "deprecated due to package renaming",
@@ -73,7 +69,4 @@ fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isErrorStat
     level = DeprecationLevel.WARNING
 )
 fun <T, E, ST : ResourceState<T, E>, LD : LiveData<out ST>> List<LD>.isEmptyState(): LiveData<Boolean> =
-    MediatorLiveData(false)
-        .composition(this) { list ->
-            list.firstOrNull { it is ResourceState.Empty<*, *> } != null
-        }
+    this.isEmptyState()
