@@ -9,15 +9,18 @@ import dev.icerock.moko.test.AndroidArchitectureInstantTaskExecutorRule
 import dev.icerock.moko.test.TestRule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class FlowDataTest {
 
     @get:TestRule
@@ -26,51 +29,52 @@ class FlowDataTest {
     private val coroutineScope = CoroutineScope(Dispatchers.Unconfined)
 
     @Test
-    fun dataTransformTest() {
+    fun dataTransformTest() = runTest {
         val flow: MutableStateFlow<ResourceState<Int, Throwable>> =
             MutableStateFlow(ResourceState.Success(10))
-
         val flowBool: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-        var flowDataTransformCounter = 0
-        var flowMergeWithCounter = 0
+        var dataTransformCounter = 0
+        var mergeWithCounter = 0
 
-        val mapLd: StateFlow<ResourceState<Long, Throwable>> = flow.dataTransform {
-            flowDataTransformCounter++
+        val mapFlow: StateFlow<ResourceState<Long, Throwable>> = flow.dataTransform {
+            dataTransformCounter++
             combine(this, flowBool) { a1, a2 ->
-                flowMergeWithCounter++
+                mergeWithCounter++
                 if (a2) a1.toLong() else -a1.toLong()
             }
         }.stateIn(coroutineScope, SharingStarted.Eagerly, ResourceState.Loading())
 
-        assertEquals(actual = flowDataTransformCounter, expected = 1)
-        assertEquals(actual = flowMergeWithCounter, expected = 3)
-        assertEquals(expected = -10, actual = mapLd.value.dataValue())
+        assertEquals(actual = dataTransformCounter, expected = 1)
+        assertEquals(actual = mergeWithCounter, expected = 1)
+        assertEquals(expected = -10, actual = mapFlow.value.dataValue())
 
         flowBool.value = true
 
-        assertEquals(actual = flowDataTransformCounter, expected = 1)
-        assertEquals(actual = flowMergeWithCounter, expected = 4)
-        assertEquals(expected = 10, actual = mapLd.value.dataValue())
+        assertEquals(actual = dataTransformCounter, expected = 1)
+        assertEquals(actual = mergeWithCounter, expected = 2)
+        assertEquals(expected = 10, actual = mapFlow.value.dataValue())
 
         flow.value = ResourceState.Success(11)
 
-        assertEquals(actual = flowDataTransformCounter, expected = 2)
-        assertEquals(actual = flowMergeWithCounter, expected = 7)
-        assertEquals(expected = 11, actual = mapLd.value.dataValue())
+        assertEquals(actual = dataTransformCounter, expected = 2)
+        assertEquals(actual = mergeWithCounter, expected = 3)
+        assertEquals(expected = 11, actual = mapFlow.value.dataValue())
 
         flowBool.value = false
 
-        assertEquals(actual = flowDataTransformCounter, expected = 2)
+        assertEquals(actual = dataTransformCounter, expected = 2)
         assertEquals(
-            actual = flowMergeWithCounter,
-            expected = 9
+            actual = mergeWithCounter,
+            expected = 4
         ) // FIXME: there's an extra mergeWith lambda call
-        assertEquals(expected = -11, actual = mapLd.value.dataValue())
+        assertEquals(expected = -11, actual = mapFlow.value.dataValue())
     }
 
     @Test
-    fun dataTransformMergeWithTest() {
+    fun dataTransformMergeWithTest() = runTest {
+        val coroutineScope = CoroutineScope(Dispatchers.Unconfined)
+
         val vmIsAuthorized = MutableStateFlow(true)
         val state: MutableStateFlow<ResourceState<Int, Throwable>> =
             MutableStateFlow(ResourceState.Empty())
@@ -102,37 +106,37 @@ class FlowDataTest {
 
         assertEquals(actual = dataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithDataTransformCounter, expected = 0)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 3)
+        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 1)
         assertTrue { result.value.isEmpty() }
 
         state.value = ResourceState.Loading()
 
         assertEquals(actual = dataTransformCounter, expected = 0)
         assertEquals(actual = mergeWithDataTransformCounter, expected = 0)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 4)
+        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 2)
         assertTrue { result.value.isLoading() }
 
         state.value = ResourceState.Success(10)
 
         assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 3)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 5)
+        assertEquals(actual = mergeWithDataTransformCounter, expected = 1)
+        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 3)
         assertTrue { result.value.isSuccess() }
         assertEquals(actual = result.value.dataValue(), expected = -10)
 
         isLoading.value = true
 
         assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 4)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 6)
+        assertEquals(actual = mergeWithDataTransformCounter, expected = 2)
+        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 4)
         assertTrue { result.value.isSuccess() }
         assertEquals(actual = result.value.dataValue(), expected = 10)
 
         isLoading.value = false
 
         assertEquals(actual = dataTransformCounter, expected = 1)
-        assertEquals(actual = mergeWithDataTransformCounter, expected = 5)
-        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 7)
+        assertEquals(actual = mergeWithDataTransformCounter, expected = 3)
+        assertEquals(actual = mergeWithIsAuthorizedCounter, expected = 5)
         assertTrue { result.value.isSuccess() }
         assertEquals(actual = result.value.dataValue(), expected = -10)
     }
