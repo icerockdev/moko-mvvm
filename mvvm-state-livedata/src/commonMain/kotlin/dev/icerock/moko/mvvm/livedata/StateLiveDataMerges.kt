@@ -7,7 +7,6 @@ package dev.icerock.moko.mvvm.livedata
 import dev.icerock.moko.mvvm.state.ResourceState
 import dev.icerock.moko.mvvm.state.livedata.concatData
 
-
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("concatData", "dev.icerock.moko.mvvm.state.livedata"),

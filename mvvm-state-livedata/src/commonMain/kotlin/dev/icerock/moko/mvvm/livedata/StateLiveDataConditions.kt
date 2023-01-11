@@ -10,7 +10,6 @@ import dev.icerock.moko.mvvm.state.livedata.isErrorState
 import dev.icerock.moko.mvvm.state.livedata.isLoadingState
 import dev.icerock.moko.mvvm.state.livedata.isSuccessState
 
-
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("isSuccessState", "dev.icerock.moko.mvvm.state.livedata"),

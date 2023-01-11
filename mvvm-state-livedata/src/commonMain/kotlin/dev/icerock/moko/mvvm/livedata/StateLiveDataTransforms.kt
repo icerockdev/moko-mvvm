@@ -11,7 +11,6 @@ import dev.icerock.moko.mvvm.state.livedata.emptyAsError
 import dev.icerock.moko.mvvm.state.livedata.emptyIf
 import dev.icerock.moko.mvvm.state.livedata.errorTransform
 
-
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("dataTransform", "dev.icerock.moko.mvvm.state.livedata"),

@@ -10,7 +10,6 @@ import dev.icerock.moko.mvvm.state.livedata.dataValue
 import dev.icerock.moko.mvvm.state.livedata.error
 import dev.icerock.moko.mvvm.state.livedata.errorValue
 
-
 @Deprecated(
     message = "deprecated due to package renaming",
     replaceWith = ReplaceWith("data", "dev.icerock.moko.mvvm.state.livedata"),
