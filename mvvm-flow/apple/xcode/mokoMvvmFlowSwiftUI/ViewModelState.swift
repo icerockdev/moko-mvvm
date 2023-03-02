@@ -21,10 +21,10 @@ public extension ObservableObject where Self: ViewModel {
         
         var disposable: DisposableHandle? = nil
         
-        disposable = stateFlow.subscribe(onCollect: { value in
+        disposable = stateFlow.subscribe(onCollect: { [weak self] value in
             if !equals(lastValue, value) {
                 lastValue = value
-                self.objectWillChange.send()
+                self?.objectWillChange.send()
                 disposable?.dispose()
             }
         })
