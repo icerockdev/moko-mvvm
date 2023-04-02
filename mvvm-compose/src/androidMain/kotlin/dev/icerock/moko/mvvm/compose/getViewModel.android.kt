@@ -10,39 +10,43 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ComponentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.viewModelFactory
 import dev.icerock.moko.mvvm.getViewModel
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlin.reflect.KClass
 
 @Composable
 actual fun <T : ViewModel> getViewModel(
-    key: String,
+    key: Any,
     klass: KClass<T>,
     viewModelBlock: () -> T
 ): T {
     val context: Context = LocalContext.current
-    val viewModel: T = remember(key, context) {
+    val storeHolder: ViewModelStoreHolder = remember(context, key) {
         val viewModelStore: ViewModelStoreOwner = context as? ViewModelStoreOwner
             ?: throw IllegalStateException("context not implement ViewModelStoreOwner")
 
-        viewModelStore.getViewModel(
-            key = key,
-            klass = klass,
-            viewModelBlock = viewModelBlock
-        )
+        val storeViewModel: StoreViewModel = viewModelStore.getViewModel { StoreViewModel() }
+        storeViewModel.get(key)
+    }
+    val viewModel: T = remember(storeHolder) {
+        ViewModelProvider(
+            store = storeHolder.viewModelStore,
+            factory = viewModelFactory { addInitializer(klass) { viewModelBlock() } }
+        )[klass.java]
     }
 
-    DisposableEffect(viewModel, context) {
+    DisposableEffect(context, storeHolder) {
         onDispose {
             val componentActivity: ComponentActivity = context as? ComponentActivity
                 ?: throw IllegalStateException("context should be ComponentActivity")
-            val viewModelStore: ViewModelStoreOwner = context as? ViewModelStoreOwner
-                ?: throw IllegalStateException("context not implement ViewModelStoreOwner")
 
             if (!componentActivity.isChangingConfigurations) {
-                viewModel.onCleared()
+                storeHolder.viewModelStore.clear()
+                storeHolder.disposeStore()
             }
         }
     }
@@ -50,6 +54,24 @@ actual fun <T : ViewModel> getViewModel(
     return viewModel
 }
 
-private class StoreViewModel : androidx.lifecycle.ViewModel(), ViewModelStoreOwner {
-    override val viewModelStore: ViewModelStore = ViewModelStore()
+private class StoreViewModel : androidx.lifecycle.ViewModel() {
+    private val stores: MutableMap<Any, ViewModelStore> = mutableMapOf()
+
+    fun get(key: Any): ViewModelStoreHolder {
+        val store: ViewModelStore = stores[key] ?: ViewModelStore()
+
+        if (stores.containsKey(key).not()) {
+            stores[key] = store
+        }
+
+        return ViewModelStoreHolder(
+            viewModelStore = store,
+            disposeStore = { stores.remove(key) }
+        )
+    }
 }
+
+private data class ViewModelStoreHolder(
+    val viewModelStore: ViewModelStore,
+    val disposeStore: () -> Unit
+)

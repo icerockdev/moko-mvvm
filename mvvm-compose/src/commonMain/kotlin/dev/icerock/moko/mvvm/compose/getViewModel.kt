@@ -10,13 +10,13 @@ import kotlin.reflect.KClass
 
 @Composable
 expect fun <T : ViewModel> getViewModel(
-    key: String,
+    key: Any,
     klass: KClass<T>,
     viewModelBlock: () -> T
 ): T
 
 @Composable
 inline fun <reified T : ViewModel> getViewModel(
-    key: String,
+    key: Any,
     noinline viewModelBlock: () -> T
 ): T = getViewModel(key, T::class, viewModelBlock)

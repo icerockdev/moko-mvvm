@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 
 @Composable
 actual fun <T : ViewModel> getViewModel(
-    key: String,
+    key: Any,
     klass: KClass<T>,
     viewModelBlock: () -> T
 ): T {
