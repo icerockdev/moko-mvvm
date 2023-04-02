@@ -1,19 +1,18 @@
 [versions]
-kotlinVersion = "1.6.10"
-androidLifecycleVersion = "2.2.0"
-coroutinesVersion = "1.6.0-native-mt"
-mokoResourcesVersion = "0.18.0"
+kotlinVersion = "1.8.10"
+androidLifecycleVersion = "2.6.1"
+coroutinesVersion = "1.6.4"
+mokoResourcesVersion = "0.21.1"
 mokoTestVersion = "0.6.1"
-mokoMvvmVersion = "0.15.0"
-mokoKSwiftVersion = "0.4.0"
-composeVersion = "1.1.1"
-composeJetBrainsVersion = "1.1.1"
+mokoMvvmVersion = "0.16.0"
+mokoKSwiftVersion = "0.6.1"
+composeVersion = "1.4.0"
+composeJetBrainsVersion = "1.3.1"
 
 [libraries]
 # android
-appCompat = { module = "androidx.appcompat:appcompat", version = "1.2.0" }
-material = { module = "com.google.android.material:material", version = "1.2.1" }
-lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidLifecycleVersion" }
+appCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+material = { module = "com.google.android.material:material", version = "1.8.0" }
 lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidLifecycleVersion" }
 androidViewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidLifecycleVersion" }
 androidLiveData = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidLifecycleVersion" }
@@ -35,14 +34,14 @@ mokoKSwift = { module = "dev.icerock.moko:kswift-runtime", version.ref = "mokoKS
 
 # tests
 kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinVersion" }
-androidCoreTesting = { module = "androidx.arch.core:core-testing", version = "2.1.0" }
+androidCoreTesting = { module = "androidx.arch.core:core-testing", version = "2.2.0" }
 
 # gradle plugins
 dokkaGradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlinVersion" }
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinVersion" }
-mobileMultiplatformGradlePlugin = { module = "dev.icerock:mobile-multiplatform", version = "0.13.0" }
-androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.2.2" }
-detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.19.0" }
+mobileMultiplatformGradlePlugin = { module = "dev.icerock:mobile-multiplatform", version = "0.14.2" }
+androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.4.2" }
+detektGradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.22.0" }
 kswiftGradlePlugin = { module = "dev.icerock.moko:kswift-gradle-plugin", version.ref = "mokoKSwiftVersion" }
 composeJetBrainsGradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeJetBrainsVersion" }
 
