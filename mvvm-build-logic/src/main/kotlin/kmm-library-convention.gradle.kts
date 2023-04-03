@@ -41,13 +41,13 @@ kotlin {
         val mobileMain by creating
         val mobileTest by creating
         val androidMain by getting
-        val androidTest by getting
+        val androidUnitTest by getting
 
         mobileMain.dependsOn(commonMain)
         mobileTest.dependsOn(commonTest)
 
         androidMain.dependsOn(mobileMain)
-        androidTest.dependsOn(mobileTest)
+        androidUnitTest.dependsOn(mobileTest)
 
         iosMain.dependsOn(mobileMain)
         iosTest.dependsOn(mobileTest)

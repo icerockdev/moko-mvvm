@@ -16,6 +16,7 @@ android {
 
     lintOptions {
         disable("Instantiatable") // bug Error: SimpleActivity must extend android.app.Activity [Instantiatable]
+        disable("NotificationPermission") // https://github.com/bumptech/glide/issues/4940
     }
 }
 

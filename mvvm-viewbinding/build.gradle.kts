@@ -21,6 +21,6 @@ dependencies {
     api(libs.mokoResources)
 
     api(libs.appCompat)
-    api(libs.lifecycle)
+    api(libs.lifecycleKtx)
     api(libs.coroutines)
 }
