@@ -16,7 +16,7 @@ material = { module = "com.google.android.material:material", version = "1.8.0" 
 lifecycleKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidLifecycleVersion" }
 androidViewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidLifecycleVersion" }
 androidLiveData = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidLifecycleVersion" }
-glide = { module = "com.github.bumptech.glide:glide", version = "4.11.0" }
+glide = { module = "com.github.bumptech.glide:glide", version = "4.15.1" }
 swipeRefresh = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version = "1.1.0" }
 
 # compose
