@@ -4,6 +4,6 @@
 
 package dev.icerock.moko.mvvm.internal
 
-expect class WeakReference<T: Any>(referred: T) {
+expect class WeakReference<T : Any>(referred: T) {
     fun get(): T?
 }
