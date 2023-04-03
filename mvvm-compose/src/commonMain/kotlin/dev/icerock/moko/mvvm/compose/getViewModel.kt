@@ -15,6 +15,12 @@ expect fun <T : ViewModel> getViewModel(
     viewModelBlock: () -> T
 ): T
 
+// with this inline function we got error
+// Module "dev.icerock.moko:mvvm-compose (dev.icerock.moko:mvvm-compose-iossimulatorarm64)" has a
+// reference to symbol [ dev.icerock.moko.mvvm.compose/getViewModel|-1374970681312300217[0]
+// <- local Local[<TP>,0 | TYPE_PARAMETER name:T index:0 variance:
+// superTypes:[dev.icerock.moko.mvvm.viewmodel.ViewModel] reified:true] ].
+// Neither the module itself nor its dependencies contain such declaration.
 @Composable
 inline fun <reified T : ViewModel> getViewModel(
     key: Any,
