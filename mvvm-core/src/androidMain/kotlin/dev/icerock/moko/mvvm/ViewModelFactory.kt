@@ -7,25 +7,44 @@ package dev.icerock.moko.mvvm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.CreationExtras
+import kotlin.reflect.KClass
 
 class ViewModelFactory(
     private val viewModelBlock: () -> ViewModel
 ) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         @Suppress("UNCHECKED_CAST")
         return viewModelBlock() as T
     }
 }
 
+fun <T : ViewModel> ViewModelStoreOwner.getViewModel(
+    klass: KClass<T>,
+    viewModelBlock: () -> T
+): T = ViewModelProvider(
+    owner = this,
+    factory = ViewModelFactory(viewModelBlock)
+)[klass.java]
+
+fun <T : ViewModel> ViewModelStoreOwner.getViewModel(
+    key: String,
+    klass: KClass<T>,
+    viewModelBlock: () -> T
+): T = ViewModelProvider(
+    owner = this,
+    factory = ViewModelFactory(viewModelBlock)
+).get(key = key, klass.java)
+
+inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(
+    key: String,
+    noinline viewModelBlock: () -> T
+): T = getViewModel(key, T::class, viewModelBlock)
+
 inline fun <reified T : ViewModel> ViewModelStoreOwner.getViewModel(
     noinline viewModelBlock: () -> T
-): T = ViewModelProvider(
-    this,
-    ViewModelFactory { viewModelBlock() }
-).get(T::class.java)
+): T = getViewModel(T::class, viewModelBlock)
 
 inline fun <reified T : ViewModel> createViewModelFactory(
     noinline viewModelBlock: () -> T
-): ViewModelFactory = ViewModelFactory {
-    viewModelBlock()
-}
+): ViewModelFactory = ViewModelFactory(viewModelBlock)

@@ -16,7 +16,6 @@ dependencies {
     api(libs.mokoResources)
 
     api(libs.appCompat)
-    api(libs.lifecycle)
     api(libs.glide)
     api(libs.coroutines)
 }
