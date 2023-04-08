@@ -3,11 +3,15 @@
  */
 
 plugins {
-    id("org.jetbrains.kotlin.multiplatform")
+    id("kmp-library-convention")
     id("detekt-convention")
     id("org.jetbrains.compose")
     id("javadoc-stub-convention")
     id("publication-convention")
+}
+
+android {
+    namespace = "dev.icerock.moko.mvvm.flow.compose"
 }
 
 java {
@@ -17,11 +21,6 @@ java {
 }
 
 kotlin {
-    jvm()
-    js(IR) {
-        browser()
-    }
-
     sourceSets {
         commonMain {
             dependencies {
