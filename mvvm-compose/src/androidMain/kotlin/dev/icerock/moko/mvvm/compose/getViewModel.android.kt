@@ -27,7 +27,7 @@ actual fun <T : ViewModel> getViewModel(
     val context: Context = LocalContext.current
     val storeHolder: ViewModelStoreHolder = remember(context, key) {
         val viewModelStore: ViewModelStoreOwner = context as? ViewModelStoreOwner
-            ?: throw IllegalStateException("context not implement ViewModelStoreOwner")
+            ?: error("context not implement ViewModelStoreOwner")
 
         val storeViewModel: StoreViewModel = viewModelStore.getViewModel { StoreViewModel() }
         storeViewModel.get(key)
@@ -42,7 +42,7 @@ actual fun <T : ViewModel> getViewModel(
     DisposableEffect(context, storeHolder) {
         onDispose {
             val componentActivity: ComponentActivity = context as? ComponentActivity
-                ?: throw IllegalStateException("context should be ComponentActivity")
+                ?: error("context should be ComponentActivity")
 
             if (!componentActivity.isChangingConfigurations) {
                 storeHolder.viewModelStore.clear()

@@ -12,6 +12,9 @@ plugins {
 
 android {
     namespace = "dev.icerock.moko.mvvm.livedata.compose"
+    defaultConfig {
+        minSdk = 21
+    }
 }
 
 java {
