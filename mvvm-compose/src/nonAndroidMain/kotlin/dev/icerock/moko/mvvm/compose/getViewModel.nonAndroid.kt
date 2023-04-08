@@ -16,7 +16,7 @@ actual fun <T : ViewModel> getViewModel(
     klass: KClass<T>,
     viewModelBlock: () -> T
 ): T {
-    val viewModel: T = remember(key, viewModelBlock)
+    val viewModel: T = remember(key, klass, viewModelBlock)
 
     DisposableEffect(viewModel) {
         onDispose { viewModel.onCleared() }
