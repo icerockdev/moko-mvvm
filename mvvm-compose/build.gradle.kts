@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.icerock.moko.mvvm.flow.compose"
+    namespace = "dev.icerock.moko.mvvm.compose"
     defaultConfig {
         minSdk = 21
     }
@@ -27,9 +27,15 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(projects.mvvmFlow)
-
+                api(projects.mvvmCore)
                 api(compose.runtime)
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation(libs.composeFoundation)
+                implementation(libs.androidxCore)
             }
         }
     }
