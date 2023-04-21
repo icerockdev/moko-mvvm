@@ -31,8 +31,10 @@ private class CFlowSubscription<Output: AnyObject, S: Subscriber>: Subscription 
     
     init(flow: CFlow<Output>, subscriber: S) {
         self.subscriber = subscriber
-        self.disposable = flow.subscribe { value in
-            let _ = subscriber.receive(value!)
+        // TRICKY: `as! CFlow<AnyObject>` cast here, and `as! Output` cast below, combine
+        // to work around https://github.com/apple/swift/issues/65331
+        self.disposable = (flow as! CFlow<AnyObject>).subscribe { value in
+            let _ = subscriber.receive(value as! Output)
         }
     }
     

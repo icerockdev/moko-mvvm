@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'mokoMvvmFlowSwiftUI'
-  s.version          = '0.16.0'
+  s.version          = '0.16.1'
   s.summary          = 'MOKO MVVM SwiftUI additions for Flow'
   s.description      = 'some description here'
   s.homepage         = 'localhost'
