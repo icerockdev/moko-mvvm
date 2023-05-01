@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: 11
       - name: Gradle Build Action
-        uses: gradle/gradle-build-action@v2.1.5
+        uses: gradle/gradle-build-action@v2.4.2
       - name: Check build
         run: ./run-check.sh "${{ matrix.os }}"
         shell: bash
