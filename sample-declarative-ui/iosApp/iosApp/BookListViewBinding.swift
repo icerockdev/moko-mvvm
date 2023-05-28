@@ -33,6 +33,10 @@ struct BookListView: View {
                 EmptyView()
                     .hidden()
             }
+            
+            ForEach(viewModel.listTestSwift, id: \.self) { item in
+                Text(item)
+            }
 
             BookListViewBody(
                 state: viewModel.stateKs,
@@ -59,6 +63,16 @@ extension BookListViewModel {
                 \.state,
                 equals: { $0 === $1 },
                 mapper: { BookListViewModelStateKs($0) }
+            )
+        }
+    }
+    
+    var listTestSwift: [String] {
+        get {
+            return self.state(
+                \.listTest,
+                 equals: { $0 === $1 },
+                 mapper: { $0 as! [String] }
             )
         }
     }

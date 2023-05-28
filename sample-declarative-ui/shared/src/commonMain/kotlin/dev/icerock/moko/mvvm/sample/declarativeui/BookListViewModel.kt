@@ -42,6 +42,9 @@ class BookListViewModel : ViewModel() {
     private val _actions = Channel<Action>(Channel.BUFFERED)
     val actions: CFlow<Action> get() = _actions.receiveAsFlow().cFlow()
 
+    private val _listTest = MutableStateFlow<List<String>>(emptyList())
+    val listTest: CStateFlow<List<String>> get() = _listTest.cStateFlow()
+
     fun start() = apply { loadBooks() }
 
     fun onRetryPressed() {
