@@ -101,6 +101,10 @@ pod 'mokoMvvmFlowSwiftUI', :podspec => 'https://raw.githubusercontent.com/iceroc
 ```
 required export of `mvvm-core` and `mvvm-flow`.
 
+## Documentation
+
+The API documentation for moko-mvvm can be found at https://icerockdev.github.io/moko-mvvm.
+
 ## Usage
 ### Simple view model
 Let’s say we need a screen with a button click counter. To implement it we should:
