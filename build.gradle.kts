@@ -2,6 +2,8 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
 buildscript {
     repositories {
         mavenCentral()
@@ -13,6 +15,7 @@ buildscript {
         classpath(":mvvm-build-logic")
         classpath(libs.kswiftGradlePlugin)
         classpath(libs.composeJetBrainsGradlePlugin)
+        classpath(libs.dokkaGradlePlugin)
     }
 }
 
@@ -40,10 +43,10 @@ allprojects {
             force(rootProject.libs.coroutines)
         }
     }
-}
 
-// temporary fix for Apple Silicon (remove after 1.6.20 update)
-rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().nodeVersion =
-        "16.0.0"
+    apply(plugin = "org.jetbrains.dokka")
+
+    tasks.withType<DokkaTaskPartial>().configureEach {
+        this.enabled = name.startsWith("mvvm-")
+    }
 }
