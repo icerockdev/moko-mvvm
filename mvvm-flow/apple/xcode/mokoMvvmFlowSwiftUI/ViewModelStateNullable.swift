@@ -24,6 +24,7 @@ extension ObservableObject where Self: ViewModel {
                 lastValue = value
                 self?.objectWillChange.send()
                 disposable?.dispose()
+                disposable = nil
             }
         })
         
