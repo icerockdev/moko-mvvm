@@ -93,4 +93,12 @@ public extension ObservableObject where Self: ViewModel {
             mapper: { $0 as! Array<T> }
         )
     }
+
+    func state<T: KotlinBase>(_ flowKey: KeyPath<Self, CStateFlow<T>>) -> T {
+        return state(
+            flowKey,
+            equals: { $0.isEqual($1) },
+            mapper: { $0 }
+        )
+    }
 }
