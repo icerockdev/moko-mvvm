@@ -1,6 +1,6 @@
 //
 //  ViewModelStateNullable.swift
-//  mokoMvvmFlow
+//  mokoMvvmFlowSwiftUI (iOS)
 //
 //  Created by mdubkov on 25.09.2022.
 //
