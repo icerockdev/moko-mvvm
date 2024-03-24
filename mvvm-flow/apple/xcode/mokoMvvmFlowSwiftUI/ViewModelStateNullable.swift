@@ -1,6 +1,6 @@
 //
 //  ViewModelStateNullable.swift
-//  mokoMvvmFlow
+//  mokoMvvmFlowSwiftUI (iOS)
 //
 //  Created by mdubkov on 25.09.2022.
 //
@@ -24,6 +24,7 @@ extension ObservableObject where Self: ViewModel {
                 lastValue = value
                 self?.objectWillChange.send()
                 disposable?.dispose()
+                disposable = nil
             }
         })
         
@@ -79,9 +80,18 @@ extension ObservableObject where Self: ViewModel {
     }
     
     func stateNullable<T>(_ flowKey: KeyPath<Self, CStateFlow<NSArray>>) -> Array<T>? {
-        return state(
+        return stateNullable(
             flowKey,
-            equals: { $0 === $1 },
+            equals: { oldValue, newValue in
+                if let oldValue = oldValue {
+                    guard let newValue = newValue as? Array<T> else {
+                        return false
+                    }
+                    return oldValue.isEqual(to: newValue)
+                } else {
+                    return newValue == nil
+                }
+            },
             mapper: { $0 as? Array<T> }
         )
     }
@@ -91,6 +101,14 @@ extension ObservableObject where Self: ViewModel {
             flowKey,
             equals: { $0 === $1 },
             mapper: { $0?.localized() }
+        )
+    }
+
+    func stateNullable<T: KotlinBase>(_ flowKey: KeyPath<Self, CStateFlow<T>>) -> T? {
+        return stateNullable(
+            flowKey,
+            equals: { $0?.isEqual($1) == true },
+            mapper: { $0 }
         )
     }
 }
