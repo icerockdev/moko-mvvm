@@ -1,1 +1,0 @@
-var pages = [{"name":"fun <T : Any> createTestEventsDispatcher(): EventsDispatcher<T>","description":"dev.icerock.moko.mvvm.test.createTestEventsDispatcher","location":"mvvm-test/dev.icerock.moko.mvvm.test/create-test-events-dispatcher.html","searchKeys":["createTestEventsDispatcher","fun <T : Any> createTestEventsDispatcher(): EventsDispatcher<T>"]}]

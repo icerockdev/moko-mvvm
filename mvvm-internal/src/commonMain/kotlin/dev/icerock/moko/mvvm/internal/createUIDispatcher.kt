@@ -10,4 +10,4 @@ import kotlinx.coroutines.Dispatchers
 /**
  * We use coroutines native-mt version, so we can use Main dispatcher on both platforms
  */
-fun createUIDispatcher(): CoroutineDispatcher = Dispatchers.Main
+fun createUIDispatcher(): CoroutineDispatcher = Dispatchers.Main.immediate
